@@ -1823,7 +1823,7 @@ function go(n){
  const finish=()=>{{const mv=$('#muv');if(mv)mv.dataset.scr=n;if(typeof MV!=='undefined'&&MV.open&&n!=='home')mvClose()}if(prev==='detail'&&n!=='detail'){if(n==='home')stopExtract();else{const ex=document.querySelector('#exSound');if(ex)ex.remove();setTimeout(stopExtract,400)}}cur=n;if(n==='detail')setTimeout(startExtract,60);markStep();if(typeof markDnav==='function')markDnav();setTimeout(()=>{to.setAttribute('tabindex','-1');to.focus({preventScroll:true})},60);say(to.getAttribute('aria-label')||'')};
  const reduce=A11Y.rm||matchMedia('(prefers-reduced-motion:reduce)').matches;
  /* Transition vue (Chrome, Safari récents) : l'écran qui part s'efface vite, celui qui arrive glisse et se pose ; sur grand écran l'affiche voyage de la carte à la fiche */
- if(document.startViewTransition&&!reduce&&!NOVT&&!(prev==='detail'&&n!=='home')){
+ if(document.startViewTransition&&!reduce&&!NOVT&&((prev==='home'&&n==='detail')||(prev==='detail'&&n==='home'))&&innerWidth>=600&&!document.querySelector('.d-video')){
   const root=document.documentElement,wide=innerWidth>=600;
   let src=null;if(wide){if(n==='detail'&&prev==='home')src=VTSRC&&VTSRC.isConnected?VTSRC:document.querySelector('#fan .fcard.c');else if(prev==='detail'&&n==='home')src=document.querySelector('#s-detail .d-sharp')}
   VTSRC=null;if(src)src.style.viewTransitionName='film-poster';
