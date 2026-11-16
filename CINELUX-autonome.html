@@ -815,6 +815,8 @@ body.devmode .stage{display:none}
 .redtog[aria-expanded=true] svg{transform:rotate(90deg)}
 .redtog .sv{position:absolute;right:40px;top:12px;font-style:normal;font-weight:700;font-size:calc(var(--fs-xs)*var(--ts,1));padding:2px 8px;border-radius:var(--r-pill);background:var(--grad);color:var(--on-accent)}
 .redtog .sv[hidden]{display:none}
+.redtog{padding-left:150px;min-height:96px;overflow:hidden;border-style:solid;border-color:color-mix(in srgb,var(--accent) 45%,var(--line));background:linear-gradient(120deg,color-mix(in srgb,var(--accent) 12%,var(--surface)),var(--surface))}
+.redtog .rt-ph{position:absolute;left:0;top:0;width:136px;height:100%;object-fit:cover;object-position:50% 50%;-webkit-mask-image:linear-gradient(90deg,#000 70%,transparent);mask-image:linear-gradient(90deg,#000 70%,transparent)}
 .reduced[hidden]{display:none}
 :root{--sw:38px}
 @media (max-width:599px){
@@ -2546,7 +2548,7 @@ function renderSnacks(){
 }
 function renderSnackToggle(){
  const open=ST.snOpen||ST.snacks.some(n=>n>0),t=$('#snTog');
- if(!t.querySelector('svg'))t.insertAdjacentHTML('beforeend',IC.chev);
+ if(!t.querySelector('svg'))t.insertAdjacentHTML('beforeend',IC.chev);if(!t.querySelector('.rt-ph'))t.insertAdjacentHTML('afterbegin','<img class="rt-ph" src="img/food/combo2.jpg" alt="" loading="lazy" decoding="async">');
  t.setAttribute('aria-expanded',open);$('#snBox').hidden=!open;
  const n=ST.snacks.reduce((x,y)=>x+y,0),duo=ST.snacks[0]>0;
  t.querySelector('span').innerHTML=n?`${n} gourmandise${n>1?'s':''} ajoutée${n>1?'s':''}`:`Un popcorn pour la séance ?`;
