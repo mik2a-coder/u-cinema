@@ -150,3 +150,7 @@ Polices : **Bebas Neue** (titres, MAJUSCULES, `line-height .95`), **Inter** (tex
 | Fiche texte d'abord | Image, séances rapides, synopsis replié | L'image avant le paragraphe |
 | Tailles/rayons/espaces libres | Échelle 1,125, rayons imbriqués, grille de 4 | Échelle typographique, design system |
 | Téléphone ou « petit iPhone » | Téléphone / tablette / bureau pensés | Grille responsive 4-8-12 |
+
+
+## Boutons en mode clair
+Primaire (`.btn`, `.split`, `.cta.gold`, `+` des quantités) : **or à plat** `#E4B243`, texte encre `#1E1810`, ombre chaude, pas de bordure ni de dégradé. Secondaire (`.btn.alt`, `.vfs`, `.pill`, `.qchip`, `.hslot`, `.fchip`) : **verre dépoli clair** (blanc 72 %, flou, filet fin), texte encre. Les boutons ronds sur image restent en verre sombre.
