@@ -24,7 +24,7 @@ s = s.replace('src="img/scene/${f.id}.jpg"', 'src="${SCENEDATA[f.id]||\'img/scen
 css = open('fonts/fonts.css', encoding='utf8').read()
 css = re.sub(r"url\(([^)]+\.woff2)\)", lambda mm: "url(" + uri('fonts/' + mm.group(1)) + ")", css)
 s = s.replace('<link rel="stylesheet" href="fonts/fonts.css">', "<style>" + css + "</style>", 1)
-for l in ['<link rel="manifest" href="manifest.webmanifest">\n', '<link rel="icon" type="image/png" href="icons/icon-192.png">\n', '<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">\n']:
-    s = s.replace(l, '')
+import re as _re
+s = _re.sub(r'<link rel="(manifest|icon|apple-touch-icon)"[^>]*>\n', '', s)
 open('CINELUX-autonome.html', 'w', encoding='utf8').write(s)
 print(f"CINELUX-autonome.html : {len(s)//1024} Ko — {len(paths)} affiches, {len(dirs)} portraits, {len(scenes)} scènes")

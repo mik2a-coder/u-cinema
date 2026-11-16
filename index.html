@@ -9,8 +9,11 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="U CINEMÀ">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/png" href="icons/icon-192.png">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="icons/icon.svg?v=3">
+<link rel="icon" type="image/png" sizes="48x48" href="icons/favicon-48.png?v=3">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png?v=3">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png?v=3">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=3">
 <link rel="stylesheet" href="fonts/fonts.css">
 <title>U CINEMÀ V2 – Prototype</title>
 <style>
@@ -507,7 +510,7 @@ svg{display:block}
 .sinput input::placeholder{color:var(--muted)}
 .sinput .btn{width:auto;padding:0 24px;font-size:calc(var(--fs-sm)*var(--ts,1))}
 /* CTA Réserver : halo qui respire, reflet qui balaie, flèche qui invite */
-.cta span{position:relative;z-index:2}
+.cta span:not(.rip){position:relative;z-index:2}
 /* upsell snacks */
 .upsell{display:flex;align-items:center;gap:12px;margin:0 16px 12px;padding:16px;border-radius:var(--r-lg);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 26%,var(--surface)),var(--surface));border:1px solid color-mix(in srgb,var(--accent) 45%,transparent)}
 .upsell .ic2{width:72px;height:72px;border-radius:18px;overflow:hidden;background:var(--surface2);display:grid;place-items:center;flex:none;color:var(--on-accent);box-shadow:0 10px 22px -12px rgba(0,0,0,.55)}
@@ -529,7 +532,7 @@ svg{display:block}
 /* Réserver : or semi-métallique (#d9a633, metalness .7, roughness .28 → reflets, pas de plastique) */
 .cta{position:relative;overflow:hidden;isolation:isolate}
 .cta::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit}
-.cta span{position:relative;z-index:2}
+.cta span:not(.rip){position:relative;z-index:2}
 .cta.gold{color:#1b1203;background:#d9a633;text-shadow:0 1px 0 rgba(255,236,170,.55);
  box-shadow:0 12px 30px -8px rgba(217,166,51,.6),inset 0 1px 0 rgba(255,255,255,.5),inset 0 -6px 14px -6px rgba(96,58,0,.28),inset 0 0 0 1px rgba(120,76,0,.22)}
 .cta.gold::before{background:
@@ -1169,7 +1172,7 @@ html.vt-back::view-transition-new(root){animation:vtInB .46s cubic-bezier(.16,1,
 .split{--mx:-300px;--my:-300px;background-image:radial-gradient(160px circle at var(--mx) var(--my),rgba(255,255,255,.5),rgba(255,255,255,0) 60%),var(--grad);transition:transform .38s cubic-bezier(.3,1.7,.45,1),box-shadow .3s,filter .3s}
 .split:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 22px 46px -10px var(--glow),inset 0 1px 0 rgba(255,255,255,.6)}
 .split:not(:disabled):active{transform:scale(.96);transition-duration:.12s}
-.rip{position:absolute;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(255,255,255,.6),rgba(255,255,255,0) 66%);transform:scale(0);animation:rip .75s cubic-bezier(.2,.7,.3,1) forwards;z-index:0}
+.rip{position:absolute!important;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(255,255,255,.6),rgba(255,255,255,0) 66%);transform:scale(0);animation:rip .75s cubic-bezier(.2,.7,.3,1) forwards;z-index:0}
 .time .rip,.date .rip,.qchip .rip,.fchip .rip,.opt .rip,.acc-row .rip,.vfs .rip{background:radial-gradient(circle,color-mix(in srgb,var(--accent) 40%,transparent),transparent 66%)}
 @keyframes rip{to{transform:scale(1);opacity:0}}
 .viewport.rm .rip{display:none}.viewport.rm .btn,.viewport.rm .split{transition:none}
