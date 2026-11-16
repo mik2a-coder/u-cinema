@@ -1138,7 +1138,8 @@ html.vt-back::view-transition-new(root){animation:vtInB .46s cubic-bezier(.16,1,
 .acc-row strong{display:block;font-size:calc(var(--fs-md)*var(--ts,1))}.acc-row small{display:block;color:var(--muted);font-size:calc(var(--fs-xs)*var(--ts,1))}
 .acc-row .rh{margin-top:2px;color:var(--accent-text);font-weight:600}
 .acc-row.hist .mini-th{width:50px;height:74px}
-.acc-empty{margin:0 16px;padding:18px;border-radius:var(--r-lg);border:1px dashed var(--line);text-align:center;color:var(--muted)}.acc-empty p{margin-bottom:12px}
+.acc-empty{margin:0 16px;padding:26px 20px;border-radius:var(--r-lg);border:1px dashed var(--line);text-align:center;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:6px}.acc-empty b{color:var(--text);font-size:calc(var(--fs-md)*var(--ts,1))}.acc-empty p{margin:0 0 10px;max-width:34ch}.acc-empty .btn{width:auto;min-width:180px}
+@media (min-width:900px){#accScroll{padding:8px max(24px,4vw) 24px}.acc-grid{display:grid;grid-template-columns:minmax(360px,420px) minmax(0,1fr);gap:0 56px;max-width:1180px;margin:0 auto;align-items:start}.acc-left{position:sticky;top:8px}.acc-left .acc-id,.acc-left .lc-wrap,.acc-left .lc-prog,.acc-left .acc-stats{padding-left:0;padding-right:0}.acc-left .acc-h{margin-left:0;margin-right:0}.acc-left .opt{margin-left:0;margin-right:0;width:100%}.acc-right .acc-h:first-child{margin-top:12px}.acc-right .acc-row,.acc-right .acc-empty{margin-left:0;margin-right:0;width:100%}.acc-right .acc-note{margin-left:0}.acc-hist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}.acc-hist .acc-row{width:100%}}
 .acc-note{margin:6px 24px 0;color:var(--muted);font-size:calc(var(--fs-xs)*var(--ts,1))}
 .r5{display:flex;gap:0;margin:4px 0 0 -8px}
 .r5 button{display:grid;place-items:center;width:40px;height:40px;color:var(--muted);transition:transform .2s cubic-bezier(.3,1.6,.5,1),color .2s}
@@ -2065,6 +2066,7 @@ function renderAccount(){
  const F=id=>FILMS.find(f=>f.id===id);
  const rated=Object.keys(ACC.ratings).length,rem=Object.keys(ACC.remind).map(F).filter(Boolean);
  $('#accScroll').innerHTML=`
+ <div class="acc-grid"><div class="acc-left">
  <div class="acc-id"><span class="acc-av">M</span><div><strong>Mika</strong><small>Membre depuis ${ACC.since} · profil de démonstration</small></div></div>
  <div class="lc-wrap"><button type="button" class="lcard" id="lcard" aria-pressed="false" aria-label="Carte de fidélité ${LVL[li][0]}. Appuyer pour afficher le code à présenter en caisse">
   <span class="lc-in">
@@ -2076,17 +2078,19 @@ function renderAccount(){
  <div class="lc-prog"><div class="bar"><i style="width:${pct}%"></i></div><p>${nx?`Plus que <b>${(nx[1]-pts).toLocaleString('fr-FR')} points</b> pour passer <b>${nx[0]}</b>`:'<b>Niveau maximum atteint</b>'} · 1 point par euro dépensé</p></div>
  <div class="acc-stats"><div><b>${hist.length}</b><small>films vus</small></div><div><b>${rated}</b><small>notes données</small></div><div><b>${up.length+rem.length}</b><small>à venir</small></div></div>
 
- <h3 class="acc-h">Mes réservations</h3>
- ${up.length?up.map((b,i)=>{const f=F(b.id);return f?`<button class="acc-row" data-bk="${i}"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>${fdateStr(b.date)} · ${b.time} · ${esc(CINEMAS[b.cin].s)}</small><small>Places ${b.seats.join(', ')} · ${eur(b.total)}</small></span><span data-ic="chev"></span></button>`:''}).join(''):`<div class="acc-empty"><p>Aucune réservation à venir.</p><button class="btn mini" data-go="home"><span>Voir les films</span></button></div>`}
- ${rem.length?`<h3 class="acc-h">Mes rappels de sortie</h3>${rem.map(f=>`<div class="acc-row static"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>Sortie le ${relLabel(f)}</small></span><button class="link rm" data-unremind="${f.id}">Retirer</button></div>`).join('')}`:''}
-
- <h3 class="acc-h">Films que j’ai vus</h3>
- ${hist.map(h=>{const f=F(h.id);if(!f)return'';const n=ACC.ratings[h.id]||0;return `<div class="acc-row static hist"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>${fdateStr(h.date)} · ${esc(CINEMAS[h.cin].s)}</small>${stars(h.id,n)}<small class="rh">${n?'Votre note : '+n+'/5':'Notez ce film'}</small></span></div>`}).join('')}
- <p class="acc-note">Historique et notes de départ : données de démonstration. Tout reste sur cet appareil.</p>
-
  <h3 class="acc-h">Préférences</h3>
  <button class="opt" id="accA11y"><span data-ic="access"></span><span class="grow"><strong>Affichage et accessibilité</strong><small>Clair ou sombre, texte, contraste, extraits vidéo</small></span><span data-ic="chev"></span></button>
  <button class="opt" id="accLegal"><span data-ic="shield"></span><span class="grow"><strong>Données et confidentialité</strong><small>Exporter ou effacer mes données</small></span><span data-ic="chev"></span></button>
+ </div><div class="acc-right">
+ <h3 class="acc-h">Mes réservations</h3>
+ ${up.length?up.map((b,i)=>{const f=F(b.id);return f?`<button class="acc-row" data-bk="${i}"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>${fdateStr(b.date)} · ${b.time} · ${esc(CINEMAS[b.cin].s)}</small><small>Places ${b.seats.join(', ')} · ${eur(b.total)}</small></span><span data-ic="chev"></span></button>`:''}).join(''):`<div class="acc-empty"><b>Aucune réservation à venir</b><p>Choisissez un film et une séance : votre billet apparaîtra ici.</p><button class="btn mini" data-go="home"><span>Voir les films</span></button></div>`}
+ ${rem.length?`<h3 class="acc-h">Mes rappels de sortie</h3>${rem.map(f=>`<div class="acc-row static"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>Sortie le ${relLabel(f)}</small></span><button class="link rm" data-unremind="${f.id}">Retirer</button></div>`).join('')}`:''}
+
+ <h3 class="acc-h">Films que j’ai vus</h3>
+ <div class="acc-hist">${hist.map(h=>{const f=F(h.id);if(!f)return'';const n=ACC.ratings[h.id]||0;return `<div class="acc-row static hist"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>${fdateStr(h.date)} · ${esc(CINEMAS[h.cin].s)}</small>${stars(h.id,n)}<small class="rh">${n?'Votre note : '+n+'/5':'Notez ce film'}</small></span></div>`}).join('')}</div>
+ <p class="acc-note">Historique et notes de départ : données de démonstration. Tout reste sur cet appareil.</p>
+ </div></div>
+
  <footer class="foot"><button type="button" class="textlink" data-legal>Confidentialité et mentions légales</button></footer>`;
  paintIcons($('#accScroll'));
 }
