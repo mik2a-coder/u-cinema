@@ -2307,9 +2307,9 @@ $('#tarifs').addEventListener('click',e=>{const b=e.target.closest('button');if(
  if(b.dataset.k==='han'&&+b.dataset.d>0&&ST.tq.han===0&&!ST.consentHealth){askHealthConsent(()=>{tqChange('han',1);renderBook()});return}
  tqChange(b.dataset.k,+b.dataset.d);haptic('tick');renderBook()});
 function proofBlock(){const l=[...new Set(TARIFS.filter(t=>t.proof&&ST.tq[t.k]>0).map(t=>t.proof))];return `<div class="pickup"><b>Tarifs</b>${TARIFS.filter(t=>ST.tq[t.k]>0).map(t=>`${ST.tq[t.k]}× ${t.n}`).join(' · ')}${l.length?`<br>À présenter à l’entrée : ${l.join(', ')}.`:''}</div>`}
-const A11Y={ts:1,hc:false,rm:false,dys:false,vib:true,mode:'dark',vidOn:false,vidAsked:false};
+const A11Y={mv:2,ts:1,hc:false,rm:false,dys:false,vib:true,mode:'light',vidOn:false,vidAsked:false};
 function applyA11y(){const v=$('#vp');if(typeof PALID!=='undefined')applyPalette(PALID,false);v.style.setProperty('--ts',A11Y.ts);v.classList.toggle('hc',A11Y.hc);v.classList.toggle('rm',A11Y.rm);v.classList.toggle('dys',A11Y.dys);try{localStorage.setItem('cinelux-a11y',JSON.stringify(A11Y))}catch(e){}}
-function loadA11y(){try{Object.assign(A11Y,JSON.parse(localStorage.getItem('cinelux-a11y')||'{}'))}catch(e){}applyA11y()}
+function loadA11y(){try{const o=JSON.parse(localStorage.getItem('cinelux-a11y')||'{}');if(o.mv!==2){o.mode='light';o.mv=2}Object.assign(A11Y,o)}catch(e){}applyA11y()}
 function openA11y(){
  const sizes=[[1,'A','Normal'],[1.15,'A+','Grand'],[1.3,'A++','Très grand']];
  const sw=[['hc','Contraste élevé','Fond uni, textes et contours renforcés'],['rm','Réduire les animations','Supprime les mouvements et transitions'],['dys','Police lisible','Police adaptée à la dyslexie et à la basse vision'],['vib','Vibrations','Petit retour tactile à chaque choix (téléphones compatibles)'],['vidOn','Extraits vidéo (YouTube)','Un extrait de la bande-annonce démarre 3 secondes après l’affiche, sans son']];
