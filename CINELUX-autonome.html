@@ -513,7 +513,8 @@ svg{display:block}
 .cta span{position:relative;z-index:2}
 /* upsell snacks */
 .upsell{display:flex;align-items:center;gap:12px;margin:0 16px 12px;padding:16px;border-radius:var(--r-lg);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 26%,var(--surface)),var(--surface));border:1px solid color-mix(in srgb,var(--accent) 45%,transparent)}
-.upsell .ic2{width:48px;height:48px;border-radius:var(--r-sm);background:var(--grad);display:grid;place-items:center;flex:none;color:var(--on-accent)}
+.upsell .ic2{width:72px;height:72px;border-radius:18px;overflow:hidden;background:var(--surface2);display:grid;place-items:center;flex:none;color:var(--on-accent);box-shadow:0 10px 22px -12px rgba(0,0,0,.55)}
+.upsell .ic2 img{width:100%;height:100%;object-fit:cover;display:block}
 .upsell .ic2 svg{width:26px;height:26px}
 .upsell .grow{flex:1;min-width:0}.upsell strong{display:block;font-size:calc(var(--fs-md)*var(--ts,1))}
 .upsell small{display:block;color:var(--muted);font-size:calc(var(--fs-xs)*var(--ts,1));line-height:1.35;margin-top:2px}
@@ -903,6 +904,7 @@ body.devmode .stage{display:none}
 .upsell .ic2 span{position:absolute;inset:0;display:grid;place-items:center;transition:opacity .25s,transform .3s cubic-bezier(.2,.8,.2,1)}
 .upsell .ic2 .i-ok{opacity:0;transform:scale(.4)}
 .upsell.done{border-color:var(--accent)}
+.upsell.done .ic2{background:var(--grad)}
 .upsell.done .ic2 .i-pop{opacity:0;transform:scale(.4)}
 .upsell.done .ic2 .i-ok{opacity:1;transform:none}
 .upsell .btn.mini{transition:background .3s,color .3s,box-shadow .3s}
@@ -1437,6 +1439,17 @@ html.vt-back::view-transition-new(root){animation:vtInB .46s cubic-bezier(.16,1,
 .muv-form .btn svg{width:20px;height:20px}
 .pill{white-space:nowrap}.pill.cnt{flex-wrap:nowrap;gap:2px;padding:0 6px}
 .sh-pills .pill{padding-left:14px;padding-right:14px}.sh-pills .pill.cnt{padding:0 4px}
+
+/* ---------- Boutons en mode clair : encre profonde + or, à plat (plus de dégradé boueux) ---------- */
+:root.light .btn:not(.alt):not(.wallet):not(.cta):not(.mini),:root.light .split{background:#1E1810!important;background-image:none!important;color:#F4E4B6!important;border:0!important;box-shadow:0 14px 26px -16px rgba(30,24,16,.7),inset 0 1px 0 rgba(255,255,255,.12)!important}
+:root.light .btn:not(.alt):not(.wallet):not(.cta):not(.mini):not(:disabled):hover,:root.light .split:not(:disabled):hover{background:#2C2316!important;transform:translateY(-1px);box-shadow:0 18px 30px -16px rgba(30,24,16,.75),inset 0 1px 0 rgba(255,255,255,.16)!important}
+:root.light .btn.mini{background:#1E1810!important;background-image:none!important;color:#F4E4B6!important;border:0!important;min-height:44px;padding:0 20px;box-shadow:0 10px 20px -14px rgba(30,24,16,.7)!important}
+:root.light .btn.mini:not(:disabled):hover{background:#2C2316!important}
+:root.light .btn.cta.gold{background:#E4B341!important;background-image:none!important;color:#1E1810!important;border:0!important;box-shadow:0 14px 28px -14px rgba(160,110,10,.75)!important}
+:root.light .upsell.done .btn.mini{background:transparent!important;color:var(--accent-text)!important;box-shadow:inset 0 0 0 1.5px var(--accent-text)!important}
+:root.light .btn.alt{background:#fff!important;color:#1E1810!important;border:1px solid rgba(30,24,16,.14)!important;box-shadow:0 8px 18px -14px rgba(30,24,16,.5)!important}
+:root.light .btn svg,:root.light .split svg{color:currentColor}
+:root.light .stepper .plus{background:#1E1810!important;background-image:none!important;color:#F4E4B6!important;border:0!important;box-shadow:0 8px 16px -10px rgba(30,24,16,.7)!important}
 </style>
 </head>
 <body>
@@ -1749,8 +1762,8 @@ const TARIFS=[
 ];
 const SNCATS=[['menus','Menus'],['popcorn','Pop-corn'],['boissons','Boissons'],['douceurs','Douceurs'],['sale','Salé']];
 const SNACKS=[
- {n:'Menu Duo',d:'Pop-corn L + 2 boissons',p:12.5,old:15.5,cat:'menus',img:'img/food/combo2.jpg',tag:'−3 €',hot:1},
- {n:'Menu Solo',d:'Pop-corn M + 1 boisson',p:8.9,cat:'menus',img:'img/food/soda.jpg'},
+ {n:'Menu Duo',d:'Pop-corn L + 2 boissons',p:12.5,old:15.5,cat:'menus',img:'img/food/combo.jpg',tag:'−3 €',hot:1},
+ {n:'Menu Solo',d:'Pop-corn M + 1 boisson',p:8.9,cat:'menus',img:'img/food/solo.jpg'},
  {n:'Pop-corn salé',d:'Sel de mer · Grand',p:6.5,cat:'popcorn',img:'img/food/popcorn3.jpg',tag:'Populaire'},
  {n:'Pop-corn caramel',d:'Caramel beurre salé · Grand',p:6.9,cat:'popcorn',img:'img/food/popcorn2.jpg'},
  {n:'Cola',d:'Cola classique · 50 cl',p:4.5,cat:'boissons',img:'img/food/cola2.jpg'},
@@ -2204,6 +2217,7 @@ $('#sv').addEventListener('pointermove',e=>{if(A11Y.rm||e.target.closest('.sv-hu
 addEventListener('resize',()=>{if(SV.open)svAim(SV.ids[SV.i])});
 
 
+
 /* ---------- Boutons : reflet qui suit le pointeur, onde au toucher, retour en ressort ---------- */
 (function(){
  const SEL='.btn,.split,.qchip,.time,.date,.fchip,.vfs,.acc-row:not(.static),.opt';
@@ -2539,7 +2553,7 @@ function renderOrder(){
  {const p=PAYS[ST.pay];$('#pays').innerHTML=`<button class="pay" id="payBtn" aria-haspopup="dialog" style="border-color:var(--accent)">${IC[p[2]]}<span class="grow">${p[0]}<small>${p[1]}</small></span><span class="muted" style="font-size:calc(var(--fs-xs)*var(--ts,1));font-weight:600">Modifier</span>${IC.chev}</button>`}
  renderSnackToggle();renderPromo();renderTotals();renderUpsell();
 }
-const SNBAN=[{i:0,t:'Votre combo cinéma favori.',pos:'40% 50%'},{i:4,t:'Rafraîchissez-vous avec un grand classique.',pos:'40% 50%'},{i:2,t:'Le grand classique ciné, chaud et salé.'},{i:7,t:'Pour les gourmands aux fruits.'},{i:11,t:'Croustillant et fondant.'},{i:8,t:'La pause chocolatée parfaite.'}];
+const SNBAN=[{i:0,t:'Votre combo cinéma favori.',img:'img/food/combo2.jpg',pos:'40% 50%'},{i:4,t:'Rafraîchissez-vous avec un grand classique.',pos:'40% 50%'},{i:2,t:'Le grand classique ciné, chaud et salé.'},{i:7,t:'Pour les gourmands aux fruits.'},{i:11,t:'Croustillant et fondant.'},{i:8,t:'La pause chocolatée parfaite.'}];
 function renderSnacks(){
  const cat=ST.snCat||'menus';
  {const bn=$('#snBan'),sl=bn.scrollLeft;bn.innerHTML=SNBAN.map(b=>{const x=SNACKS[b.i],n=ST.snacks[b.i];return `<div class="bn"><img src="${b.img||x.img}" alt="" style="object-position:${b.pos||'50% 50%'}" loading="lazy" decoding="async"><p>${b.t}</p><button type="button" class="${n?'on':''}" data-i="${b.i}" data-d="1" aria-label="Ajouter ${x.n}${n?' (déjà '+n+')':''}">${n?n+' ajouté'+(n>1?'s':'')+' · +':'Commander · '+eur(x.p)}</button></div>`}).join('');bn.scrollLeft=sl}
@@ -2572,7 +2586,7 @@ function snackSum(){return SNACKS.reduce((a,x,i)=>a+x.p*ST.snacks[i],0)}
 function renderUpsell(){
  const el=$('#upsell'),sum=snackSum(),left=Math.max(0,GOAL-sum),pct=Math.min(100,sum/GOAL*100),duo=ST.snacks[0]>0;
  /* Transformer plutôt que remplacer : la même carte passe de « Ajouter » à « Ajouté » (cours : morphing) */
- if(!$('#duoCard'))el.innerHTML=`<div class="upsell" id="duoCard"><div class="ic2"><span class="i-pop">${IC.pop}</span><span class="i-ok">${IC.check}</span></div><div class="grow"><strong id="duoT"></strong><small id="duoS"></small></div><button class="btn mini" id="addDuo"><span id="duoB"></span></button></div><div class="goal" aria-live="polite" id="goalBox"></div>`;
+ if(!$('#duoCard'))el.innerHTML=`<div class="upsell" id="duoCard"><div class="ic2"><span class="i-pop"><img src="img/food/combo.jpg" alt=""></span><span class="i-ok">${IC.check}</span></div><div class="grow"><strong id="duoT"></strong><small id="duoS"></small></div><button class="btn mini" id="addDuo"><span id="duoB"></span></button></div><div class="goal" aria-live="polite" id="goalBox"></div>`;
  $('#duoCard').classList.toggle('done',duo);
  $('#duoT').textContent=duo?'Menu Duo ajouté':'Le duo gagnant';
  $('#duoS').textContent=duo?'Popcorn + 2 boissons. Retrait express au comptoir, sans file.':'Popcorn + 2 boissons à 12,50 € au lieu de 15,50 €. Retrait express au comptoir, sans file.';
