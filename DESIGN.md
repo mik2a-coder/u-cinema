@@ -153,4 +153,4 @@ Polices : **Bebas Neue** (titres, MAJUSCULES, `line-height .95`), **Inter** (tex
 
 
 ## Boutons en mode clair
-Primaire (`.btn`, `.split`, `.cta.gold`, `+` des quantités) : **or à plat** `#E4B243`, texte encre `#1E1810`, ombre chaude, pas de bordure ni de dégradé. Secondaire (`.btn.alt`, `.vfs`, `.pill`, `.qchip`, `.hslot`, `.fchip`) : **verre dépoli clair** (blanc 72 %, flou, filet fin), texte encre. Les boutons ronds sur image restent en verre sombre.
+Primaire (`.btn`, `.split`, `.cta.gold`, `+` des quantités) : **encre foncée** `#1E1810`, texte crème `#F4E4B6`, ombre douce, pas de bordure ni de dégradé (choix validé sur le bouton « Commande avec obligation de paiement »). Secondaire (`.btn.alt`, `.vfs`, `.pill`, `.qchip`, `.hslot`, `.fchip`) : **verre dépoli clair** (blanc 72 %, flou, filet fin), texte encre. Les boutons ronds sur image restent en verre sombre.
