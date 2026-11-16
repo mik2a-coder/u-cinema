@@ -1,0 +1,4 @@
+Images de scène : captures extraites des vignettes des bandes-annonces officielles des films (YouTube),
+recadrées en 16:9 pour l'écran de la salle. Les images restent la propriété de leurs ayants droit.
+Usage : maquette / prototype personnel uniquement. Pour une publication, remplacer par des images sous licence
+(par exemple via l'API TMDB : tools/fetch-scenes.py).
