@@ -1452,9 +1452,11 @@ html.vt-back::view-transition-new(root){animation:vtInB .46s cubic-bezier(.16,1,
 :root.light .lg-mark{--lm-fill:#1E1810;--lm-stroke:#1E1810;--lm-in:0;--lm-u:#EDBE55;filter:drop-shadow(0 6px 10px rgba(30,24,16,.28))}
 :root.light .lg-word{color:#1E1810!important;letter-spacing:.16em}
 :root.light .lg-word i{background:none!important;-webkit-background-clip:initial!important;background-clip:initial!important;color:#B98414!important}
-.lg-mark{width:54px!important;height:54px!important;object-fit:contain;filter:drop-shadow(0 3px 8px rgba(30,24,16,.25))!important}.onb-logo .lg-mark{width:40px!important;height:40px!important}
-/* logo : le chat touche presque le U, comme dans le fichier d'origine */
-.brand,.onb-logo{gap:0!important}.lg-mark{margin-right:6px}.lg-word{padding-left:0!important;gap:.34em!important}
+.lg-mark{object-fit:contain;filter:drop-shadow(0 3px 8px rgba(30,24,16,.25))!important}
+/* logo : proportions du fichier d'origine (chat, U tout près, grand blanc, lettres espacées), partout */
+.brand,.onb-logo{--lm:54px;gap:0!important}.onb-logo{--lm:44px}
+.lg-mark{width:var(--lm)!important;height:var(--lm)!important;margin-right:calc(var(--lm)*.07)}
+.lg-word{font-size:calc(var(--lm)*.52)!important;letter-spacing:.3em!important;padding-left:0!important;gap:.34em!important}
 </style>
 </head>
 <body>
