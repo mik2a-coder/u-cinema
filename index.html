@@ -1504,6 +1504,13 @@ body:has(#s-detail.active) .toast{bottom:118px}
 .muv-svg,.muv-fab,.muv-svg img,.muv-av{filter:none!important;-webkit-filter:none!important;box-shadow:none!important;background:transparent!important}
 /* moins d'animations : le message d'accueil du chat apparaît sans mouvement */
 .muv-hi{animation:none!important}
+/* suivi : l'état « suivi » est nettement différent (plein, même style que les boutons principaux) */
+.follow[aria-pressed=true],.listen.ff[aria-pressed=true]{background:var(--grad)!important;background-image:var(--grad)!important;color:var(--on-accent)!important;border-color:transparent!important;box-shadow:0 10px 22px -12px var(--glow)!important}
+:root.light .follow[aria-pressed=true],:root.light .listen.ff[aria-pressed=true]{background:#1E1810!important;background-image:none!important;color:#F4E4B6!important;box-shadow:0 12px 24px -14px rgba(30,24,16,.7)!important}
+.follow[aria-pressed=true]::before{content:"✓";margin-right:8px;font-weight:700}
+.listen.ff[aria-pressed=true] svg{fill:currentColor;color:inherit!important}
+.follow,.listen.ff{transition:background .25s,color .25s,box-shadow .25s,transform .2s}
+.follow:active,.listen.ff:active{transform:scale(.95)}
 </style>
 </head>
 <body>
@@ -2378,7 +2385,7 @@ function renderDetail(){
  ${f.rate==null?`<div class="soonb">Dans les salles <b>le ${relLabel(f)}</b></div>`:`<div class="rating">${IC.star}<b>${rt(f)}</b><span class="muted">/10 · note du public</span></div>`}
  <div class="meta">${f.dur}<i></i>${f.genres}<i></i>${f.year}</div>
  ${isSoon(f)?'':quickSlots()}
- <div class="dir"><div class="avs">${dirPhoto(f)}</div><div class="grow"><small>${TM(f).role.toUpperCase()}</small><strong>${f.dir}</strong></div><button class="follow" id="follow" aria-pressed="${!!ST.follow[f.id]}">${ST.follow[f.id]?'Suivie':'Suivre'}</button></div>
+ <div class="dir"><div class="avs">${dirPhoto(f)}</div><div class="grow"><small>${TM(f).role.toUpperCase()}</small><strong>${f.dir}</strong></div><button class="follow" id="follow" aria-pressed="${!!ST.follow[f.id]}">${ST.follow[f.id]?'Suivi':'Suivre'}</button></div>
  <div class="synh"><h3>Synopsis</h3><button class="listen ff" id="followFilm" aria-pressed="${!!ACC.follows[f.id]}">${IC.bell}<span>${ACC.follows[f.id]?'Suivi':'Suivre ce film'}</span></button></div><p class="syn clamp" id="syn">${f.syn}</p><button class="synmore" id="synMore" aria-expanded="false" aria-controls="syn">Lire la suite</button>${castHtml(f)}<footer class="foot"><button type="button" class="textlink" data-legal>Confidentialité et mentions légales</button></footer>`;
  $('#dScroll').scrollTop=0;
  $('#favBtn').setAttribute('aria-pressed',!!ST.fav[f.id]);paintFav();paintCta(f);armNudge();
@@ -2386,7 +2393,7 @@ function renderDetail(){
 }
 function paintFav(){const f=film(),on=!!ST.fav[f.id],b=$('#favBtn');b.querySelector('svg').style.fill=on?'var(--accent)':'none';b.querySelector('svg').style.color=on?'var(--accent)':'currentColor';b.setAttribute('aria-pressed',on)}
 $('#favBtn').onclick=()=>{const f=film();const flip=()=>{ST.fav[f.id]=!ST.fav[f.id];paintFav();logAct(ST.fav[f.id]?'fav':'unfav',f.id)};flip();haptic('soft');toast(ST.fav[f.id]?'Ajouté aux favoris':'Retiré des favoris',{undo:flip})};
-$('#dBody').addEventListener('click',e=>{const b=e.target.closest('#follow');if(!b)return;const f=film();ST.follow[f.id]=!ST.follow[f.id];b.setAttribute('aria-pressed',!!ST.follow[f.id]);b.textContent=ST.follow[f.id]?'Suivie':'Suivre'});
+$('#dBody').addEventListener('click',e=>{const b=e.target.closest('#follow');if(!b)return;const f=film();ST.follow[f.id]=!ST.follow[f.id];b.setAttribute('aria-pressed',!!ST.follow[f.id]);b.textContent=ST.follow[f.id]?'Suivi':'Suivre';haptic('soft');toast(ST.follow[f.id]?'Vous suivez '+dirNames(f).join(' et '):'Vous ne suivez plus '+dirNames(f).join(' et '))});
 
 /* =============== 4. RÉSERVATION =============== */
 function cnt(){return TARIFS.reduce((a,t)=>a+ST.tq[t.k],0)}
