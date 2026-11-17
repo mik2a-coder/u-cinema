@@ -1462,6 +1462,17 @@ html.vt-back::view-transition-new(root){animation:vtInB .46s cubic-bezier(.16,1,
 :root.light .lg-word i{color:#B06F06!important;-webkit-text-stroke:.5px #B06F06;text-shadow:0 1px 1px rgba(30,24,16,.28)}
 :root:not(.light) .lg-word i{-webkit-text-stroke:0}
 :root.light .lg-mark{filter:drop-shadow(0 3px 8px rgba(30,24,16,.3))!important}
+/* ---- Corrections : barre haute opaque, pas de barres de défilement, dégagements ---- */
+*{scrollbar-width:none;-ms-overflow-style:none}
+*::-webkit-scrollbar{display:none;width:0;height:0}
+#dtop,:root.light #dtop{background:var(--bg)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border-bottom:1px solid var(--line)}
+#dtop .dnav{background:var(--surface2,var(--bg))!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+@media (min-width:600px){#s-detail .d-body{padding-bottom:240px!important}#dScroll,#s-detail .d-scroll{scroll-padding-bottom:200px}}
+@media (max-width:599px){#s-detail .d-body{padding-bottom:max(190px,calc(var(--bot) + 150px))}}
+.avs{flex:none}.dph-row{display:flex}.dph-row>*{width:56px;height:56px;border-radius:50%;overflow:hidden;flex:none;object-fit:cover;object-position:center 20%;border:2px solid var(--surface);box-sizing:border-box;background:var(--surface2)}.dph-row>*+*{margin-left:-16px}
+.ff{white-space:nowrap;flex:none}.ff svg{width:20px;height:20px}.ff[aria-pressed=true]{border-color:var(--accent);color:var(--accent-text)}.ff[aria-pressed=true] svg{fill:currentColor}
+.ff.pop svg{animation:bellRing .7s ease-out}@keyframes bellRing{20%{transform:rotate(18deg)}40%{transform:rotate(-16deg)}60%{transform:rotate(10deg)}80%{transform:rotate(-6deg)}}
+@media (min-width:600px){.now{grid-template-columns:repeat(auto-fit,minmax(168px,210px))!important;justify-content:center}}
 </style>
 </head>
 <body>
@@ -1716,7 +1727,10 @@ function poster(kind){
  <path d="M0 200c30-14 60 14 100 0s70-14 100 0v100H0z" fill="var(--sec)" opacity=".55"/><path d="M0 232c34-14 64 14 104 0s64-12 96 2v66H0z" fill="#07101c" opacity=".8"/><path d="M0 262c40-12 70 12 110 0s60-10 90 2v36H0z" fill="#03060b"/>`}
  return `<div class="poster"><svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${b}</svg></div>`}
 const PIMG={"David Ayer": "img/people/david-ayer.jpg", "Brad Pitt": "img/people/brad-pitt.jpg", "J. K. Simmons": "img/people/j-k-simmons.jpg", "Anna Lambe": "img/people/anna-lambe.jpg", "Fred Cavayé": "img/people/fred-cavaye.jpg", "Vincent Lindon": "img/people/vincent-lindon.jpg", "Tahar Rahim": "img/people/tahar-rahim.jpg", "Noémie Merlant": "img/people/noemie-merlant.jpg", "Christopher Nolan": "img/people/christopher-nolan.jpg", "Matt Damon": "img/people/matt-damon.jpg", "Tom Holland": "img/people/tom-holland.jpg", "Anne Hathaway": "img/people/anne-hathaway.jpg", "Robert Pattinson": "img/people/robert-pattinson.jpg", "Lupita Nyong'o": "img/people/lupita-nyong-o.jpg", "Samantha Morton": "img/people/samantha-morton.jpg", "Destin Daniel Cretton": "img/people/destin-daniel-cretton.jpg", "Zendaya": "img/people/zendaya.jpg", "Sadie Sink": "img/people/sadie-sink.jpg", "Jacob Batalon": "img/people/jacob-batalon.jpg", "Jon Bernthal": "img/people/jon-bernthal.jpg", "Florence Pugh": "img/people/florence-pugh.jpg", "Andrew Stanton": "img/people/andrew-stanton.jpg", "Joan Cusack": "img/people/joan-cusack.jpg", "Tom Hanks": "img/people/tom-hanks.jpg", "Tim Allen": "img/people/tim-allen.jpg", "Conan O'Brien": "img/people/conan-o-brien.jpg", "Greta Lee": "img/people/greta-lee.jpg", "Ryan Gosling": "img/people/ryan-gosling.jpg", "Sandra Hüller": "img/people/sandra-huller.jpg", "James Ortiz": "img/people/james-ortiz.jpg", "Lionel Boyce": "img/people/lionel-boyce.jpg", "Antoine Fuqua": "img/people/antoine-fuqua.jpg", "Jaafar Jackson": "img/people/jaafar-jackson.jpg", "Nia Long": "img/people/nia-long.jpg", "Laura Harrier": "img/people/laura-harrier.jpg", "Jessica Sula": "img/people/jessica-sula.jpg", "Craig Gillespie": "img/people/craig-gillespie.jpg", "Milly Alcock": "img/people/milly-alcock.jpg", "Matthias Schoenaerts": "img/people/matthias-schoenaerts.jpg", "Eve Ridley": "img/people/eve-ridley.jpg", "David Krumholtz": "img/people/david-krumholtz.jpg", "Emily Beecham": "img/people/emily-beecham.jpg", "David Corenswet": "img/people/david-corenswet.jpg", "David Frankel": "img/people/david-frankel.jpg", "Meryl Streep": "img/people/meryl-streep.jpg", "Emily Blunt": "img/people/emily-blunt.jpg", "Justin Theroux": "img/people/justin-theroux.jpg", "Kenneth Branagh": "img/people/kenneth-branagh.jpg", "Stanley Tucci": "img/people/stanley-tucci.jpg", "Aaron Horvath": "img/people/aaron-horvath.jpg", "Michael Jelenic": "img/people/michael-jelenic.jpg", "Chris Pratt": "img/people/chris-pratt.jpg", "Anya Taylor-Joy": "img/people/anya-taylor-joy.jpg", "Charlie Day": "img/people/charlie-day.jpg", "Jack Black": "img/people/jack-black.jpg", "Keegan-Michael Key": "img/people/keegan-michael-key.jpg", "Benny Safdie": "img/people/benny-safdie.jpg", "Jon Favreau": "img/people/jon-favreau.jpg", "Pedro Pascal": "img/people/pedro-pascal.jpg", "Jeremy Allen White": "img/people/jeremy-allen-white.jpg", "Brendan Wayne": "img/people/brendan-wayne.jpg", "Lateef Crowder": "img/people/lateef-crowder.jpg", "Jonny Coyne": "img/people/jonny-coyne.jpg", "Martin Scorsese": "img/people/martin-scorsese.jpg", "Thomas Kail": "img/people/thomas-kail.jpg", "Dwayne Johnson": "img/people/dwayne-johnson.jpg", "Rena Owen": "img/people/rena-owen.jpg", "John Tui": "img/people/john-tui.jpg", "Frankie Adams": "img/people/frankie-adams.jpg", "Jemaine Clement": "img/people/jemaine-clement.jpg", "Catherine Laga'aia": "img/people/catherine-laga-aia.jpg", "Francis Lawrence": "img/people/francis-lawrence.jpg", "Jesse Plemons": "img/people/jesse-plemons.jpg", "Ralph Fiennes": "img/people/ralph-fiennes.jpg", "Glenn Close": "img/people/glenn-close.jpg", "Ben Wang": "img/people/ben-wang.jpg", "Kieran Culkin": "img/people/kieran-culkin.jpg", "John Hamburg": "img/people/john-hamburg.jpg", "Robert De Niro": "img/people/robert-de-niro.jpg", "Ben Stiller": "img/people/ben-stiller.jpg", "Ariana Grande": "img/people/ariana-grande.jpg", "Owen Wilson": "img/people/owen-wilson.jpg", "Blythe Danner": "img/people/blythe-danner.jpg", "Teri Polo": "img/people/teri-polo.jpg", "Robert Downey Jr.": "img/people/robert-downey-jr.jpg", "Chris Hemsworth": "img/people/chris-hemsworth.jpg", "Paul Rudd": "img/people/paul-rudd.jpg", "Anthony Mackie": "img/people/anthony-mackie.jpg", "Denis Villeneuve": "img/people/denis-villeneuve.jpg", "Timothée Chalamet": "img/people/timothee-chalamet.jpg", "Jason Momoa": "img/people/jason-momoa.jpg", "Rebecca Ferguson": "img/people/rebecca-ferguson.jpg", "Isaach de Bankolé": "img/people/isaach-de-bankole.jpg", "Jason Sudeikis": "img/people/jason-sudeikis.jpg", "Josh Gad": "img/people/josh-gad.jpg", "Emma Myers": "img/people/emma-myers.jpg", "Rachel Bloom": "img/people/rachel-bloom.jpg", "Walker Scobell": "img/people/walker-scobell.jpg", "Danny McBride": "img/people/danny-mcbride.jpg", "Jake Kasdan": "img/people/jake-kasdan.jpg", "Kevin Hart": "img/people/kevin-hart.jpg", "Karen Gillan": "img/people/karen-gillan.jpg", "Nick Jonas": "img/people/nick-jonas.jpg", "Awkwafina": "img/people/awkwafina.jpg"};
-function dirPhoto(f){const n=f.dir.split(/ et /)[0],k=PIMG[n];return k?`<img class="dph" src="${k}" alt="Portrait de ${n}" data-ini="${f.ini}" data-id="${f.id}" decoding="async">`:avatarSVG(f.ini,f.id)}
+Object.assign(PIMG,{"Charlize Theron":"img/people/charlize-theron.jpg","Phil Lord":"img/people/phil-lord.jpg","Christopher Miller":"img/people/christopher-miller.jpg","Joseph Zada":"img/people/joseph-zada.jpg","Anthony Russo":"img/people/anthony-russo.jpg","Joe Russo":"img/people/joe-russo.jpg","Chris Evans":"img/people/chris-evans.jpg"});
+Object.keys(PIMG).forEach(k=>{if(k.indexOf("'")>-1)PIMG[k.replace(/'/g,'’')]=PIMG[k]});
+const dirNames=f=>{const m=f.dir.match(/^(\S+) et (\S+) (\S+)$/);return m?[m[1]+' '+m[3],m[2]+' '+m[3]]:f.dir.split(/ et /)};
+function dirPhoto(f){return `<span class="dph-row">${dirNames(f).map((n,i)=>{const k=PIMG[n];return k?`<img class="dph" src="${k}" alt="Portrait de ${n}" data-ini="${initials(n)}" data-id="${f.id}${i}" decoding="async">`:avatarSVG(initials(n),f.id+'d'+i)}).join('')}</span>`}
 document.addEventListener('error',e=>{const t=e.target;if(t&&t.classList&&t.classList.contains('dph'))t.outerHTML=avatarSVG(t.dataset.ini,t.dataset.id)},true);
 function avatarSVG(ini,seed){return `<svg viewBox="0 0 56 56" width="100%" height="100%" aria-hidden="true"><defs><linearGradient id="av${seed}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--accent)"/><stop offset="1" style="stop-color:var(--accent2)"/></linearGradient></defs><rect width="56" height="56" fill="url(#av${seed})"/><text x="28" y="35" text-anchor="middle" font-family="Bebas Neue,Impact,sans-serif" font-size="24" fill="var(--on-accent)">${ini}</text></svg>`}
 
@@ -1747,7 +1761,10 @@ FILMS.forEach(f=>{f.type='film';f.kind=f.id});
 const ACC_DEF=()=>({v:1,since:2024,points:1240,hist:[{id:'hailmary',date:'2026-03-22',cin:0},{id:'michael',date:'2026-04-26',cin:1},{id:'prada2',date:'2026-05-03',cin:0},{id:'toystory5',date:'2026-06-20',cin:2},{id:'odyssey',date:'2026-07-18',cin:0}],ratings:{hailmary:5,michael:3},remind:{},bookings:[]});
 let ACC=(()=>{try{const x=JSON.parse(localStorage.getItem('cinelux-acc'));if(x&&x.v===1)return x}catch(e){}return ACC_DEF()})();
 {const seen=new Set();ACC.bookings=(ACC.bookings||[]).filter(b=>{const k=b.id+'|'+b.date+'|'+b.time;if(seen.has(k))return false;seen.add(k);return true})}
+ACC.log=ACC.log||[];ACC.follows=ACC.follows||{};
+function logAct(t,id,x){try{ACC.log.unshift(Object.assign({t,id,ts:Date.now()},x||{}));ACC.log=ACC.log.slice(0,60);saveACC()}catch(e){}}
 function saveACC(){try{localStorage.setItem('cinelux-acc',JSON.stringify(ACC))}catch(e){}}
+IC.bell=P('<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>');
 const initials=n=>String(n).split(/[\s.’'-]+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase();
 const IMGS={"hotb": "img/hotb.jpg", "lesmis": "img/lesmis.jpg", "odyssey": "img/odyssey.jpg", "spiderman": "img/spiderman.jpg", "toystory5": "img/toystory5.jpg", "hailmary": "img/hailmary.jpg", "michael": "img/michael.png", "supergirl": "img/supergirl.jpg", "prada2": "img/prada2.png", "mariogalaxy": "img/mariogalaxy.jpg", "mandalorian": "img/mandalorian.jpg", "moana": "img/moana.jpg", "hungergames": "img/hungergames.jpg", "focker": "img/focker.jpg", "avengers": "img/avengers.jpg", "dune3": "img/dune3.jpg", "angrybirds3": "img/angrybirds3.jpg", "jumanji": "img/jumanji.jpg"};
 const WIDE=new Set([]);
@@ -1854,11 +1871,16 @@ const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 const ORDER=['onb','home','detail','book','seats','order','ticket'],LABELS=['Intro','Accueil','Fiche','Séances','Places','Commande','Billet'];
 let cur='onb';
 const HOOKS={account:()=>renderAccount(),detail:renderDetail,book:renderBook,seats:renderSeats,order:renderOrder,ticket:renderTicket};
-let VTSRC=null,NOVT=false,VTID=0;
+let VTSRC=null,NOVT=false,VTID=0,RET=null;const SCR={};
 function go(n){
  if(n===cur)return;const prev=cur,from=$('#s-'+cur),to=$('#s-'+n),dir=n==='account'?1:cur==='account'?-1:(ORDER.indexOf(n)>=ORDER.indexOf(cur)?1:-1);
- const finish=()=>{{const mv=$('#muv');if(mv)mv.dataset.scr=n;if(typeof MV!=='undefined'&&MV.open&&n!=='home')mvClose()}if(prev==='detail'&&n!=='detail')setTimeout(stopExtract,200);cur=n;if(n==='detail')setTimeout(startExtract,60);markStep();if(typeof markDnav==='function')markDnav();setTimeout(()=>{to.setAttribute('tabindex','-1');to.focus({preventScroll:true})},60);say(to.getAttribute('aria-label')||'')};
+ const finish=()=>{{const mv=$('#muv');if(mv)mv.dataset.scr=n;if(typeof MV!=='undefined'&&MV.open&&n!=='home')mvClose()}if(prev==='detail'&&n!=='detail')setTimeout(stopExtract,200);cur=n;if(n==='detail')setTimeout(startExtract,60);markStep();if(typeof markDnav==='function')markDnav();setTimeout(()=>{to.setAttribute('tabindex','-1');to.focus({preventScroll:true});if(restore!=null){const s2=to.querySelector('.scroll,.d-scroll');if(s2)s2.scrollTop=restore}},90);say(to.getAttribute('aria-label')||'')};
  if(prev==='detail'){document.querySelectorAll('#dVisual .d-video').forEach(v=>{v.style.transition='opacity .14s';v.classList.remove('on')});const ex=document.querySelector('#exSound');if(ex)ex.remove();setTimeout(stopExtract,170)}
+ {const sc0=from.querySelector('.scroll,.d-scroll');if(sc0)SCR[prev]=sc0.scrollTop}
+ if(prev==='home'&&n==='detail'&&!RET)RET={tab:ST.tab,cur:ST.cur,q:ST.q};
+ if(n==='home'&&prev==='detail'&&RET){const r=RET;RET=null;try{ST.tab=r.tab;ST.q=r.q||'';$('#q').value=ST.q;const idx=r.film?tabList(r.tab).findIndex(x=>x.id===r.film):-1;ST.cur=r.cur>=0?r.cur:Math.max(0,idx);renderTabs();renderFan();renderNow()}catch(e){}}
+ else if(n==='home')RET=null;
+ const restore=dir<0&&SCR[n]!=null?SCR[n]:null;
  const reduce=A11Y.rm||matchMedia('(prefers-reduced-motion:reduce)').matches;
  /* Transition vue (Chrome, Safari récents) : l'écran qui part s'efface vite, celui qui arrive glisse et se pose ; sur grand écran l'affiche voyage de la carte à la fiche */
  if(document.startViewTransition&&!reduce&&!NOVT&&((prev==='home'&&n==='detail')||(prev==='detail'&&n==='home'))&&innerWidth>=600&&!document.querySelector('.d-video')){
@@ -1998,7 +2020,7 @@ function filmMatch(f,n){
  if(/^\d{3,4}$/.test(n)&&String(f.year).startsWith(n))return{r:6};
  return{r:9};
 }
-function peopleIndex(){const m=new Map();FILMS.forEach(f=>SROLES.forEach(([k,l0])=>(k==='dir'?[f.dir]:f[k]||[]).forEach(nm=>{const l=k==='dir'?TM(f).role:l0;let p=m.get(nm);if(!p){p={name:nm,roles:[],films:[]};m.set(nm,p)}if(!p.roles.includes(l))p.roles.push(l);if(!p.films.includes(f))p.films.push(f)})));return[...m.values()]}
+function peopleIndex(){const m=new Map();FILMS.forEach(f=>SROLES.forEach(([k,l0])=>(k==='dir'?dirNames(f):f[k]||[]).forEach(nm=>{const l=k==='dir'?TM(f).role:l0;let p=m.get(nm);if(!p){p={name:nm,roles:[],films:[]};m.set(nm,p)}if(!p.roles.includes(l))p.roles.push(l);if(!p.films.includes(f))p.films.push(f)})));return[...m.values()]}
 function todaySlots(){const ds=defaultSlot(),d=ds.date,l=TIMES.map((t,i)=>i).filter(i=>okSlot(d,i)).slice(0,4);return{d,l,next:ds.time}}
 function renderNow(){
  {const h=$('#nowH');if(h)h.textContent=ST.q?'Résultats':['À l’affiche','Nouveautés','Bientôt en salle'][ST.tab]||'À l’affiche'}
@@ -2007,7 +2029,7 @@ function renderNow(){
  const q=norm(ST.q),l=(q?FILMS:list()).filter(f=>!q||filmMatch(f,q).r<9),nxs=todaySlots();
  $('#now').innerHTML=l.length?l.map(f=>`<button class="ncard" data-id="${f.id}"><div class="img">${poster(f.kind)}${f.rate==null?`<div class="rate soon">${relShort(f)}</div>`:`<div class="rate">${IC.star}${rt(f)}</div>`}</div><h4>${f.title}</h4><span>${f.genre}</span>${isSoon(f)||!nxs.l.length?'':`<small class="nx">${dayLabel(nxs.d)} · ${TIMES[nxs.next].t}</small>`}</button>`).join(''):`<div class="emptyst"><b>Aucun film ne correspond à « ${esc(ST.q.trim())} »</b><p>Essayez un genre :</p><div class="eg">${[...new Set(FILMS.map(f=>f.genre))].map(g=>`<button type="button" data-g="${g}">${g}</button>`).join('')}</div><button type="button" class="link" id="clrq">Effacer la recherche</button></div>`;
 }
-$('#now').addEventListener('click',e=>{const c=e.target.closest('.ncard');if(!c)return;const id=c.dataset.id;VTSRC=c.querySelector('.img');ST.tab=0;ST.cur=list().findIndex(f=>f.id===id);renderTabs();renderFan();go('detail')});
+$('#now').addEventListener('click',e=>{const c=e.target.closest('.ncard');if(!c)return;const id=c.dataset.id;VTSRC=c.querySelector('.img');RET={tab:ST.tab,cur:ST.cur,q:ST.q,film:id};ST.tab=0;ST.cur=list().findIndex(f=>f.id===id);renderTabs();renderFan();go('detail')});
 $('#now').addEventListener('click',e=>{const g=e.target.closest('[data-g]');if(g){ST.q=g.dataset.g;$('#q').value=ST.q;renderNow()}if(e.target.closest('#clrq')){ST.q='';$('#q').value='';renderNow()}});
 $('#q').addEventListener('input',e=>{const v=e.target.value,n=SBASE(v).replace(/\s+/g,' ').trim(),hasF=FILMS.some(f=>filmMatch(f,n).r<9),hasC=n.length>=2&&CINEMAS.some(c=>SBASE(c.n+' '+c.a).includes(n));ST.q=(hasF||!hasC)?v:'';renderNow()});
 /* ---------- Suggestions de recherche : films, personnes, genres, cinémas (combobox ARIA) ---------- */
@@ -2077,7 +2099,7 @@ const lvlOf=p=>{let i=0;LVL.forEach((l,k)=>{if(p>=l[1])i=k});return i};
 function recordBooking(){
  try{const m=money(),f=film();
   ACC.bookings.unshift({id:f.id,date:DATES[ST.date].getFullYear()+'-'+String(DATES[ST.date].getMonth()+1).padStart(2,'0')+'-'+String(DATES[ST.date].getDate()).padStart(2,'0'),time:TIMES[ST.time].t,cin:ST.cinema,seats:ST.seats.slice().sort(),count:ST.count,total:+m.tot.toFixed(2)});
-  ACC.bookings=ACC.bookings.slice(0,20);ACC.points+=Math.round(m.tot);saveACC()}catch(e){}
+  ACC.bookings=ACC.bookings.slice(0,20);ACC.points+=Math.round(m.tot);saveACC();logAct('book',f.id,{bk:ACC.bookings[0].date+'|'+ACC.bookings[0].time})}catch(e){}
 }
 const fdateStr=iso=>cap(new Date(iso+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'}).replace('.',''));
 const stars=(id,n)=>`<div class="r5" role="radiogroup" aria-label="Votre note">${[1,2,3,4,5].map(k=>`<button type="button" role="radio" aria-checked="${n===k}" aria-label="${k} sur 5" data-rate="${k}" data-f="${id}" class="${k<=n?'on':''}">${IC.star}</button>`).join('')}</div>`;
@@ -2256,18 +2278,9 @@ function quickSlots(){const ds=defaultSlot(),l=TIMES.map((t,i)=>i).filter(i=>okS
 function castHtml(f){
  const ppl=peopleIndex(),card=(n,i)=>{const p=ppl.find(x=>x.name===n),c=p?p.films.length:1,img=PIMG[n];
   return `<button type="button" class="cc" data-actor="${esc(n)}"><span class="ph">${img?`<img src="${img}" alt="" loading="lazy" decoding="async">`:`<b>${esc(initials(n))}</b>`}</span><strong>${esc(n)}</strong><small>${c>1?c+' films à l’affiche':(i<2?'Tête d’affiche':'Distribution')}</small></button>`};
- const crew=[['Réalisation',f.dir.split(/ et /)],['Production',f.prod||[]],['Musique',f.music||[]]].filter(x=>x[1].length);
+ const crew=[['Réalisation',dirNames(f)],['Production',f.prod||[]],['Musique',f.music||[]]].filter(x=>x[1].length);
  return `<h3 class="castH">Distribution</h3><div class="cast" role="list">${(f.cast||[]).map((n,i)=>`<div role="listitem">${card(n,i)}</div>`).join('')}</div>
  <div class="crew">${crew.map(([l,a])=>`<div><small>${l}</small><span>${a.map(n=>`<button type="button" class="nm" data-actor="${esc(n)}">${esc(n)}</button>`).join(', ')}</span></div>`).join('')}</div>`}
-function openActor(name){
- const p=peopleIndex().find(x=>x.name===name),img=PIMG[name];if(!p)return;
- const fl=p.films.slice().sort((a,b)=>relDate(b)-relDate(a));
- openSheet(name,`<div class="ap"><span class="ph">${img?`<img src="${img}" alt="">`:`<b>${esc(initials(name))}</b>`}</span><div><strong>${esc(name)}</strong><small>${p.roles.join(' · ')}</small></div></div>
- <h5 class="sech">${fl.length>1?fl.length+' films à l’affiche ou à venir':'À l’affiche ou à venir'}</h5>
- ${fl.map(f=>`<button class="opt" data-f="${f.id}"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>${f.year} · ${f.genre}${isSoon(f)?' · sortie le '+relLabel(f):''}</small></span><span data-ic="chev"></span></button>`).join('')}
- <button class="opt" id="apAll"><span data-ic="search"></span><span class="grow"><strong>Voir dans la recherche</strong><small>Afficher tous les films liés à ${esc(name)}</small></span></button>`,
- b=>{b.onclick=e=>{const o=e.target.closest('[data-f]');if(o){closeSheet();setTimeout(()=>{ST.tab=0;ST.cur=list().findIndex(f=>f.id===o.dataset.f);if(ST.cur<0){ST.cur=0}renderTabs();renderFan();if(cur==='detail'){renderDetail()}else go('detail')},300);return}
-  if(e.target.closest('#apAll')){closeSheet();ST.q=name;$('#q').value=name;renderNow();go('home')}}})}
 /* ---- bouton principal : réserver ou être prévenu ---- */
 function paintCta(f){
  const b=$('#ctaMain');if(!b)return;
@@ -2322,14 +2335,14 @@ function renderDetail(){
  ${f.rate==null?`<div class="soonb">Dans les salles <b>le ${relLabel(f)}</b></div>`:`<div class="rating">${IC.star}<b>${rt(f)}</b><span class="muted">/10 · note du public</span></div>`}
  <div class="meta">${f.dur}<i></i>${f.genres}<i></i>${f.year}</div>
  ${isSoon(f)?'':quickSlots()}
- <div class="dir"><div class="av">${dirPhoto(f)}</div><div class="grow"><small>${TM(f).role.toUpperCase()}</small><strong>${f.dir}</strong></div><button class="follow" id="follow" aria-pressed="${!!ST.follow[f.id]}">${ST.follow[f.id]?'Suivie':'Suivre'}</button></div>
- <div class="synh"><h3>Synopsis</h3><button class="listen" id="listen" aria-label="Écouter le synopsis">${IC.speaker}Écouter</button></div><p class="syn clamp" id="syn">${f.syn}</p><button class="synmore" id="synMore" aria-expanded="false" aria-controls="syn">Lire la suite</button>${castHtml(f)}<footer class="foot"><button type="button" class="textlink" data-legal>Confidentialité et mentions légales</button></footer>`;
+ <div class="dir"><div class="avs">${dirPhoto(f)}</div><div class="grow"><small>${TM(f).role.toUpperCase()}</small><strong>${f.dir}</strong></div><button class="follow" id="follow" aria-pressed="${!!ST.follow[f.id]}">${ST.follow[f.id]?'Suivie':'Suivre'}</button></div>
+ <div class="synh"><h3>Synopsis</h3><button class="listen ff" id="followFilm" aria-pressed="${!!ACC.follows[f.id]}">${IC.bell}<span>${ACC.follows[f.id]?'Suivi':'Suivre ce film'}</span></button></div><p class="syn clamp" id="syn">${f.syn}</p><button class="synmore" id="synMore" aria-expanded="false" aria-controls="syn">Lire la suite</button>${castHtml(f)}<footer class="foot"><button type="button" class="textlink" data-legal>Confidentialité et mentions légales</button></footer>`;
  $('#dScroll').scrollTop=0;
  $('#favBtn').setAttribute('aria-pressed',!!ST.fav[f.id]);paintFav();paintCta(f);armNudge();
  {const d=defaultSlot();ST.date=d.date;ST.time=d.time}ST.count=2;ST.tq={plein:2,etu:0,chom:0,han:0,acc:0};ST.pmrN=0;ST.fil={ad:false,st:false};ST.seats=[];
 }
 function paintFav(){const f=film(),on=!!ST.fav[f.id],b=$('#favBtn');b.querySelector('svg').style.fill=on?'var(--accent)':'none';b.querySelector('svg').style.color=on?'var(--accent)':'currentColor';b.setAttribute('aria-pressed',on)}
-$('#favBtn').onclick=()=>{const f=film();const flip=()=>{ST.fav[f.id]=!ST.fav[f.id];paintFav()};flip();haptic('soft');toast(ST.fav[f.id]?'Ajouté aux favoris':'Retiré des favoris',{undo:flip})};
+$('#favBtn').onclick=()=>{const f=film();const flip=()=>{ST.fav[f.id]=!ST.fav[f.id];paintFav();logAct(ST.fav[f.id]?'fav':'unfav',f.id)};flip();haptic('soft');toast(ST.fav[f.id]?'Ajouté aux favoris':'Retiré des favoris',{undo:flip})};
 $('#dBody').addEventListener('click',e=>{const b=e.target.closest('#follow');if(!b)return;const f=film();ST.follow[f.id]=!ST.follow[f.id];b.setAttribute('aria-pressed',!!ST.follow[f.id]);b.textContent=ST.follow[f.id]?'Suivie':'Suivre'});
 
 /* =============== 4. RÉSERVATION =============== */
@@ -2369,12 +2382,13 @@ function openA11y(){
   applyA11y()}})}
 $('#onbA11y').onclick=openA11y;
 $('#dBody').addEventListener('click',e=>{
- const ac=e.target.closest('[data-actor]');if(ac){openActor(ac.dataset.actor);return}
+ const ac=e.target.closest('[data-actor]');if(ac){RET=null;ST.q=ac.dataset.actor;$('#q').value=ST.q;renderNow();go('home');return}
  const q=e.target.closest('.qchip');if(q){ST.date=+q.dataset.di;ST.time=+q.dataset.ti;haptic('soft');go('book');return}
  const m=e.target.closest('#synMore');if(m){const p=$('#syn'),open=p.classList.toggle('clamp')===false;m.setAttribute('aria-expanded',open);m.textContent=open?'Réduire':'Lire la suite';return}
- if(!e.target.closest('#listen'))return;const f=film();if(!('speechSynthesis' in window)){toast('Lecture vocale non disponible');return}
- if(speechSynthesis.speaking){speechSynthesis.cancel();return}
- const u=new SpeechSynthesisUtterance(`${f.title}. ${TM(f).art} ${f.dir}. ${f.dur.replace('h',' heure').replace('m',' minutes')}. ${f.genres}. ${f.rate==null?'Sortie le '+relLabel(f)+'.':'Note du public : '+rt(f)+' sur 10.'} ${f.syn}`);u.lang='fr-FR';speechSynthesis.speak(u)});
+ const ff=e.target.closest('#followFilm');if(!ff)return;const f=film(),on=!ACC.follows[f.id];
+ if(on)ACC.follows[f.id]=Date.now();else delete ACC.follows[f.id];saveACC();logAct(on?'follow':'unfollow',f.id);haptic(on?'success':'tick');
+ ff.setAttribute('aria-pressed',on);ff.querySelector('span').textContent=on?'Suivi':'Suivre ce film';ff.classList.remove('pop');void ff.offsetWidth;ff.classList.add('pop');
+ toast(on?'Vous suivez ce film : nouvelles séances, ouverture des réservations, sortie en salle':'Vous ne suivez plus ce film',{undo:()=>{if(on)delete ACC.follows[f.id];else ACC.follows[f.id]=Date.now();saveACC();ff.setAttribute('aria-pressed',!on);ff.querySelector('span').textContent=on?'Suivre ce film':'Suivi'}});});
 
 /* =============== RGPD, droit de la consommation, accessibilité : informations et gestion des données =============== */
 ST.consentHealth=false;ST.consentAt=null;
