@@ -1457,12 +1457,11 @@ html.vt-back::view-transition-new(root){animation:vtInB .46s cubic-bezier(.16,1,
 .brand,.onb-logo{--lm:54px;gap:0!important}.onb-logo{--lm:44px}
 .lg-mark{width:var(--lm)!important;height:var(--lm)!important;margin-right:calc(var(--lm)*.03)}
 .lg-word{font-size:calc(var(--lm)*.52)!important;letter-spacing:.3em!important;padding-left:0!important;gap:.34em!important}
-/* logo sur pastille de verre : lisible quelle que soit la couleur de l'affiche en fond (rose, vert, bleu, sombre…) */
-#dtop .brand-in,.onb-logo{display:inline-flex;align-items:center;background:rgba(255,255,255,.68);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(60,44,16,.14);border-radius:99px;padding:4px 14px 4px 6px;box-shadow:0 10px 24px -16px rgba(30,24,16,.55)}
-:root:not(.light) #dtop .brand-in,:root:not(.light) .onb-logo{background:rgba(18,16,12,.58);border-color:rgba(255,255,255,.16);box-shadow:0 10px 24px -16px rgba(0,0,0,.8)}
-:root.light .lg-word i{color:#7A5206!important;-webkit-text-stroke:.7px #7A5206}
-:root:not(.light) .lg-word i{-webkit-text-stroke:.6px currentColor}
-@media (max-width:759px){#dtop .brand-in{background:none;border:0;box-shadow:none;padding:0;backdrop-filter:none;-webkit-backdrop-filter:none}}
+/* logo : sans pastille ni cadre ; U ambre soutenu, lisible sur tous les fonds */
+#dtop .brand-in,.onb-logo{display:inline-flex;align-items:center}
+:root.light .lg-word i{color:#B06F06!important;-webkit-text-stroke:.5px #B06F06;text-shadow:0 1px 1px rgba(30,24,16,.28)}
+:root:not(.light) .lg-word i{-webkit-text-stroke:0}
+:root.light .lg-mark{filter:drop-shadow(0 3px 8px rgba(30,24,16,.3))!important}
 </style>
 </head>
 <body>
