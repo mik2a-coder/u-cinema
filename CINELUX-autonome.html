@@ -1504,6 +1504,8 @@ html.vt-back::view-transition-new(root){animation:vtInB .46s cubic-bezier(.16,1,
 .r5{flex-wrap:nowrap;max-width:100%}.r5 button{flex:0 1 auto}
 /* vidéo : l'affiche floutée reste lisible autour de la bande-annonce ; messages au-dessus du bouton Réserver */
 body:has(#s-detail.active) .toast{bottom:118px}
+/* Safari dessine un cadre autour d'une image filtrée : aucune ombre portée sur le chat */
+.muv-svg,.muv-fab,.muv-svg img,.muv-av{filter:none!important;-webkit-filter:none!important;box-shadow:none!important;background:transparent!important}
 </style>
 </head>
 <body>
