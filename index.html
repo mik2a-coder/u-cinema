@@ -1485,6 +1485,8 @@ html.vt-back::view-transition-new(root){animation:vtInB .46s cubic-bezier(.16,1,
 .lg-mark.talk{animation:lgTalk .6s ease-in-out 3}@keyframes lgTalk{25%{transform:rotate(-9deg) scale(1.06)}75%{transform:rotate(9deg) scale(1.06)}}
 @media (max-width:599px){.lgsay{display:none}}
 @media (max-width:599px){#s-seats .vfs{top:44px!important;right:10px!important}}
+/* logo : aucun filtre (certains navigateurs dessinent un cadre autour d'une image filtrée) */
+.lg-mark,:root.light .lg-mark,:root:not(.light) .lg-mark{filter:none!important;-webkit-filter:none!important;background:transparent!important;box-shadow:none!important}
 </style>
 </head>
 <body>
