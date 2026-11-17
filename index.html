@@ -1455,8 +1455,14 @@ html.vt-back::view-transition-new(root){animation:vtInB .46s cubic-bezier(.16,1,
 .lg-mark{object-fit:contain;filter:drop-shadow(0 3px 8px rgba(30,24,16,.25))!important}
 /* logo : proportions du fichier d'origine (chat, U tout près, grand blanc, lettres espacées), partout */
 .brand,.onb-logo{--lm:54px;gap:0!important}.onb-logo{--lm:44px}
-.lg-mark{width:var(--lm)!important;height:var(--lm)!important;margin-right:calc(var(--lm)*-.015)}
+.lg-mark{width:var(--lm)!important;height:var(--lm)!important;margin-right:calc(var(--lm)*.03)}
 .lg-word{font-size:calc(var(--lm)*.52)!important;letter-spacing:.3em!important;padding-left:0!important;gap:.34em!important}
+/* logo sur pastille de verre : lisible quelle que soit la couleur de l'affiche en fond (rose, vert, bleu, sombre…) */
+#dtop .brand-in,.onb-logo{display:inline-flex;align-items:center;background:rgba(255,255,255,.68);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(60,44,16,.14);border-radius:99px;padding:4px 14px 4px 6px;box-shadow:0 10px 24px -16px rgba(30,24,16,.55)}
+:root:not(.light) #dtop .brand-in,:root:not(.light) .onb-logo{background:rgba(18,16,12,.58);border-color:rgba(255,255,255,.16);box-shadow:0 10px 24px -16px rgba(0,0,0,.8)}
+:root.light .lg-word i{color:#7A5206!important;-webkit-text-stroke:.7px #7A5206}
+:root:not(.light) .lg-word i{-webkit-text-stroke:.6px currentColor}
+@media (max-width:759px){#dtop .brand-in{background:none;border:0;box-shadow:none;padding:0;backdrop-filter:none;-webkit-backdrop-filter:none}}
 </style>
 </head>
 <body>
@@ -1480,7 +1486,7 @@ html.vt-back::view-transition-new(root){animation:vtInB .46s cubic-bezier(.16,1,
     <svg viewBox="0 0 66 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/><path d="M28 3.2c2.3 0 4.4.9 6 2.4l-1.2 1.3A7.2 7.2 0 0 0 28 4.9c-1.9 0-3.700.8-4.800 2L22 5.600A8.900 8.900 0 0 1 28 3.200zm0 3.600c1.300 0 2.500.5 3.400 1.300L28 11.500l-3.400-3.400c.9-.8 2.100-1.300 3.400-1.300z"/><rect x="40" y=".5" width="23" height="11" rx="3.500" fill="none" stroke="currentColor" opacity=".5"/><rect x="42" y="2.500" width="19" height="7" rx="2"/><rect x="64" y="4" width="2" height="4" rx="1" opacity=".5"/></svg></div>
 
   <div class="dback" id="dback" aria-hidden="true"></div>
-  <header id="dtop"><button class="brand" data-go="home" aria-label="U CINEMÀ, retour à l'accueil"><img class="lg-mark" src="img/logo-mark2.png" alt="" width="44" height="44" decoding="async"><span class="lg-word"><i>U</i>CINEMÀ</span></button>
+  <header id="dtop"><button class="brand" data-go="home" aria-label="U CINEMÀ, retour à l'accueil"><span class="brand-in"><img class="lg-mark" src="img/logo-mark2.png" alt="" width="44" height="44" decoding="async"><span class="lg-word"><i>U</i>CINEMÀ</span></span></button>
     <nav class="dnav" aria-label="Navigation principale"><button data-d="home" aria-current="page">Accueil</button><button data-d="tickets">Mes billets</button><button data-d="account">Compte</button></nav>
     <div class="dright"><button class="dlink dmini" id="dA11y" aria-label="Affichage et accessibilité"><span data-ic="access"></span></button></div></header>
   <!-- 1 -->
