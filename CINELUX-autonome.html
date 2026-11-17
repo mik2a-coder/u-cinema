@@ -1481,10 +1481,7 @@ html.vt-back::view-transition-new(root){animation:vtInB .46s cubic-bezier(.16,1,
 /* vidéo verticale officielle (champ ytv d'un film) : elle remplit le cadre tel quel */
 .d-video.vert iframe{left:0;top:0;width:100%;height:100%;transform:scale(1.19)}
 .d-video.vert::after{display:none}
-.lgsay{position:absolute;left:max(28px,calc(4vw + 6px));top:74px;max-width:250px;padding:10px 14px;border-radius:16px 16px 16px 4px;background:var(--surface);color:var(--text);border:1px solid var(--line);box-shadow:0 14px 30px -14px rgba(0,0,0,.45);font-size:calc(var(--fs-sm)*var(--ts,1));font-weight:600;line-height:1.3;text-align:left;opacity:0;visibility:hidden;transform:translateY(-6px) scale(.96);transform-origin:20px 0;transition:opacity .3s,transform .35s cubic-bezier(.3,1.5,.5,1),visibility 0s .3s;z-index:70}
-.lgsay.on{opacity:1;visibility:visible;transform:none;transition:opacity .3s,transform .35s cubic-bezier(.3,1.5,.5,1)}
-.lg-mark.talk{animation:lgTalk .6s ease-in-out 1}@keyframes lgTalk{25%{transform:rotate(-9deg) scale(1.06)}75%{transform:rotate(9deg) scale(1.06)}}
-@media (max-width:599px){.lgsay{display:none}}
+
 @media (max-width:599px){#s-seats .vfs{top:44px!important;right:10px!important}}
 /* logo : aucun filtre (certains navigateurs dessinent un cadre autour d'une image filtrée) */
 .lg-mark,:root.light .lg-mark,:root:not(.light) .lg-mark{filter:none!important;-webkit-filter:none!important;background:transparent!important;box-shadow:none!important}
@@ -1506,6 +1503,8 @@ html.vt-back::view-transition-new(root){animation:vtInB .46s cubic-bezier(.16,1,
 body:has(#s-detail.active) .toast{bottom:118px}
 /* Safari dessine un cadre autour d'une image filtrée : aucune ombre portée sur le chat */
 .muv-svg,.muv-fab,.muv-svg img,.muv-av{filter:none!important;-webkit-filter:none!important;box-shadow:none!important;background:transparent!important}
+/* moins d'animations : le message d'accueil du chat apparaît sans mouvement */
+.muv-hi{animation:none!important}
 </style>
 </head>
 <body>
@@ -2903,17 +2902,6 @@ $('#muvFabSvg').innerHTML=muvraSVG();$('#muvAv').innerHTML=muvraSVG('face');
 function mvHello(){try{if(sessionStorage.getItem('muvHi'))return;sessionStorage.setItem('muvHi','1')}catch(e){}
  setTimeout(()=>{if($('#muv').dataset.scr==='home'&&!MV.open){$('#muvHi').hidden=false;setTimeout(()=>{$('#muvHi').hidden=true},7000)}},5500)}
 
-/* le chat du logo parle : petite bulle qui revient de temps en temps, un clic ouvre l'assistant */
-(function(){const host=document.getElementById('dtop');if(!host)return;
- const b=document.createElement('button');b.type='button';b.id='lgSay';b.className='lgsay';b.setAttribute('aria-live','polite');host.appendChild(b);
- const L=['Miaou ! Besoin d’un coup de patte pour choisir ?','Un film ce soir ? Je connais toutes les séances.','Cliquez sur moi, je vous aide à choisir.','Psst… regardez les nouveautés !'];let k=0,t1,t2;
- const mark=()=>host.querySelector('.lg-mark');
- function talk(){if(innerWidth<600||!['home','detail'].includes(cur)){later(30000);return}
-  b.textContent=L[k++%L.length];b.classList.add('on');const m=mark();if(m&&!A11Y.rm){m.classList.remove('talk');void m.offsetWidth;m.classList.add('talk')}
-  clearTimeout(t2);t2=setTimeout(()=>{b.classList.remove('on')},5200)}
- function later(ms){clearTimeout(t1);t1=setTimeout(talk,ms)}
- b.onclick=()=>{b.classList.remove('on');try{mvOpen()}catch(e){}};
- later(3500)})();
 {const o=mvOpen;mvOpen=function(){document.querySelectorAll('.muv-svg').forEach(x=>{x.classList.remove('blink');void x.offsetWidth;x.classList.add('blink')});return o.apply(this,arguments)}}
 paintIcons();initPalette();loadA11y();renderOnb();mvHello();renderTabs();renderFan();renderNow();
 $('#avatar').innerHTML=avatarSVG('M','me');$('#avatar').style.cssText='display:block;width:100%;height:100%';
