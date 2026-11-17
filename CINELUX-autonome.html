@@ -1478,6 +1478,9 @@ html.vt-back::view-transition-new(root){animation:vtInB .46s cubic-bezier(.16,1,
 .d-video.fit{background:rgba(10,8,6,.5);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px)}
 .d-video.fit iframe{left:0;top:50%;width:100%;height:auto;aspect-ratio:16/9;transform:translateY(-50%)}
 .d-video.fit::after{display:none}
+/* vidéo verticale officielle (champ ytv d'un film) : elle remplit le cadre tel quel */
+.d-video.vert iframe{left:0;top:0;width:100%;height:100%;transform:none}
+.d-video.vert::after{display:none}
 </style>
 </head>
 <body>
@@ -2314,8 +2317,8 @@ function startExtract(){stopExtract();const f=film();if(!f||!f.yt)return;
   if(vidOK())playExtract(f)},2000)}
 function playExtract(f){
  const host=document.querySelector('#dVisual .d-sharp');if(!host||film().id!==f.id||host.querySelector('.d-video'))return;
- const w=document.createElement('div');w.className='d-video'+(innerWidth>=600?' fit':'');const st=f.ts||30;
- w.innerHTML=`<iframe src="${ytSrc(f,{loop:1,playlist:f.yt,start:st,end:st+28})}" title="Extrait de la bande-annonce de ${esc(f.title)}" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1" aria-hidden="true"></iframe>`;
+ const vert=!!f.ytv,w=document.createElement('div');w.className='d-video'+(vert?' vert':innerWidth>=600?' fit':'');const st=f.ts||30;
+ w.innerHTML=`<iframe src="${vert?ytSrc({yt:f.ytv},{loop:1,playlist:f.ytv}):ytSrc(f,{loop:1,playlist:f.yt,start:st,end:st+28})}" title="Extrait de la bande-annonce de ${esc(f.title)}" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1" aria-hidden="true"></iframe>`;
  const fr=w.firstChild;ytWhenPlaying(fr,()=>w.classList.add('on'));host.appendChild(w);
  if(!$('#exSound')){const b=document.createElement('button');b.type='button';b.id='exSound';b.className='round';b.setAttribute('aria-pressed','false');b.setAttribute('aria-label','Activer le son de l’extrait');b.innerHTML=IC.speaker;
   b.onclick=()=>{const on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);b.setAttribute('aria-label',on?'Couper le son de l’extrait':'Activer le son de l’extrait');try{fr.contentWindow.postMessage(JSON.stringify({event:'command',func:on?'unMute':'mute',args:[]}),'*')}catch(e){}haptic('tick')};
