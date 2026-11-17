@@ -9,7 +9,7 @@ La V1 reste intacte dans `../CINELUX`. Ouvrir la V2 : `Ouvrir CINELUX V2.command
 
 | Famille | Critère | État | Preuve dans l'app |
 |---|---|---|---|
-| **Geste** | Le mouvement aide | 🟡 | Transitions de page directionnelles (View Transitions), affiche qui voyage vers la fiche, vue de place « plongée » ; transitions séquentielles (l'ancien écran s'efface, le nouveau arrive) ; **mais** le chat respire, clignote et la bulle du logo revient toutes les 45 s : décoratif, à valider ; tout coupé avec « Réduire les animations » |
+| **Geste** | Le mouvement aide | ✅ | Transitions de page directionnelles (View Transitions), affiche qui voyage vers la fiche, vue de place « plongée » ; transitions séquentielles (l'ancien écran s'efface, le nouveau arrive) ; plus aucune animation décorative en boucle (le chat ne bouge qu'à votre geste : regard, clignement à l'ouverture, bulle une seule fois par visite) ; tout coupé avec « Réduire les animations » |
 | | Le toucher se sent | ✅ | `haptic()` : tic, succès, erreur ; onde au toucher sur les boutons |
 | | Gestes naturels | ✅ | Carrousel qui suit le doigt, feuille glissable, carte de fidélité qui s'incline, regard de U Ghjattu-Volpe qui suit la souris |
 | | L'objet se transforme | ✅ | Menu duo → « Ajouté », carte de fidélité qui se retourne, billet → vue de place |
@@ -24,7 +24,7 @@ La V1 reste intacte dans `../CINELUX`. Ouvrir la V2 : `Ouvrir CINELUX V2.command
 | | Ce qui reste à faire | ✅ | « Encore 1 place à choisir », jauge « bonbons offerts » |
 | | Erreur réparable | ✅ | `showPayErr()` : commande conservée |
 | | Réponse rapide | ✅ | Tout est local (< 400 ms) |
-| **Densité** | Densité adaptée | 🟡 | Audit automatique 0 défaut avant les dernières évolutions (Compte en 2 colonnes, bannières snacks, bouton Suivre) ; mobile à retester |
+| **Densité** | Densité adaptée | ✅ | Audit automatique le 17 novembre 2026 : 6 tailles (360, 390, 430, 768, 1024, 1440 px) × 6 écrans (accueil, fiche, réservation, places, commande avec snacks, compte) → aucun débordement |
 | | L'espace groupe | ✅ | Séances groupées sous le titre, snacks par onglets |
 | | L'image d'abord | ✅ | Affiches entières (plus de voile), photos de produits |
 | | Compris en 3 secondes | ✅ | Affiche, titre, séances du jour, un bouton |
@@ -32,7 +32,7 @@ La V1 reste intacte dans `../CINELUX`. Ouvrir la V2 : `Ouvrir CINELUX V2.command
 | | L'important au début et à la fin | ✅ | Progression en haut, action en bas |
 | | Un motif connu | ✅ | Onglets, feuilles, steppers, puces, assistant de chat |
 
-**Score : 19 ✅ et 3 🟡 sur 22** (🟡 « Le mouvement aide » : animations du chat ; « Peu de couleurs » : le mode clair teinte le fond avec l'affiche ; « Densité adaptée » : mobile à retester après les derniers ajouts).
+**Score : 21 sur 22** (🟡 « Peu de couleurs » : le mode clair teinte le fond avec l'affiche, choix assumé de l'auteur).
 
 ### U Ghjattu-Volpe, l'assistant
 Mascotte cliquable (un chat-renard, « ghjattu-volpe » en corse : le symbole de la classe, orthographe à faire valider) sur l'accueil. Ses yeux suivent la souris sur bureau ; clignement, humeurs (réfléchit, content, déçu). Elle comprend des demandes en français (« un film drôle ce soir en famille », « avec Brad Pitt », « court, avant 21 h », « surprends-moi », « bientôt en salle ») ou des suggestions à toucher, croise les genres, les acteurs, la durée, les horaires réellement libres et les goûts du compte (notes ≥ 4 favorisées, films déjà vus écartés), et propose trois films avec des puces de séance qui ouvrent directement la réservation. Critères affichés et retirables. Tout est calculé sur l'appareil, rien n'est envoyé.
