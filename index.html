@@ -1505,12 +1505,16 @@ body:has(#s-detail.active) .toast{bottom:118px}
 /* moins d'animations : le message d'accueil du chat apparaît sans mouvement */
 .muv-hi{animation:none!important}
 /* suivi : l'état « suivi » est nettement différent (plein, même style que les boutons principaux) */
-.follow[aria-pressed=true],.listen.ff[aria-pressed=true]{background:var(--grad)!important;background-image:var(--grad)!important;color:var(--on-accent)!important;border-color:transparent!important;box-shadow:0 10px 22px -12px var(--glow)!important}
-:root.light .follow[aria-pressed=true],:root.light .listen.ff[aria-pressed=true]{background:#1E1810!important;background-image:none!important;color:#F4E4B6!important;box-shadow:0 12px 24px -14px rgba(30,24,16,.7)!important}
+.follow[aria-pressed=true],.ff2[aria-pressed=true],.listen.ff[aria-pressed=true]{background:var(--grad)!important;background-image:var(--grad)!important;color:var(--on-accent)!important;border-color:transparent!important;box-shadow:0 10px 22px -12px var(--glow)!important}
+:root.light .follow[aria-pressed=true],:root.light .ff2[aria-pressed=true],:root.light .listen.ff[aria-pressed=true]{background:#1E1810!important;background-image:none!important;color:#F4E4B6!important;box-shadow:0 12px 24px -14px rgba(30,24,16,.7)!important}
 .follow[aria-pressed=true]::before{content:"✓";margin-right:8px;font-weight:700}
-.listen.ff[aria-pressed=true] svg{fill:currentColor;color:inherit!important}
+.ff2[aria-pressed=true] svg,.listen.ff[aria-pressed=true] svg{fill:currentColor;color:inherit!important}
 .follow,.listen.ff{transition:background .25s,color .25s,box-shadow .25s,transform .2s}
 .follow:active,.listen.ff:active{transform:scale(.95)}
+.ff2{display:inline-flex;align-items:center;justify-content:center;gap:8px;flex:none;min-height:56px;padding:0 20px;border-radius:99px;border:1px solid var(--line);background:rgba(255,255,255,.1);font-weight:600;font-size:calc(var(--fs-sm)*var(--ts,1));white-space:nowrap;transition:background .25s,color .25s,box-shadow .25s,transform .2s}
+:root.light .ff2{background:rgba(255,255,255,.78);color:#1E1810;border-color:rgba(60,44,16,.16)}
+.ff2 svg{width:20px;height:20px;color:var(--accent-text)}.ff2:active{transform:scale(.95)}.ff2.pop svg{animation:bellRing .7s ease-out}
+@media (max-width:599px){.ff2{width:56px;padding:0}.ff2 .ff-t{display:none}}
 </style>
 </head>
 <body>
@@ -1586,7 +1590,7 @@ body:has(#s-detail.active) .toast{bottom:118px}
       <div class="d-spacer"><button class="trailer" id="trailerBtn"><span data-ic="play"></span>Bande-annonce</button></div>
       <div class="d-body" id="dBody"></div>
     </div>
-    <div class="d-bar"><button class="round" aria-label="Partager" data-toast="Lien copié" data-ic="share"></button><button class="btn cta gold" id="ctaMain" data-go="book"><span>Réserver</span><span data-ic="arrow"></span></button></div>
+    <div class="d-bar"><button class="round" aria-label="Partager" data-toast="Lien copié" data-ic="share"></button><button class="ff2" id="followFilm" aria-pressed="false" aria-label="Suivre ce film"><span data-ic="bell"></span><span class="ff-t">Suivre</span></button><button class="btn cta gold" id="ctaMain" data-go="book"><span>Réserver</span><span data-ic="arrow"></span></button></div>
   </section>
 
   <!-- 4 -->
@@ -2377,6 +2381,11 @@ function openTrailer(){
  b=>{b.onclick=e=>{if(e.target.closest('#vGo')){closeSheet();setTimeout(play,380)}else if(e.target.closest('#vNo2'))closeSheet()}})}
 $('#trailerBtn').onclick=openTrailer;
 
+function paintFollow(f){const b=$('#followFilm');if(!b)return;const on=!!(f&&ACC.follows[f.id]);b.setAttribute('aria-pressed',on);b.setAttribute('aria-label',on?'Ne plus suivre ce film':'Suivre ce film');const t=b.querySelector('.ff-t');if(t)t.textContent=on?'Suivi':'Suivre'}
+document.addEventListener('click',e=>{const ff=e.target.closest('#followFilm');if(!ff)return;const f=film(),on=!ACC.follows[f.id];
+ if(on)ACC.follows[f.id]=Date.now();else delete ACC.follows[f.id];saveACC();logAct(on?'follow':'unfollow',f.id);haptic(on?'success':'tick');
+ paintFollow(f);ff.classList.remove('pop');void ff.offsetWidth;ff.classList.add('pop');
+ toast(on?'Vous suivez ce film : nouvelles séances, ouverture des réservations, sortie en salle':'Vous ne suivez plus ce film',{undo:()=>{if(on)delete ACC.follows[f.id];else ACC.follows[f.id]=Date.now();saveACC();paintFollow(f)}})});
 function renderDetail(){
  const f=film();
  $('#dVisual').innerHTML=`<div class="d-blur">${poster(f.kind)}</div><div class="d-sharp">${poster(f.kind)}</div><div class="pblur"><i></i><i></i><i></i><i></i><i></i><i></i></div>`;
@@ -2386,7 +2395,8 @@ function renderDetail(){
  <div class="meta">${f.dur}<i></i>${f.genres}<i></i>${f.year}</div>
  ${isSoon(f)?'':quickSlots()}
  <div class="dir"><div class="avs">${dirPhoto(f)}</div><div class="grow"><small>${TM(f).role.toUpperCase()}</small><strong>${f.dir}</strong></div><button class="follow" id="follow" aria-pressed="${!!ST.follow[f.id]}">${ST.follow[f.id]?'Suivi':'Suivre'}</button></div>
- <div class="synh"><h3>Synopsis</h3><button class="listen ff" id="followFilm" aria-pressed="${!!ACC.follows[f.id]}">${IC.bell}<span>${ACC.follows[f.id]?'Suivi':'Suivre ce film'}</span></button></div><p class="syn clamp" id="syn">${f.syn}</p><button class="synmore" id="synMore" aria-expanded="false" aria-controls="syn">Lire la suite</button>${castHtml(f)}<footer class="foot"><button type="button" class="textlink" data-legal>Confidentialité et mentions légales</button></footer>`;
+ <div class="synh"><h3>Synopsis</h3></div><p class="syn clamp" id="syn">${f.syn}</p><button class="synmore" id="synMore" aria-expanded="false" aria-controls="syn">Lire la suite</button>${castHtml(f)}<footer class="foot"><button type="button" class="textlink" data-legal>Confidentialité et mentions légales</button></footer>`;
+ paintFollow(f);
  $('#dScroll').scrollTop=0;
  $('#favBtn').setAttribute('aria-pressed',!!ST.fav[f.id]);paintFav();paintCta(f);armNudge();
  {const d=defaultSlot();ST.date=d.date;ST.time=d.time}ST.count=2;ST.tq={plein:2,etu:0,chom:0,han:0,acc:0};ST.pmrN=0;ST.fil={ad:false,st:false};ST.seats=[];
@@ -2435,10 +2445,7 @@ $('#dBody').addEventListener('click',e=>{
  const ac=e.target.closest('[data-actor]');if(ac){RET=null;ST.q=ac.dataset.actor;$('#q').value=ST.q;renderNow();go('home');return}
  const q=e.target.closest('.qchip');if(q){ST.date=+q.dataset.di;ST.time=+q.dataset.ti;haptic('soft');go('book');return}
  const m=e.target.closest('#synMore');if(m){const p=$('#syn'),open=p.classList.toggle('clamp')===false;m.setAttribute('aria-expanded',open);m.textContent=open?'Réduire':'Lire la suite';return}
- const ff=e.target.closest('#followFilm');if(!ff)return;const f=film(),on=!ACC.follows[f.id];
- if(on)ACC.follows[f.id]=Date.now();else delete ACC.follows[f.id];saveACC();logAct(on?'follow':'unfollow',f.id);haptic(on?'success':'tick');
- ff.setAttribute('aria-pressed',on);ff.querySelector('span').textContent=on?'Suivi':'Suivre ce film';ff.classList.remove('pop');void ff.offsetWidth;ff.classList.add('pop');
- toast(on?'Vous suivez ce film : nouvelles séances, ouverture des réservations, sortie en salle':'Vous ne suivez plus ce film',{undo:()=>{if(on)delete ACC.follows[f.id];else ACC.follows[f.id]=Date.now();saveACC();ff.setAttribute('aria-pressed',!on);ff.querySelector('span').textContent=on?'Suivre ce film':'Suivi'}});});
+ });
 
 /* =============== RGPD, droit de la consommation, accessibilité : informations et gestion des données =============== */
 ST.consentHealth=false;ST.consentAt=null;
