@@ -1488,9 +1488,13 @@ html.vt-back::view-transition-new(root){animation:vtInB .46s cubic-bezier(.16,1,
 @media (max-width:599px){#s-seats .vfs{top:44px!important;right:10px!important}}
 /* logo : aucun filtre (certains navigateurs dessinent un cadre autour d'une image filtrée) */
 .lg-mark,:root.light .lg-mark,:root:not(.light) .lg-mark{filter:none!important;-webkit-filter:none!important;background:transparent!important;box-shadow:none!important}
-/* barre haute : fusion douce avec la page (plus de ligne dure entre l'en-tête et le contenu) */
-#dtop,:root.light #dtop{border-bottom:0!important}
-#dtop::after{content:"";position:absolute;left:0;right:0;top:100%;height:34px;background:linear-gradient(to bottom,var(--bg),color-mix(in srgb,var(--bg) 55%,transparent) 40%,transparent);pointer-events:none}
+/* barre haute : verre progressif, le flou et la teinte s'estompent vers le contenu (aucune ligne) */
+#dtop,:root.light #dtop{background:none!important;border-bottom:0!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+#dtop::before{content:"";position:absolute;left:0;right:0;top:0;bottom:-38px;z-index:-1;pointer-events:none;
+ background:linear-gradient(to bottom,var(--bg) 0,color-mix(in srgb,var(--bg) 92%,transparent) 52%,color-mix(in srgb,var(--bg) 45%,transparent) 78%,transparent 100%);
+ -webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);
+ -webkit-mask-image:linear-gradient(to bottom,#000 0,#000 62%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0,#000 62%,transparent 100%)}
+#dtop::after{content:none}
 </style>
 </head>
 <body>
