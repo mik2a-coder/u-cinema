@@ -1600,6 +1600,11 @@ body:has(#s-home.active) #dtop.sc::before{opacity:1}
 /* retour de la vue depuis la place : la salle se retire en fondu (léger recul) pendant que le plan réapparaît, au lieu d'un iris qui se referme */
 .sv.closing{clip-path:none!important;visibility:visible!important;opacity:0;transform:scale(1.045);transition:opacity .5s cubic-bezier(.4,0,.2,1),transform .55s cubic-bezier(.3,.6,.2,1)!important;pointer-events:none}
 .viewport.rm .sv.closing{transition:none!important}
+/* commande : bouton actif même sans CGV cochées ; au clic, l'écran va sur la case à valider et la met en évidence */
+#confirm.off{filter:grayscale(.6) opacity(.68)}
+.cgv.need{box-shadow:0 0 0 2.5px var(--accent-text),0 14px 30px -16px rgba(0,0,0,.4);animation:cgvNeed .6s cubic-bezier(.3,1.4,.5,1) 1}
+@keyframes cgvNeed{0%,100%{transform:none}20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.viewport.rm .cgv.need{animation:none}
 </style>
 </head>
 <body>
@@ -2809,9 +2814,9 @@ function renderUpsell(){
 $('#upsell').addEventListener('click',e=>{if(!e.target.closest('#addDuo'))return;const had=ST.snacks[0]>0;
  if(had){const n=ST.snacks[0];ST.snacks[0]=0;renderOrder();haptic('soft');toast('Menu Duo retiré',{undo:()=>{ST.snacks[0]=n;renderOrder()}})}
  else{ST.snacks[0]++;renderOrder();haptic('soft');toast('Menu Duo ajouté à la commande',{undo:()=>{ST.snacks[0]=Math.max(0,ST.snacks[0]-1);renderOrder()}})}});
-function updateConfirm(){const b=$('#confirm');if(b.dataset.busy)return;const ok=$('#cgv')&&$('#cgv').checked;b.disabled=!ok;
+function updateConfirm(){const b=$('#confirm');if(b.dataset.busy)return;const ok=$('#cgv')&&$('#cgv').checked;b.disabled=false;b.classList.toggle('off',!ok);b.setAttribute('aria-disabled',!ok);
  b.innerHTML=`<span class="cl"><b>Commande avec obligation de paiement</b><small>${eur(money().tot)} TTC</small></span>${IC.arrow}`}
-$('#cgv').addEventListener('change',updateConfirm);
+$('#cgv').addEventListener('change',()=>{const bx=$('#cgv').closest('.cgv');if($('#cgv').checked&&bx)bx.classList.remove('need');updateConfirm()});
 function renderTotals(){const m=money();$('#totals').innerHTML=`${TARIFS.filter(t=>ST.tq[t.k]>0).map(t=>`<div>${ST.tq[t.k]}× ${t.n}<b>${eur(ST.tq[t.k]*t.p)}</b></div>`).join('')}<div>Snacks<b>${eur(m.s)}</b></div><div>Frais de service<b>${eur(m.fee)}</b></div>${snackSum()>=GOAL?`<div>Bonbons offerts<b style="color:var(--accent-text)">Offert</b></div>`:''}${m.disc?`<div>Code CINE10<b style="color:var(--accent-text)">−${eur(m.disc)}</b></div>`:''}<div class="tot"><span>Total TTC</span><b>${eur(m.tot)}</b></div>`;updateConfirm()}
 $('#snTabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;ST.snCat=b.dataset.cat;haptic('tick');renderSnacks()});
 $('#snBan').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const i=+b.dataset.i;ST.snacks[i]=Math.min(9,ST.snacks[i]+1);haptic('tick');renderSnacks();renderTotals();renderUpsell();renderSnackToggle()});
@@ -2819,7 +2824,7 @@ $('#snacks').addEventListener('click',e=>{const b=e.target.closest('button');if(
 $('#pays').addEventListener('click',e=>{if(!e.target.closest('#payBtn'))return;
  openSheet('Moyen de paiement',PAYS.map((p,i)=>`<button class="opt" role="radio" aria-checked="${i===ST.pay}" data-i="${i}"><span data-ic="${p[2]}"></span><span class="grow"><strong>${p[0]}</strong><small>${p[1]}</small></span>${i===ST.pay?'<span class="ok" data-ic="check"></span>':''}</button>`).join('')+`<button class="opt" data-add="1"><span data-ic="plus"></span><span class="grow"><strong>Ajouter une carte</strong><small>Bientôt disponible</small></span></button>`,b=>{
   b.onclick=e=>{const o=e.target.closest('.opt');if(!o)return;if(o.dataset.add){toast('Bientôt disponible');return}ST.pay=+o.dataset.i;$('#payErr').hidden=true;renderOrder();closeSheet()}})});
-$('#confirm').onclick=()=>{const b=$('#confirm');if(!$('#cgv').checked){toast('Veuillez accepter les conditions générales de vente');return}b.disabled=true;b.dataset.busy=1;b.innerHTML='<span class="spin"></span><span>Paiement en cours…</span>';setTimeout(()=>{
+$('#confirm').onclick=()=>{const b=$('#confirm');if(!$('#cgv').checked){const cg=$('#cgv'),bx=cg.closest('.cgv');if(bx){bx.scrollIntoView({behavior:A11Y.rm?'auto':'smooth',block:'center'});bx.classList.remove('need');void bx.offsetWidth;bx.classList.add('need')}cg.focus({preventScroll:true});haptic('error');toast('Veuillez accepter les conditions générales de vente pour continuer');return}b.disabled=true;b.dataset.busy=1;b.innerHTML='<span class="spin"></span><span>Paiement en cours…</span>';setTimeout(()=>{
   if(PAYS[ST.pay][3]){delete b.dataset.busy;updateConfirm();haptic('error');showPayErr();return}
   {const c=bkConflict(ST.date,ST.time);if(c){delete b.dataset.busy;updateConfirm();haptic('error');const e=$('#payErr');e.textContent=c.same?'Vous avez déjà réservé cette séance (Mon compte › Mes réservations).':'Vous avez déjà une séance à cette heure : '+(c.f?c.f.title:'autre film')+', '+c.b.time+'. Choisissez un autre horaire.';e.hidden=false;return}}
   $('#payErr').hidden=true;ST.booked=true;recordBooking();go('ticket');haptic('success');b.disabled=false;delete b.dataset.busy;updateConfirm()},900)};
