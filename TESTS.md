@@ -42,3 +42,36 @@ Ne jamais aider. Noter : hésitations, retours en arrière, mots employés, temp
 | Problème | Gravité (1–3) | Fréquence | Correction prévue | Corrigé ? |
 |---|---|---|---|---|
 | | | | | |
+
+
+---
+
+## Contrôles automatiques (réalisés, reproductibles)
+| Contrôle | Comment | Résultat (18 nov. 2026) |
+|---|---|---|
+| Débordement horizontal et boutons coupés | `node tools/shoot.mjs <l> <h> sortie tools/scenarios/audit-debordement.json` sur 360×640, 390×844, 430×932, 768×1024, 1024×768, 1440×900 ; 6 écrans (accueil, fiche, réservation, places, commande, compte) | **0 défaut** sur les 6 tailles |
+| Parcours complet captures | `tools/scenarios/parcours-mobile.json` et `parcours-bureau.json` | 9 captures mobile + 6 bureau (`rendu/captures/`) |
+| Suite de vérifications fonctionnelles | 95 vérifications pendant le développement (recherche, parcours, tarifs, paiement refusé, modes clair/sombre, assistant, contrastes) | 95 / 95 au dernier passage complet, avant les ajouts du 17 novembre (le script n'est pas versionné) |
+| Contraste | Mesure des paires texte/fond sur 5 palettes | ≥ 4,5 : 1 (voir `DESIGN.md`) |
+
+## Revues déjà intégrées — la version améliorée (1 relecteur : l'auteur)
+> Ce **n'est pas** le test à 3 personnes : ce sont des retours de revue de l'auteur sur ses appareils (Chrome, Safari), chacun ayant conduit à une correction visible.
+
+| Retour observé | Correction |
+|---|---|
+| Mode clair illisible sur fond orangé | Palette claire déduite de la palette active, îlots sombres sous les textes sur images |
+| Nom et logo peu convaincants | Nom « U Cinemà », logo repris du dessin de l'auteur (chat aux lunettes 3D), espacements d'origine |
+| Vue depuis la place « pas optimisée » | Scène 3D refaite, simplifiée et sombre, avec la bande-annonce sur l'écran |
+| Bande-annonce : titre YouTube visible, image figée au début, boutons parasites | Recadrage sans titre ; la vidéo n'apparaît que quand elle joue ; cadre vertical sans zoom |
+| Bug de transition au clic sur « Réserver » | Cause trouvée sur la vidéo d'écran : l'onde au toucher agrandissait le bouton ; corrigée et vérifiée sur 133 boutons |
+| Boutons « pas du tout design » en clair | Boutons principaux encre foncée + texte crème, secondaires en verre ; règle écrite dans `DESIGN.md` |
+| Même film réservé deux fois à la même heure | Séances en conflit grisées, refus au paiement avec explication |
+| Photos de petite faim absentes | Bannières de suggestions avec photos, combos, onglets |
+| Contraste dur entre la barre du haut et la page | Verre progressif : opaque en haut, fondu vers le contenu |
+| Carré autour du logo et du chat sous Safari | Suppression de tout filtre sur les images |
+| Bouton « Suivre » : état suivi peu visible | État plein (coche, cloche pleine), déplacé à côté de « Réserver » |
+| Animations décoratives du chat | Suppression des boucles et de la bulle du logo |
+| Résultats de recherche, plan de salle, 5 dates qui débordent | Centrage, rangée A dégagée, dates sur 5 colonnes |
+
+## Test à 3 personnes — à compléter
+Remplir la « Grille de résultats » ci-dessus avec de **vraies** observations, puis la synthèse gravité × fréquence, puis cocher « Corrigé ? ». Livrer ensuite un avant/après d'au moins 2 corrections.

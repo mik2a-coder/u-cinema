@@ -26,3 +26,19 @@ puis ouvrir http://localhost:8731/index.html (les extraits vidéo demandent un s
 - `index.html` : l'application (fichier unique), `sw.js` : mode hors ligne, `manifest.webmanifest`
 - `V2-NOTES.md`, `DESIGN.md`, `CONFORMITE.md`, `TESTS.md` : notes de conception, conformité et tests
 - `deploy/` : déploiement sur Raspberry Pi
+
+
+## Dossier de rendu (exercice « Prototyper en 2026 »)
+| Pièce | Fichier |
+|---|---|
+| **Dossier à rendre (PDF, tout-en-un)** | `RENDU-U-CINEMA.pdf` |
+| Barème (auto-évaluation avec preuves) | `BAREME.md` |
+| Brief et persona | `BRIEF-PERSONA.md` |
+| Parcours utilisateur | `PARCOURS.md` + `rendu/captures/` |
+| Design system (variables, composants) | `DESIGN.md` |
+| Tests (protocole, contrôles, revues) | `TESTS.md`, `tools/scenarios/` |
+| Journal (outils, prompts, choix) | `JOURNAL.md` |
+| Notes de conception, grille Peaufiner | `V2-NOTES.md` |
+| Conformité | `CONFORMITE.md` |
+
+Régénérer le PDF : `python3 tools/build-rendu.py` (Chrome requis). Captures : `node tools/shoot.mjs …` (voir `TESTS.md`).

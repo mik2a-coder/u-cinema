@@ -1,7 +1,8 @@
 # U CINEMÀ V2 — Design System
 
 Application de réservation de places de cinéma (PWA), pour mobile **et** grands écrans. Ambiance « salle obscure » : fonds sombres chauds, un seul signal lumineux, titres condensés façon affiche.
-Thème par défaut : **Noir & Or** (quatre autres palettes interchangeables).
+Thème par défaut : **Noir & Or** (quatre autres palettes interchangeables) ; **version claire** déduite de la palette. Marque : **U CINEMÀ**, logo « chat aux lunettes 3D » et mascotte *U Ghjattu-Volpe*.
+Prototype en ligne : https://mik2a-coder.github.io/u-cinema/
 Cette version 2 applique le cours *Prototyper en 2026* (voir `V2-NOTES.md` pour la correspondance idée → écran).
 
 ---
@@ -58,7 +59,7 @@ Sombre reste le défaut. Le mode clair n'est pas une 6ᵉ palette : il se **déd
 | `--bg` / `--surface` / `--surface2` | le « papier » de la palette éclairci à 55 % / 80 % / 25 % (ivoire chaud pour Noir & Or) |
 | `--bg2` | papier teinté d'accent à 14 % (halo en haut d'écran) |
 | `--text` / `--muted` | `--ink` de la palette / `--ink-muted` assombri jusqu'à 4,9 : 1 |
-| `--accent` / `--accent2` | **inchangés** : le bouton or reste le même dans les deux modes |
+| `--accent` / `--accent2` | **inchangés** : l'or reste le signal dans les deux modes (les boutons principaux, eux, passent en encre foncée en clair : voir § 7) |
 | `--accent-text` | `--accent2` assombri jusqu'à 4,9 : 1 sur le fond (bronze ≈ `#8A5A00` pour Noir & Or) |
 | `--paper` | blanc : le billet reste l'élément le plus clair, cerné d'un filet |
 | `--line`, `--wr` | filets et voiles en brun foncé (`60,44,16`) au lieu de blanc |
@@ -101,8 +102,10 @@ Polices : **Bebas Neue** (titres, MAJUSCULES, `line-height .95`), **Inter** (tex
 
 | Composant | Classe | Spécification |
 |---|---|---|
-| **Bouton primaire** | `.btn` | Pilule h 56, `--grad`, texte `--on-accent` 700, lueur `--glow`. `:active` scale .97, `:disabled` désaturé |
-| **Bouton Réserver** | `.cta.gold` | Or semi-métallique **statique** ; un reflet + coup de coude unique après 2,5 s d'inactivité |
+| **Bouton primaire** | `.btn` | Pilule h 56 ; **sombre : `--grad` or, texte `--on-accent`, lueur `--glow`** ; **clair : encre `#1E1810`, texte crème `#F4E4B6`** (§ 7). `:active` scale .95, `:disabled` désaturé |
+| **Bouton secondaire (verre)** | `.btn.alt`, `.vfs`, `.pill`, `.qchip`, `.hslot`, `.fchip` | Verre dépoli : blanc 72 % + flou + filet fin (clair) ou blanc 10 % (sombre) ; texte encre / crème |
+| **Bouton Réserver** | `.cta.gold` | Même règle que le primaire ; l'onde au toucher est contenue dans le bouton |
+| **Suivre (réalisateur / film)** | `.follow`, `.ff2` | Repos : verre. **Suivi : plein** (encre en clair, or en sombre) + coche ou cloche pleine + animation de cloche ; le film se suit à côté de « Réserver » |
 | **Acheter (partagé)** | `.split` | Pilule dégradée « Acheter · séparateur · prix · pastille flèche » ; grisé tant que le choix n'est pas complet |
 | **Hero d'accueil** | `.ftitle` + `.hero-cta` | Année · genre · durée, titre, « Prochaine séance · aujourd'hui, 20:30 », **une** action « Voir les séances » |
 | **Progression du parcours** | `.stp` | 4 segments (Séance · Places · Paiement · Billet), segment courant déjà à 55 % (on part avec de l'avance), `role="progressbar"` |
@@ -115,6 +118,12 @@ Polices : **Bebas Neue** (titres, MAJUSCULES, `line-height .95`), **Inter** (tex
 | **Hors ligne** | `.net` | Bandeau pilule « Hors ligne · vos choix sont conservés » / « De retour en ligne » |
 | **Squelette d'affiche** | `.poster` | Reflet animé tant que l'image charge, fondu à l'arrivée (désactivé en animations réduites) |
 | **Feuille** | `.sheet` | Panneau bas r `--r-xl`, corps scrollable, glissable vers le bas ; centré sur tablette/bureau |
+| **Barre haute (bureau)** | `#dtop` | Verre progressif : opaque à hauteur du logo et du menu, flou et teinte qui s'estompent sur ~40 px ; pas de ligne ; le contenu démarre sous la barre |
+| **Logo** | `.lg-mark` + `.lg-word` | Pastille du chat (image à fond transparent, sans filtre) + « **U** CINEMÀ » : U ambre, mot en encre, lettres espacées ; proportions du dessin d'origine (§ 6) |
+| **Bannière de petite faim** | `.bn` | Photo, accroche, bouton « Commander · prix » ; carrousel à défilement doux ; repliée par défaut |
+| **Carte de fidélité** | `.lcard` | Carte or qui s'incline et se retourne (QR au dos), niveau, points, progression |
+| **Activité récente** | `.acc-row[data-act]` | Miniature, action (réservation, favori, suivi, annulation), date et heure ; un clic ouvre le billet ou la fiche |
+| **Assistant** | `.muv-*` | Chat-renard cliquable, yeux qui suivent la souris, panneau de conversation local (rien n'est envoyé) |
 | **Chip / Pill / Stepper / Onglets / Nav / Ticket / QR** | — | Inchangés (voir V1) ; nav flottante en verre, se rétracte au défilement |
 
 ---
@@ -152,5 +161,36 @@ Polices : **Bebas Neue** (titres, MAJUSCULES, `line-height .95`), **Inter** (tex
 | Téléphone ou « petit iPhone » | Téléphone / tablette / bureau pensés | Grille responsive 4-8-12 |
 
 
-## Boutons en mode clair
-Primaire (`.btn`, `.split`, `.cta.gold`, `+` des quantités) : **encre foncée** `#1E1810`, texte crème `#F4E4B6`, ombre douce, pas de bordure ni de dégradé (choix validé sur le bouton « Commande avec obligation de paiement »). Secondaire (`.btn.alt`, `.vfs`, `.pill`, `.qchip`, `.hslot`, `.fchip`) : **verre dépoli clair** (blanc 72 %, flou, filet fin), texte encre. Les boutons ronds sur image restent en verre sombre.
+---
+
+## 6. Logo et mascotte
+- **Logo** : pastille ronde du chat aux lunettes 3D (dessin de l'auteur) + mot-symbole « U CINEMÀ ». Proportions du fichier d'origine, exprimées par rapport à la pastille (`--lm`) : U à 3 % de la pastille, grand blanc, lettres espacées de .3 em ; taille de police = 52 % de la pastille.
+- **Couleurs** : « CINEMÀ » `--text` ; « U » ambre soutenu en clair (`#B06F06`), or en sombre.
+- **Règle des images** : aucune ombre portée ni filtre CSS sur une image à fond transparent (sinon un cadre apparaît sous Safari).
+- **Mascotte** *U Ghjattu-Volpe* : image du chat à fond transparent, yeux animés par l'app ; ne bouge qu'à l'action de l'utilisateur (regard, clignement à l'ouverture) ; aucune animation en boucle.
+
+## 7. Boutons — règles (clair / sombre)
+| Rôle | Sombre | Clair |
+|---|---|---|
+| Primaire (`.btn`, `.split`, `.cta.gold`, « + » des quantités) | Or `--grad`, texte `--on-accent` | **Encre `#1E1810`**, texte crème `#F4E4B6`, ombre douce, sans bordure ni dégradé ; survol `#2C2316` |
+| Secondaire (verre) | Blanc 10 %, filet blanc | Blanc 72 %, flou, filet brun 16 %, texte encre |
+| Suivi / sélectionné | Or plein | Encre pleine |
+| Désactivé | Désaturé, 62 % | idem |
+| Sur image | Verre sombre | Verre sombre (îlot) |
+Règle d'or : **un seul bouton principal par écran**, les autres en verre.
+
+## 8. Mouvement — règles
+- Transitions d'écran **séquentielles** : l'ancien écran s'efface en 160 ms, le nouveau arrive en 340 ms (jamais deux écrans visibles ensemble) ; la transition d'affiche (accueil ↔ fiche) n'est utilisée que sur grand écran.
+- Pas de boucle décorative. Les seules animations continues sont fonctionnelles : cercle de chargement, reflet des affiches qui chargent.
+- Tout est neutralisé par « Réduire les animations » ou `prefers-reduced-motion`.
+
+## 9. Variables CSS ↔ ce document (réponse « Variables et composants »)
+| Famille | Variables | Où |
+|---|---|---|
+| Couleurs | `--bg --bg2 --surface --surface2 --text --muted --accent --accent2 --accent-text --on-accent --paper --ink --ink-muted --line --glow --grad` | § 2 |
+| Typographie | `--fs-micro … --fs-14xl`, `--ts` | § 2 |
+| Rayons | `--r-xs --r-sm --r-md --r-lg --r-xl --r-pill` | § 2 |
+| Espacements | `--sp-1 … --sp-16` | § 2 |
+| Mise en page | `--top --bot --sw --lm` | § 2, § 6 |
+| Composants | `.btn .cta .split .qchip .trow .seat .upsell .bn .toast .payerr .net .poster .sheet .lcard .ff2 .follow` | § 3 |
+Principe : couleurs, tailles, rayons et espaces passent par des variables ; une palette ou un mode se change en redéfinissant ces variables. **Exception connue** : les boutons du mode clair utilisent deux valeurs écrites directement (`#1E1810`, `#F4E4B6`) ; elles devraient devenir des jetons (`--btn-ink`, `--btn-ink-text`).
