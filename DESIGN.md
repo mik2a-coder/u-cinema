@@ -217,3 +217,5 @@ Principe : couleurs, tailles, rayons et espaces passent par des variables ; une 
 - **Vue depuis la place** : écran sans cadre (lueur seule), format 2,3 : 1 (2,05 : 1 sur téléphone), vidéo recadrée pour supprimer les bandes noires ; au premier et deuxième rang, les fauteuils voisins se réduisent aux bords.
 - **Introduction** : à chaque « Continuer », les trois affiches changent (glissement décalé de 60 ms, fondu) en même temps que le texte ; bouton de 264 px ; sans animation si « Réduire les animations ».
 - **Identité de l'onglet** : favicon, icône d'écran d'accueil (180, 192, 512, maskable) et image d'aperçu de lien 1200×630 générés à partir de `img/logo-mark3.png` (`tools/make-icons.mjs`).
+
+- **Page « Plus de réseau »** (`#off`) : plein écran, mascotte, titre Bebas, message, zone de jeu `.off-game` (canvas, couleurs lues dans les variables du thème), boutons « Réessayer » (primaire) et « Continuer hors ligne » (secondaire). Le jeu ne démarre qu'à l'action de l'utilisateur ; Échap ferme la page.

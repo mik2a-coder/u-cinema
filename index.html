@@ -1649,6 +1649,20 @@ body:has(#s-home.active) #dtop.sc::before{opacity:1}
 @media (min-width:600px){#s-person .header{width:100%;max-width:760px;margin:0 auto;padding-left:16px}}
 
 .promo b{display:flex;align-items:center}
+
+/* v83 · page « pas de réseau » avec mini-jeu */
+.off{position:absolute;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:calc(var(--top) + 8px) 20px calc(var(--bot) + 8px);background:radial-gradient(ellipse 80% 60% at 50% 30%,color-mix(in srgb,var(--accent) 16%,var(--bg)),var(--bg));overflow-y:auto}
+.off[hidden]{display:none}
+.off-in{width:100%;max-width:560px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+.off-cat{width:88px;height:auto}.off h1{font-size:calc(var(--fs-7xl)*var(--ts,1));line-height:1}
+.off p{color:var(--muted);font-size:calc(var(--fs-md)*var(--ts,1));line-height:1.5;max-width:46ch}
+.off-game{position:relative;width:100%;border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--line);overflow:hidden;touch-action:manipulation;cursor:pointer}
+.off-game canvas{display:block;width:100%;height:170px}
+.off-sc{position:absolute;top:10px;right:14px;font-weight:700;font-size:calc(var(--fs-sm)*var(--ts,1));color:var(--muted)}.off-sc span{color:var(--accent-text)}
+.off .off-hint{font-size:calc(var(--fs-xs)*var(--ts,1))}
+.off-act{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;width:100%}.off-act .btn{width:auto;min-width:180px;flex:1 1 180px;max-width:260px}
+.off.shake .off-in{animation:offShake .4s}@keyframes offShake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.viewport.rm .off.shake .off-in{animation:none}
 </style>
 </head>
 <body>
@@ -1813,6 +1827,13 @@ body:has(#s-home.active) #dtop.sc::before{opacity:1}
     </div>
   </section>
 
+  <div class="off" id="off" role="dialog" aria-modal="true" aria-labelledby="offT" hidden>
+    <div class="off-in"><img class="off-cat" src="img/mascot-head.png" alt="" width="88" height="78">
+      <h1 class="display" id="offT">Plus de réseau</h1><p id="offMsg">La connexion est coupée. Vos billets restent disponibles sur cet appareil. En attendant, aidez U Ghjattu-Volpe à sauter par-dessus les pop-corn.</p>
+      <div class="off-game"><canvas id="offCv" aria-label="Mini-jeu : le chat saute par-dessus des seaux de pop-corn. Touchez l’écran ou appuyez sur Espace pour sauter." role="img"></canvas><div class="off-sc" aria-live="off"><span id="offScore">0</span> · record <span id="offBest">0</span></div></div>
+      <p class="off-hint" id="offHint">Touchez le jeu ou appuyez sur Espace pour sauter</p>
+      <div class="off-act"><button class="btn" id="offRetry" type="button"><span>Réessayer</span></button><button class="btn alt" id="offClose" type="button"><span>Continuer hors ligne</span></button></div>
+    </div></div>
   <div class="sheet-back" id="sheetBack"></div>
   <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle"><button type="button" class="round sheet-x" id="sheetX" aria-label="Fermer" data-ic="close"></button><div class="grab" id="grab"><i></i></div><h3 id="sheetTitle"></h3><div class="sbody" id="sheetBody"></div></div>
   <div class="sr" id="live" aria-live="polite"></div>
@@ -2856,9 +2877,54 @@ document.querySelectorAll('.stp').forEach(el=>{const n=+el.dataset.step;el.setAt
 function showPayErr(){const e=$('#payErr');e.hidden=false;e.innerHTML=`<b>Paiement refusé par la banque.</b><p>Rien n’a été débité et votre commande est conservée : ${cnt()} place${cnt()>1?'s':''}, ${eur(money().tot)} TTC.</p><div class="pe-a"><button type="button" class="btn" id="peChange">Changer de moyen de paiement</button><button type="button" class="link" id="peRetry">Réessayer</button></div>`;e.scrollIntoView({block:'center',behavior:'smooth'})}
 document.addEventListener('click',e=>{if(e.target.closest('#peChange'))$('#payBtn').click();if(e.target.closest('#peRetry')){$('#payErr').hidden=true;$('#confirm').click()}});
 /* Hors ligne : on le dit, on rassure (cours : « montrer ce que fait le système ») */
+
+/* ---- page « pas de réseau » : message, nouvel essai, mini-jeu du chat (touche ou Espace pour sauter) ---- */
+const OFF={on:false,raf:0,g:null};
+function offShow(kind){
+ const o=$('#off');if(!o)return;
+ $('#offT').textContent=kind==='pay'?'Connexion nécessaire':'Plus de réseau';
+ $('#offMsg').textContent=kind==='pay'?'Le paiement a besoin d’une connexion. Votre commande est conservée : réessayez dès que le réseau revient. En attendant, un petit saut ?':'La connexion est coupée ou instable. Vos billets restent disponibles sur cet appareil. En attendant, aidez U Ghjattu-Volpe à sauter par-dessus les pop-corn.';
+ if(OFF.on&&kind!=='pay')return;
+ OFF.on=true;o.hidden=false;if(SH&&SH.open)closeSheet();offGameInit();$('#offRetry').focus({preventScroll:true})}
+function offHide(){const o=$('#off');if(!o||!OFF.on)return;OFF.on=false;o.hidden=true;cancelAnimationFrame(OFF.raf);OFF.g=null}
+function offGameInit(){
+ const cv=$('#offCv'),dpr=Math.min(2,devicePixelRatio||1),W=cv.clientWidth||320,H=170;cv.width=W*dpr;cv.height=H*dpr;const x=cv.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);
+ const img=new Image();img.src='img/mascot.png';
+ const cs=getComputedStyle(document.documentElement),col=k=>cs.getPropertyValue(k).trim()||'#888';
+ const best=(()=>{try{return +localStorage.getItem('cinelux-off-best')||0}catch(e){return 0}})();
+ const G=OFF.g={W,H,gy:H-34,y:0,vy:0,run:false,over:false,spd:3.6,sc:0,best,ob:[],t:0,next:90,img};
+ $('#offBest').textContent=best;$('#offScore').textContent=0;
+ const draw=()=>{x.clearRect(0,0,W,H);
+  x.strokeStyle=col('--line');x.lineWidth=2;x.beginPath();x.moveTo(0,G.gy+2);x.lineTo(W,G.gy+2);x.stroke();
+  x.fillStyle=col('--line');for(let i=0;i<14;i++){const px=((i*97-G.t*G.spd*.6)%(W+40)+W+40)%(W+40);x.fillRect(px,G.gy+10+(i%3)*7,10+(i%4)*5,2)}
+  G.ob.forEach(o=>{const b=o.x,t=G.gy-o.h;x.fillStyle='#fff';x.strokeStyle=col('--accent2');x.lineWidth=2;x.beginPath();x.moveTo(b,t+6);x.lineTo(b+o.w,t+6);x.lineTo(b+o.w-5,G.gy+1);x.lineTo(b+5,G.gy+1);x.closePath();x.fill();x.stroke();
+   x.fillStyle='#C0392B';for(let k=0;k<3;k++)x.fillRect(b+7+k*((o.w-14)/3)+ (o.w-14)/6-3,t+9,6,G.gy-t-11);
+   x.fillStyle='#F0C05A';for(let k=0;k<4;k++){x.beginPath();x.arc(b+5+k*((o.w-10)/3),t+5,6,0,7);x.fill()}});
+  const ch=54,cw=ch*(img.naturalWidth||465)/(img.naturalHeight||520);
+  if(img.complete&&img.naturalWidth)x.drawImage(img,46,G.gy-ch-G.y+4,cw,ch);else{x.fillStyle=col('--accent');x.fillRect(46,G.gy-ch-G.y+4,40,ch)}
+  if(!G.run||G.over){x.fillStyle=col('--text');x.font='600 14px Inter,system-ui,sans-serif';x.textAlign='center';x.fillText(G.over?'Perdu ! Touchez pour rejouer':'Touchez pour commencer',W/2,34);x.textAlign='left'}};
+ const hit=()=>{const cx0=52,cx1=46+(54*.9)-6,cy0=G.gy-G.y-46;return G.ob.some(o=>cx1>o.x+4&&cx0<o.x+o.w-4&&G.gy-G.y>G.gy-o.h+6)};
+ const step=()=>{if(!OFF.on)return;
+  if(G.run&&!G.over){G.t++;G.spd=3.6+Math.min(5,G.sc/260);G.vy-=.62;G.y=Math.max(0,G.y+G.vy);if(G.y===0)G.vy=0;
+   G.ob.forEach(o=>o.x-=G.spd);G.ob=G.ob.filter(o=>o.x>-60);G.next--;
+   if(G.next<=0){const h=26+Math.random()*16;G.ob.push({x:W+10,w:26+Math.random()*10,h});G.next=Math.max(46,70+Math.random()*70-G.spd*5)}
+   G.sc+=.18;$('#offScore').textContent=Math.floor(G.sc);
+   if(hit()){G.over=true;haptic('error');const sc=Math.floor(G.sc);if(sc>G.best){G.best=sc;$('#offBest').textContent=sc;try{localStorage.setItem('cinelux-off-best',sc)}catch(e){}}}}
+  draw();OFF.raf=requestAnimationFrame(step)};
+ G.jump=()=>{if(G.over){G.ob=[];G.sc=0;G.over=false;G.run=true;G.y=0;G.vy=0;G.t=0;G.next=60;return}if(!G.run){G.run=true;return}if(G.y===0){G.vy=11.2;haptic('tick')}};
+ cancelAnimationFrame(OFF.raf);img.onload=draw;draw();OFF.raf=requestAnimationFrame(step)}
+$('#off').addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;if(OFF.g&&e.target.closest('.off-game'))OFF.g.jump()});
+document.addEventListener('keydown',e=>{if(!OFF.on||!OFF.g)return;if(e.key==='Escape'){offHide();return}if((e.key===' '||e.key==='ArrowUp')&&!e.target.closest('button')){e.preventDefault();OFF.g.jump()}});
+$('#offClose').onclick=offHide;
+$('#offRetry').onclick=async()=>{const b=$('#offRetry');b.disabled=true;b.querySelector('span').textContent='Vérification…';
+ let ok=false;try{const c=new AbortController(),t=setTimeout(()=>c.abort(),4000);const r=await fetch('manifest.webmanifest?ping='+Date.now(),{cache:'no-store',signal:c.signal});clearTimeout(t);ok=r.ok}catch(e){}
+ b.disabled=false;b.querySelector('span').textContent='Réessayer';
+ if(ok){offHide();toast('De retour en ligne')}else{const o=$('#off');o.classList.remove('shake');void o.offsetWidth;o.classList.add('shake');haptic('error');$('#offHint').textContent='Toujours pas de réseau. Réessayez dans un instant.'}};
+addEventListener('online',()=>{if(OFF.on){offHide();toast('De retour en ligne')}});
+addEventListener('offline',()=>offShow('offline'));if(navigator.onLine===false)setTimeout(()=>offShow('offline'),1500);
+if(navigator.connection&&navigator.connection.addEventListener)navigator.connection.addEventListener('change',()=>{const t=navigator.connection.effectiveType;if(/^(slow-2g|2g)$/.test(t)&&navigator.onLine!==false){const n=$('#net');n.textContent='Connexion instable · le chargement peut être lent';n.hidden=false;setTimeout(()=>n.hidden=true,4000)}});
 {const n=$('#net');let t;const show=(m,ms)=>{n.textContent=m;n.hidden=false;clearTimeout(t);if(ms)t=setTimeout(()=>n.hidden=true,ms)};
- addEventListener('offline',()=>show('Hors ligne · vos choix sont conservés'));addEventListener('online',()=>show('De retour en ligne',2200));
- if(!navigator.onLine)show('Hors ligne · vos choix sont conservés')}
+ addEventListener('online',()=>show('De retour en ligne',2200))}
 let nudgeT;function armNudge(){clearTimeout(nudgeT);const b=document.querySelector('#s-detail .cta');if(!b)return;b.classList.remove('nudge');
  nudgeT=setTimeout(()=>{if(cur==='detail'&&!A11Y.rm){b.classList.add('nudge');setTimeout(()=>b.classList.remove('nudge'),1700)}},2500)}
 ['pointerdown','keydown','wheel','touchstart'].forEach(ev=>$('#s-detail').addEventListener(ev,()=>clearTimeout(nudgeT),{capture:true,passive:true}));
@@ -3063,7 +3129,7 @@ $('#snacks').addEventListener('click',e=>{const b=e.target.closest('button');if(
 $('#pays').addEventListener('click',e=>{if(!e.target.closest('#payBtn'))return;
  openSheet('Moyen de paiement',PAYS.map((p,i)=>`<button class="opt" role="radio" aria-checked="${i===ST.pay}" data-i="${i}"><span data-ic="${p[2]}"></span><span class="grow"><strong>${p[0]}</strong><small>${p[1]}</small></span>${i===ST.pay?'<span class="ok" data-ic="check"></span>':''}</button>`).join('')+`<button class="opt" data-add="1"><span data-ic="plus"></span><span class="grow"><strong>Ajouter une carte</strong><small>Bientôt disponible</small></span></button>`,b=>{
   b.onclick=e=>{const o=e.target.closest('.opt');if(!o)return;if(o.dataset.add){toast('Bientôt disponible');return}ST.pay=+o.dataset.i;$('#payErr').hidden=true;renderOrder();closeSheet()}})});
-$('#confirm').onclick=()=>{const b=$('#confirm');if(!$('#cgv').checked){const cg=$('#cgv'),bx=cg.closest('.cgv');if(bx){bx.scrollIntoView({behavior:A11Y.rm?'auto':'smooth',block:'center'});bx.classList.remove('need');void bx.offsetWidth;bx.classList.add('need')}cg.focus({preventScroll:true});haptic('error');toast('Veuillez accepter les conditions générales de vente pour continuer');return}b.disabled=true;b.dataset.busy=1;b.innerHTML='<span class="spin"></span><span>Paiement en cours…</span>';setTimeout(()=>{
+$('#confirm').onclick=()=>{const b=$('#confirm');if(navigator.onLine===false){offShow('pay');return}if(!$('#cgv').checked){const cg=$('#cgv'),bx=cg.closest('.cgv');if(bx){bx.scrollIntoView({behavior:A11Y.rm?'auto':'smooth',block:'center'});bx.classList.remove('need');void bx.offsetWidth;bx.classList.add('need')}cg.focus({preventScroll:true});haptic('error');toast('Veuillez accepter les conditions générales de vente pour continuer');return}b.disabled=true;b.dataset.busy=1;b.innerHTML='<span class="spin"></span><span>Paiement en cours…</span>';setTimeout(()=>{
   if(PAYS[ST.pay][3]){delete b.dataset.busy;updateConfirm();haptic('error');showPayErr();return}
   {const c=bkConflict(ST.date,ST.time);if(c){delete b.dataset.busy;updateConfirm();haptic('error');const e=$('#payErr');e.textContent=c.same?'Vous avez déjà réservé cette séance (Mon compte › Mes réservations).':'Vous avez déjà une séance : '+(c.f?c.f.title:'autre film')+' à '+c.b.time+'. Il faut au moins 45 minutes entre deux films : choisissez un autre horaire.';e.hidden=false;return}}
   $('#payErr').hidden=true;ST.booked=true;ST.tkBk=null;recordBooking();go('ticket');haptic('success');b.disabled=false;delete b.dataset.busy;updateConfirm()},900)};
@@ -3333,7 +3399,7 @@ paintIcons();initPalette();loadA11y();renderOnb();mvHello();renderTabs();renderF
 $('#avatar').innerHTML=avatarSVG('M','me');$('#avatar').style.cssText='display:block;width:100%;height:100%';
 {const mt=location.hash.match(/[,:]tab=(\d)/);if(mt){ST.tab=+mt[1];setTimeout(()=>{renderTabs();renderFan();renderNow()},400)}}
 {const mq=location.hash.match(/[,:]q=([^,:]*)/);if(mq)setTimeout(()=>{const q=$('#q');q.value=decodeURIComponent(mq[1]);q.dispatchEvent(new Event('input'));ST.q=q.value;renderNow()},700)}
-{const [h,hi,fl]=location.hash.slice(1).split(':');if(hi)ST.cur=+hi;if(fl){fl.split(',').forEach(x=>{if(x==='hc')A11Y.hc=true;if(x==='l')A11Y.ts=1.15;if(x==='xl')A11Y.ts=1.3;if(x==='dys')A11Y.dys=true;if(x==='light')A11Y.mode='light';if(x==='novt')NOVT=true;if(x==='sv')setTimeout(()=>{if(cur==='seats')openSeatView()},1200);if(x==='novid')A11Y.vidAsked=true;if(x==='sn'){ST.snOpen=true;ST.snCat='popcorn'}if(x==='muv')setTimeout(()=>mvOpen(),900);if(x.startsWith('mq='))setTimeout(()=>{mvOpen();mvAsk(decodeURIComponent(x.slice(3)))},900);if(x==='dark')A11Y.mode='dark';if(x==='rm')A11Y.rm=true});applyA11y()}if(h==='a11y'){go('home');setTimeout(openA11y,500)}else if((ORDER.includes(h)||h==='account')&&h!=='onb'){ST.booked=true;if(h!=='home')go('home');go(h)}}
+{const [h,hi,fl]=location.hash.slice(1).split(':');if(hi)ST.cur=+hi;if(fl){fl.split(',').forEach(x=>{if(x==='hc')A11Y.hc=true;if(x==='l')A11Y.ts=1.15;if(x==='xl')A11Y.ts=1.3;if(x==='dys')A11Y.dys=true;if(x==='light')A11Y.mode='light';if(x==='novt')NOVT=true;if(x==='sv')setTimeout(()=>{if(cur==='seats')openSeatView()},1200);if(x==='novid')A11Y.vidAsked=true;if(x==='sn'){ST.snOpen=true;ST.snCat='popcorn'}if(x==='muv')setTimeout(()=>mvOpen(),900);if(x.startsWith('mq='))setTimeout(()=>{mvOpen();mvAsk(decodeURIComponent(x.slice(3)))},900);if(x==='dark')A11Y.mode='dark';if(x==='off')setTimeout(()=>offShow('offline'),1200);if(x==='rm')A11Y.rm=true});applyA11y()}if(h==='a11y'){go('home');setTimeout(openA11y,500)}else if((ORDER.includes(h)||h==='account')&&h!=='onb'){ST.booked=true;if(h!=='home')go('home');go(h)}}
 
 /* bouton retour du téléphone : revient à l'écran précédent, ferme un panneau, puis quitte */
 const PREV={book:'detail',seats:'book',order:'seats',ticket:'home'};Object.defineProperty(PREV,'detail',{get:()=>ST.dFrom==='person'?'person':'home',enumerable:true});Object.defineProperty(PREV,'person',{get:()=>ST.pFrom&&ST.pFrom!=='person'?ST.pFrom:'home',enumerable:true});

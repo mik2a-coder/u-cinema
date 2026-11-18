@@ -2,6 +2,12 @@
 
 Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` dans `sw.js`), affiché en bas de la page **Compte** (« Version vNN »). Pour passer d'une version à l'autre : recharger sans cache (Cmd + Option + R sur Safari).
 
+## Version 83 — 18 novembre 2026
+
+| Demande | Ce qui a été fait | Où le voir |
+|---|---|---|
+| Page dédiée en cas de réseau coupé ou instable, avec un mini-jeu du chat | Page « Plus de réseau » (mascotte, message rassurant, « Réessayer » qui vérifie vraiment la connexion, « Continuer hors ligne » pour garder ses billets) et mini-jeu façon dinosaure de Google : U Ghjattu-Volpe saute par-dessus des seaux de pop-corn (touche, clic ou Espace), score et record gardés sur l'appareil. Au paiement sans réseau : « Connexion nécessaire », commande conservée. Connexion très lente : bandeau « Connexion instable ». Test rapide : ajouter `#x:0:off` à l'adresse | Coupure du réseau, paiement hors ligne |
+
 ## Version 82 — 18 novembre 2026 (revue en 24 points)
 
 Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs (360 à 1440 px) ; 0 chevauchement avec la barre du haut sur 3 tailles de fenêtre ; 146 fiches personnes valides ; règle des 45 minutes cohérente sur tous les créneaux ; annulation, avoir, récompenses et « Mes billets » vérifiés de bout en bout.
@@ -107,3 +113,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v81 | 18/11/2026 | Retour sur l'accueil : le dernier film choisi reste en vue et se signale par un anneau doré |
 | v82 | 18/11/2026 | v82 : 24 points de la revue (fiches personnes, mes billets, assistant qui réserve, avoir/récompenses, annulation 2 h, 45 min entre séances, barre d'étapes, défilement, logo/icônes, écran de salle sans cadre, extraits sans bandes noires, en-têtes sans chevauchement) |
 | v82 | 18/11/2026 | Revue en 24 points (voir ci-dessus) |
+| v83 | 18/11/2026 | Page « Plus de réseau » avec mini-jeu du chat |
