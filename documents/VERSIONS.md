@@ -22,6 +22,13 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
 
+## Version 97 — 18 novembre 2026
+
+| Demande | Ce qui a été fait | Où le voir |
+|---|---|---|
+| Rendre cliquables « films vus », « notes données » et « à venir » avec une fenêtre centrée | Les trois tuiles deviennent des boutons (« Voir › ») qui ouvrent une fenêtre : **films vus** (date, cinéma, note), **notes** (étoiles), **à venir** (réservations et rappels) ; un film s'ouvre sur sa fiche, une réservation sur son billet | Compte |
+| Utiliser les avatars en photos fournis | **En attente des fichiers** : l'application est prête (dossier `img/avatars/`, un fichier JPG par personnage, voir `LISEZ-MOI.md`) ; dès qu'un fichier existe il remplace le dessin | Compte › Mon personnage |
+
 ## Version 96 — 18 novembre 2026
 
 | N° | Demande | Ce qui a été fait | Où le voir |
@@ -245,3 +252,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v94 | 18/11/2026 | Tête « Heureux » du chat dans la rubrique enfants |
 | v95 | 18/11/2026 | Annulation depuis le billet ; bande du haut translucide en mode sombre |
 | v96 | 18/11/2026 | Défilement au bord de la fenêtre, plan de salle ajusté, étoiles lisibles, bouton Retour du navigateur, lien légal en pied de page, état des filtres |
+| v97 | 18/11/2026 | Tuiles du compte cliquables (fenêtres) ; dossier prêt pour les avatars en photos |

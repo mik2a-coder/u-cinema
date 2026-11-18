@@ -1709,6 +1709,12 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
 .fchip[aria-pressed=true] svg,:root.light .fchip[aria-pressed=true] svg{color:var(--on-accent)!important}
 .fchip[aria-pressed=true]::before{content:"✓";font-weight:800;margin-right:2px}
 .fchip{transition:background .2s,color .2s,box-shadow .2s,border-color .2s}
+.acc-stats .acc-stat{padding:12px 8px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--line);text-align:center;cursor:pointer;transition:transform .15s,border-color .2s,background .2s;min-height:72px}
+.acc-stats .acc-stat:hover{border-color:var(--accent)}.acc-stats .acc-stat:active{transform:scale(.97)}.acc-stats .acc-stat:focus-visible{outline:2px solid var(--accent-text);outline-offset:2px}
+.acc-stats .acc-stat::after{content:"Voir ›";display:block;margin-top:2px;font-size:calc(var(--fs-micro)*var(--ts,1));color:var(--accent-text);font-weight:600}
+.bkrow .stl{color:var(--accent-text);font-weight:600;letter-spacing:.02em}
+:root.light .acc-stats .acc-stat{background:rgba(255,255,255,.52)}
+.avh{position:relative;display:block;width:100%;height:100%;border-radius:inherit;overflow:hidden}.avh svg{position:absolute;inset:0}.avimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
 </style>
 </head>
 <body>
@@ -2007,7 +2013,8 @@ const AVATARS=[
  {k:'cowboy',n:'Le shérif',f:'Toy Story 5',bg:'#7bb5e8',d:`<ellipse cx="14" cy="14" rx="10" ry="5" fill="#fff" opacity=".85"/><ellipse cx="50" cy="20" rx="9" ry="4" fill="#fff" opacity=".8"/><path d="M8 64c0-14 10-20 24-20s24 6 24 20z" fill="#F2C230"/><path d="M20 50l12 14 12-14v14H20z" fill="#7a4a22"/><path d="M26 45l6 5 6-5z" fill="#D7252B"/><circle cx="32" cy="32" r="13" fill="${SK}"/><ellipse cx="32" cy="23" rx="25" ry="5" fill="#6b3f1b"/><path d="M20 23c0-11 6-14 12-14s12 3 12 14z" fill="#7b4a22"/>${EY}<path d="M28 38q4 2 8 0" stroke="#7a4a30" stroke-width="1.4" fill="none" stroke-linecap="round"/><path d="M32 53l2 4 4 .5-3 3 1 4-4-2-4 2 1-4-3-3 4-.5z" fill="#F4C430" stroke="#a87a10" stroke-width=".8"/>`},
  {k:'navigatrice',n:'La navigatrice',f:'Vaiana',bg:'#1f8fb0',d:`<path d="M0 52q8-6 16 0t16 0 16 0 16 0v12H0z" fill="#16739a"/><path d="M14 30a18 20 0 0 1 36 0v26H14z" fill="#2a1a14"/><path d="M8 64c0-13 10-18 24-18s24 5 24 18z" fill="#D9582B"/><circle cx="32" cy="31" r="12.5" fill="#D9A06F"/><path d="M19 28q13-14 26 0q-13-5-26 0z" fill="#2a1a14"/><circle cx="26.5" cy="31" r="1.6" fill="#2a1a10"/><circle cx="37.5" cy="31" r="1.6" fill="#2a1a10"/><path d="M29 37q3 2 6 0" stroke="#7a3a2a" stroke-width="1.4" fill="none" stroke-linecap="round"/><g transform="translate(46 22)"><circle r="2" fill="#F6D365"/><circle cx="0" cy="-4" r="2.6" fill="#E8416B"/><circle cx="3.8" cy="-1.2" r="2.6" fill="#E8416B"/><circle cx="2.4" cy="3.2" r="2.6" fill="#E8416B"/><circle cx="-2.4" cy="3.2" r="2.6" fill="#E8416B"/><circle cx="-3.8" cy="-1.2" r="2.6" fill="#E8416B"/><circle r="1.8" fill="#F6D365"/></g>`}
 ];
-const avSvg=k=>{const a=AVATARS.find(x=>x.k===k);return a?`<svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><rect width="64" height="64" fill="${a.bg}"/>${a.d}</svg>`:''};
+/* si une photo existe dans img/avatars/<clé>.jpg elle recouvre le dessin ; sinon on garde le dessin */
+const avSvg=k=>{const a=AVATARS.find(x=>x.k===k);return a?`<span class="avh"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><rect width="64" height="64" fill="${a.bg}"/>${a.d}</svg><img class="avimg" src="img/avatars/${a.k}.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span>`:''};
 function openAvatars(){const cur=ACC.avatar||'';
  openSheet('Mon personnage',`<p class="muted" style="margin:0 0 12px;font-size:calc(var(--fs-sm)*var(--ts,1))">Choisissez le personnage qui vous représente dans U CINEMÀ.</p><div class="avgrid" role="radiogroup" aria-label="Personnages">${AVATARS.map(a=>`<button type="button" class="avp" role="radio" aria-checked="${a.k===cur}" data-av="${a.k}"><span class="avi">${avSvg(a.k)}</span><b>${esc(a.n)}</b><small>${esc(a.f)}</small></button>`).join('')}</div><button type="button" class="btn alt" id="avNone" style="margin-top:12px"><span>Revenir à mon initiale</span></button>`,
  bb=>{bb.onclick=e=>{const p=e.target.closest('[data-av]'),n=e.target.closest('#avNone');if(!p&&!n)return;ACC.avatar=p?p.dataset.av:'';saveACC();haptic('soft');closeSheet();if(cur_screen_is_account())renderAccount();toast(p?'Personnage choisi : '+AVATARS.find(a=>a.k===ACC.avatar).n:'Initiale rétablie')}})}
@@ -2420,6 +2427,23 @@ function cancelBlock(b){return cxLeft(b)>=POL.cx*3600e3?`<p class="vtxt small" s
 function cancelBooking(b){const i=ACC.bookings.indexOf(b);if(i<0)return false;ACC.bookings.splice(i,1);ACC.points=Math.max(0,ACC.points-Math.round(b.total));ACC.credit=+(creditNow()+b.total).toFixed(2);{const e=new Date();e.setMonth(e.getMonth()+POL.creditMonths);ACC.creditExp=dIso(e)}saveACC();logAct('cancel',b.id);return true}
 const fdateStr=iso=>cap(new Date(iso+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'}).replace('.',''));
 const stars=(id,n)=>`<div class="r5" role="radiogroup" aria-label="Votre note">${[1,2,3,4,5].map(k=>`<button type="button" role="radio" aria-checked="${n===k}" aria-label="${k} sur 5" data-rate="${k}" data-f="${id}" class="${k<=n?'on':''}">${IC.star}</button>`).join('')}</div>`;
+function openFilmId(id){for(const t of [0,1,2,3]){const i=tabList(t).findIndex(f=>f.id===id);if(i>=0){ST.tab=t;ST.cur=i;break}}renderTabs();renderFan();go('detail')}
+function openStat(kind){
+ const F=id=>FILMS.find(f=>f.id===id),today=new Date(TODAY);
+ const past=ACC.bookings.filter(b=>new Date(b.date+'T23:59:00')<today).map(b=>({id:b.id,date:b.date,cin:b.cin}));
+ const hist=[...past,...ACC.hist].sort((a,b)=>b.date.localeCompare(a.date));
+ const starsTxt=n=>n?'★'.repeat(n)+'☆'.repeat(5-n)+' · '+n+'/5':'Pas encore noté';
+ const row=(f,l1,l2)=>`<button type="button" class="bkrow" data-sf="${f.id}"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong>${l1?`<small>${l1}</small>`:''}${l2?`<small class="stl">${l2}</small>`:''}</span><span data-ic="chev"></span></button>`;
+ let title,body;
+ if(kind==='seen'){title='Films que j’ai vus ('+hist.length+')';body=hist.length?hist.map(h=>{const f=F(h.id);return f?row(f,fdateStr(h.date)+' · '+esc(CINEMAS[h.cin].s),starsTxt(ACC.ratings[h.id]||0)):''}).join(''):'<p class="muted">Aucun film vu pour le moment.</p>'}
+ else if(kind==='rated'){const l=Object.keys(ACC.ratings).filter(id=>ACC.ratings[id]>0).map(F).filter(Boolean);title='Mes notes ('+l.length+')';body=l.length?l.map(f=>row(f,'',starsTxt(ACC.ratings[f.id]))).join('')+'<p class="muted" style="margin-top:10px;font-size:calc(var(--fs-xs)*var(--ts,1))">Pour changer une note, touchez les étoiles du film dans « Films que j’ai vus ».</p>':'<p class="muted">Aucune note donnée. Notez vos films dans « Films que j’ai vus ».</p>'}
+ else{const up=upBookings(),rem=Object.keys(ACC.remind).map(F).filter(Boolean);title='À venir ('+(up.length+rem.length)+')';
+  body=(up.length?'<h4 class="acc-sub">Réservations</h4>'+up.map((b,i)=>{const f=F(b.id);return f?`<button type="button" class="bkrow" data-sb="${i}"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>${fdateStr(b.date)} · ${b.time} · ${esc(CINEMAS[b.cin].s)}</small><small>Places ${b.seats.join(', ')}</small></span><span data-ic="chev"></span></button>`:''}).join(''):'')
+  +(rem.length?'<h4 class="acc-sub">Rappels de sortie</h4>'+rem.map(f=>row(f,'Sortie le '+relLabel(f),'')).join(''):'')
+  +(up.length||rem.length?'':'<p class="muted">Rien à venir. Réservez une séance ou activez un rappel de sortie.</p>')}
+ openSheet(title,body,bb=>{paintIcons(bb);bb.onclick=e=>{const sf=e.target.closest('[data-sf]'),sb=e.target.closest('[data-sb]');
+  if(sf){closeSheet();setTimeout(()=>openFilmId(sf.dataset.sf),260)}
+  else if(sb){const b=upBookings()[+sb.dataset.sb];closeSheet();if(b)setTimeout(()=>showBkTicket(b),260)}}})}
 function renderAccount(){
  const pts=ACC.points,li=lvlOf(pts),nx=LVL[li+1],base=LVL[li][1],pct=nx?Math.min(100,(pts-base)/(nx[1]-base)*100):100;
  const today=new Date(TODAY),up=ACC.bookings.filter(b=>new Date(b.date+'T23:59:00')>=today),past=ACC.bookings.filter(b=>new Date(b.date+'T23:59:00')<today);
@@ -2441,7 +2465,7 @@ ${creditNow()>0?`<div class="acc-credit"><span data-ic="wallet"></span><div><str
  <h3 class="acc-h">Mes récompenses</h3>
  <p class="rw-bal"><b>${ptsFree().toLocaleString('fr-FR')}</b> points à dépenser</p>
  ${RW.map(r=>{const n=ACC.rw[r.k]||0,ok=ptsFree()>=r.pts;return `<div class="rw"><div class="grow"><strong>${r.n}</strong><small>${r.d}</small>${n?`<small class="rw-own">${n} disponible${n>1?'s':''} : à activer dans votre commande</small>`:''}</div><button type="button" class="btn mini${ok?'':' alt'}" data-unlock="${r.k}" ${ok?'':'disabled'}><span>${ok?'Débloquer · '+r.pts+' pts':'Encore '+(r.pts-ptsFree())+' pts'}</span></button></div>`}).join('')}
- <div class="acc-stats"><div><b>${hist.length}</b><small>films vus</small></div><div><b>${rated}</b><small>notes données</small></div><div><b>${up.length+rem.length}</b><small>à venir</small></div></div>
+ <div class="acc-stats"><button type="button" class="acc-stat" data-stat="seen" aria-label="Voir les films vus : ${hist.length}"><b>${hist.length}</b><small>films vus</small></button><button type="button" class="acc-stat" data-stat="rated" aria-label="Voir les notes données : ${rated}"><b>${rated}</b><small>notes données</small></button><button type="button" class="acc-stat" data-stat="soon" aria-label="Voir ce qui est à venir : ${up.length+rem.length}"><b>${up.length+rem.length}</b><small>à venir</small></button></div>
 
  <h3 class="acc-h">Préférences</h3>
  <button class="opt" id="accA11y"><span data-ic="access"></span><span class="grow"><strong>Affichage et accessibilité</strong><small>Clair ou sombre, texte, contraste, extraits vidéo</small></span><span data-ic="chev"></span></button>
@@ -2488,6 +2512,7 @@ ${creditNow()>0?`<div class="acc-credit"><span data-ic="wallet"></span><div><str
     <div class="bk-g"><div><small>CINÉMA</small><b>${esc(CINEMAS[b.cin].n)}</b></div><div><small>PLACES</small><b>${b.seats.join(' · ')}</b></div><div><small>BILLETS</small><b>${b.count}</b></div><div><small>TOTAL TTC</small><b>${eur(b.total)}</b></div></div>
     <div class="bk-qr">${qrSVG('bk-'+b.id+b.date+b.time)}</div><p class="vtxt small" style="text-align:center">À présenter à l’entrée de la salle.</p>${cancelBlock(b)}</div>`,bb=>{bb.onclick=ev=>{const c=ev.target.closest('#bkCancel');if(!c)return;if(cxLeft(b)<POL.cx*3600e3){toast('Annulation impossible moins de 2 h avant la séance');closeSheet();return}if(!c.dataset.sure){c.dataset.sure='1';c.querySelector('span').textContent='Confirmer · avoir de '+eur(b.total);return}
      cancelBooking(b);closeSheet();renderAccount();toast('Réservation annulée · avoir de '+eur(b.total)+' ajouté à votre compte')}});return}
+  {const st=e.target.closest('[data-stat]');if(st){openStat(st.dataset.stat);return}}
   if(e.target.closest('#accAv,#accAvLink'))openAvatars();
   if(e.target.closest('#accA11y'))openA11y();
   if(e.target.closest('#accLegal'))openLegal();
