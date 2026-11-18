@@ -48,6 +48,7 @@ puis l'**avis général** : content · mitigé · pas content.
 | Audit en équipe (v98) | 4 agents de revue (accessibilité, UI, QA, documents) ; 11 défauts QA, 12 d'accessibilité, 12 d'UI, 14 de cohérence documentaire constatés ; corrections vérifiées : 13 suggestions de l'assistant sur 13 répondent, 0 débordement sur 6 largeurs, 0 chevauchement d'en-tête, achat jusqu'au billet, historique du navigateur, piège du focus | vérifié (Chrome) |
 | Réservation guidée | Parcours complet par boutons (film, jour, heure, nombre, emplacement, friandise, friandise offerte, −5 %, avoir) jusqu'au récapitulatif avec les bonnes places et les avantages appliqués (total 34,30 € vérifié) ; parcours écrit (« Hoppers », « demain », « à 21h », « 3 », « centre », « non merci ») ; film pas encore sorti refusé avec rappel ; « laisser tomber » à tout moment | vérifié (v100) |
 | Partage | Fenêtre de partage sur bureau et téléphone ; copie du lien ; liens directs `#f=hoppers` et `#p=Ryan%20Gosling` ouvrent la bonne page | vérifié (v101) |
+| Typographie et clavier (v105) | 0 espace simple avant `? ! ; :` dans le texte visible ; lien d'évitement : le focus arrive sur la page affichée ; numéro de commande identique sur la commande et le billet ; compteur de places « − 2 pl. + » visible sur une ligne de 360 à 1440 px | vérifié (Chrome) |
 | Contraste | Mesure des paires texte/fond sur 5 palettes | ≥ 4,5 : 1 (voir `DESIGN.md`) |
 
 ## Revues déjà intégrées — la version améliorée (1 relecteur : l'auteur)

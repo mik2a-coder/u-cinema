@@ -22,6 +22,16 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
 
+## Version 105 — 18 novembre 2026
+
+| Demande | Ce qui a été fait | Où le voir |
+|---|---|---|
+| Il manquait le « + » pour ajouter une place depuis le plan | Cause : le compteur « − 2 pl. + » s'empilait verticalement (le « + » sortait de la pastille). Il s'affiche de nouveau sur une ligne (« − 2 pl. + »), et les trois pastilles (jour, heure, places) tiennent sur une ligne dès 360 px | Plan de salle |
+| Points restés ouverts de l'audit : espaces insécables | Espace insécable avant `? ! : ; % €` et à l'intérieur des guillemets français, appliqué automatiquement au **texte visible** (jamais au code) ; contrôle : 0 espace simple restant avant ces signes | Toutes les pages |
+| Lien d'évitement | Lien « Aller au contenu » (premier élément au clavier) qui place le focus sur la page affichée | Clavier |
+| Cibles tactiles | « Débloquer », créneaux de l'accueil, « Voir depuis ma place », liens du pied de page et noms cliquables passent à 44 px de haut minimum (les sièges restent plus petits, au-delà du minimum de 24 px de la norme, pour tenir sur le plan) | Compte, accueil, fiche |
+| Numéro de commande unique | Le numéro `CLX-MMJJ-HHMM-XXXX` dépend maintenant du film, du jour, de l'heure et des places ; il est identique sur la commande, le billet et « Mes billets » | Commande, billet |
+
 ## Version 104 — 18 novembre 2026
 
 | Demande | Ce qui a été fait | Où le voir |
@@ -79,7 +89,7 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 | Confidentialité | Les textes disaient « pas de compte, rien conservé » alors que le profil, les réservations et le record sont enregistrés sur l'appareil | Textes exacts, clés `cinelux-acc` et `cinelux-off-best` listées, « Effacer mes données » les supprime |
 | Documents | 14 écarts (catalogue de 22 films, versions, zones du plan, mode Auto, « Continuer »…) | Tous corrigés |
 
-**Non traité (noté pour la suite) :** espaces insécables avant `? ! :`, lien d'évitement, cibles tactiles de 35 à 43 px (sièges, « Débloquer »), plan de salle plus grand sur très grand écran, retour à l'étape après rechargement en pleine commande, numéro de commande unique.
+**Non traité à la v98 (traité en v105 sauf les deux derniers) :** espaces insécables, lien d'évitement, cibles tactiles, numéro de commande unique ; **reste à faire** : plan de salle plus grand sur très grand écran, reprise de la commande après rechargement de la page.
 
 ## Version 97 — 18 novembre 2026
 
@@ -319,3 +329,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v102 | 18/11/2026 | Icône de partage visible en haut de la fiche ; logo dans la fenêtre de partage |
 | v103 | 18/11/2026 | Fenêtre de partage sans logo du site |
 | v104 | 18/11/2026 | Icône de partage à côté du titre (bureau) et décollée de la note (téléphone) |
+| v105 | 18/11/2026 | Compteur de places réparé, espaces insécables, lien d'évitement, cibles de 44 px, numéro de commande unique |

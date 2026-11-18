@@ -252,3 +252,10 @@ Principe : couleurs, tailles, rayons et espaces passent par des variables ; une 
 ## 17. Version 101 : partage
 - **Fenêtre « Partager »** (`openShare`) : carte du contenu (affiche ou portrait, titre, sous-titre), champ du lien + « Copier le lien » (retour « Lien copié ✓ »), puis lignes de services (`.opt.shl`) : appareil (si `navigator.share`), WhatsApp, SMS, e-mail, Facebook, X.
 - **Liens directs** : `#f=<id du film>` et `#p=<nom>` ; à l'ouverture, l'application passe l'introduction et affiche la page demandée.
+
+## 18. Version 105 : finitions
+- **Typographie française** : une fonction de fond remplace, dans le texte visible (nœuds de texte, hors scripts, champs et code), l'espace avant `? ! ; : % €` et dans les guillemets par une espace insécable, y compris pour les contenus ajoutés plus tard (observateur de modifications).
+- **Lien d'évitement** `.skip` : caché hors focus, doré au focus clavier.
+- **Cibles tactiles** : 44 px minimum pour les boutons d'action et les liens ; sièges plus petits assumés (voir `TESTS.md`).
+- **Compteur de places** `.pill.cnt` : `display:inline-flex` sur une ligne, pastilles jour/heure/places non retournées à la ligne sous 480 px.
+- **Numéro de commande** : `ordRef()` ; format `CLX-MMJJ-HHMM-XXXX`.
