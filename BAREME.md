@@ -21,7 +21,7 @@
 
 ## 1. Brief et persona — 2 points
 **Attendu** : un problème clair, une personne crédible.
-**Livré** : `BRIEF-PERSONA.md` (une page) : problème, objectif mesurable (réserver 2 places en moins de 60 s), périmètre, contraintes, mesure de réussite ; persona principal (Léa) et persona d'accessibilité (Karim) ; tableau « besoin → réponse de l'app ».
+**Livré** : `BRIEF-PERSONA.md` (une page) : problème, objectif mesurable (réserver 2 places en moins de 60 s), périmètre, contraintes, mesure de réussite ; persona principal (Mika, Ajaccio) et persona d'accessibilité (Ghjuvana Maria, Bastia) ; tableau « besoin → réponse de l'app ».
 **Écart à signaler** : le sujet est adapté (réseau de 4 cinémas fictifs en Corse au lieu de « Ciné Lumière, 12 salles »).
 
 ## 2. Parcours utilisateur — 2 points

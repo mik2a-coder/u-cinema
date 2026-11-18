@@ -14,13 +14,13 @@
 **Mesure de réussite.** Temps de réservation ≤ 60 s · 0 aide demandée · tarif adapté retrouvé · billet retrouvé hors ligne.
 
 ## Persona principal
-**Léa, 27 ans, graphiste à Lyon.** Va au cinéma deux fois par mois, souvent le samedi avec un ami. Réserve dans le tram, d'une main, avec peu de patience.
-- **Veut** : savoir vite s'il reste des places ce soir, choisir deux sièges côte à côte, avoir son billet même sans réseau.
+**Mika, 27 ans, graphiste à Ajaccio.** Va au cinéma deux fois par mois, souvent le samedi avec un ami. Réserve dans le bus ou le train, d'une main, avec peu de patience.
+- **Veut** : savoir vite s'il reste des places ce soir, choisir deux sièges côte à côte, avoir son billet même sans réseau (les tunnels du train et les zones blanches de l'intérieur de l'île coupent la connexion).
 - **Frustrations** : formulaires longs, tarifs incompréhensibles, frais au dernier écran, billet introuvable à l'entrée.
 - **Contexte** : téléphone, une main, trajet, réseau instable.
 
 ## Persona d'accessibilité
-**Karim, 34 ans, utilisateur de fauteuil roulant.** Besoin d'emplacements dédiés, du tarif adapté et d'un accompagnant ; veut savoir combien d'emplacements restent **avant** de se déplacer.
+**Ghjuvana Maria, 34 ans, de Bastia, se déplace en fauteuil roulant.** Prend le train ou le bus pour aller au cinéma. Besoin d'emplacements dédiés, du tarif adapté et d'un accompagnant ; veut savoir combien d'emplacements restent **avant** de se déplacer.
 
 ## Ce que l'app répond
 | Besoin | Réponse dans l'app |

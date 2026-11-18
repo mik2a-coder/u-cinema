@@ -1,12 +1,12 @@
 # U CINEMÀ — Parcours utilisateur
 
-Parcours principal de Léa, du premier regard au billet. Chaque étape a un **seul but**, un retour visible et un plan B.
+Parcours principal de Mika, du premier regard au billet. Chaque étape a un **seul but**, un retour visible et un plan B.
 
 **Accueil → Fiche film → Séance → Places → Commande → Billet → Compte**
 
 À chaque étape, un imprévu a son plan B (tableau « Imprévus prévus » plus bas) : séance complète ou annulée, paiement refusé, hors ligne, double réservation, recherche vide.
 
-| Étape | Ce que Léa fait | Ce qu'elle voit | Émotion / risque | Écran |
+| Étape | Ce que Mika fait | Ce qu'elle voit | Émotion / risque | Écran |
 |---|---|---|---|---|
 | 1. Découvrir | Ouvre l'app | Affiche du film du moment, titre, **séances du jour**, un bouton « Toutes les séances » | Curiosité | `01-accueil` |
 | 2. Comprendre | Touche l'affiche | Fiche : note, durée, séances rapides, réalisateur, synopsis replié, distribution ; bouton **Réserver** | Rapide | `02-fiche` |
