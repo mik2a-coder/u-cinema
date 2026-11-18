@@ -1580,6 +1580,16 @@ body:has(#s-home.active) #dtop.sc::before{opacity:1}
 .v-floor{position:absolute;left:0;right:0;bottom:0;height:16%;background:linear-gradient(transparent,rgba(20,3,5,.8));pointer-events:none;z-index:2}
 .sv-hud{background:linear-gradient(to top,rgba(20,4,6,.92),transparent)!important}
 .viewport.rm .v-scene.in,.viewport.rm .v-scene.sw{animation:none}
+/* vue depuis la place : salle sombre mais lisible, aucun détail (pas de rayures, têtes discrètes), l'écran reste le point clair */
+.sv-room{background:linear-gradient(to bottom,#2a0c11 0,#1e080c 45%,#150507 100%)!important}
+.v-wall{background:linear-gradient(to bottom,#341016,#240a0e)!important;opacity:.85}
+.v-glow{background:radial-gradient(60% 40% at 50% var(--sy),rgba(255,190,155,.22),rgba(255,150,120,.06) 55%,transparent 75%)}
+.vs{background:linear-gradient(#8a2027 0,#661319 20%,#470b10 62%,#2b0609 100%)!important;box-shadow:inset 0 .05em 0 rgba(255,140,128,.3),inset 0 -.12em .22em rgba(0,0,0,.45),0 .2em .4em rgba(0,0,0,.35)!important}
+.vs::after{display:none!important}
+.v-hd{opacity:.38;background:#1a0709!important}
+.v-nb{background:linear-gradient(#7a1d24,#52101a 45%,#2e070c)!important;box-shadow:inset 0 .25em 0 rgba(255,140,128,.25)!important}
+.v-scene::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 75% 70% at 50% 42%,transparent 45%,rgba(8,2,3,.6) 100%);pointer-events:none;z-index:4}
+.v-screen{z-index:5}
 </style>
 </head>
 <body>
