@@ -22,6 +22,12 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
 
+## Version 103 — 18 novembre 2026
+
+| Demande | Ce qui a été fait | Où le voir |
+|---|---|---|
+| Voir l'icône de partage sur la page avant de valider, pas le logo du site | Le logo U CINEMÀ est retiré de la fenêtre de partage ; l'**icône de partage** reste visible en haut de la fiche (bureau et téléphone), à côté du cœur | Fiche film |
+
 ## Version 102 — 18 novembre 2026
 
 | Demande | Ce qui a été fait | Où le voir |
@@ -305,3 +311,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v100 | 18/11/2026 | Réservation guidée par l'assistant, avec friandise et avoir |
 | v101 | 18/11/2026 | Partage des fiches film et personne avec lien direct |
 | v102 | 18/11/2026 | Icône de partage visible en haut de la fiche ; logo dans la fenêtre de partage |
+| v103 | 18/11/2026 | Fenêtre de partage sans logo du site |

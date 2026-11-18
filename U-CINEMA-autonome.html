@@ -1737,7 +1737,6 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
 .shurl .btn.mini{flex:none;min-height:48px;padding:0 18px;white-space:nowrap}
 .opt.shl{display:flex;margin-bottom:8px;text-decoration:none;color:inherit}.shi{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:color-mix(in srgb,var(--accent) 22%,var(--surface));color:var(--accent-text)}
 #sharePerson{margin-left:auto}
-.shbrand{display:flex;align-items:center;gap:10px;margin:0 0 12px}.shbrand img{width:34px;height:34px;flex:none}.shbrand span{font-family:var(--display);letter-spacing:.3em;font-size:calc(var(--fs-xl)*var(--ts,1));line-height:1}.shbrand span b{color:#B06F06;font-weight:400}.shbrand small{margin-left:auto;color:var(--muted);font-size:calc(var(--fs-micro)*var(--ts,1));text-align:right;max-width:46%;line-height:1.25}
 .d-topr{display:flex;gap:10px}
 @media (max-width:480px){#s-detail .d-chips .chip:nth-child(2){display:none}}
 </style>
@@ -3748,7 +3747,7 @@ function copyText(txt){return (navigator.clipboard&&navigator.clipboard.writeTex
 function openShare(o){
  const enc=encodeURIComponent,u=o.url,t=o.text,nat=typeof navigator.share==='function';
  const lk=(href,ic,lab,sub)=>`<a class="opt shl" href="${href}" target="_blank" rel="noopener noreferrer"><span class="shi">${ic}</span><span class="grow"><strong>${lab}</strong><small>${sub}</small></span></a>`;
- openSheet('Partager',`<div class="shbrand"><img src="img/logo-mark3.png" alt="" width="34" height="34"><span><b>U</b> CINEMÀ</span><small>Réservez vos séances en quelques gestes</small></div><div class="shp"><span class="mini-th">${o.th}</span><div><strong>${esc(o.title)}</strong><small>${esc(o.sub)}</small></div></div>
+ openSheet('Partager',`<div class="shp"><span class="mini-th">${o.th}</span><div><strong>${esc(o.title)}</strong><small>${esc(o.sub)}</small></div></div>
   <div class="shurl"><input id="shU" readonly value="${esc(u)}" aria-label="Lien à partager" onfocus="this.select()"><button type="button" class="btn mini" id="shCopy"><span>Copier le lien</span></button></div>
   ${nat?`<button type="button" class="opt shl" data-sh="native"><span class="shi">↗</span><span class="grow"><strong>Partager avec…</strong><small>Messages, AirDrop, applications de l’appareil</small></span></button>`:''}
   ${lk('https://wa.me/?text='+enc(t+' '+u),'W','WhatsApp','Envoyer à un contact ou un groupe')}
