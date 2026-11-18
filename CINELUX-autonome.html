@@ -2275,8 +2275,8 @@ function renderAccount(){
  <p class="acc-note">Historique et notes de départ : données de démonstration. Tout reste sur cet appareil.</p>
  </div></div>
 
- <footer class="foot"><button type="button" class="textlink" data-legal>Confidentialité et mentions légales</button></footer>`;
- paintIcons($('#accScroll'));
+ <footer class="foot"><button type="button" class="textlink" data-legal>Confidentialité et mentions légales</button><small id="appVer" style="display:block;color:var(--muted);margin-top:6px;font-size:calc(var(--fs-micro)*var(--ts,1))"></small></footer>`;
+ paintIcons($('#accScroll'));try{caches.keys().then(k=>{const v=k.filter(x=>/^cinelux2-v/.test(x)).sort((a,b)=>parseInt(a.slice(10))-parseInt(b.slice(10))).pop(),e=$('#appVer');if(e)e.textContent='Version '+(v?v.slice(9):'locale')})}catch(e){}
 }
 (function(){
  const sc=$('#accScroll');
