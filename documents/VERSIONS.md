@@ -22,6 +22,13 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
 
+## Version 87 — 18 novembre 2026
+
+| Demande | Ce qui a été fait | Où le voir |
+|---|---|---|
+| Même effet de fond coloré sur la première page | L'introduction reçoit le fond flouté en ovale de l'accueil, qui change de couleur avec les affiches à chaque « Continuer » ; barre du haut transparente | Introduction |
+| En-tête qui garde le fond flouté quand on descend | La barre du haut ne se remplit plus de crème au défilement de l'accueil : le fond coloré reste visible derrière elle sur toute la page | Accueil |
+
 ## Rangement du dossier (après la v86)
 Le dossier du projet s'appelle désormais **U CINEMA**. Textes dans `documents/`, PDF à remettre dans `A-RENDRE/`, anciens essais dans `archives/`, version autonome renommée `U-CINEMA-autonome.html`, lanceurs « Ouvrir U CINEMA ». Le site (à la racine) n'a pas bougé.
 
@@ -159,3 +166,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v84 | 18/11/2026 | Mini-jeu : chat animé qui court et saute, tête triste en haut |
 | v85 | 18/11/2026 | Mini-jeu : cycle de course en 6 images et obstacles de la planche de sprites |
 | v86 | 18/11/2026 | Mini-jeu : poses remises dans l'ordre, départ, arrivée en glissade, chute, objets de cinéma, plus facile |
+| v87 | 18/11/2026 | Fond flouté en ovale sur l'introduction ; en-tête de l'accueil transparent au défilement |

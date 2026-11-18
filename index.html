@@ -1546,9 +1546,13 @@ body:has(#s-detail.active) .toast{bottom:118px}
 /* accueil : le fond coloré de l'affiche prend la forme d'un ovale doux (les boutons et textes ne sont jamais floutés) */
 #s-home .amb{top:0;bottom:0;height:100%!important;opacity:.9;-webkit-mask-image:radial-gradient(ellipse 92% 54% at 50% 50%,#000 58%,rgba(0,0,0,.62) 76%,rgba(0,0,0,.24) 90%,rgba(0,0,0,0) 100%);mask-image:radial-gradient(ellipse 92% 54% at 50% 50%,#000 58%,rgba(0,0,0,.62) 76%,rgba(0,0,0,.24) 90%,rgba(0,0,0,0) 100%)}
 /* accueil : tout en haut de page, la barre est transparente et l'ovale de couleur passe derrière elle ; elle ne se remplit qu'au défilement */
-body:has(#s-home.active) #dtop::before{opacity:0;transition:opacity .35s}
-body:has(#s-home.active) #dtop.sc::before{opacity:1}
+body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opacity:0;transition:opacity .35s}
 :root.light #s-home .amb{opacity:.55}
+/* introduction : même fond coloré en ovale que l'accueil, il change avec les affiches */
+#s-onb .amb{top:0;bottom:0;height:100%!important;opacity:.9;-webkit-mask-image:radial-gradient(ellipse 92% 54% at 50% 42%,#000 58%,rgba(0,0,0,.62) 76%,rgba(0,0,0,.24) 90%,rgba(0,0,0,0) 100%);mask-image:radial-gradient(ellipse 92% 54% at 50% 42%,#000 58%,rgba(0,0,0,.62) 76%,rgba(0,0,0,.24) 90%,rgba(0,0,0,0) 100%)}
+:root.light #s-onb .amb{opacity:.55}
+#s-onb>.amb{max-width:none!important;width:100%!important;margin:0!important;left:0;right:0;position:absolute}
+.onb-fan,.onb-text,.onb-actions,.onb-foot{position:relative;z-index:1}
 /* liste des films : toutes les affiches sur la même ligne de base, grille alignée sur le titre de section */
 .ncard{align-self:start}.ncard .img{aspect-ratio:2/3;height:auto!important}
 #seeSoon[hidden]{display:none!important}
@@ -1691,6 +1695,7 @@ body:has(#s-home.active) #dtop.sc::before{opacity:1}
     <div class="dright"><button class="dlink dmini" id="dA11y" aria-label="Affichage et accessibilité"><span data-ic="access"></span></button></div></header>
   <!-- 1 -->
   <section class="screen active" id="s-onb" aria-label="Bienvenue">
+    <div class="amb" id="ambOnb" aria-hidden="true"></div>
     <div class="onb-fan" id="onbFan"></div>
     <div class="onb-text"><div class="onb-logo" aria-hidden="true"><img class="lg-mark" src="img/logo-mark3.png" alt="" width="44" height="44" decoding="async"><span class="lg-word"><i>U</i>CINEMÀ</span></div><div class="eyebrow" id="onbEye"></div><h1 class="display" id="onbTitle"></h1><p id="onbSub"></p>
       <div class="dots" id="onbDots" aria-hidden="true"><i></i><i></i><i></i></div></div>
@@ -2172,6 +2177,7 @@ function renderOnb(anim){
  const txt=()=>{$('#onbEye').textContent=o[0];$('#onbTitle').textContent=o[1];$('#onbSub').textContent=o[2]};
  [...$('#onbDots').children].forEach((d,i)=>d.classList.toggle('on',i===k));
  $('#onbNext').innerHTML=`<span>${k<2?'Continuer':'Commencer'}</span>${IC.arrow}`;
+{const ab=$('#ambOnb');if(ab){const set=()=>{ab.innerHTML=poster(ONBP[k][1])};if(!anim||!ab.animate)set();else{const o=ab.animate([{opacity:1},{opacity:0}],{duration:240,fill:'forwards'});o.onfinish=()=>{set();const i=ab.animate([{opacity:0},{opacity:1}],{duration:520,fill:'both'});i.onfinish=()=>{i.cancel();o.cancel()}}}}}
  const cards=[...f.querySelectorAll('.card3')],reduce=A11Y.rm||matchMedia('(prefers-reduced-motion:reduce)').matches;
  if(!anim||reduce||!cards[0].animate){cards.forEach((c,i)=>{c.innerHTML=poster(ONBP[k][i])});txt();return}
  /* images : chaque affiche glisse légèrement, change, puis revient (décalées) ; le texte se fond en même temps */
