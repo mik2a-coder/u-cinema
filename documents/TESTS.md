@@ -41,10 +41,11 @@ puis l'**avis général** : content · mitigé · pas content.
 | Assistant | « deux places côte à côte au fond… ce soir 20h » mène au récapitulatif avec les bonnes places, l'horaire le plus proche et le total | vérifié ; refus propre pour un film pas encore en salle |
 | Page « Plus de réseau » | Joueur automatique : 3 parties sur 3 gagnées jusqu'à l'arrivée ; une partie sans saut finit par la chute du chat sur un objet ; saut visible en entier dans le cadre | vérifié (Chrome, v86) ; à essayer sur iPhone et Safari |
 | Bouton de commande | Sur la page Commande, le bouton garde sa taille (≈ 52 px de haut, en bas de page) avec et sans CGV cochées ; achat jusqu'au billet | vérifié (v90) après un conflit de classe repéré sur une vidéo d'écran |
-| Bandes-annonces | Pour les 22 films : lien YouTube vérifié (réponse « oEmbed » valide) et extrait de la fiche révélé en environ 2,5 s (Chrome) | voir v92 |
+| Bandes-annonces | Pour les 22 films : lien YouTube vérifié (réponse « oEmbed » valide) et extrait de la fiche révélé en environ 2,5 s (2 s minimum après l'affiche) (Chrome) | voir v92 |
 | Règles d'achat | Annulation refusée à moins de 2 h ; avoir créé avec une date à 12 mois, affiché dans Compte et à la commande ; avoir périmé ignoré ; doublon et chevauchement refusés (45 min) | vérifié (v93) |
 | Annulation depuis le billet | Après un achat à 2 jours : bouton présent, confirmation en 2 temps, avoir de 38,40 € à 12 mois, retour au Compte ; billet à moins de 2 h : « Annulation impossible » | vérifié (v95) |
 | Bureau et historique | Défilement au bord de la fenêtre sur 8 écrans (1280×720 à 1920×1080) ; plan de salle sans recouvrement de 1024×768 à 1920×1080 ; bouton Retour du navigateur : écran précédent, fenêtre fermée d'abord, billet → accueil ; lien légal visible et non recouvert sur 8 écrans | vérifié (v96, Chrome) |
+| Audit en équipe (v98) | 4 agents de revue (accessibilité, UI, QA, documents) ; 11 défauts QA, 12 d'accessibilité, 12 d'UI, 14 de cohérence documentaire constatés ; corrections vérifiées : 13 suggestions de l'assistant sur 13 répondent, 0 débordement sur 6 largeurs, 0 chevauchement d'en-tête, achat jusqu'au billet, historique du navigateur, piège du focus | vérifié (Chrome) |
 | Contraste | Mesure des paires texte/fond sur 5 palettes | ≥ 4,5 : 1 (voir `DESIGN.md`) |
 
 ## Revues déjà intégrées — la version améliorée (1 relecteur : l'auteur)
@@ -66,7 +67,7 @@ puis l'**avis général** : content · mitigé · pas content.
 | Animations décoratives du chat | Suppression des boucles et de la bulle du logo |
 | Résultats de recherche, plan de salle, 5 dates qui débordent | Centrage, rangée A dégagée, dates sur 5 colonnes |
 | Suivis introuvables dans le compte | Section « Mes suivis » (films, acteurs, réalisateurs), « Retirer » aligné à droite |
-| Transition du choix de places jugée moins fluide qu'un plan de stade | Vue d'ensemble puis zoom sur la zone ; « Changer de place / Acheter » depuis la vue de la place |
+| Transition du choix de places jugée moins fluide qu'un plan de stade | Toute la salle visible d'un coup (v91) ; « Changer de place / Acheter » depuis la vue de la place |
 | Vue depuis la place cassée sous Safari (bloc noir, côtés manquants) | Écran 16:9 qui contient exactement la vidéo |
 | Ligne dure entre la barre du haut et la page (Safari) | Fondu sans flou ni masque ; barre transparente sur l'accueil |
 | Fond de l'accueil sans forme | Ovale doux qui déborde de l'écran, opacité 55 % / 90 % |

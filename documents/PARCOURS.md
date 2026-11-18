@@ -11,7 +11,7 @@ Parcours principal de Mika, du premier regard au billet. Chaque étape a un **se
 | 1. Découvrir | Ouvre l'app | Affiche du film du moment, titre, **séances du jour**, un bouton « Toutes les séances » | Curiosité | `01-accueil` |
 | 2. Comprendre | Touche l'affiche | Fiche : note, durée, séances rapides, réalisateur, synopsis replié, distribution ; bouton **Réserver** | Rapide | `02-fiche` |
 | 3. Séance | Vérifie le jour, garde 2 places | Progression 1/4, dates, séances (complète grisée), tarifs réduits repliés | Confiance | `03-seance` |
-| 4. Places | Les sièges sont déjà proposés ; la caméra zoome sur leur zone | Plan de **toute la salle** d'un coup (8 rangées), « Voir depuis ma place » (avec Changer de place / Acheter), **Acheter · 36 €** | Contrôle | `04-places` |
+| 4. Places | Les sièges sont déjà proposés | Plan de **toute la salle** d'un coup (8 rangées), « Voir depuis ma place » (avec Changer de place / Acheter), **Acheter · 36 €** | Contrôle | `04-places` |
 | 5. Payer | Ajoute une gourmandise (facultatif), coche les CGV, valide | Bannières de suggestions, total TTC, « Commande avec obligation de paiement · 38,40 € TTC » | Vigilance | `05-commande`, `06-petite-faim` |
 | **Imprévu** | Carte refusée | « Paiement refusé par la banque. **Rien n'a été débité**, commande conservée » + [Changer de moyen] [Réessayer] | Inquiétude → soulagement | `07-paiement-refuse` |
 | 6. Entrer | Montre son billet | QR, coche animée, « Profitez de la séance », disponible hors ligne | **Pic** et fin positifs | `08-billet` |
@@ -26,7 +26,7 @@ Parcours principal de Mika, du premier regard au billet. Chaque étape a un **se
 | Paiement **refusé** | Message clair, commande conservée |
 | **Hors ligne ou réseau instable** | Page « Plus de réseau » : chat triste, message rassurant, **mini-jeu** (le chat court, saute des objets de cinéma, glisse à l'arrivée), « Réessayer » (teste vraiment la connexion) et « Continuer hors ligne » ; billet toujours lisible. Au paiement sans réseau : « Connexion nécessaire », commande conservée. Voir la page : https://mik2a-coder.github.io/u-cinema/#x:0:off |
 | **Recherche vide** | Suggestions de genres + « Effacer la recherche » |
-| **Annulation** d'une réservation | Depuis « Mon billet » : confirmation, points rendus |
+| **Annulation** d'une réservation | Depuis « Mon billet » : confirmation, avoir, points retirés |
 
 ## Parcours secondaires
 - **Choisir avec l'aide du chat** : « un film drôle ce soir en famille » → propositions tenant compte des séances et des goûts (notes).

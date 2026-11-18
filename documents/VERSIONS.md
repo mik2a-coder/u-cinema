@@ -18,9 +18,31 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 | `tools/build-rendu.py` | v82 | Dossier de rendu au style « artefact », sans notes de notation |
 | `documents/DIRECTION-ARTISTIQUE.md`, `documents/VERSIONS.md` | v82–v86 | Nouveaux documents |
 | `BRIEF-PERSONA.md`, `PARCOURS.md`, `BAREME.md`, `DESIGN.md`, `TESTS.md`, `JOURNAL.md`, `README.md` | v82–v86 | Personas Mika (Ajaccio) et Ghjuvana Maria (Bastia), page d'erreur, tests, décisions |
-| `RENDU-U-CINEMA.pdf`, `CHECKLIST-TEST-3-PERSONNES.pdf`, `CINELUX-autonome.html` | v82–v86 | Régénérés à chaque version |
+| `RENDU-U-CINEMA.pdf`, `CHECKLIST-TEST-3-PERSONNES.pdf`, `U-CINEMA-autonome.html` | v82–v86 | Régénérés à chaque version |
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
+
+## Version 98 — 18 novembre 2026 (audit UX/UI en équipe)
+
+**Dispositif :** 4 agents de revue en lecture seule (accessibilité, UI visuelle et responsive, QA fonctionnelle, cohérence documentaire) ; les corrections et les tests ont été faits par l'auteur du projet avec l'assistant, pour éviter les conflits d'écriture. Chaque défaut ci-dessous a été constaté par un agent avant d'être corrigé.
+
+| Domaine | Défaut constaté | Correction |
+|---|---|---|
+| Assistant | Une suggestion comme « Autre proposition » ou « De l'émotion » menait à « Je n'ai pas bien compris » ; « Ce soir » pouvait finir en « rien ne correspond » si une réservation existait déjà | Les suggestions sont toutes reconnues ; l'assistant **ne reste plus jamais sans réponse** : il assouplit les critères un par un (déjà vus, demain, horaire, genre) et dit ce qui a changé ; créneaux calculés par film ; « tarifs » compris ; plafond de 8 places annoncé ; « côte à côte » seulement si les sièges le sont vraiment |
+| QA | Un billet handicap + accompagnant pouvait être réduit à 0 place (réservation à 0 €) | Minimum 1 billet, bouton bloqué |
+| QA | Promo, snacks et CGV cochée restaient d'une commande à la suivante | Commande remise à zéro à chaque nouveau film |
+| QA | On pouvait acheter une séance annulée, complète ou passée en changeant la date sur le plan | Séance revérifiée aux étapes « Places » et « Acheter » ; heure corrigée automatiquement |
+| QA | Annulation d'une commande payée en partie avec un avoir : la part d'avoir était perdue | L'avoir utilisé est recrédité (les récompenses déjà consommées ne sont pas rendues) |
+| QA | Compte enregistré abîmé : application bloquée au chargement | Compte relu avec valeurs par défaut et contrôles ; plus de blocage |
+| QA | La 21ᵉ réservation effaçait la plus ancienne, même à venir | Seules les séances passées sont purgées |
+| Accessibilité | Fenêtres modales sans piège du focus clavier | Tab et Maj+Tab bouclent dans la fenêtre (feuilles, vue depuis la place, page réseau) |
+| Accessibilité | Contrastes insuffisants : « Bande-annonce » (1,8 : 1), méta du film à l'accueil (2,7 : 1), petits textes de la carte de fidélité | Fond opaque, ombre portée du texte, texte foncé |
+| Accessibilité | Pas de repère `main`, deux navigations de même nom, carrousel sans nom, champ promo sans état d'erreur | `role="main"`, noms uniques, `aria-label`, `aria-invalid` |
+| UI | « Changer mon personnage » collé au texte ; légende du plan et « 2 pl. » coupées ; bouton de commande gris comme désactivé ; bouton « Lancer la bande-annonce » au milieu du visage ; barre « Suivre / Réserver » superposée au texte | Corrigés (alignement, marges, état, bouton en bas de l'image, dégradé sous la barre) |
+| Confidentialité | Les textes disaient « pas de compte, rien conservé » alors que le profil, les réservations et le record sont enregistrés sur l'appareil | Textes exacts, clés `cinelux-acc` et `cinelux-off-best` listées, « Effacer mes données » les supprime |
+| Documents | 14 écarts (catalogue de 22 films, versions, zones du plan, mode Auto, « Continuer »…) | Tous corrigés |
+
+**Non traité (noté pour la suite) :** espaces insécables avant `? ! :`, lien d'évitement, cibles tactiles de 35 à 43 px (sièges, « Débloquer »), plan de salle plus grand sur très grand écran, retour à l'étape après rechargement en pleine commande, numéro de commande unique.
 
 ## Version 97 — 18 novembre 2026
 
@@ -253,3 +275,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v95 | 18/11/2026 | Annulation depuis le billet ; bande du haut translucide en mode sombre |
 | v96 | 18/11/2026 | Défilement au bord de la fenêtre, plan de salle ajusté, étoiles lisibles, bouton Retour du navigateur, lien légal en pied de page, état des filtres |
 | v97 | 18/11/2026 | Tuiles du compte cliquables (fenêtres) ; dossier prêt pour les avatars en photos |
+| v98 | 18/11/2026 | Audit UX/UI en équipe : assistant jamais sans réponse, correctifs QA, accessibilité, UI, confidentialité |

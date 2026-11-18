@@ -85,10 +85,10 @@ Contrôle automatique des boutons coupés ou inatteignables et des débordements
 - Les tests utilisateurs (3 personnes) restent à mener : `TESTS.md`.
 
 ## 6. Catalogue et nouvelles fonctions (novembre 2026)
-**Catalogue** : 18 films de 2026 (`FILMS`) : 12 à l'affiche, 6 à venir. Distributions, équipes et résumés d'après Wikipédia ; dates de sortie France **indicatives** ; notes du public = démonstration. Onglets : **Films** (à l'affiche), **Nouveautés** (sorties des 4 derniers mois), **Prochainement** (« Me prévenir à la sortie » à la place de « Réserver », rappel gardé sur l'appareil).
+**Catalogue** : 22 films de 2026 (`FILMS`) : 17 à l'affiche, 5 à venir. Distributions, équipes et résumés d'après Wikipédia ; dates de sortie France **indicatives** ; notes du public = démonstration. Onglets : **Films** (à l'affiche), **Nouveautés** (sorties des 4 derniers mois), **Prochainement** (« Me prévenir à la sortie » à la place de « Réserver », rappel gardé sur l'appareil).
 **Affiche** : plus de pastilles en bas ; la note est dans une pastille dorée à côté de l'année et du genre, sous le titre.
 **Fiche** : cartes de distribution sous le synopsis (photo, nom, nombre de films), fiche acteur en feuille, équipe (réalisation, production, musique).
-**Extrait de bande-annonce** : 3,5 s après l'affiche, la vidéo (YouTube sans cookie, muette, en boucle) apparaît en fondu dans l'affiche ; bouton de son ; « Bande-annonce » ouvre la vidéo complète. **Consentement avant tout chargement** (feuille « Extraits de bandes-annonces », oui/non d'égale importance) ; réglable dans *Affichage et accessibilité* ; coupé avec « Réduire les animations » ou économie de données. Nécessite un serveur http (`Ouvrir U CINEMA.command` en lance un sur localhost:8731) : YouTube refuse les pages ouvertes en `file://`.
+**Extrait de bande-annonce** : environ 2 s après l'affiche, la vidéo (YouTube sans cookie, muette, en boucle) apparaît en fondu dans l'affiche ; bouton de son ; « Bande-annonce » ouvre la vidéo complète. **Consentement avant tout chargement** (feuille « Extraits de bandes-annonces », oui/non d'égale importance) ; réglable dans *Affichage et accessibilité* ; coupé avec « Réduire les animations » ou économie de données. Nécessite un serveur http (`Ouvrir U CINEMA.command` en lance un sur localhost:8731) : YouTube refuse les pages ouvertes en `file://`.
 **Vue depuis ma place** : sur le plan de salle, « Voir depuis ma place » plonge dans le siège choisi (zoom, cercle qui s'ouvre) et montre l'écran en perspective selon le rang et la colonne, les spectateurs devant, parallaxe au pointeur, flèches pour passer d'une place à l'autre. Simulation indicative.
 **Billet** : l'affiche entière en vedette sur fond flou, « 2 places » au lieu de « ADMET DEUX ».
 **Compte** (onglet « Compte ») : carte de fidélité (niveaux Bronze à Platine, points = 1 par euro, se retourne pour montrer le code), réservations à venir, rappels de sortie, historique des films vus avec notes en étoiles (annulables), préférences. Tout est en `localStorage` (`cinelux-acc`) ; inclus dans l'export et effacé avec « Tout effacer ». Historique et notes de départ : démonstration.
@@ -100,7 +100,7 @@ Les 4 cinémas sont **fictifs** et situés en Corse : U Cinemà Aiacciu (Ajaccio
 
 
 ## 7. Évolutions du 18 novembre 2026
-- **Plan de salle en zones** (Avant, Centre, Fond) avec zoom de caméra ; vue depuis la place avec « Changer de place / Acheter ».
+- **Plan de salle complet** (toute la salle visible d'un coup) ; vue depuis la place avec « Changer de place / Acheter ».
 - **Compte** : réservations, rappels de sortie, suivis (films, acteurs, réalisateurs), films vus ; annulation d'une réservation.
 - **Accueil** : fond en ovale doux qui déborde de l'écran (55 % en clair, 90 % en sombre), barre du haut transparente en haut de page, logo en haut à gauche sur téléphone.
 - **Fiche film** : « Suivre ce film » à côté de « Réserver » ; portraits des réalisateurs ; vidéo verticale pour 3 films.

@@ -53,6 +53,16 @@ Boucle courte, répétée une centaine de fois : **ma demande (souvent avec capt
 **4. Simplifier un protocole de test**
 > « Réduis le test utilisateur à **une page** : 3 tâches chronométrées, 2 questions, cases à cocher. Pas de jargon. Ne remplis aucun résultat à ma place. »
 
+## Travailler avec une équipe d'agents (version 98)
+| Rôle | Mission (lecture seule) | Ce qui en est sorti |
+|---|---|---|
+| Expert accessibilité | Mesurer contrastes, cibles, clavier, lecteurs d'écran | Piège du focus, contrastes, repères |
+| Directeur artistique UI | Regarder chaque écran en clair/sombre, 3 tailles | Alignements, états, superpositions |
+| Testeur QA | Chercher à casser les parcours et l'assistant | Réservation à 0 place, état de commande qui reste, séance annulée achetable |
+| Relecteur éditorial | Comparer documents et code | 14 écarts dont le texte de confidentialité |
+
+> Prompt de départ : « Agis comme un expert UX/UI avec l'aide d'une équipe d'agents : contrôle tout, mets à jour les documents. » Version améliorée : « 4 agents en lecture seule par domaine, chacun avec un périmètre, une méthode de mesure, un format de rapport court et l'interdiction de modifier le projet ; les corrections restent chez moi, puis tests et documents. »
+
 ## Choix expliqués
 | Choix | Pourquoi |
 |---|---|
@@ -104,7 +114,7 @@ Détail point par point dans `VERSIONS.md`. Décisions de conception :
 
 ## Limites et à valider
 - Test à 3 personnes **non réalisé** (voir `TESTS.md`).
-- Bandes-annonces verticales officielles trouvées pour 3 films sur 18 ; les autres s'affichent en 16:9 dans le cadre.
+- Bandes-annonces verticales officielles trouvées pour 3 films sur 22 ; les autres s'affichent en 16:9 dans le cadre.
 - « Suivre ce film » est enregistré sur l'appareil ; il n'envoie **pas** de vraie notification (il faudrait un serveur).
 - Sujet adapté (Corse) par rapport à l'énoncé (« Ciné Lumière »).
 - Photos et affiches : usage pédagogique, non commercial.

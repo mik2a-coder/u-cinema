@@ -53,7 +53,7 @@ Autres palettes (Rouge cinéma, Violet néon, Bleu nuit, Émeraude) : mêmes 15 
 Toutes les paires dépassent 4,5 : 1 (minimum mesuré : 4,6 avec la palette Rouge cinéma).
 
 ### Mode clair (Réglages › Affichage et accessibilité › Apparence : Sombre · Clair · Auto)
-Sombre reste le défaut. Le mode clair n'est pas une 6ᵉ palette : il se **déduit de la palette active**, donc les 5 thèmes ont leur version claire.
+Le mode **Auto** suit l'appareil (clair ou sombre) ; la palette par défaut est Noir & Or. Le mode clair n'est pas une 6ᵉ palette : il se **déduit de la palette active**, donc les 5 thèmes ont leur version claire.
 | Jeton | Règle |
 |---|---|
 | `--bg` / `--surface` / `--surface2` | le « papier » de la palette éclairci à 55 % / 80 % / 25 % (ivoire chaud pour Noir & Or) |
@@ -107,7 +107,7 @@ Polices : **Bebas Neue** (titres, MAJUSCULES, `line-height .95`), **Inter** (tex
 | **Bouton Réserver** | `.cta.gold` | Même règle que le primaire ; l'onde au toucher est contenue dans le bouton |
 | **Suivre (réalisateur / film)** | `.follow`, `.ff2` | Repos : verre. **Suivi : plein** (encre en clair, or en sombre) + coche ou cloche pleine + animation de cloche ; le film se suit à côté de « Réserver » |
 | **Acheter (partagé)** | `.split` | Pilule dégradée « Acheter · séparateur · prix · pastille flèche » ; grisé tant que le choix n'est pas complet |
-| **Hero d'accueil** | `.ftitle` + `.hero-cta` | Année · genre · durée, titre, « Prochaine séance · aujourd'hui, 20:30 », **une** action « Voir les séances » |
+| **Hero d'accueil** | `.ftitle` + `.hero-cta` | Année · genre · durée, titre, le jour et 4 horaires en pastilles, **une** action « Toutes les séances » |
 | **Progression du parcours** | `.stp` | 4 segments (Séance · Places · Paiement · Billet), segment courant déjà à 55 % (on part avec de l'avance), `role="progressbar"` |
 | **Séances rapides** | `.qchip` | Pastilles d'horaires sur la fiche film : un tap → réservation avec ce créneau |
 | **Tarifs** | `.trow` + `.redtog` | Plein tarif visible ; « J'ai droit à un tarif réduit » déplie les 4 autres |
@@ -115,7 +115,7 @@ Polices : **Bebas Neue** (titres, MAJUSCULES, `line-height .95`), **Inter** (tex
 | **Menu duo** | `.upsell` | Même carte : « Ajouter » → « Ajouté ✓ · Retirer » (transformation, pas de remplacement) |
 | **Toast** | `.toast` | Message + action **Annuler** (5,5 s) : ce qui s'est passé, ce que je peux annuler |
 | **Erreur de paiement** | `.payerr` | Encadré rouge doux : cause, « rien n'a été débité », commande conservée, [Changer de moyen] [Réessayer] |
-| **Hors ligne** | `.net` | Bandeau pilule « Hors ligne · vos choix sont conservés » / « De retour en ligne » |
+| **Hors ligne** | `.net` | Bandeau pilule « Connexion instable · le chargement peut être lent » / « De retour en ligne » (le détail est dans la page « Plus de réseau ») |
 | **Squelette d'affiche** | `.poster` | Reflet animé tant que l'image charge, fondu à l'arrivée (désactivé en animations réduites) |
 | **Modale** | `.sheet` + `.sheet-back` | Fenêtre **centrée** (largeur max 560 px, rayon `--r-xl`), bouton fermer en haut à droite, Échap ou clic sur le voile pour fermer ; **voile adapté au thème** : sombre `rgba(6,4,2,.80)`, clair `rgba(32,22,8,.62)`, contraste élevé `.90` ; apparition en fondu + légère mise à l'échelle ; sans animation en mode « Réduire les animations » ; utilisée sur tout le site (billet, accessibilité, consentement vidéo, mentions légales, choix de cinéma…) |
 | **Barre haute (bureau)** | `#dtop` | Verre progressif : opaque à hauteur du logo et du menu, flou et teinte qui s'estompent sur ~40 px ; pas de ligne ; le contenu démarre sous la barre |

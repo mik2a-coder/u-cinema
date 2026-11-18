@@ -1,12 +1,12 @@
 # Direction artistique et palette
 
-*Dossier de livraison : passation design et développement. Version du prototype : **v97** (18 novembre 2026).*
+*Dossier de livraison : passation design et développement. Version du prototype : **v98** (18 novembre 2026).*
 
 ## 1. Synthèse de la direction artistique
 
 **Client / projet** : U CINEMÀ, réseau de quatre cinémas corses (Aiacciu, Bastia, Corti, Portivechju). **Objectif** : permettre de choisir un film, une séance et ses places en moins d'une minute, sur téléphone comme sur grand écran, et de retrouver son billet sans réseau.
 
-**Parti pris visuel : « la salle obscure, mais chaleureuse ».** Les affiches sont les héros ; l'interface reste en retrait, comme le noir d'une salle avant la projection. Le mode clair (par défaut) s'appuie sur un crème chaud et une encre presque noire ; le mode sombre inverse ces rôles. **Un seul signal lumineux, l'or**, guide l'œil : étape en cours, place choisie, note, dernier film consulté.
+**Parti pris visuel : « la salle obscure, mais chaleureuse ».** Les affiches sont les héros ; l'interface reste en retrait, comme le noir d'une salle avant la projection. Le mode **Auto** suit l'appareil (clair ou sombre) ; le clair s'appuie sur un crème chaud et une encre presque noire ; le mode sombre inverse ces rôles. **Un seul signal lumineux, l'or**, guide l'œil : étape en cours, place choisie, note, dernier film consulté.
 
 **Expérience utilisateur.** Une intention par écran (choisir, réserver, payer, présenter). Le mouvement aide sans décorer : l'affiche voyage de la liste à la fiche, la vue depuis la place plonge dans la salle, l'affiche de l'écran d'accueil change avec le texte. La mascotte **U Ghjattu-Volpe** (chat-renard à lunettes 3D) incarne la marque et sert d'assistant : « Miaou ! Donne-moi ton humeur, je te trouve le film idéal ! » Elle peut même préparer une réservation complète à partir d'une phrase.
 
@@ -67,6 +67,6 @@ Règles d'accessibilité : cibles tactiles ≥ 44 px ; focus visible (contour or
 
 1. **Test avec 3 personnes** (grille `CHECKLIST-TESTS.md`) : à réaliser avec de vraies personnes, puis reporter les résultats dans `TESTS.md`. Aucun résultat n'a été inventé.
 2. **Vérifier dans Safari** (Mac et iPhone) la vue depuis la place, l'en-tête et le fond de l'accueil : cela n'a pu être testé qu'avec Chrome.
-3. **Extraits verticaux** : fournir les liens officiels des Shorts des 15 autres films (3 films en disposent déjà).
+3. **Extraits verticaux** : fournir les liens officiels des Shorts des 19 autres films (3 films en disposent déjà).
 4. **Biographies** : relire les résumés (sources publiques) avant diffusion ; 15 noms n'ont qu'un rôle et une filmographie.
-5. **Passation technique** : un seul fichier `index.html`, un `sw.js` (cache `cinelux2-vNN`), un manifeste ; `tools/` regroupe les scénarios de test et la fabrication des documents. La **page d'erreur réseau** (mascotte triste, mini-jeu, objets de cinéma) suit la même palette. Une version « autonome » (`CINELUX-autonome.html`) fonctionne sans réseau.
+5. **Passation technique** : un seul fichier `index.html`, un `sw.js` (cache `cinelux2-vNN`), un manifeste ; `tools/` regroupe les scénarios de test et la fabrication des documents. La **page d'erreur réseau** (mascotte triste, mini-jeu, objets de cinéma) suit la même palette. Une version « autonome » (`U-CINEMA-autonome.html`) fonctionne sans réseau.

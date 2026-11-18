@@ -1714,6 +1714,20 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
 .bkrow .stl{color:var(--accent-text);font-weight:600;letter-spacing:.02em}
 :root.light .acc-stats .acc-stat{background:rgba(255,255,255,.52)}
 .avh{position:relative;display:block;width:100%;height:100%;border-radius:inherit;overflow:hidden}.avh svg{position:absolute;inset:0}.avimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
+
+/* v98 : audit UX/UI en équipe : contrastes, états, alignements */
+.trailer,:root.light .trailer{background:rgba(14,12,10,.78)!important;color:#F8F3E8!important;border-color:rgba(255,255,255,.3)!important}
+#s-home .ft-meta,#s-home .hs-l,#s-home .nexts{text-shadow:0 0 10px color-mix(in srgb,var(--bg) 85%,transparent),0 1px 2px color-mix(in srgb,var(--bg) 70%,transparent)}
+#s-home .score,#s-home .rate{background:color-mix(in srgb,var(--bg) 82%,transparent)!important}
+.lc-bot,.lc-bot small,.lc-back small,.lc-top .lc-lvl{color:#1A1204!important;opacity:1!important}
+#accAvLink{display:block;margin-top:2px;text-decoration:underline;text-underline-offset:3px}
+.cnt,.sh-pills{padding-bottom:18px}.legend{flex-wrap:wrap;gap:6px 12px;justify-content:center}
+#confirm.off{filter:none!important;opacity:.9}
+.sv-play{top:auto!important;bottom:14px;transform:translateX(-50%)!important;white-space:nowrap}
+.sv-act .btn.alt{background:transparent!important;border:1px solid rgba(255,255,255,.4)!important}
+.t-head .eyebrow{margin-bottom:6px}.ticket .perf::before,.ticket .perf::after{background:var(--bg)!important}
+.per-all{width:auto;align-self:flex-start;padding:0 22px}
+@media (min-width:900px){#s-detail .d-bar{background:linear-gradient(to top,color-mix(in srgb,var(--bg) 94%,transparent) 55%,transparent);padding-top:24px}}
 </style>
 </head>
 <body>
@@ -1737,7 +1751,7 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
     <svg viewBox="0 0 66 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/><path d="M28 3.2c2.3 0 4.4.9 6 2.4l-1.2 1.3A7.2 7.2 0 0 0 28 4.9c-1.9 0-3.700.8-4.800 2L22 5.600A8.900 8.900 0 0 1 28 3.200zm0 3.600c1.300 0 2.500.5 3.400 1.300L28 11.500l-3.400-3.400c.9-.8 2.100-1.300 3.400-1.300z"/><rect x="40" y=".5" width="23" height="11" rx="3.500" fill="none" stroke="currentColor" opacity=".5"/><rect x="42" y="2.500" width="19" height="7" rx="2"/><rect x="64" y="4" width="2" height="4" rx="1" opacity=".5"/></svg></div>
 
   <div class="dback" id="dback" aria-hidden="true"></div>
-  <header id="dtop"><button class="brand" data-go="home" aria-label="U CINEMÀ, retour à l'accueil"><span class="brand-in"><img class="lg-mark" src="img/logo-mark3.png" alt="" width="44" height="44" decoding="async"><span class="lg-word"><i>U</i>CINEMÀ</span></span></button>
+  <header id="dtop"><button class="brand" data-go="home" aria-label="U CINEMÀ, retour à l’accueil"><span class="brand-in"><img class="lg-mark" src="img/logo-mark3.png" alt="" width="44" height="44" decoding="async"><span class="lg-word"><i>U</i>CINEMÀ</span></span></button>
     <nav class="dnav" aria-label="Navigation principale"><button data-d="home" aria-current="page">Accueil</button><button data-d="tickets">Mes billets</button><button data-d="account">Compte</button></nav>
     <div class="dright"><button class="dlink dmini" id="dA11y" aria-label="Affichage et accessibilité"><span data-ic="access"></span></button></div></header>
   <!-- 1 -->
@@ -1761,7 +1775,7 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
     <div class="tabs" role="tablist" id="tabs"></div>
     <div class="kidsbar" id="kidsBar" hidden><img src="img/chat/heureux.png" alt="" width="46" height="58"><div><b>Rubrique enfants</b><small>Des dessins animés pour toute la famille, du plus petit au plus grand.</small></div></div>
     <div class="scroll hbody" id="hbody">
-      <div class="fanwrap"><button class="fnav prev" id="fPrev" aria-label="Film précédent" data-ic="back"></button><div class="fan" id="fan" aria-roledescription="carrousel"></div><button class="fnav next" id="fNext" aria-label="Film suivant" data-ic="chev"></button></div>
+      <div class="fanwrap"><button class="fnav prev" id="fPrev" aria-label="Film précédent" data-ic="back"></button><div class="fan" id="fan" role="group" aria-label="Films à l’affiche" aria-roledescription="carrousel"></div><button class="fnav next" id="fNext" aria-label="Film suivant" data-ic="chev"></button></div>
       <div class="ftitle" id="ftitle"></div>
       <div class="dots" id="fdots" aria-hidden="true"></div>
       <div class="sec-h"><h2 id="nowH">À l’affiche</h2><button id="seeSoon" hidden>Voir les films à venir <span data-ic="chev"></span></button></div>
@@ -1770,7 +1784,7 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
       <footer class="foot"><button type="button" class="textlink" data-legal>Règles, confidentialité et mentions légales</button></footer>
     </div>
     <div class="hfade"></div>
-    <nav class="nav" aria-label="Navigation principale">
+    <nav class="nav" aria-label="Navigation mobile">
       <button aria-current="page" data-nav="home" aria-label="Accueil"><span data-ic="home"></span><span class="lbl">Accueil</span></button>
       <button data-nav="explore" aria-label="Explorer"><span data-ic="compass"></span><span class="lbl">Explorer</span></button>
       <button data-nav="tickets" aria-label="Mes billets"><span data-ic="ticket"></span><span class="lbl">Billets</span></button>
@@ -2048,8 +2062,8 @@ const FILMS=[
 FILMS.forEach(f=>{f.type='film';f.kind=f.id});
 /* Compte : tout reste sur l'appareil (localStorage). Historique et notes de départ = données de démonstration. */
 const ACC_DEF=()=>({v:1,since:2024,points:1240,hist:[{id:'hailmary',date:'2026-03-22',cin:0},{id:'michael',date:'2026-04-26',cin:1},{id:'prada2',date:'2026-05-03',cin:0},{id:'toystory5',date:'2026-06-20',cin:2},{id:'odyssey',date:'2026-07-18',cin:0}],ratings:{hailmary:5,michael:3},remind:{},bookings:[]});
-let ACC=(()=>{try{const x=JSON.parse(localStorage.getItem('cinelux-acc'));if(x&&x.v===1)return x}catch(e){}return ACC_DEF()})();
-{const seen=new Set();ACC.bookings=(ACC.bookings||[]).filter(b=>{const k=b.id+'|'+b.date+'|'+b.time;if(seen.has(k))return false;seen.add(k);return true})}
+let ACC=(()=>{try{const x=JSON.parse(localStorage.getItem('cinelux-acc'));if(x&&typeof x==='object'&&x.v===1)return Object.assign(ACC_DEF(),x)}catch(e){}return ACC_DEF()})();
+try{const seen=new Set();ACC.bookings=(Array.isArray(ACC.bookings)?ACC.bookings:[]).filter(b=>{if(!b||!b.id||!b.date||!b.time||!Number.isInteger(b.cin)||b.cin<0||b.cin>3||!Array.isArray(b.seats)||!FILMS.some(f=>f.id===b.id))return false;const k=b.id+'|'+b.date+'|'+b.time;if(seen.has(k))return false;seen.add(k);return true});if(!Array.isArray(ACC.hist))ACC.hist=[];ACC.hist=ACC.hist.filter(h=>h&&FILMS.some(f=>f.id===h.id)&&Number.isInteger(h.cin)&&h.cin>=0&&h.cin<4);for(const k of ['ratings','remind']){if(!ACC[k]||typeof ACC[k]!=='object'||Array.isArray(ACC[k]))ACC[k]={}}}catch(e){Object.assign(ACC,ACC_DEF())}
 ACC.rw=ACC.rw||{snack:0,off5:0};ACC.spent=ACC.spent||0;ACC.credit=ACC.credit||0;ACC.log=ACC.log||[];ACC.follows=ACC.follows||{};ACC.fp=ACC.fp||{};
 function logAct(t,id,x){try{ACC.log.unshift(Object.assign({t,id,ts:Date.now()},x||{}));ACC.log=ACC.log.slice(0,60);saveACC()}catch(e){}}
 function saveACC(){try{localStorage.setItem('cinelux-acc',JSON.stringify(ACC))}catch(e){}}
@@ -2417,12 +2431,13 @@ const LVL=[['Bronze',0],['Argent',500],['Or',1000],['Platine',1500]];
 const lvlOf=p=>{let i=0;LVL.forEach((l,k)=>{if(p>=l[1])i=k});return i};
 function recordBooking(){
  try{const m=money(),f=film();
-  ACC.bookings.unshift({id:f.id,date:DATES[ST.date].getFullYear()+'-'+String(DATES[ST.date].getMonth()+1).padStart(2,'0')+'-'+String(DATES[ST.date].getDate()).padStart(2,'0'),time:TIMES[ST.time].t,cin:ST.cinema,seats:ST.seats.slice().sort(),count:ST.count,total:+m.tot.toFixed(2)});
-  ACC.bookings=ACC.bookings.slice(0,20);ACC.points+=Math.round(m.tot);if(m.cr)ACC.credit=+Math.max(0,ACC.credit-m.cr).toFixed(2);if(m.rwOff)ACC.rw.off5--;if(m.rwSn)ACC.rw.snack--;ST.useCredit=ST.useOff5=ST.useSnack=false;saveACC();logAct('book',f.id,{bk:ACC.bookings[0].date+'|'+ACC.bookings[0].time})}catch(e){}
+  ACC.bookings.unshift({id:f.id,date:DATES[ST.date].getFullYear()+'-'+String(DATES[ST.date].getMonth()+1).padStart(2,'0')+'-'+String(DATES[ST.date].getDate()).padStart(2,'0'),time:TIMES[ST.time].t,cin:ST.cinema,seats:ST.seats.slice().sort(),count:ST.count,total:+m.tot.toFixed(2),cr:+(m.cr||0).toFixed(2)});
+  {const t0=new Date(TODAY),up0=ACC.bookings.filter(b=>new Date(b.date+'T23:59:00')>=t0),pa0=ACC.bookings.filter(b=>new Date(b.date+'T23:59:00')<t0).slice(0,20);ACC.bookings=[...up0,...pa0]}ACC.points+=Math.round(m.tot);if(m.cr)ACC.credit=+Math.max(0,ACC.credit-m.cr).toFixed(2);if(m.rwOff)ACC.rw.off5--;if(m.rwSn)ACC.rw.snack--;ST.useCredit=ST.useOff5=ST.useSnack=false;saveACC();logAct('book',f.id,{bk:ACC.bookings[0].date+'|'+ACC.bookings[0].time})}catch(e){}
 }
 const cxLeft=b=>new Date(b.date+'T'+b.time+':00').getTime()-Date.now();
-function cancelBlock(b){return cxLeft(b)>=POL.cx*3600e3?`<p class="vtxt small" style="margin-top:14px;text-align:center">Annulation possible jusqu’à ${POL.cx} h avant la séance. Le montant est rendu sous forme d’avoir de ${eur(b.total)}, valable ${POL.creditMonths} mois (pas de remboursement). <button type="button" class="lnk" data-legal="annulation">Voir les règles</button></p><button class="btn alt" id="bkCancel" style="margin-top:8px"><span>Annuler la réservation</span></button>`:`<p class="vtxt small" role="note" style="margin-top:14px;text-align:center"><b>Annulation impossible</b> : elle n’est possible que jusqu’à 2 h avant la séance.</p>`}
-function cancelBooking(b){const i=ACC.bookings.indexOf(b);if(i<0)return false;ACC.bookings.splice(i,1);ACC.points=Math.max(0,ACC.points-Math.round(b.total));ACC.credit=+(creditNow()+b.total).toFixed(2);{const e=new Date();e.setMonth(e.getMonth()+POL.creditMonths);ACC.creditExp=dIso(e)}saveACC();logAct('cancel',b.id);return true}
+function cancelBlock(b){return cxLeft(b)>=POL.cx*3600e3?`<p class="vtxt small" style="margin-top:14px;text-align:center">Annulation possible jusqu’à ${POL.cx} h avant la séance. Le montant est rendu sous forme d’avoir de ${eur(refundOf(b))}, valable ${POL.creditMonths} mois (pas de remboursement). <button type="button" class="lnk" data-legal="annulation">Voir les règles</button></p><button class="btn alt" id="bkCancel" style="margin-top:8px"><span>Annuler la réservation</span></button>`:`<p class="vtxt small" role="note" style="margin-top:14px;text-align:center"><b>Annulation impossible</b> : elle n’est possible que jusqu’à 2 h avant la séance.</p>`}
+const refundOf=b=>+((b.total||0)+(b.cr||0)).toFixed(2);
+function cancelBooking(b){const i=ACC.bookings.indexOf(b);if(i<0)return false;ACC.bookings.splice(i,1);ACC.points=Math.max(0,ACC.points-Math.round(b.total));ACC.credit=+(creditNow()+refundOf(b)).toFixed(2);{const e=new Date();e.setMonth(e.getMonth()+POL.creditMonths);ACC.creditExp=dIso(e)}saveACC();logAct('cancel',b.id);return true}
 const fdateStr=iso=>cap(new Date(iso+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'}).replace('.',''));
 const stars=(id,n)=>`<div class="r5" role="radiogroup" aria-label="Votre note">${[1,2,3,4,5].map(k=>`<button type="button" role="radio" aria-checked="${n===k}" aria-label="${k} sur 5" data-rate="${k}" data-f="${id}" class="${k<=n?'on':''}">${IC.star}</button>`).join('')}</div>`;
 function openFilmId(id){for(const t of [0,1,2,3]){const i=tabList(t).findIndex(f=>f.id===id);if(i>=0){ST.tab=t;ST.cur=i;break}}renderTabs();renderFan();go('detail')}
@@ -2508,8 +2523,8 @@ ${creditNow()>0?`<div class="acc-credit"><span data-ic="wallet"></span><div><str
   if(bk){const up=ACC.bookings.filter(b=>new Date(b.date+'T23:59:00')>=new Date(TODAY));const b=up[+bk.dataset.bk],f=FILMS.find(x=>x.id===b.id);
    openSheet('Mon billet',`<div class="bk"><div class="bk-top"><span class="mini-th">${poster(f.kind)}</span><div><strong>${esc(f.title)}</strong><small>${fdateStr(b.date)} · ${b.time}</small></div></div>
     <div class="bk-g"><div><small>CINÉMA</small><b>${esc(CINEMAS[b.cin].n)}</b></div><div><small>PLACES</small><b>${b.seats.join(' · ')}</b></div><div><small>BILLETS</small><b>${b.count}</b></div><div><small>TOTAL TTC</small><b>${eur(b.total)}</b></div></div>
-    <div class="bk-qr">${qrSVG('bk-'+b.id+b.date+b.time)}</div><p class="vtxt small" style="text-align:center">À présenter à l’entrée de la salle.</p>${cancelBlock(b)}</div>`,bb=>{bb.onclick=ev=>{const c=ev.target.closest('#bkCancel');if(!c)return;if(cxLeft(b)<POL.cx*3600e3){toast('Annulation impossible moins de 2 h avant la séance');closeSheet();return}if(!c.dataset.sure){c.dataset.sure='1';c.querySelector('span').textContent='Confirmer · avoir de '+eur(b.total);return}
-     cancelBooking(b);closeSheet();renderAccount();toast('Réservation annulée · avoir de '+eur(b.total)+' ajouté à votre compte')}});return}
+    <div class="bk-qr">${qrSVG('bk-'+b.id+b.date+b.time)}</div><p class="vtxt small" style="text-align:center">À présenter à l’entrée de la salle.</p>${cancelBlock(b)}</div>`,bb=>{bb.onclick=ev=>{const c=ev.target.closest('#bkCancel');if(!c)return;if(cxLeft(b)<POL.cx*3600e3){toast('Annulation impossible moins de 2 h avant la séance');closeSheet();return}if(!c.dataset.sure){c.dataset.sure='1';c.querySelector('span').textContent='Confirmer · avoir de '+eur(refundOf(b));return}
+     cancelBooking(b);closeSheet();renderAccount();toast('Réservation annulée · avoir de '+eur(refundOf(b))+' ajouté à votre compte')}});return}
   {const st=e.target.closest('[data-stat]');if(st){openStat(st.dataset.stat);return}}
   if(e.target.closest('#accAv,#accAvLink'))openAvatars();
   if(e.target.closest('#accA11y'))openA11y();
@@ -2878,7 +2893,7 @@ function renderDetail(){
  paintFollow(f);
  $('#dScroll').scrollTop=0;
  $('#favBtn').setAttribute('aria-pressed',!!ST.fav[f.id]);paintFav();paintCta(f);armNudge();
- {const d=defaultSlot();ST.date=d.date;ST.time=d.time}ST.count=2;ST.tq={plein:2,etu:0,chom:0,han:0,acc:0};ST.pmrN=0;ST.fil={ad:false,st:false};ST.seats=[];
+ {const d=defaultSlot();ST.date=d.date;ST.time=d.time}ST.count=2;ST.tq={plein:2,etu:0,chom:0,han:0,acc:0};ST.pmrN=0;ST.fil={ad:false,st:false};ST.seats=[];ST.promo=0;ST.snacks=SNACKS.map(()=>0);ST.useCredit=ST.useOff5=ST.useSnack=false;{const cg=$('#cgv');if(cg)cg.checked=false}
 }
 function paintFav(){const f=film(),on=!!ST.fav[f.id],b=$('#favBtn');b.querySelector('svg').style.fill=on?'var(--accent)':'none';b.querySelector('svg').style.color=on?'var(--accent)':'currentColor';b.setAttribute('aria-pressed',on)}
 $('#favBtn').onclick=()=>{const f=film();const flip=()=>{ST.fav[f.id]=!ST.fav[f.id];paintFav();logAct(ST.fav[f.id]?'fav':'unfav',f.id)};flip();haptic('soft');toast(ST.fav[f.id]?'Ajouté aux favoris':'Retiré des favoris',{undo:flip})};
@@ -2897,8 +2912,8 @@ $('#dBody').addEventListener('click',e=>{const b=e.target.closest('#follow');if(
 function cnt(){return TARIFS.reduce((a,t)=>a+ST.tq[t.k],0)}
 function ticketsTotal(){return TARIFS.reduce((a,t)=>a+ST.tq[t.k]*t.p,0)}
 function tqChange(k,d){const q=ST.tq,n=q[k]+d;if(n<0)return;if(d>0){if(cnt()>=8)return;if(k==='acc'&&n>q.han)return}
- if(d<0&&cnt()<=1)return;q[k]=n;if(q.acc>q.han)q.acc=q.han;if(ST.pmrN>q.han)ST.pmrN=q.han;ST.count=cnt();ST.seats=[]}
-function changeCount(d){if(d>0){if(cnt()>=8)return;ST.tq.plein++}else{if(cnt()<=1)return;for(const k of ['plein','etu','chom','acc','han']){if(ST.tq[k]>0){ST.tq[k]--;break}}if(ST.tq.acc>ST.tq.han)ST.tq.acc=ST.tq.han}ST.count=cnt()}
+ if(d<0&&cnt()<=1)return;const bak=Object.assign({},q),bp=ST.pmrN;q[k]=n;if(q.acc>q.han)q.acc=q.han;if(ST.pmrN>q.han)ST.pmrN=q.han;if(cnt()<1){Object.assign(q,bak);ST.pmrN=bp;return}ST.count=cnt();ST.seats=[]}
+function changeCount(d){if(d>0){if(cnt()>=8)return;ST.tq.plein++}else{if(cnt()<=1)return;for(const k of ['plein','etu','chom','acc','han']){if(ST.tq[k]>0){ST.tq[k]--;break}}if(ST.tq.acc>ST.tq.han)ST.tq.acc=ST.tq.han;if(ST.pmrN>ST.tq.han)ST.pmrN=ST.tq.han}ST.count=cnt()}
 function renderTarifs(){
  const rowHtml=t=>{const n=ST.tq[t.k],canP=cnt()<8&&!(t.k==='acc'&&n>=ST.tq.han),canM=n>0&&cnt()>1;
   return `<div class="trow"><div class="tn"><strong>${t.n}</strong><small>${t.d||'Tarif normal'}</small></div><b class="tp">${eur(t.p)}</b><div class="stepper"><button data-k="${t.k}" data-d="-1" aria-label="Retirer un billet ${t.n}" ${canM?'':'disabled'}>${IC.minus}</button><output aria-live="polite">${n}</output><button class="plus" data-k="${t.k}" data-d="1" aria-label="Ajouter un billet ${t.n}" ${canP?'':'disabled'}>${IC.plus}</button></div></div>`};
@@ -2949,7 +2964,7 @@ function askHealthConsent(onOk){
 function withdrawHealth(){ST.consentHealth=false;ST.consentAt=null;ST.tq.han=0;ST.tq.acc=0;ST.pmrN=0;if(cnt()<1)ST.tq.plein=1;ST.count=cnt();ST.seats=[];
  if(cur==='book')renderBook();toast('Consentement retiré : tarif et emplacement handicap supprimés')}
 function storedKeys(){const out=[];try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^cinelux/.test(k))out.push(k)}}catch(e){}return out}
-const KEYINFO={'cinelux-a11y':'vos réglages d’accessibilité (taille du texte, contraste…)','cinelux-pal':'palette de couleurs (mode développeur)','cinelux-dev':'mode développeur'};
+const KEYINFO={'cinelux-a11y':'vos réglages d’accessibilité (taille du texte, contraste…)','cinelux-acc':'votre profil de démonstration : réservations, points, notes, suivis, avoir','cinelux-off-best':'votre record au mini-jeu hors connexion','cinelux-pal':'palette de couleurs (mode développeur)','cinelux-dev':'mode développeur'};
 function exportData(){const f=film();
  const data={exporté_le:new Date().toISOString(),application:'U CINEMÀ (prototype)',
   préférences_accessibilité:{...A11Y},
@@ -2972,9 +2987,9 @@ function legalSections(){const keys=storedKeys();return [
 ['confidentialite','Politique de confidentialité (RGPD)',`
  <p>Responsable du traitement : ${TODO('nom ou raison sociale, adresse, e-mail de contact')}. Délégué à la protection des données : ${TODO('contact, ou « non désigné »')}.</p>
  <h4>Ce que fait cette application</h4>
- <p>Elle ne demande <b>ni nom, ni e-mail, ni téléphone, ni numéro de carte</b>. Il n’y a pas de compte. Le paiement est simulé : aucune donnée bancaire n’est saisie ni enregistrée. Les polices, affiches et images sont servies par l’application elle-même : aucune connexion à un service tiers (publicité, statistiques, polices ou cartes externes).</p>
+ <p>Elle ne demande <b>ni nom, ni e-mail, ni téléphone, ni numéro de carte</b>. Le « compte » est un profil de démonstration conservé <b>uniquement sur votre appareil</b> (aucun serveur). Le paiement est simulé : aucune donnée bancaire n’est saisie ni enregistrée. Les polices, affiches et images sont servies par l’application elle-même : aucune connexion à un service tiers (publicité, statistiques, polices ou cartes externes).</p>
  <h4>Données, finalités et bases légales</h4>
- <p><b>1. Votre réservation</b> (film, séance, places, snacks, code promo). Finalité : exécuter votre réservation. Base : exécution du contrat (art. 6.1.b). Conservation : dans ce prototype, en mémoire de l’appareil seulement, effacée à la fermeture de l’application. <i>Pour un service réel : durée du contrat, puis conservation des pièces comptables selon la loi.</i></p>
+ <p><b>1. Votre réservation</b> (film, séance, places, snacks, code promo). Finalité : exécuter votre réservation. Base : exécution du contrat (art. 6.1.b). Conservation : dans ce prototype, sur votre appareil seulement (stockage local, avec votre compte), jusqu’à l’annulation de la réservation ou jusqu’à « Effacer toutes mes données ». <i>Pour un service réel : durée du contrat, puis conservation des pièces comptables selon la loi.</i></p>
  <p><b>2. Tarif « handicap » et emplacement fauteuil roulant.</b> C’est une <b>donnée de santé</b> (art. 9), traitée uniquement avec votre <b>consentement explicite</b> (art. 9.2.a), demandé avant le choix de ce tarif. Finalité : appliquer ce tarif et cet emplacement. Le justificatif est contrôlé à l’entrée et n’est jamais téléversé. Vous pouvez retirer votre consentement à tout moment, aussi simplement que vous l’avez donné (voir « Mes données »).</p>
  <p><b>3. Vos réglages d’accessibilité.</b> Ils peuvent révéler une situation de handicap : ils restent <b>uniquement sur votre appareil</b>, ne sont jamais transmis, et vous pouvez les effacer à tout moment.</p>
  <h4>Destinataires et transferts</h4><p>Aucun destinataire, aucun transfert hors de l’Union européenne dans ce prototype.</p>
@@ -2982,7 +2997,7 @@ function legalSections(){const keys=storedKeys();return [
  <h4>Mineurs</h4><p>Aucun compte n’est créé. En France, l’âge du consentement numérique est de 15 ans.</p>`],
 ['cookies','Cookies et traceurs',`
  <p><b>Cette application n’utilise aucun cookie ni traceur publicitaire, de profilage ou de mesure d’audience.</b></p>
- <p>Elle enregistre seulement, <b>sur votre appareil et à votre initiative</b>, vos réglages d’accessibilité (clé « cinelux-a11y ») et une copie de l’application pour le mode hors ligne (aucune donnée personnelle). Ces enregistrements servent uniquement à fournir la fonction que vous demandez ; aucune bannière de consentement n’est donc nécessaire.</p>
+ <p>Elle enregistre seulement, <b>sur votre appareil et à votre initiative</b>, vos réglages d’accessibilité (clé « cinelux-a11y »), votre profil de démonstration avec ses réservations, points, notes, suivis et avoir (clé « cinelux-acc »), le record du mini-jeu (clé « cinelux-off-best ») et une copie de l’application pour le mode hors ligne. Rien de tout cela n’est envoyé à un serveur. Ces enregistrements servent uniquement à fournir la fonction que vous demandez ; aucune bannière de consentement n’est donc nécessaire.</p>
  <p>Si une mesure d’audience ou de la publicité était ajoutée un jour, une bannière serait affichée avant tout dépôt, avec un bouton « Tout refuser » aussi visible que « Tout accepter ».</p>`],
 ['mesdonnees','Mes données',`
  <p><b>Consentement données de santé :</b> ${ST.consentHealth?'donné le '+new Date(ST.consentAt).toLocaleString('fr-FR')+'.':'non donné.'}</p>
@@ -3160,7 +3175,7 @@ function renderBook(){
 $('#afil').addEventListener('click',e=>{const b=e.target.closest('.fchip');if(!b)return;ST.fil[b.dataset.f]=!ST.fil[b.dataset.f];const ok=t=>!t.full&&(!ST.fil.ad||t.feat.includes('ad'))&&(!ST.fil.st||t.feat.includes('st'));if(!ok(TIMES[ST.time])){const j=TIMES.findIndex(ok);if(j>=0)ST.time=j}ST.seats=[];renderBook()});
 $('#dates').addEventListener('click',e=>{const b=e.target.closest('.date');if(b){ST.date=+b.dataset.i;fixTime();ST.seats=[];renderBook()}});
 $('#times').addEventListener('click',e=>{const b=e.target.closest('.time');if(b&&!b.disabled&&!b.classList.contains('dim')){ST.time=+b.dataset.i;ST.seats=[];renderBook()}});
-$('#toSeats').onclick=()=>go('seats');
+$('#toSeats').onclick=()=>{if(cnt()<1){toast('Choisissez au moins un billet');return}fixTime();if(TIMES[ST.time].full||isPast(ST.date,ST.time)||isCx(ST.date,ST.time)){toast('Cette séance n’est plus disponible : choisissez-en une autre');return}go('seats')};
 function openCinema(){openSheet('Choisir un cinéma',CINEMAS.map((c,i)=>`<button class="opt" role="radio" aria-checked="${i===ST.cinema}" data-i="${i}"><span data-ic="pin"></span><span class="grow"><strong>${c.n}</strong><small>${c.a} · ${c.d}</small><small>Ouvert ${POL.open} – ${POL.shut}</small></span>${i===ST.cinema?'<span class="ok" data-ic="check"></span>':''}</button>`).join(''),b=>{
  b.onclick=e=>{const o=e.target.closest('.opt');if(!o)return;ST.cinema=+o.dataset.i;ST.seats=[];renderBook();if(cur==='seats')renderSeats();closeSheet();toast(cin().n)}})}
 $('#cinemaBtn').onclick=openCinema;$('#cinemaBtn2').onclick=openCinema;
@@ -3233,7 +3248,7 @@ function seatInner(id,on){const pm=PMR.includes(id);return on?(pm?IC.wheel+'<i c
 function resetSeats(){ST.seats=[];renderSeats()}
 $('#sMinus').onclick=()=>{changeCount(-1);haptic('tick');resetSeats()};
 $('#sPlus').onclick=()=>{changeCount(1);haptic('tick');resetSeats()};
-$('#pDate').onclick=()=>openSheet('Choisir une date',DATES.map((d,i)=>`<button class="opt" role="radio" aria-checked="${i===ST.date}" data-i="${i}"><span class="grow"><strong>${cap(fdate(d,{weekday:'long',day:'numeric',month:'long'}))}</strong></span>${i===ST.date?'<span class="ok" data-ic="check"></span>':''}</button>`).join(''),b=>{b.onclick=e=>{const o=e.target.closest('.opt');if(!o)return;ST.date=+o.dataset.i;closeSheet();resetSeats()}});
+$('#pDate').onclick=()=>openSheet('Choisir une date',DATES.map((d,i)=>`<button class="opt" role="radio" aria-checked="${i===ST.date}" data-i="${i}"><span class="grow"><strong>${cap(fdate(d,{weekday:'long',day:'numeric',month:'long'}))}</strong></span>${i===ST.date?'<span class="ok" data-ic="check"></span>':''}</button>`).join(''),b=>{b.onclick=e=>{const o=e.target.closest('.opt');if(!o)return;ST.date=+o.dataset.i;fixTime();closeSheet();resetSeats()}});
 $('#pTime').onclick=()=>openSheet('Choisir une séance',TIMES.map((t,i)=>`<button class="opt" role="radio" aria-checked="${i===ST.time}" data-i="${i}" ${(t.full||isPast(ST.date,i)||isCx(ST.date,i))?'disabled style="opacity:.5"':''}><span class="grow"><strong ${t.full?'style="text-decoration:line-through"':''}>${t.t}</strong><small>${isPast(ST.date,i)?'Terminée':isCx(ST.date,i)?'Séance annulée':t.s} · Dolby Atmos · Salle 2</small></span>${i===ST.time?'<span class="ok" data-ic="check"></span>':''}</button>`).join(''),b=>{b.onclick=e=>{const o=e.target.closest('.opt');if(!o||o.disabled)return;ST.time=+o.dataset.i;closeSheet();resetSeats()}});
 function paintSeatsBar(){
  const s=ST.seats.slice().sort((a,b)=>a.localeCompare(b));const ps=pmrSelected(),needP=ST.pmrN-ps,ok=s.length===ST.count&&needP<=0;
@@ -3256,7 +3271,7 @@ $('#sgrid').addEventListener('click',e=>{const b=e.target.closest('.seat');if(!b
 function askPmr(){const han=ST.tq.han>0;openSheet('Emplacement fauteuil roulant',`<p class="muted" style="font-size:calc(var(--fs-sm)*var(--ts,1));line-height:1.5">${han?'Pour réserver un emplacement fauteuil roulant, indiquez-le d’abord sur l’écran <b style="color:var(--text)">Séances</b> : « Avez-vous besoin d’un emplacement fauteuil roulant ? ». Cela permet de savoir combien il en reste pour les autres personnes.':'Ces emplacements sont réservés aux personnes en situation de handicap. Ajoutez d’abord un billet <b style="color:var(--text)">« Personne en situation de handicap »</b> (carte mobilité inclusion ou d’invalidité), puis indiquez que vous avez besoin d’un emplacement.'}</p><button class="btn" id="pmrYes">Modifier ma réservation</button><button class="link" id="pmrNo">Fermer</button>`,b=>{
  $('#pmrYes').onclick=()=>{closeSheet();go('book')};$('#pmrNo').onclick=closeSheet})}
 const dupMsg=c=>c.same?'Vous avez déjà réservé cette séance (Mon compte › Mes réservations).':'Vous avez déjà une séance : '+(c.f?c.f.title:'autre film')+' à '+c.b.time+'. Il faut au moins 45 minutes entre deux films : choisissez un autre horaire.';
-$('#buy').onclick=()=>{const c=bkConflict(ST.date,ST.time);if(c){haptic('error');toast(dupMsg(c),{ms:5000});go('book');return}go('order')};
+$('#buy').onclick=()=>{if(TIMES[ST.time].full||isPast(ST.date,ST.time)||isCx(ST.date,ST.time)){haptic('error');toast('Cette séance n’est plus disponible : choisissez-en une autre');go('book');return}const c=bkConflict(ST.date,ST.time);if(c){haptic('error');toast(dupMsg(c),{ms:5000});go('book');return}go('order')};
 
 /* =============== 6. COMMANDE =============== */
 const RW=[{k:'snack',n:'Friandise offerte',d:'Un cookie, des bonbons ou du chocolat au comptoir',pts:300,val:3.2},{k:'off5',n:'−5 % sur une place',d:'Remise sur le prix d’une place, pour une commande',pts:500}];
@@ -3307,7 +3322,7 @@ function renderPromo(){
 $('#promo').onclick=()=>{
  if(ST.promo){ST.promo=0;renderPromo();renderTotals();return}
  openSheet('Code promo',`<div class="sinput"><label class="sr" for="pin">Code promo</label><input id="pin" placeholder="Saisissez votre code" maxlength="12" autocomplete="off"><button class="btn" id="pAp">Appliquer</button></div><p class="muted" id="pErr" style="font-size:calc(var(--fs-xs)*var(--ts,1));min-height:18px" aria-live="polite">Astuce : essayez CINE10.</p>`,b=>{
-  const ap=()=>{const v=$('#pin').value.trim().toUpperCase();if(v==='CINE10'){ST.promo=1;closeSheet();renderPromo();renderTotals();toast('Code CINE10 appliqué')}else{$('#pErr').style.color='#FF9AA2';$('#pErr').textContent=v?'Code invalide. Essayez CINE10.':'Saisissez un code.'}};
+  const ap=()=>{const v=$('#pin').value.trim().toUpperCase();if(v==='CINE10'){ST.promo=1;closeSheet();renderPromo();renderTotals();toast('Code CINE10 appliqué')}else{$('#pin').setAttribute('aria-invalid','true');$('#pin').setAttribute('aria-describedby','pErr');$('#pErr').style.color='#FF9AA2';$('#pErr').textContent=v?'Code invalide. Essayez CINE10.':'Saisissez un code.'}};
   $('#pAp').onclick=ap;$('#pin').addEventListener('keydown',e=>{if(e.key==='Enter')ap()})});
 };
 function snackSum(){return SNACKS.reduce((a,x,i)=>a+x.p*ST.snacks[i],0)}
@@ -3364,7 +3379,7 @@ function renderTicket(){
  $('#wallet').classList.remove('done');$('#wLbl').textContent='Ajouter à Wallet';
  {const bo=bk||ACC.bookings.find(x=>x.id===f.id&&x.date===dIso(d)&&x.time===tm);ST.tkB=bo||null;$('#tkCancel').innerHTML=bo?cancelBlock(bo):''}
 }
-document.addEventListener('click',e=>{const c=e.target.closest('#tkCancel #bkCancel');if(!c)return;const b=ST.tkB;if(!b)return;if(cxLeft(b)<POL.cx*3600e3){toast('Annulation impossible moins de '+POL.cx+' h avant la séance');return}if(!c.dataset.sure){c.dataset.sure='1';c.querySelector('span').textContent='Confirmer · avoir de '+eur(b.total);haptic('tick');return}if(cancelBooking(b)){ST.tkBk=null;ST.tkB=null;ST.booked=upBookings().length>0;haptic('success');toast('Réservation annulée · avoir de '+eur(b.total)+' ajouté à votre compte');go('account')}});
+document.addEventListener('click',e=>{const c=e.target.closest('#tkCancel #bkCancel');if(!c)return;const b=ST.tkB;if(!b)return;if(cxLeft(b)<POL.cx*3600e3){toast('Annulation impossible moins de '+POL.cx+' h avant la séance');return}if(!c.dataset.sure){c.dataset.sure='1';c.querySelector('span').textContent='Confirmer · avoir de '+eur(refundOf(b));haptic('tick');return}if(cancelBooking(b)){ST.tkBk=null;ST.tkB=null;ST.booked=upBookings().length>0;haptic('success');toast('Réservation annulée · avoir de '+eur(refundOf(b))+' ajouté à votre compte');go('account')}});
 $('#wallet').onclick=()=>{$('#wallet').classList.add('done');$('#wLbl').textContent='Ajouté à Wallet ✓';toast('Billet ajouté à Wallet')};
 
 /* =============== INIT & ÉCHELLE =============== */
@@ -3389,7 +3404,7 @@ const MVG=[
  [/\b(action|baston|explosi|super.?heros|marvel|dc\b)/,'de l’action',['action','super-heros'],'action'],
  [/\b(aventure|epopee|voyage|fantastique|mythologie)/,'de l’aventure',['aventure','epopee','fantastique'],'aventure'],
  [/\b(science|sf\b|espace|futur|dystop|extraterrestre)/,'de la science-fiction',['sci-fi','science-fiction','dystopie'],'science-fiction'],
- [/\b(emouv|pleur|drame|touchant|histoire vraie|biopic|musique|chanteur|chanson)/,'de l’émotion',['drame','biopic','musique'],'émotion'],
+ [/\b(emotion|emouv|pleur|drame|touchant|histoire vraie|biopic|musique|chanteur|chanson)/,'de l’émotion',['drame','biopic','musique'],'émotion'],
  [/\b(frisson|suspens|thriller|survie|tension|peur)/,'du suspense',['thriller','survie'],'suspense'],
  [/\b(histori|epoque|classique|litterature)/,'un film historique',['historique'],'historique'],
  [/\b(animation|dessin anime|pixar|disney)/,'de l’animation',['animation'],'animation']
@@ -3419,7 +3434,7 @@ function mvTitle(raw){const t=' '+mvNorm(raw).replace(/[^a-z0-9 ]+/g,' ').replac
  const names=f=>{const full=mvNorm(f.title).replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ').trim(),base=mvNorm(f.title.split(/\s*[:,]\s*/)[0]).replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ').trim(),alt=base.replace(/^(le|la|les|l|un|une|the)\s+/,'');return[...new Set([full,base,alt])].filter(n=>n.length>=4)};
  return FILMS.find(f=>names(f).some(n=>t.includes(' '+n+' ')))}
 function mvDayIdx(){const st=MV.st;if(st.when!=null)return st.when;return defaultSlot().date}
-function mvSlots(f,d){const st=MV.st;return TIMES.map((x,i)=>i).filter(i=>okSlot(d,i)&&(st.after==null||mvT(i)>=st.after)&&(st.before==null||mvT(i)<=st.before))}
+function mvSlots(f,d){const st=MV.st;return TIMES.map((x,i)=>i).filter(i=>!TIMES[i].full&&!isPast(d,i)&&!isCx(d,i)&&!bkConflict(d,i,f)&&(st.after==null||mvT(i)>=st.after)&&(st.before==null||mvT(i)<=st.before))}
 function mvScore(f,d){
  const st=MV.st,tx=SBASE((f.genre||'')+' '+(f.genres||'')),soon=isSoon(f);let sc=(f.rate==null?7.2:f.rate);
  if(st.soon!==soon)return -1;
@@ -3477,9 +3492,17 @@ function mvAnswer(){
  MV.mood('think');
  setTimeout(()=>{
   if(!list.length){
-   const keep=st.seen;st.seen=false;const alt=mvPick();st.seen=keep;
-   if(keep&&alt.list.length){mvSay(`<p>${esc(alt.list.map(f=>f.title).join(' et '))} correspond${alt.list.length>1?'ent':''}, mais vous ${alt.list.length>1?'les':'l’'}avez déjà vu${alt.list.length>1?'s':''}. Je vous ${alt.list.length>1?'les':'le'} propose quand même ?</p>${alt.list.map(f=>mvCard(f,alt.d)).join('')}`,'bot',true);MV.mood('happy')}
-   else{mvSay('Hmm, rien ne correspond à tous ces critères. Essayons d’en retirer un (touchez-le ci-dessous) ou dites-moi autre chose.');MV.mood('sad')}
+   /* jamais d'impasse : on assouplit les critères un par un et on explique ce qui a changé */
+   let res=null,note='';
+   const attempt=(mod,msg)=>{if(res)return;const bk=JSON.stringify(st);mod();const p=mvPick();if(p.list.length){res=p;note=msg}else Object.assign(st,JSON.parse(bk))};
+   if(st.shown.length)attempt(()=>{st.shown=[]},'Je n’ai plus de nouvelle idée avec ces critères : voici de nouveau mes préférées.');
+   if(st.seen)attempt(()=>{st.seen=false},'Ces films correspondent, mais vous les avez déjà vus. Je vous les propose quand même :');
+   if(st.when===0)attempt(()=>{st.when=1},'Plus de séance ce soir avec ces critères : voici demain.');
+   if(st.after!=null||st.before!=null||st.maxMin)attempt(()=>{st.after=null;st.before=null;st.maxMin=null},'Rien à cet horaire ou de cette durée : voici sans contrainte d’heure.');
+   if(st.tags.length||st.people.length)attempt(()=>{st.tags=[];st.labels=[];st.people=[]},'Rien de ce genre sur cette période : voici les films les mieux notés.');
+   attempt(()=>{st.when=null;st.after=null;st.before=null;st.maxMin=null;st.soft=false;st.soon=false;st.tags=[];st.labels=[];st.people=[];st.seen=false;st.shown=[]},'Voici ce qui se joue en ce moment :');
+   if(res){mvSay(`<p>${esc(note)}</p>${res.list.map(f=>mvCard(f,res.d)).join('')}`,'bot',true);res.list.forEach(f=>st.shown.push(f.id));MV.mood('happy')}
+   else{mvSay('Je ne trouve aucune séance libre pour le moment. Revenez un peu plus tard, ou ouvrez « Prochainement » pour les films à venir.');MV.mood('sad')}
   }else{
    const what=st.labels.length?st.labels.join(' et '):'';
    const intro=st.soon?'Voici ce qui arrive bientôt en salle :':`${list.length>1?'Voici':'Voici'} ${list.length>1?list.length+' idées':'une idée'}${what?' pour '+what:''}${st.maxMin?', pas trop long':''}, ${mvDayWord(d)} :`;
@@ -3495,7 +3518,7 @@ const MVN={un:1,une:1,deux:2,trois:3,quatre:4,cinq:5,six:6,sept:7,huit:8};
 function mvBookIntent(t){
  const c=/\b(\d+|un|une|deux|trois|quatre|cinq|six|sept|huit)\s+(places?|billets?|sieges?|fauteuils?|personnes?)\b/.exec(t);
  const want=/\b(reserv\w*|prend\w*|prendre|acheter|achete\w*|book|veux|voudrais|aimerais|besoin)\b/.test(t),side=/(cote a cote|cote-a-cote|a cote|ensemble|cote a cote)/.test(t),pl=/\b(places?|billets?|sieges?)\b/.test(t);
- if(c&&(want||side||/(fond|devant|milieu|centre|soir|demain|\d\s*h)/.test(t)))return{n:Math.min(8,Math.max(1,+c[1]||MVN[c[1]]||1)),side};
+ if(c&&(want||side||/(fond|devant|milieu|centre|soir|demain|\d\s*h)/.test(t))){const raw=+c[1]||MVN[c[1]]||1;return{n:Math.min(8,Math.max(1,raw)),side,cap:raw>8}}
  if(want&&pl&&!mvTitle(t))return{n:2,side};
  return null}
 function mvTimeOf(t){const re=/\b(\d{1,2})\s*(?:h|:|heures?)\s*(\d{2})?/g;let m;while((m=re.exec(t))){if(/(avant|apres)\s*$/.test(t.slice(0,m.index)))continue;const h=+m[1];if(h>=0&&h<24)return h*60+(+(m[2]||0))}return null}
@@ -3516,15 +3539,15 @@ function mvBook(raw,t,bi){
   const tk=taken();ST.tk=tk;let ids=z!=null?autoSeatsZone(tk,z):null,fell=false;if(!ids){ids=autoSeats(tk);fell=z!=null}
   if(!ids||ids.length<n){mvSay(`Il n’y a plus ${n} places libres côte à côte pour cette séance. Voulez-vous une autre heure ?`);MV.mood('sad');mvChips();return}
   ST.seats=ids.slice(0,n);ST.zPick=z!=null&&!fell;ST.zone=zoneOf(ST.seats[0]);
-  const zn=['à l’avant','au centre','au fond'][zoneOf(ST.seats[0])],adj=n>1&&ST.seats.length>1?'côte à côte':'',tot=money().tot;
-  const why=[];if(relaxed&&tm!=null)why.push(`Pas de séance à ${Math.floor(tm/60)} h pour ce critère : la plus proche est à ${TIMES[ti].t}.`);if(fell)why.push('Plus de place libre dans la zone demandée : je vous ai placé au mieux.');
-  mvSay(`<p><b>C’est prêt.</b> ${n} place${n>1?'s':''} ${adj} ${zn} pour <b>${esc(f.title)}</b>, ${mvDayWord(d)} à <b>${TIMES[ti].t}</b> : ${ST.seats.slice().sort().join(', ')}. Total ${eur(tot)}.</p>${why.length?`<p>${esc(why.join(' '))}</p>`:''}<p>Je vous emmène au récapitulatif : <b>rien n’est payé</b> tant que vous n’avez pas validé.</p>`,'bot',true);
+  const zn=['à l’avant','au centre','au fond'][zoneOf(ST.seats[0])],srt=ST.seats.slice().sort((a,b)=>a.localeCompare(b,'fr',{numeric:true})),contig=srt.every((id,i)=>i===0||(id[0]===srt[i-1][0]&&+id.slice(1)===+srt[i-1].slice(1)+1)),adj=n>1&&contig?'côte à côte':'',tot=money().tot;
+  const why=[];if(relaxed&&tm!=null)why.push(`Pas de séance à ${Math.floor(tm/60)} h pour ce critère : la plus proche est à ${TIMES[ti].t}.`);if(fell)why.push('Plus de place libre dans la zone demandée : je vous ai placé au mieux.');if(bi.cap)why.push('Je réserve 8 places au maximum par commande.');if(n>1&&!contig)why.push('Impossible de trouver des places côte à côte : elles sont proches mais séparées.');
+  mvSay(`<p><b>C’est prêt.</b> ${n} place${n>1?'s':''}${adj?' '+adj:''} ${zn} pour <b>${esc(f.title)}</b>, ${mvDayWord(d)} à <b>${TIMES[ti].t}</b> : ${ST.seats.slice().sort().join(', ')}. Total ${eur(tot)}.</p>${why.length?`<p>${esc(why.join(' '))}</p>`:''}<p>Je vous emmène au récapitulatif : <b>rien n’est payé</b> tant que vous n’avez pas validé.</p>`,'bot',true);
   MV.mood('happy');haptic('success');
   setTimeout(()=>{mvClose();setTimeout(()=>go('order'),220)},1500)},520)}
 function mvFaq(t,raw){
  const ft=mvTitle(raw)||FILMS.find(f=>f.id===(MV.st.shown||[]).slice(-1)[0]);
  const tr=TARIFS.map(x=>`${x.n} : ${eur(x.p)}`).join(' · ');
- if(/\b(tarif|prix|combien|coute|cout)\b/.test(t)&&!/(durer|temps)/.test(t))return `<p>Nos tarifs : ${esc(tr)}. Frais de service : ${eur(FEE)} par billet.</p>`;
+ if(/\b(tarifs?|prix|combien|coute|cout)\b/.test(t)&&!/(durer|temps)/.test(t))return `<p>Nos tarifs : ${esc(tr)}. Frais de service : ${eur(FEE)} par billet.</p>`;
  if(/(annul|rembours|avoir)/.test(t))return `<p>Vous pouvez annuler jusqu’à <b>${POL.cx} h avant la séance</b>, depuis « Mon compte » › « Mes réservations ». Le montant est rendu sous forme d’<b>avoir valable ${POL.creditMonths} mois</b> (pas de remboursement en argent). Si c’est le cinéma qui annule la séance, vous êtes remboursé intégralement.</p>`;
  if(/(horaire d ouverture|heures? d ouverture|ouvert|ferme|fermeture|jusqu a quelle heure)/.test(t))return `<p>Accueil et caisses : tous les jours de ${POL.open} à ${POL.shut}. Séances de ${POL.first} à ${POL.last}. Réservation en ligne jusqu’à ${POL.close} minutes avant la séance.</p>`;
  if(/(reglement|regles du cinema|interdit|puis je|retard|nourriture|manger|apporter)/.test(t))return '<p>Quelques règles : billet contrôlé à l’entrée, téléphone en silencieux, interdiction de filmer, boissons alcoolisées extérieures interdites, entrée possible après le début sans remboursement. Tout est dans « Règles et informations légales » (lien en bas de chaque page).</p>';
@@ -3538,6 +3561,7 @@ function mvFaq(t,raw){
  return null}
 function mvAsk(raw){
  raw=raw.trim();if(!raw)return;
+ {const K={more:'autre proposition',court:'plus court',demain:'demain'};if(K[raw.toLowerCase()])raw=K[raw.toLowerCase()]}
  mvSay(raw,'me');haptic('tick');
  const t=mvNorm(raw);
  if(/^(recommencer|reset|annuler|efface)/.test(t)){mvReset();mvSay('C’est reparti ! Qu’est-ce qui vous ferait plaisir ?');MV.mood('happy');mvChips();return}
@@ -3597,6 +3621,12 @@ document.addEventListener('click',e=>{
 });
 $('#muvForm').addEventListener('submit',e=>{e.preventDefault();const i=$('#muvIn');const v=i.value;i.value='';mvAsk(v)});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&MV.open&&!SH.open)mvClose()});
+document.querySelectorAll('.screen').forEach(x=>x.setAttribute('role','main'));
+/* fenêtres modales : le focus clavier reste à l'intérieur (Tab et Maj+Tab bouclent) */
+document.addEventListener('keydown',e=>{if(e.key!=='Tab')return;const root=SH.open?$('#sheet'):(typeof SV!=='undefined'&&SV.open?$('#sv'):(typeof OFF!=='undefined'&&OFF.on?$('#off'):null));if(!root)return;
+ const f=[...root.querySelectorAll('button,a[href],input,select,textarea,[tabindex]:not([tabindex="-1"])')].filter(x=>!x.disabled&&x.offsetParent!==null);if(!f.length)return;const a=document.activeElement;
+ if(!root.contains(a)){e.preventDefault();f[0].focus();return}
+ if(e.shiftKey&&a===f[0]){e.preventDefault();f[f.length-1].focus()}else if(!e.shiftKey&&a===f[f.length-1]){e.preventDefault();f[0].focus()}},true);
 $('#muvFabSvg').innerHTML=muvraSVG();$('#muvAv').innerHTML=muvraSVG('face');
 /* petite bulle d'accueil, une seule fois par session, sur l'accueil */
 function mvHello(){if(mvHello.on||$('#muv').dataset.scr!=='home')return;try{if(sessionStorage.getItem('muvHi'))return}catch(e){}mvHello.on=1;try{sessionStorage.setItem('muvHi','1')}catch(e){}
