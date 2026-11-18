@@ -1,6 +1,6 @@
 # U CINEMÀ — Checklist de test (3 participants)
 
-> À imprimer (A4 paysage) ou à remplir à l'écran. **Ne jamais aider** le participant. Cocher ☑ (réussi) ou ☒ (problème) dans la colonne de chaque participant : **P1 · P2 · P3**.
+> À remplir au stylet sur tablette (format vertical) ou à imprimer. **Ne jamais aider** le participant. Cocher ☑ (réussi) ou ☒ (problème) dans la colonne de chaque participant : **P1 · P2 · P3**.
 > Prototype : https://mik2a-coder.github.io/u-cinema/ (recharger avec Cmd + Maj + R avant chaque test)
 
 ## A. Avant le test
@@ -15,52 +15,52 @@
 | ☐ | Participant 3 : âge ___ · usage du cinéma ___ · besoin d'accessibilité : oui / non |
 
 ## B. Scénarios (à lire tels quels)
-Critère de réussite = **sans aide**. Noter le temps (secondes) et les hésitations.
-| # | Consigne lue au participant | Réussi sans aide (P1 / P2 / P3) | Temps P1 / P2 / P3 | Objectif | Si échec → piste de modification |
-|---|---|---|---|---|---|
-| S1 | « Vous voulez voir un film **ce soir** avec un ami. Réservez **deux places**. » | ☐ / ☐ / ☐ | __ / __ / __ s | ≤ 60 s | Raccourcir : séances du jour plus visibles, bouton plus clair |
-| S2 | « Votre ami est **étudiant** : retrouvez le tarif adapté. » | ☐ / ☐ / ☐ | __ / __ / __ s | ≤ 20 s | Afficher un tarif réduit par défaut |
-| S3 | « Choisissez des places **au fond** de la salle. » (zones du plan) | ☐ / ☐ / ☐ | __ / __ / __ s | ≤ 15 s | Rendre les zones plus visibles, texte « Voir toute la salle » |
-| S4 | « Regardez **la vue depuis votre place**. » | ☐ / ☐ / ☐ | __ / __ / __ s | ≤ 10 s | Déplacer ou renommer le bouton |
-| S5 | « Ajoutez un **pop-corn** à votre commande. » | ☐ / ☐ / ☐ | __ / __ / __ s | ≤ 20 s | Montrer la petite faim plus tôt |
-| S6 | « Au moment de payer, la carte est **refusée** : terminez quand même. » (carte de test •••• 0002) | ☐ / ☐ / ☐ | __ / __ / __ s | ≤ 30 s | Message plus clair, bouton « Changer de moyen » plus visible |
-| S7 | « **Suivez** ce film pour être prévenu des nouveautés. » | ☐ / ☐ / ☐ | __ / __ / __ s | ≤ 10 s | Déplacer la cloche, changer le libellé |
-| S8 | « Retrouvez votre **billet** sans connexion. » (mode avion) | ☐ / ☐ / ☐ | __ / __ / __ s | ≤ 20 s | Lien plus direct vers le billet |
-| S9 | « **Annulez** cette réservation. » (Compte › Mes réservations) | ☐ / ☐ / ☐ | __ / __ / __ s | ≤ 30 s | Rendre l'annulation plus visible |
-| S10 | *(accessibilité)* « Agrandissez le texte, puis choisissez vos places **au clavier** ou au lecteur d'écran. » | ☐ / ☐ / ☐ | __ / __ / __ s | sans blocage | Voir `DESIGN.md` (cibles, focus) |
+Réussi **sans aide** = ☑. Noter le temps en secondes. Cases : ☐ réussi · ☒ échec.
+| # | Consigne · objectif · si échec | P1 | P2 | P3 |
+|---|---|---|---|---|
+| S1 | « Vous voulez voir un film **ce soir** avec un ami. Réservez **deux places**. »<br>**Objectif ≤ 60 s** · *si échec : raccourcir : séances du jour et bouton plus clairs* | ☐ ___ s | ☐ ___ s | ☐ ___ s |
+| S2 | « Votre ami est **étudiant** : retrouvez le tarif adapté. »<br>**Objectif ≤ 20 s** · *si échec : afficher un tarif réduit par défaut* | ☐ ___ s | ☐ ___ s | ☐ ___ s |
+| S3 | « Choisissez des places **au fond** de la salle. » (zones du plan)<br>**Objectif ≤ 15 s** · *si échec : zones plus visibles, texte « Voir toute la salle »* | ☐ ___ s | ☐ ___ s | ☐ ___ s |
+| S4 | « Regardez **la vue depuis votre place**. »<br>**Objectif ≤ 10 s** · *si échec : déplacer ou renommer le bouton* | ☐ ___ s | ☐ ___ s | ☐ ___ s |
+| S5 | « Ajoutez un **pop-corn** à votre commande. »<br>**Objectif ≤ 20 s** · *si échec : montrer la petite faim plus tôt* | ☐ ___ s | ☐ ___ s | ☐ ___ s |
+| S6 | « La carte est **refusée** : terminez quand même. » (carte de test •••• 0002)<br>**Objectif ≤ 30 s** · *si échec : message plus clair, « Changer de moyen » plus visible* | ☐ ___ s | ☐ ___ s | ☐ ___ s |
+| S7 | « **Suivez** ce film pour être prévenu des nouveautés. »<br>**Objectif ≤ 10 s** · *si échec : déplacer la cloche, changer le libellé* | ☐ ___ s | ☐ ___ s | ☐ ___ s |
+| S8 | « Retrouvez votre **billet** sans connexion. » (mode avion)<br>**Objectif ≤ 20 s** · *si échec : lien plus direct vers le billet* | ☐ ___ s | ☐ ___ s | ☐ ___ s |
+| S9 | « **Annulez** cette réservation. » (Compte › Mes réservations)<br>**Objectif ≤ 30 s** · *si échec : annulation plus visible* | ☐ ___ s | ☐ ___ s | ☐ ___ s |
+| S10 | *(accessibilité)* « Agrandissez le texte, puis choisissez vos places **au clavier** ou au lecteur d'écran. »<br>**Objectif sans blocage** · *si échec : voir `DESIGN.md` (cibles, focus)* | ☐ ___ s | ☐ ___ s | ☐ ___ s |
 
 ## C. Points à vérifier écran par écran
-Cocher **OK** si le critère est vrai pour le participant, **Pb** s'il y a un problème (noter lequel dans la colonne de droite).
-| Écran | Critère à observer | P1 | P2 | P3 | Problème / citation | Modification possible |
-|---|---|:-:|:-:|:-:|---|---|
-| **Accueil** | Comprend en 3 s ce qu'il peut faire (affiche, séances, bouton) | OK / Pb | OK / Pb | OK / Pb | | |
-| | Voit les séances du jour sans défiler | OK / Pb | OK / Pb | OK / Pb | | |
-| | Trouve les onglets Films / Nouveautés / Prochainement | OK / Pb | OK / Pb | OK / Pb | | |
-| **Recherche** | Les suggestions (film, acteur, cinéma) sont comprises | OK / Pb | OK / Pb | OK / Pb | | |
-| **Fiche film** | Trouve « Réserver » sans hésiter | OK / Pb | OK / Pb | OK / Pb | | |
-| | Comprend la cloche « Suivre » à côté de Réserver | OK / Pb | OK / Pb | OK / Pb | | |
-| | La bande-annonce (consentement, lancement) est comprise et non gênante | OK / Pb | OK / Pb | OK / Pb | | |
-| **Séance** | Repère une séance **complète** ou **déjà réservée** (grisée) | OK / Pb | OK / Pb | OK / Pb | | |
-| | Trouve les tarifs réduits repliés | OK / Pb | OK / Pb | OK / Pb | | |
-| | La barre de progression (1/4…) aide | OK / Pb | OK / Pb | OK / Pb | | |
-| **Places** | Comprend que des places sont **déjà proposées** | OK / Pb | OK / Pb | OK / Pb | | |
-| | Le zoom sur la zone puis « Voir toute la salle » sont compris | OK / Pb | OK / Pb | OK / Pb | | |
-| | Touche un siège **sans erreur** (cibles, une main) | OK / Pb | OK / Pb | OK / Pb | | |
-| | Trouve les places fauteuil roulant (si besoin) | OK / Pb | OK / Pb | OK / Pb | | |
-| | « Voir depuis ma place » : compris, bande-annonce non gênante | OK / Pb | OK / Pb | OK / Pb | | |
-| **Commande** | Voit le **total TTC** et les frais avant de payer | OK / Pb | OK / Pb | OK / Pb | | |
-| | Comprend « Commande avec obligation de paiement » | OK / Pb | OK / Pb | OK / Pb | | |
-| | La « petite faim » est trouvée **si voulue**, ignorée **sinon** | OK / Pb | OK / Pb | OK / Pb | | |
-| **Paiement refusé** | Comprend que rien n'est débité et sait quoi faire | OK / Pb | OK / Pb | OK / Pb | | |
-| **Billet** | Reconnaît le QR et le message de fin ; billet lisible hors ligne | OK / Pb | OK / Pb | OK / Pb | | |
-| **Compte** | Comprend la carte, les réservations, l'activité récente | OK / Pb | OK / Pb | OK / Pb | | |
-| | Annule une réservation avec confirmation | OK / Pb | OK / Pb | OK / Pb | | |
-| **Assistant** | Comprend que le chat est cliquable, obtient une proposition utile | OK / Pb | OK / Pb | OK / Pb | | |
-| **Visuel** | Texte lisible en clair **et** en sombre | OK / Pb | OK / Pb | OK / Pb | | |
-| | Logo, mascotte, boutons : style cohérent (rien d'anormal : cadre, flou, coupure) | OK / Pb | OK / Pb | OK / Pb | | |
-| **Mouvement** | Les transitions aident (pas de saut, pas de scintillement) | OK / Pb | OK / Pb | OK / Pb | | |
-| **Accessibilité** | Texte 130 % sans coupure ; contraste élevé ; animations réduites respectées | OK / Pb | OK / Pb | OK / Pb | | |
-| **Grand écran** *(si testé sur ordinateur)* | Mise en page aérée, rien de coupé à droite ni sous la barre du haut | OK / Pb | OK / Pb | OK / Pb | | |
+Encercler **OK** ou **Pb** pour chaque participant ; noter le problème (et la modification possible) dans « Notes ».
+| Écran · critère | P1 | P2 | P3 | Notes / modification possible |
+|---|:-:|:-:|:-:|---|
+| **Accueil** · Comprend en 3 s ce qu'il peut faire (affiche, séances, bouton) | OK·Pb | OK·Pb | OK·Pb | |
+| Voit les séances du jour sans défiler | OK·Pb | OK·Pb | OK·Pb | |
+| Trouve les onglets Films / Nouveautés / Prochainement | OK·Pb | OK·Pb | OK·Pb | |
+| **Recherche** · Les suggestions (film, acteur, cinéma) sont comprises | OK·Pb | OK·Pb | OK·Pb | |
+| **Fiche film** · Trouve « Réserver » sans hésiter | OK·Pb | OK·Pb | OK·Pb | |
+| Comprend la cloche « Suivre » à côté de Réserver | OK·Pb | OK·Pb | OK·Pb | |
+| Bande-annonce (consentement, lancement) comprise et non gênante | OK·Pb | OK·Pb | OK·Pb | |
+| **Séance** · Repère une séance **complète** ou **déjà réservée** (grisée) | OK·Pb | OK·Pb | OK·Pb | |
+| Trouve les tarifs réduits repliés | OK·Pb | OK·Pb | OK·Pb | |
+| La barre de progression (1/4…) aide | OK·Pb | OK·Pb | OK·Pb | |
+| **Places** · Comprend que des places sont **déjà proposées** | OK·Pb | OK·Pb | OK·Pb | |
+| Zoom sur la zone puis « Voir toute la salle » compris | OK·Pb | OK·Pb | OK·Pb | |
+| Touche un siège **sans erreur** (cibles, une main) | OK·Pb | OK·Pb | OK·Pb | |
+| Trouve les places fauteuil roulant (si besoin) | OK·Pb | OK·Pb | OK·Pb | |
+| « Voir depuis ma place » compris, vidéo non gênante | OK·Pb | OK·Pb | OK·Pb | |
+| **Commande** · Voit le **total TTC** et les frais avant de payer | OK·Pb | OK·Pb | OK·Pb | |
+| Comprend « Commande avec obligation de paiement » | OK·Pb | OK·Pb | OK·Pb | |
+| « Petite faim » trouvée **si voulue**, ignorée **sinon** | OK·Pb | OK·Pb | OK·Pb | |
+| **Paiement refusé** · Comprend que rien n'est débité et sait quoi faire | OK·Pb | OK·Pb | OK·Pb | |
+| **Billet** · Reconnaît le QR ; billet lisible hors ligne | OK·Pb | OK·Pb | OK·Pb | |
+| **Compte** · Comprend carte, réservations, activité récente | OK·Pb | OK·Pb | OK·Pb | |
+| Annule une réservation avec confirmation | OK·Pb | OK·Pb | OK·Pb | |
+| **Assistant** · Comprend que le chat est cliquable, reçoit une proposition utile | OK·Pb | OK·Pb | OK·Pb | |
+| **Visuel** · Texte lisible en clair **et** en sombre | OK·Pb | OK·Pb | OK·Pb | |
+| Logo, mascotte, boutons cohérents (rien d'anormal : cadre, flou, coupure) | OK·Pb | OK·Pb | OK·Pb | |
+| **Mouvement** · Transitions utiles (pas de saut ni de scintillement) | OK·Pb | OK·Pb | OK·Pb | |
+| **Accessibilité** · Texte 130 % sans coupure ; contraste élevé ; animations réduites respectées | OK·Pb | OK·Pb | OK·Pb | |
+| **Grand écran** · *(si testé sur ordinateur)* mise en page aérée, rien de coupé | OK·Pb | OK·Pb | OK·Pb | |
 
 ## D. Débrief (poser tel quel, noter les mots du participant)
 | Question | P1 | P2 | P3 |

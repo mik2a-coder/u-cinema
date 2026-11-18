@@ -6,7 +6,7 @@ ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 
 def inline(t):
-    t=html.escape(t,quote=False)
+    t=html.escape(t,quote=False).replace('&lt;br&gt;','<br>')
     t=re.sub(r'`([^`]+)`',r'<code>\1</code>',t)
     t=re.sub(r'\*\*([^*]+)\*\*',r'<strong>\1</strong>',t)
     t=re.sub(r'(?<![*\w])\*([^*\n]+)\*(?![*\w])',r'<em>\1</em>',t)
@@ -35,7 +35,8 @@ def md(src,base=1):
             hdr=[c.strip() for c in l.strip().strip('|').split('|')];i+=2;rows=[]
             while i<len(lines) and lines[i].startswith('|'):
                 rows.append([c.strip() for c in lines[i].strip().strip('|').split('|')]);i+=1
-            out.append('<table><thead><tr>'+''.join(f'<th>{inline(c)}</th>' for c in hdr)+'</tr></thead><tbody>'+''.join('<tr>'+''.join(f'<td>{inline(c)}</td>' for c in r)+'</tr>' for r in rows)+'</tbody></table>');continue
+            cls=' class="sc"' if hdr and hdr[0]=='#' and 'P1' in hdr else ' class="pt"' if hdr and hdr[0].startswith('Écran') else ''
+            out.append(f'<table{cls}><thead><tr>'+''.join(f'<th>{inline(c)}</th>' for c in hdr)+'</tr></thead><tbody>'+''.join('<tr>'+''.join(f'<td>{inline(c)}</td>' for c in r)+'</tr>' for r in rows)+'</tbody></table>');continue
         if re.match(r'^\s*[-*] ',l) or re.match(r'^\s*\d+\. ',l):
             ordered=bool(re.match(r'^\s*\d+\. ',l));items=[]
             while i<len(lines) and (re.match(r'^\s*[-*] ',lines[i]) or re.match(r'^\s*\d+\. ',lines[i])):
@@ -97,9 +98,10 @@ chrome='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 subprocess.run([chrome,'--headless=new','--disable-gpu','--no-pdf-header-footer','--print-to-pdf=RENDU-U-CINEMA.pdf','file://'+os.path.abspath('rendu/dossier.html')],check=True,capture_output=True)
 print('RENDU-U-CINEMA.pdf',os.path.getsize('RENDU-U-CINEMA.pdf')//1024,'Ko')
 
-# Checklist seule, A4 paysage, à imprimer
-chk_css=css.replace('@page{size:A4;margin:16mm 14mm}','@page{size:A4 landscape;margin:10mm}').replace('font:10.5pt/1.5','font:9.5pt/1.35').replace('font-size:8.8pt','font-size:8pt')
-chk=f'''<!doctype html><html lang="fr"><meta charset="utf-8"><title>Checklist de test</title><style>{chk_css}h2{{page-break-after:avoid}}td{{height:8mm}}td:nth-last-child(1),td:nth-last-child(2){{min-width:34mm}}</style><body>{md(read('CHECKLIST-TESTS.md'),1)}</body></html>'''
+# Checklist seule : portrait 3:4 (tablette reMarkable), contraste fort, grandes cases d'écriture
+chk_css=css.replace('@page{size:A4;margin:16mm 14mm}','@page{size:180mm 240mm;margin:8mm}').replace('font:10.5pt/1.5','font:9pt/1.3').replace('font-size:8.8pt','font-size:8.2pt').replace('background:#1e1810;color:#f4e4b6','background:#e6e6e6;color:#000;border-bottom:1.5px solid #000').replace('blockquote{','blockquote{border-left-color:#000;background:#f3f3f3;').replace('td{border-bottom:1px solid #e2d9c4','td{border-bottom:1px solid #777')
+extra='h1{font-size:17pt;margin-bottom:4mm}h2{page-break-after:avoid;font-size:12pt;margin:5mm 0 2mm;border-bottom:1.5px solid #000}table{table-layout:fixed}td{height:10mm;vertical-align:middle}.sc th:first-child,.sc td:first-child{width:9%}.sc th:nth-child(2),.sc td:nth-child(2){width:49%}.sc th:nth-child(n+3),.sc td:nth-child(n+3){width:14%;text-align:center}.pt th:first-child,.pt td:first-child{width:40%}.pt th:nth-child(n+2):nth-child(-n+4),.pt td:nth-child(n+2):nth-child(-n+4){width:10%;text-align:center}.pt th:last-child,.pt td:last-child{width:30%}table:not(.sc):not(.pt) th:first-child{width:9%}a{color:#000}section{page-break-before:avoid}'
+chk=f'''<!doctype html><html lang="fr"><meta charset="utf-8"><title>Checklist de test</title><style>{chk_css}{extra}</style><body>{md(read('CHECKLIST-TESTS.md'),1)}</body></html>'''
 open('rendu/checklist.html','w',encoding='utf-8').write(chk)
 subprocess.run([chrome,'--headless=new','--disable-gpu','--no-pdf-header-footer','--print-to-pdf=CHECKLIST-TEST-3-PERSONNES.pdf','file://'+os.path.abspath('rendu/checklist.html')],check=True,capture_output=True)
 print('CHECKLIST-TEST-3-PERSONNES.pdf',os.path.getsize('CHECKLIST-TEST-3-PERSONNES.pdf')//1024,'Ko')
