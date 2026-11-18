@@ -226,3 +226,8 @@ Principe : couleurs, tailles, rayons et espaces passent par des variables ; une 
 - **Personnage du compte** : 10 avatars dessinés (mascotte, astronaute, guerrier, héros masqué, héroïne à cape, chasseur casqué, plombier moustachu, aventurier, shérif, navigatrice), choix dans une fenêtre centrée (`.avgrid`, `.avp`), pastille ✎ sur la photo ; l'initiale reste possible.
 - **Deux réalisateurs** : chaque nom est un lien vers sa fiche ; « Suivre » ouvre « Qui voulez-vous suivre ? » (un interrupteur par personne, ou « Suivre les deux ») ; le bouton indique « Suivi 1/2 » si un seul est suivi.
 - **Bande-annonce dans la salle** : lancement automatique si les extraits sont acceptés ; sinon, ou si la vidéo n'apparaît pas au bout de 7 s, bouton « Lancer la bande-annonce » (un toucher, qui demande l'accord si besoin) ; la vidéo repart quand on change de place.
+
+## 13. Version 92 : onglet Enfants, boutons de l'introduction
+- **Onglet Enfants** (4ᵉ onglet de l'accueil, marqué d'une étoile dorée) : films dont les genres contiennent « Animation » ou « Famille ». Un bandeau `.kidsbar` (mascotte assise, titre Bebas, une phrase) accompagne la liste ; le titre de section devient « Pour les enfants ».
+- **Introduction** : bouton principal « Suivant » (puis « Commencer »), bouton secondaire plein « Passer l'intro » (verre clair), tous deux de 264 px, l'un sous l'autre.
+- **Bande-annonce** : lien discret « Ouvrir sur YouTube » dans la fenêtre vidéo, en secours.

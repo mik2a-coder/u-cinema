@@ -22,6 +22,15 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
 
+## Version 92 — 18 novembre 2026
+
+| N° | Demande | Ce qui a été fait | Où le voir |
+|---|---|---|---|
+| 1 | Rubrique pour enfants, 5 dessins animés minimum | Nouvel onglet **Enfants** sur l'accueil avec bandeau « Rubrique enfants » : 8 titres (Toy Story 5, Super Mario Galaxy, Vaiana, Angry Birds 3 et **4 nouveaux** : Hoppers, Minions & Monsters, Paw Patrol: The Dino Movie, The Cat in the Hat). Données (dates, durées, distribution, réalisateurs) relevées sur Wikipédia ; note affichée = moyenne des critiques Rotten Tomatoes indiquée par Wikipédia ; bandes-annonces officielles contrôlées | Accueil > Enfants |
+| 2 | Bouton de la première page perturbant et long | « Continuer » devient **« Suivant »** (« Commencer » à la dernière étape) ; « Passer l'introduction » devient un **vrai bouton « Passer l'intro »**, bien visible sous le bouton principal | Introduction |
+| 3 | Une bande-annonce pour tous les films | Les 22 films ont une bande-annonce officielle contrôlée (réponse YouTube valide) ; chaque fenêtre de bande-annonce propose aussi « Ouvrir sur YouTube » si la vidéo intégrée ne s'affiche pas | Fiche film |
+| 4 | Prompts pertinents et améliorés dans le dossier de rendu | Journal : conseils pour bien écrire un prompt, tableau « mon prompt / version améliorée / résultat » (14 lignes) et 4 exemples complets, dont celui du fond coloré tiré des affiches | `documents/JOURNAL.md`, PDF |
+
 ## Version 91 — 18 novembre 2026
 
 | N° | Demande | Ce qui a été fait | Où le voir |
@@ -200,3 +209,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v89 | 18/11/2026 | Achat : refus d'une séance déjà réservée enfin visible, créneau par défaut sans doublon |
 | v90 | 18/11/2026 | Correctif paiement (conflit de classe avec la page réseau) ; affiches de l'introduction préchargées |
 | v91 | 18/11/2026 | Personnages du compte, plan de salle complet, deux réalisateurs, bande-annonce de la salle, test simplifié |
+| v92 | 18/11/2026 | Onglet Enfants (4 films ajoutés), boutons de l'introduction, bandes-annonces pour tous, prompts du journal |

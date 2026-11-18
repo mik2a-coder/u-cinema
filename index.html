@@ -1676,6 +1676,12 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
 .avp{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;border-radius:var(--r-md);background:var(--surface2);border:2px solid transparent;text-align:center}
 .avp[aria-checked=true]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,var(--surface2))}
 .avp .avi{width:64px;height:64px;border-radius:50%;overflow:hidden;display:block}.avp b{font-size:calc(var(--fs-sm)*var(--ts,1));line-height:1.2}.avp small{color:var(--muted);font-size:calc(var(--fs-micro)*var(--ts,1));line-height:1.25}
+.kt{color:var(--accent-text)!important}.kt::before{content:"★ ";font-size:.85em}
+.kidsbar{display:flex;align-items:center;gap:12px;margin:8px max(16px,4vw) 0;padding:10px 14px;border-radius:var(--r-lg);background:color-mix(in srgb,var(--accent) 18%,var(--surface));border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);position:relative;z-index:1}.kidsbar[hidden]{display:none}
+.kidsbar img{width:46px;height:auto;flex:none}.kidsbar b{display:block;font-family:var(--display);font-weight:400;letter-spacing:.06em;font-size:calc(var(--fs-xl)*var(--ts,1))}.kidsbar small{display:block;color:var(--muted);font-size:calc(var(--fs-xs)*var(--ts,1));line-height:1.35}
+@media (min-width:900px){.kidsbar{max-width:640px;margin-left:auto;margin-right:auto}}
+.onb-actions{flex-direction:column;gap:10px}.onb-actions .onb-skip{min-height:48px;font-weight:700}
+.ytlink{color:var(--accent-text);text-decoration:underline;text-underline-offset:3px;font-weight:600}
 </style>
 </head>
 <body>
@@ -1708,7 +1714,7 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
     <div class="onb-fan" id="onbFan"></div>
     <div class="onb-text"><div class="onb-logo" aria-hidden="true"><img class="lg-mark" src="img/logo-mark3.png" alt="" width="44" height="44" decoding="async"><span class="lg-word"><i>U</i>CINEMÀ</span></div><div class="eyebrow" id="onbEye"></div><h1 class="display" id="onbTitle"></h1><p id="onbSub"></p>
       <div class="dots" id="onbDots" aria-hidden="true"><i></i><i></i><i></i></div></div>
-    <div class="onb-actions"><button class="btn" id="onbNext"><span>Continuer</span></button><button class="link" id="onbSkip">Passer l’introduction</button></div>
+    <div class="onb-actions"><button class="btn" id="onbNext"><span>Suivant</span></button><button class="btn alt onb-skip" id="onbSkip" type="button"><span>Passer l’intro</span></button></div>
     <footer class="foot onb-foot"><button type="button" class="textlink" id="onbLegal">Confidentialité et mentions légales</button><span aria-hidden="true">·</span><button type="button" class="textlink" id="onbA11y">Options d’accessibilité</button></footer>
   </section>
 
@@ -1721,6 +1727,7 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
       <button class="round" id="hA11y" aria-label="Affichage et accessibilité" data-ic="access"></button>
     </div>
     <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="kidsbar" id="kidsBar" hidden><img src="img/chat/c11.png" alt="" width="46" height="42"><div><b>Rubrique enfants</b><small>Des dessins animés pour toute la famille, du plus petit au plus grand.</small></div></div>
     <div class="scroll hbody" id="hbody">
       <div class="fanwrap"><button class="fnav prev" id="fPrev" aria-label="Film précédent" data-ic="back"></button><div class="fan" id="fan" aria-roledescription="carrousel"></div><button class="fnav next" id="fNext" aria-label="Film suivant" data-ic="chev"></button></div>
       <div class="ftitle" id="ftitle"></div>
@@ -1997,7 +2004,11 @@ const FILMS=[
  {id:'avengers',title:'Avengers: Doomsday',genre:'Action',genres:'Super-héros, Science-fiction',dur:'2h 45m',rate:null,year:2026,rel:'2026-12-16',dir:'Anthony et Joe Russo',ini:'AR',cast:['Robert Downey Jr.','Chris Evans','Chris Hemsworth','Pedro Pascal','Paul Rudd'],prod:['Kevin Feige','Louis D’Esposito'],music:['Alan Silvestri'],yt:'irVNGjRFZGk',syn:'Les héros les plus puissants de l’univers Marvel se réunissent face à une menace sans précédent. Suite directe d’Avengers: Endgame, réalisée par les frères Russo.'},
  {id:'dune3',title:'Dune : Troisième partie',genre:'Sci-fi',genres:'Science-fiction, Épopée',dur:'2h 30m',rate:null,year:2026,rel:'2026-12-16',dir:'Denis Villeneuve',ini:'DV',cast:['Timothée Chalamet','Zendaya','Jason Momoa','Florence Pugh','Rebecca Ferguson'],prod:['Mary Parent','Cale Boyter','Denis Villeneuve','Tanya Lapointe'],music:['Hans Zimmer'],yt:'NdvqHc56lE0',syn:'Adapté du roman Le Messie de Dune, ce troisième volet conclut la trilogie de Denis Villeneuve : Paul Atréides règne sur l’univers, et le pouvoir a un prix.'},
  {id:'angrybirds3',title:'Angry Birds 3, le film',genre:'Animation',genres:'Animation, Famille, Comédie',dur:'1h 36m',rate:null,year:2026,rel:'2026-12-23',dir:'John Rice',ini:'JR',cast:['Jason Sudeikis','Josh Gad','Emma Myers','Rachel Bloom','Walker Scobell'],prod:['John Cohen','Dan Chuba','Namit Malhotra'],music:['Heitor Pereira'],yt:'a9DB_aUMzME',syn:'Red, Chuck et leurs amis volants reviennent pour une nouvelle aventure, face à des menaces encore plus folles. Suite d’Angry Birds : Copains comme cochons.'},
- {id:'jumanji',title:'Jumanji : Open World',genre:'Aventure',genres:'Aventure, Comédie, Fantastique',dur:'Durée à venir',rate:null,year:2026,rel:'2026-12-23',dir:'Jake Kasdan',ini:'JK',cast:['Dwayne Johnson','Jack Black','Kevin Hart','Karen Gillan','Nick Jonas'],prod:['Dwayne Johnson','Dany Garcia','Hiram Garcia','Matt Tolmach'],music:['Henry Jackman'],yt:'zhApeaHMvfs',syn:'Cinquième et dernier volet de la série : l’équipe retourne dans le jeu pour une nouvelle quête, plus grande et plus dangereuse que les précédentes.'}
+ {id:'jumanji',title:'Jumanji : Open World',genre:'Aventure',genres:'Aventure, Comédie, Fantastique',dur:'Durée à venir',rate:null,year:2026,rel:'2026-12-23',dir:'Jake Kasdan',ini:'JK',cast:['Dwayne Johnson','Jack Black','Kevin Hart','Karen Gillan','Nick Jonas'],prod:['Dwayne Johnson','Dany Garcia','Hiram Garcia','Matt Tolmach'],music:['Henry Jackman'],yt:'zhApeaHMvfs',syn:'Cinquième et dernier volet de la série : l’équipe retourne dans le jeu pour une nouvelle quête, plus grande et plus dangereuse que les précédentes.'},
+ {id:'hoppers',title:'Hoppers',genre:'Animation',genres:'Animation, Famille, Science-fiction',dur:'1h 44m',rate:7.7,year:2026,rel:'2026-03-06',dir:'Daniel Chong',ini:'DC',cast:['Piper Curda','Bobby Moynihan','Jon Hamm','Kathy Najimy','Dave Franco'],prod:['Nicole Paradis Grindle'],music:['Mark Mothersbaugh'],yt:'PypDSyIRRSs',syn:'Mabel, étudiante passionnée par les animaux, transfère sa conscience dans un castor robot pour parler à la faune et sauver son habitat. Sans le vouloir, elle déclenche un soulèvement des animaux.'},
+ {id:'minions',title:'Minions & Monsters',genre:'Animation',genres:'Animation, Famille, Comédie',dur:'1h 30m',rate:6.9,year:2026,rel:'2026-07-01',dir:'Pierre Coffin',ini:'PC',cast:['Pierre Coffin','Trey Parker','Allison Janney','Christoph Waltz','Jesse Eisenberg','Jeff Bridges'],prod:[],music:['John Powell'],yt:'ZSdOwt-G49w',syn:'En 1927, entre cinéma muet et cinéma parlant, une bande de Minions décide de tourner son propre film de monstres dans le Hollywood d’autrefois.'},
+ {id:'pawpatrol',title:'Paw Patrol: The Dino Movie',genre:'Animation',genres:'Animation, Famille, Aventure',dur:'1h 28m',rate:6.0,year:2026,rel:'2026-08-14',dir:'Cal Brunker',ini:'CB',cast:['Carter Young','Mckenna Grace','Terry Crews','Jennifer Hudson','Fortune Feimster','Snoop Dogg'],prod:[],music:[],yt:'xgI5iYmOf5Q',syn:'La Pat’ Patrouille s’écrase sur une île peuplée de dinosaures et enchaîne les sauvetages provoqués par les forages imprudents du maire Humdinger, jusqu’au réveil d’un volcan.'},
+ {id:'catinthehat',title:'The Cat in the Hat',genre:'Animation',genres:'Animation, Famille, Fantastique',dur:'1h 47m',rate:5.6,year:2026,rel:'2026-11-06',dir:'Alessandro Carloni et Erica Rivinoja',ini:'AC',cast:['Bill Hader','Matt Berry','Quinta Brunson','Xochitl Gomez','Giancarlo Esposito','America Ferrera'],prod:[],music:[],yt:'jz8pLlPhSeY',syn:'Employé d’un institut où des créatures étranges divertissent les enfants, le Chat au chapeau reçoit une dernière chance de garder son poste quand on lui confie un dossier compliqué. Adapté du livre du Dr Seuss.'},
 ];
 FILMS.forEach(f=>{f.type='film';f.kind=f.id});
 /* Compte : tout reste sur l'appareil (localStorage). Historique et notes de départ = données de démonstration. */
@@ -2009,7 +2020,7 @@ function logAct(t,id,x){try{ACC.log.unshift(Object.assign({t,id,ts:Date.now()},x
 function saveACC(){try{localStorage.setItem('cinelux-acc',JSON.stringify(ACC))}catch(e){}}
 IC.bell=P('<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>');
 const initials=n=>String(n).split(/[\s.’'-]+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase();
-const IMGS={"hotb": "img/hotb.jpg", "lesmis": "img/lesmis.jpg", "odyssey": "img/odyssey.jpg", "spiderman": "img/spiderman.jpg", "toystory5": "img/toystory5.jpg", "hailmary": "img/hailmary.jpg", "michael": "img/michael.png", "supergirl": "img/supergirl.jpg", "prada2": "img/prada2.png", "mariogalaxy": "img/mariogalaxy.jpg", "mandalorian": "img/mandalorian.jpg", "moana": "img/moana.jpg", "hungergames": "img/hungergames.jpg", "focker": "img/focker.jpg", "avengers": "img/avengers.jpg", "dune3": "img/dune3.jpg", "angrybirds3": "img/angrybirds3.jpg", "jumanji": "img/jumanji.jpg"};
+const IMGS={"hoppers": "img/hoppers.jpg", "minions": "img/minions.jpg", "pawpatrol": "img/pawpatrol.jpg", "catinthehat": "img/catinthehat.jpg", "hotb": "img/hotb.jpg", "lesmis": "img/lesmis.jpg", "odyssey": "img/odyssey.jpg", "spiderman": "img/spiderman.jpg", "toystory5": "img/toystory5.jpg", "hailmary": "img/hailmary.jpg", "michael": "img/michael.png", "supergirl": "img/supergirl.jpg", "prada2": "img/prada2.png", "mariogalaxy": "img/mariogalaxy.jpg", "mandalorian": "img/mandalorian.jpg", "moana": "img/moana.jpg", "hungergames": "img/hungergames.jpg", "focker": "img/focker.jpg", "avengers": "img/avengers.jpg", "dune3": "img/dune3.jpg", "angrybirds3": "img/angrybirds3.jpg", "jumanji": "img/jumanji.jpg"};
 const WIDE=new Set([]);
 const TODAY=(()=>{const d=new Date();d.setHours(0,0,0,0);return d})();
 const DATES=[0,1,2,3,4].map(k=>{const d=new Date(TODAY);d.setDate(d.getDate()+k);return d});
@@ -2101,6 +2112,7 @@ const relLabel=f=>relDate(f).toLocaleDateString('fr-FR',{day:'numeric',month:'lo
 const relShort=f=>relDate(f).toLocaleDateString('fr-FR',{day:'numeric',month:'short'}).replace('.','');
 function tabList(t){
  const now=FILMS.filter(f=>!isSoon(f)),soon=FILMS.filter(isSoon).sort((a,b)=>relDate(a)-relDate(b)||a.title.localeCompare(b.title));
+ if(t===3){const k=FILMS.filter(isKids);return k.filter(f=>!isSoon(f)).sort((a,b)=>(b.rate||0)-(a.rate||0)).concat(k.filter(isSoon).sort((a,b)=>relDate(a)-relDate(b)))}
  if(t===2)return soon.length?soon:FILMS.slice(-4);
  if(!now.length)return FILMS.slice();
  if(t===1){let n=now.filter(f=>(TODAY-relDate(f))/864e5<=135).sort((a,b)=>relDate(b)-relDate(a));if(n.length<3)n=now.slice().sort((a,b)=>relDate(b)-relDate(a)).slice(0,4);return n}
@@ -2208,7 +2220,7 @@ function renderOnb(anim){
  if(!f.children.length)f.innerHTML=`<div class="card3 l">${poster(ONBP[0][0])}</div><div class="card3 c">${poster(ONBP[0][1])}</div><div class="card3 r">${poster(ONBP[0][2])}</div>`;
  const txt=()=>{$('#onbEye').textContent=o[0];$('#onbTitle').textContent=o[1];$('#onbSub').textContent=o[2]};
  [...$('#onbDots').children].forEach((d,i)=>d.classList.toggle('on',i===k));
- $('#onbNext').innerHTML=`<span>${k<2?'Continuer':'Commencer'}</span>${IC.arrow}`;
+ $('#onbNext').innerHTML=`<span>${k<2?'Suivant':'Commencer'}</span>${IC.arrow}`;
 {const ab=$('#ambOnb');if(ab){const set=()=>{ab.innerHTML=poster(ONBP[k][1])};if(!anim||!ab.animate)set();else{const o=ab.animate([{opacity:1},{opacity:0}],{duration:240,fill:'forwards'});o.onfinish=()=>{Promise.all(ONBP[k].map(onbLoad)).then(()=>{set();const i=ab.animate([{opacity:0},{opacity:1}],{duration:520,fill:'both'});i.onfinish=()=>{i.cancel();o.cancel()}})}}}}
  const cards=[...f.querySelectorAll('.card3')],reduce=A11Y.rm||matchMedia('(prefers-reduced-motion:reduce)').matches;
  if(!anim||reduce||!cards[0].animate){cards.forEach((c,i)=>{c.innerHTML=poster(ONBP[k][i])});txt();return}
@@ -2224,9 +2236,10 @@ $('#onbNext').onclick=()=>{if(ST.onb<2){ST.onb++;renderOnb(true)}else go('home')
 $('#onbSkip').onclick=()=>go('home');
 
 /* =============== 2. ACCUEIL =============== */
-const TABS=['Films','Nouveautés','Prochainement'];
+const TABS=['Films','Nouveautés','Prochainement','Enfants'];
+const isKids=f=>/Animation|Famille/.test(f.genres||'');
 let fanDrag=null;
-function renderTabs(){$('#tabs').innerHTML=TABS.map((t,i)=>`<button role="tab" aria-selected="${i===ST.tab}" data-i="${i}">${t}</button>`).join('')}
+function renderTabs(){$('#tabs').innerHTML=TABS.map((t,i)=>`<button role="tab" aria-selected="${i===ST.tab}" data-i="${i}"${i===3?' class="kt"':''}>${t}</button>`).join('');const kb=$('#kidsBar');if(kb)kb.hidden=ST.tab!==3}
 $('#tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;ST.tab=+b.dataset.i;ST.cur=0;renderTabs();renderFan();renderNow()});
 function renderFan(){
  const l=list();
@@ -2284,7 +2297,7 @@ function todaySlots(){const ds=defaultSlot(),d=ds.date,l=TIMES.map((t,i)=>i).fil
 function renderNow(){
  ST.nowKey=ST.tab+'|'+(ST.q||'');
  {const b=$('#seeSoon');if(b)b.hidden=!!ST.q||ST.tab===2;const nw=$('#now');if(nw)nw.classList.toggle('res',!!ST.q)}
- {const h=$('#nowH');if(h)h.textContent=ST.q?'Résultats':['À l’affiche','Nouveautés','Bientôt en salle'][ST.tab]||'À l’affiche'}
+ {const h=$('#nowH');if(h)h.textContent=ST.q?'Résultats':['À l’affiche','Nouveautés','Bientôt en salle','Pour les enfants'][ST.tab]||'À l’affiche'}
  /* Loi de Postel : on accepte ce que les gens tapent (majuscules, accents, espaces en trop) */
  const norm=x=>String(x).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
  const q=norm(ST.q),l=(q?FILMS:list()).filter(f=>!q||filmMatch(f,q).r<9),nxs=todaySlots();
@@ -2689,6 +2702,25 @@ const PBIO={
 'Hiram Garcia':'Producteur américain, Seven Bucks Productions. Jumanji, Vaiana.',
 'Beau Flynn':'Producteur américain. Vaiana, San Andreas.',
 'Christophe Julien':'Compositeur français.',
+'Daniel Chong':'Réalisateur et créateur américain de la série d’animation We Bare Bears ; Hoppers est son premier long métrage.',
+'Pierre Coffin':'Réalisateur et animateur français, coréalisateur de Moi, moche et méchant ; il prête sa voix à tous les Minions.',
+'Cal Brunker':'Réalisateur canadien de films d’animation, auteur des films La Pat’ Patrouille (2021 et 2023).',
+'Alessandro Carloni':'Réalisateur italien de films d’animation, coréalisateur de Kung Fu Panda 3.',
+'Bill Hader':'Acteur et humoriste américain (né en 1978), ancien du Saturday Night Live, créateur de la série Barry.',
+'Jon Hamm':'Acteur américain (né en 1971), connu pour la série Mad Men.',
+'Trey Parker':'Auteur, acteur et réalisateur américain, cocréateur de la série South Park.',
+'Allison Janney':'Actrice américaine (née en 1959), oscarisée pour Moi, Tonya, connue pour The West Wing.',
+'Christoph Waltz':'Acteur autrichien (né en 1956), oscarisé pour Inglourious Basterds et Django Unchained.',
+'Jesse Eisenberg':'Acteur américain (né en 1983). The Social Network, Insaisissables.',
+'Jeff Bridges':'Acteur américain (né en 1949), oscarisé pour Crazy Heart ; The Big Lebowski.',
+'Terry Crews':'Acteur et ancien joueur de football américain, connu pour la série Brooklyn Nine-Nine.',
+'Snoop Dogg':'Rappeur et acteur américain (né en 1971).',
+'Jennifer Hudson':'Chanteuse et actrice américaine (née en 1981), oscarisée pour Dreamgirls.',
+'Quinta Brunson':'Actrice et créatrice américaine de la série Abbott Elementary.',
+'America Ferrera':'Actrice américaine (née en 1984). La série Ugly Betty, Barbie.',
+'Giancarlo Esposito':'Acteur américain (né en 1958). Breaking Bad, Better Call Saul.',
+'Mark Mothersbaugh':'Compositeur et musicien américain, cofondateur du groupe Devo.',
+'John Powell':'Compositeur britannique. Dragons, Moi, moche et méchant, Kung Fu Panda.',
 'Lionel Boyce':'Acteur américain, connu pour la série The Bear.',
 'Ben Wang':'Acteur américain, connu pour la série American Born Chinese.',
 'Frankie Adams':'Actrice néo-zélandaise, connue pour la série The Expanse.',
@@ -2761,9 +2793,9 @@ function askVideoConsent(then){
  b=>{b.onclick=e=>{const y=e.target.closest('#vYes'),n=e.target.closest('#vNo');if(!y&&!n)return;A11Y.vidAsked=true;A11Y.vidOn=!!y;applyA11y();closeSheet();if(y&&then)setTimeout(then,350)}})}
 function openTrailer(){
  const f=film();if(!f||!f.yt)return;
- const play=()=>openSheet('Bande-annonce',`<div class="vbox" id="vbox"><iframe src="${ytSrc(f,{mute:0,controls:1,fs:1,disablekb:0})}" title="Bande-annonce de ${esc(f.title)}" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p class="vtxt small">Vidéo hébergée par YouTube (mode sans cookie).</p>`);
+ const play=()=>openSheet('Bande-annonce',`<div class="vbox" id="vbox"><iframe src="${ytSrc(f,{mute:0,controls:1,fs:1,disablekb:0})}" title="Bande-annonce de ${esc(f.title)}" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p class="vtxt small">Vidéo hébergée par YouTube (mode sans cookie). Elle ne s’affiche pas ? <a class="ytlink" href="https://www.youtube.com/watch?v=${f.yt}" target="_blank" rel="noopener noreferrer">Ouvrir sur YouTube</a>.</p>`);
  if(A11Y.vidAsked&&A11Y.vidOn){play();return}
- openSheet('Bande-annonce',`<p class="vtxt">Cette bande-annonce est hébergée par <b>YouTube</b> (mode sans cookie). La lancer transmet votre adresse IP à YouTube.</p><div class="two"><button class="btn" id="vGo"><span>Lire la bande-annonce</span></button><button class="btn alt" id="vNo2"><span>Annuler</span></button></div>`,
+ openSheet('Bande-annonce',`<p class="vtxt">Cette bande-annonce est hébergée par <b>YouTube</b> (mode sans cookie). La lancer transmet votre adresse IP à YouTube.</p><div class="two"><button class="btn" id="vGo"><span>Lire la bande-annonce</span></button><button class="btn alt" id="vNo2"><span>Annuler</span></button></div><p class="vtxt small" style="margin-top:10px">Sans rien charger ici : <a class="ytlink" href="https://www.youtube.com/watch?v=${f.yt}" target="_blank" rel="noopener noreferrer">ouvrir sur YouTube</a>.</p>`,
  b=>{b.onclick=e=>{if(e.target.closest('#vGo')){closeSheet();setTimeout(play,380)}else if(e.target.closest('#vNo2'))closeSheet()}})}
 $('#trailerBtn').onclick=openTrailer;
 

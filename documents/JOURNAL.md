@@ -17,26 +17,41 @@
 ## Méthode
 Boucle courte, répétée une centaine de fois : **ma demande (souvent avec capture) → implémentation → vérification automatique → capture → ma validation**. Aucune idée n'est appliquée sans mon accord visuel (ex. : 5 propositions de logo avant d'en choisir). Chaque défaut vu sur mes appareils a été reproduit avant d'être corrigé quand c'était possible.
 
-## Prompts marquants (extraits fidèles) et ce qu'ils ont produit
-| Mon prompt | Résultat |
-|---|---|
-| « Je veux aussi une version claire en plus de la version sombre… harmonie des couleurs » | Mode clair déduit de la palette |
-| « Améliorer la fonction de recherche avec suggestions… miniatures d'affiches » | Recherche avec films, personnes, cinémas |
-| « Travailler les transitions entre les pages pour garder de la fluidité » | Transitions de page, puis simplifiées en fondus séquentiels |
-| « Comme si nous étions assis avec vue des sièges de devant et de l'écran » | Vue 3D depuis la place, puis bande-annonce sur l'écran |
-| « Propose-moi cinq logos et j'en validerai un » | Planches de logos (billets, noms corses, lettres-symboles) ; choix final : mon propre dessin |
-| « Un agent intelligent… personnage attachant cliquable, qui suit du regard la souris » | Assistant « U Ghjattu-Volpe » (règles locales, pas d'IA externe, rien n'est envoyé) |
-| « Inventer des cinémas en Corse » | 4 cinémas fictifs : Aiacciu, Bastia, Corti, Portivechju |
-| « Ajouter des suggestions et inspire-toi des images pour les suppléments » | Bannières de petite faim avec photos |
-| « Il ne peut pas y avoir deux réservations du même film aux mêmes heures » | Règle de non-chevauchement |
-| « Toujours le bug de transition quand on clique sur réservé… analyse la vidéo » | Bug trouvé : onde au toucher qui agrandissait le bouton |
-| « Garde l'affiche 2 secondes puis la bande-annonce au format vertical » | Affiche → vidéo (verticale officielle si elle existe) |
-| « Analyse mon site avec l'énoncé… crée les documents du barème » | Ce dossier de rendu |
-| Vidéo d'un plan de stade : « utiliser le même type de transitions pour le choix des places » | Plan de salle en zones avec zoom de caméra, vue de la place avec « Changer de place / Acheter » |
-| « Dans mon compte, je ne retrouve pas mes suivis » | Section « Mes suivis », suivi des personnes depuis la recherche |
-| Capture avec un ovale jaune : « je veux que le fond ait cette forme » (5 propositions avant de modifier) | Planche de 5 propositions, puis ovale de fond appliqué sans flou sur les boutons |
-| « Élargir le dégradé en dehors de l'écran… remettre à 55 % en clair » | Ovale qui déborde ; opacité réglable (55 % clair / 90 % sombre) |
-| « Mets-moi une checklist pour les 3 testeurs, en vertical pour ma reMarkable » | `CHECKLIST-TEST-3-PERSONNES.pdf` au format 3:4 |
+## Comment j'écris un bon prompt (ce que j'ai appris en une centaine d'essais)
+1. **Contexte et but** : à quoi sert l'écran, pour qui, quel résultat mesurable.
+2. **Contraintes** : ce qu'il ne faut pas casser (design en place, Safari, accessibilité, pas de flou sur les boutons).
+3. **Preuve demandée** : une capture avant/après, un test automatique, ou un tableau de vérification.
+4. **Une image vaut un paragraphe** : joindre la capture ou la vidéo de l'écran concerné, avec l'endroit exact entouré.
+
+## Prompts marquants, versions améliorées et résultats
+| Mon prompt (extrait fidèle) | Version améliorée (à réutiliser) | Résultat |
+|---|---|---|
+| « Je veux aussi une version claire en plus de la version sombre… harmonie des couleurs » | « Ajoute un mode clair **déduit de la palette active** (pas une 6ᵉ palette), avec contraste texte ≥ 4,5 : 1, et un réglage Clair / Sombre / Auto » | Mode clair déduit de la palette, mode Auto par défaut |
+| « Améliorer la fonction de recherche avec suggestions… miniatures d'affiches » | « La recherche propose en direct films, personnes et cinémas (miniature, rôle), accepte majuscules et accents, et se pilote au clavier » | Recherche avec suggestions et fiches personnes |
+| « Comme si nous étions assis avec vue des sièges de devant et de l'écran » | « Depuis un siège choisi, montre ce que l'on voit : écran **imposant sans cadre**, bande-annonce dessus, salle sombre, voisins discrets, **aucun fauteuil devant le premier rang** ; fiable sous Safari » | Vue depuis la place immersive |
+| « Propose-moi cinq logos et j'en validerai un » | « Fais 5 propositions visuelles côte à côte, fond clair et fond sombre, **sans rien modifier** avant mon choix » | Planches de logos, puis mon propre dessin |
+| « Un agent intelligent… personnage attachant cliquable, qui suit du regard la souris » | « Assistant à règles locales (aucune donnée envoyée) qui comprend « deux places côte à côte au fond pour un film drôle ce soir à 20 h » et ouvre le récapitulatif **sans payer à ma place** » | U Ghjattu-Volpe, réservation par la conversation |
+| « Il ne peut pas y avoir deux réservations du même film aux mêmes heures » | « Interdis les séances qui se chevauchent et impose 45 min entre deux films ; grise les créneaux, explique pourquoi, et **rends le refus visible à l'écran** » | Règle des 45 minutes, message visible |
+| « Toujours le bug de transition quand on clique sur réservé… analyse la vidéo » | « Voici ma vidéo d'écran : découpe-la en images, trouve **l'image où ça casse**, donne la cause avant de corriger, puis prouve la correction » | Onde au toucher qui agrandissait le bouton ; plus tard, conflit de classe `off` sur le bouton de commande |
+| « Dans mon compte, je ne retrouve pas mes suivis » | « Le compte regroupe réservations, rappels, suivis (films et personnes), films vus, dans cet ordre, avec « Retirer » aligné à droite » | Compte réorganisé |
+| « Je veux que le chatbot soit performant… deux places côte à côte au fond pour un film drôle ce soir 20 h » | « Écris les phrases que l'assistant doit comprendre (nombre de places, zone, heure, genre, jour), la réponse attendue et le test qui le prouve » | Réservation par la conversation, tests automatiques |
+| « Mettre un chat qui court dans le jeu avec ces planches, le plus fluide possible » | « Utilise **uniquement** mes poses : départ assis, course en boucle, saut, glissade à l'arrivée, chute sur un objet ; mouvement indépendant de la fréquence d'écran ; facile » | Mini-jeu de la page « Plus de réseau » |
+| « Mettre un mode sombre sans problème d'image » (chat avec halo blanc) | « Détoure les poses : retire le fond relié au bord de l'image, **garde le pelage blanc**, vérifie sur fond sombre » | Détourage refait |
+| « Rubrique pour enfants, 5 dessins animés minimum, bande-annonce pour tous les films » | « Ajoute un onglet Enfants (animation et famille), 4 films récents avec affiche, durée, distribution, **bande-annonce officielle vérifiée** ; contrôle que chacun se lance » | Onglet Enfants, 8 titres, bandes-annonces contrôlées |
+| « Mets-moi une checklist pour les 3 testeurs » puis « simplifier au maximum » | « Une page : 3 tâches, 2 questions, cases à cocher et secondes » | Feuille de test en une page |
+
+## Exemples de prompts complets
+**1. Le fond coloré tiré de l'affiche (demande de fond sur les pages en lien avec les images de films)**
+> « Sur l'introduction et l'accueil, le fond de page doit prendre les **couleurs de l'affiche du film affiché**, en **ovale flouté** centré derrière le carrousel, qui **déborde des deux côtés de l'écran** (dégradé doux, pas de bord visible). Le flou ne concerne **que le fond** : jamais les boutons, textes ni affiches. La barre du haut reste **transparente**, même quand on descend, pour garder le fond coloré sur toute la page. Opacité 55 % en mode clair et 90 % en mode sombre. La couleur change en fondu à chaque affiche, après préchargement des images pour éviter les cartes noires. **Sans casser Safari** (pas de `backdrop-filter` combiné à un masque). Montre-moi une capture de l'accueil en haut et défilé, clair et sombre. »
+
+**2. Réparer un bug à partir d'une vidéo d'écran**
+> « Voici l'enregistrement de mon écran Safari. Découpe-le en images, repère le moment où le bouton de paiement se met à recouvrir la page, donne la cause exacte, corrige **sans modifier le reste**, puis ajoute un contrôle automatique pour que cela ne revienne pas. »
+
+**3. Ajouter une rubrique avec des données vérifiées**
+> « Crée un onglet « Enfants » (films d'animation et famille). Ajoute au moins 5 dessins animés avec **affiche, durée, distribution, date et bande-annonce officielle** ; vérifie chaque lien vidéo et dis-moi les sources. N'invente aucune note : si une donnée est introuvable, indique-le. »
+
+**4. Simplifier un protocole de test**
+> « Réduis le test utilisateur à **une page** : 3 tâches chronométrées, 2 questions, cases à cocher. Pas de jargon. Ne remplis aucun résultat à ma place. »
 
 ## Choix expliqués
 | Choix | Pourquoi |

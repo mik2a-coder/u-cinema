@@ -1,6 +1,6 @@
 # Direction artistique et palette
 
-*Dossier de livraison : passation design et développement. Version du prototype : **v91** (18 novembre 2026).*
+*Dossier de livraison : passation design et développement. Version du prototype : **v92** (18 novembre 2026).*
 
 ## 1. Synthèse de la direction artistique
 
@@ -43,6 +43,7 @@ Le prototype est codé (HTML), il n'existe donc pas de maquette Figma : chaque �
 |---|---|---|
 | Introduction (3 étapes) | Présenter le service, images qui changent avec le texte | [Ouvrir](https://mik2a-coder.github.io/u-cinema/) |
 | Accueil | Trouver un film : carrousel, liste, recherche, assistant | [#home](https://mik2a-coder.github.io/u-cinema/#home) |
+| Rubrique enfants | Proposer des dessins animés (8 titres) dans un onglet dédié | [Accueil > Enfants](https://mik2a-coder.github.io/u-cinema/#home:0:tab=3) |
 | Fiche film | Convaincre : extrait vidéo, note, séances du jour, distribution | [#detail](https://mik2a-coder.github.io/u-cinema/#detail:0) |
 | Fiche personne | Découvrir un acteur, un réalisateur ou un compositeur : biographie, filmographie, suivre | Depuis la distribution d'une fiche film |
 | Séance | Choisir cinéma, jour, heure, tarifs | [#book](https://mik2a-coder.github.io/u-cinema/#book:0) |

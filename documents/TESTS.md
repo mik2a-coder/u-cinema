@@ -44,6 +44,7 @@
 | Assistant | « deux places côte à côte au fond… ce soir 20h » mène au récapitulatif avec les bonnes places, l'horaire le plus proche et le total | vérifié ; refus propre pour un film pas encore en salle |
 | Page « Plus de réseau » | Joueur automatique : 3 parties sur 3 gagnées jusqu'à l'arrivée ; une partie sans saut finit par la chute du chat sur un objet ; saut visible en entier dans le cadre | vérifié (Chrome, v86) ; à essayer sur iPhone et Safari |
 | Bouton de commande | Sur la page Commande, le bouton garde sa taille (≈ 52 px de haut, en bas de page) avec et sans CGV cochées ; achat jusqu'au billet | vérifié (v90) après un conflit de classe repéré sur une vidéo d'écran |
+| Bandes-annonces | Pour les 22 films : lien YouTube vérifié (réponse « oEmbed » valide) et extrait de la fiche révélé en environ 2,5 s (Chrome) | voir v92 |
 | Contraste | Mesure des paires texte/fond sur 5 palettes | ≥ 4,5 : 1 (voir `DESIGN.md`) |
 
 ## Revues déjà intégrées — la version améliorée (1 relecteur : l'auteur)
