@@ -2,6 +2,13 @@
 
 Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` dans `sw.js`), affiché en bas de la page **Compte** (« Version vNN »). Pour passer d'une version à l'autre : recharger sans cache (Cmd + Option + R sur Safari).
 
+## Version 86 — 18 novembre 2026
+
+| Demande | Ce qui a été fait | Où le voir |
+|---|---|---|
+| Mini-jeu plus fluide, plus facile, chat non coupé | Jeu réécrit avec tes 11 poses remises dans l'ordre : départ assis, cycle de course en 5 images, saut en 3 temps (montée, sommet, descente), glissade à l'arrivée si on gagne, chute sur le dos sur un objet. Mouvement indépendant de la fréquence de l'écran, vitesse de départ plus douce, saut mémorisé juste avant l'atterrissage, collisions indulgentes, zone de jeu plus haute (le chat ne sort plus du cadre) | Page « Plus de réseau » |
+| Garder les boîtes de pop-corn, ajouter d'autres objets de cinéma | Pop-corn (plus fréquent), claquette, bobine, gobelet, projecteur ; ligne d'arrivée à 260 m | Page « Plus de réseau » |
+
 ## Version 85 — 18 novembre 2026
 
 | Demande | Ce qui a été fait | Où le voir |
@@ -128,3 +135,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v83 | 18/11/2026 | Page « Plus de réseau » avec mini-jeu du chat |
 | v84 | 18/11/2026 | Mini-jeu : chat animé qui court et saute, tête triste en haut |
 | v85 | 18/11/2026 | Mini-jeu : cycle de course en 6 images et obstacles de la planche de sprites |
+| v86 | 18/11/2026 | Mini-jeu : poses remises dans l'ordre, départ, arrivée en glissade, chute, objets de cinéma, plus facile |
