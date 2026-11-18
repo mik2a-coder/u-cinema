@@ -683,7 +683,7 @@ body.devmode .stage{display:none}
  .sec-h{padding:0 max(24px,4vw)}.sec-h h2{font-size:var(--fs-3xl)}
  .now{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:28px 24px;overflow:visible;padding:0 max(24px,4vw) 40px}
  .ncard{width:auto}.ncard .img{height:auto;aspect-ratio:2/3;transition:transform .25s,box-shadow .25s}
- .ncard:hover .img{transform:translateY(-6px);box-shadow:0 24px 40px -14px rgba(0,0,0,.8),0 0 0 2px var(--accent)}
+ .ncard:hover .img{box-shadow:0 24px 40px -14px rgba(0,0,0,.8),0 0 0 2px var(--accent)}
  .ncard h4{font-size:var(--fs-3xl)}
  .nav,.hfade{display:none}
  .hbody{padding-bottom:40px}
@@ -1472,7 +1472,7 @@ html.vt-back::view-transition-new(root){animation:vtInB .46s cubic-bezier(.16,1,
 .avs{flex:none}.dph-row{display:flex}.dph-row>*{width:56px;height:56px;border-radius:50%;overflow:hidden;flex:none;object-fit:cover;object-position:center 20%;border:2px solid var(--surface);box-sizing:border-box;background:var(--surface2)}.dph-row>*+*{margin-left:-16px}
 .ff{white-space:nowrap;flex:none}.ff svg{width:20px;height:20px}.ff[aria-pressed=true]{border-color:var(--accent);color:var(--accent-text)}.ff[aria-pressed=true] svg{fill:currentColor}
 .ff.pop svg{animation:bellRing .7s ease-out}@keyframes bellRing{20%{transform:rotate(18deg)}40%{transform:rotate(-16deg)}60%{transform:rotate(10deg)}80%{transform:rotate(-6deg)}}
-@media (min-width:600px){.now{grid-template-columns:repeat(auto-fit,minmax(168px,210px))!important;justify-content:center}}
+@media (min-width:600px){.now.res{grid-template-columns:repeat(auto-fit,minmax(168px,210px));justify-content:center}}
 /* bureau : cadre vertical = affiche floutée + bande-annonce entière (16:9) à la largeur du cadre, sans recadrage ni zoom */
 .d-video.fit{background:linear-gradient(to bottom,rgba(10,8,6,.14),rgba(10,8,6,.32));-webkit-backdrop-filter:blur(9px) saturate(1.25);backdrop-filter:blur(9px) saturate(1.25)}
 .d-video.fit iframe{left:0;top:50%;width:100%;height:auto;aspect-ratio:16/9;transform:translateY(-50%)}
@@ -1544,6 +1544,9 @@ body:has(#s-detail.active) .toast{bottom:118px}
 body:has(#s-home.active) #dtop::before{opacity:0;transition:opacity .35s}
 body:has(#s-home.active) #dtop.sc::before{opacity:1}
 :root.light #s-home .amb{opacity:.55}
+/* liste des films : toutes les affiches sur la même ligne de base, grille alignée sur le titre de section */
+.ncard{align-self:start}.ncard .img{aspect-ratio:2/3;height:auto!important}
+#seeSoon[hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -2097,7 +2100,7 @@ function filmMatch(f,n){
 function peopleIndex(){const m=new Map();FILMS.forEach(f=>SROLES.forEach(([k,l0])=>(k==='dir'?dirNames(f):f[k]||[]).forEach(nm=>{const l=k==='dir'?TM(f).role:l0;let p=m.get(nm);if(!p){p={name:nm,roles:[],films:[]};m.set(nm,p)}if(!p.roles.includes(l))p.roles.push(l);if(!p.films.includes(f))p.films.push(f)})));return[...m.values()]}
 function todaySlots(){const ds=defaultSlot(),d=ds.date,l=TIMES.map((t,i)=>i).filter(i=>okSlot(d,i)).slice(0,4);return{d,l,next:ds.time}}
 function renderNow(){
- {const b=$('#seeSoon');if(b)b.hidden=!!ST.q||ST.tab===2}
+ {const b=$('#seeSoon');if(b)b.hidden=!!ST.q||ST.tab===2;const nw=$('#now');if(nw)nw.classList.toggle('res',!!ST.q)}
  {const h=$('#nowH');if(h)h.textContent=ST.q?'Résultats':['À l’affiche','Nouveautés','Bientôt en salle'][ST.tab]||'À l’affiche'}
  /* Loi de Postel : on accepte ce que les gens tapent (majuscules, accents, espaces en trop) */
  const norm=x=>String(x).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();

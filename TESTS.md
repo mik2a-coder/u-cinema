@@ -72,6 +72,12 @@ Ne jamais aider. Noter : hésitations, retours en arrière, mots employés, temp
 | Bouton « Suivre » : état suivi peu visible | État plein (coche, cloche pleine), déplacé à côté de « Réserver » |
 | Animations décoratives du chat | Suppression des boucles et de la bulle du logo |
 | Résultats de recherche, plan de salle, 5 dates qui débordent | Centrage, rangée A dégagée, dates sur 5 colonnes |
+| Suivis introuvables dans le compte | Section « Mes suivis » (films, acteurs, réalisateurs), « Retirer » aligné à droite |
+| Transition du choix de places jugée moins fluide qu'un plan de stade | Vue d'ensemble puis zoom sur la zone ; « Changer de place / Acheter » depuis la vue de la place |
+| Vue depuis la place cassée sous Safari (bloc noir, côtés manquants) | Écran 16:9 qui contient exactement la vidéo |
+| Ligne dure entre la barre du haut et la page (Safari) | Fondu sans flou ni masque ; barre transparente sur l'accueil |
+| Fond de l'accueil sans forme | Ovale doux qui déborde de l'écran, opacité 55 % / 90 % |
+| Affiches de la liste mal alignées | Grille alignée sur le titre, aucune élévation au survol |
 
 ## Test à 3 personnes — à compléter
 Remplir la « Grille de résultats » ci-dessus avec de **vraies** observations, puis la synthèse gravité × fréquence, puis cocher « Corrigé ? ». Livrer ensuite un avant/après d'au moins 2 corrections.

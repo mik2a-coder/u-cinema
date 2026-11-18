@@ -194,3 +194,11 @@ Règle d'or : **un seul bouton principal par écran**, les autres en verre.
 | Mise en page | `--top --bot --sw --lm` | § 2, § 6 |
 | Composants | `.btn .cta .split .qchip .trow .seat .upsell .bn .toast .payerr .net .poster .sheet .lcard .ff2 .follow` | § 3 |
 Principe : couleurs, tailles, rayons et espaces passent par des variables ; une palette ou un mode se change en redéfinissant ces variables. **Exception connue** : les boutons du mode clair utilisent deux valeurs écrites directement (`#1E1810`, `#F4E4B6`) ; elles devraient devenir des jetons (`--btn-ink`, `--btn-ink-text`).
+
+
+## 10. Accueil : fond en ovale, barre transparente, liste des films
+- **Fond en ovale** : la couleur de l'affiche en cours forme un ovale doux centré sur le carrousel (masque `radial-gradient(ellipse 92% 54%)`), qui **déborde des deux côtés de l'écran** ; opacité **55 % en clair, 90 % en sombre** ; bord en fondu progressif, **aucun flou sur les boutons ni les textes**.
+- **Barre du haut sur l'accueil** : transparente en haut de page (l'ovale passe derrière), elle se remplit en fondu au défilement.
+- **Liste « À l'affiche »** : grille alignée sur le titre de section (colonnes de 210 px minimum, toutes les affiches en 2:3 sur la même ligne de base) ; pas de décalage au survol (anneau et ombre seulement) ; résultats de recherche centrés.
+- **Plan de salle en zones** : trois zones (`ZONES` : Avant A–C, Centre D–F, Fond G–H) ; arrivée en vue d'ensemble puis zoom de la caméra sur la zone des places proposées (`#sgrid.ov` → `.zf`, 0,8 s) ; les autres rangées s'estompent ; « Voir toute la salle » bascule ; animations réduites : pas de zoom.
+- **Téléphone** : le logo de l'app en haut à gauche de l'accueil ; le compte est dans le menu du bas.

@@ -33,7 +33,8 @@
 **Livré** : le prototype en ligne couvre, sur téléphone :
 - **Parcours** : accueil → fiche → séance (dates, séances, tarifs) → places (plan, vue depuis la place) → commande (petite faim, CGV) → billet QR → compte.
 - **Imprévus** : séance complète / annulée / déjà réservée, paiement refusé (carte de test), hors ligne, recherche vide, double réservation refusée.
-- **Plus** : recherche avec suggestions (films, personnes, cinémas), assistant « U Ghjattu-Volpe », carte de fidélité, historique et notes, suivi de films, annulation de réservation, installation sur l'écran d'accueil (PWA).
+- **Plan de salle en zones** : vue d'ensemble, zoom de caméra sur la zone des places proposées, « Voir depuis ma place » avec « Changer de place / Acheter ».
+- **Plus** : recherche avec suggestions (films, personnes, cinémas), assistant « U Ghjattu-Volpe », carte de fidélité, historique et notes, suivis (films, acteurs, réalisateurs) dans le compte, annulation de réservation, installation sur l'écran d'accueil (PWA).
 **Preuves** : captures `mobile_01` à `mobile_09` ; audit de débordement sur 360, 390 et 430 px (`tools/scenarios/audit-debordement.json`, 0 défaut le 18 novembre 2026).
 
 ## 4. Grand écran — 2 points

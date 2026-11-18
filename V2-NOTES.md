@@ -97,3 +97,11 @@ Contrôle automatique des boutons coupés ou inatteignables et des débordements
 
 ## Cinémas (démonstration)
 Les 4 cinémas sont **fictifs** et situés en Corse : U Cinemà Aiacciu (Ajaccio), Bastia, Corti (Corte), Portivechju (Porto-Vecchio). Adresses et distances inventées pour la maquette.
+
+
+## 7. Évolutions du 18 novembre 2026
+- **Plan de salle en zones** (Avant, Centre, Fond) avec zoom de caméra ; vue depuis la place avec « Changer de place / Acheter ».
+- **Compte** : réservations, rappels de sortie, suivis (films, acteurs, réalisateurs), films vus ; annulation d'une réservation.
+- **Accueil** : fond en ovale doux qui déborde de l'écran (55 % en clair, 90 % en sombre), barre du haut transparente en haut de page, logo en haut à gauche sur téléphone.
+- **Fiche film** : « Suivre ce film » à côté de « Réserver » ; portraits des réalisateurs ; vidéo verticale pour 3 films.
+- **Dossier de rendu** : `BAREME.md`, `PARCOURS.md`, `JOURNAL.md`, `CHECKLIST-TESTS.md`, `RENDU-U-CINEMA.pdf`.

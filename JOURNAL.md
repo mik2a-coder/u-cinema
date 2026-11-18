@@ -32,6 +32,11 @@ Boucle courte, répétée une centaine de fois : **ma demande (souvent avec capt
 | « Toujours le bug de transition quand on clique sur réservé… analyse la vidéo » | Bug trouvé : onde au toucher qui agrandissait le bouton |
 | « Garde l'affiche 2 secondes puis la bande-annonce au format vertical » | Affiche → vidéo (verticale officielle si elle existe) |
 | « Analyse mon site avec l'énoncé… crée les documents du barème » | Ce dossier de rendu |
+| Vidéo d'un plan de stade : « utiliser le même type de transitions pour le choix des places » | Plan de salle en zones avec zoom de caméra, vue de la place avec « Changer de place / Acheter » |
+| « Dans mon compte, je ne retrouve pas mes suivis » | Section « Mes suivis », suivi des personnes depuis la recherche |
+| Capture avec un ovale jaune : « je veux que le fond ait cette forme » (5 propositions avant de modifier) | Planche de 5 propositions, puis ovale de fond appliqué sans flou sur les boutons |
+| « Élargir le dégradé en dehors de l'écran… remettre à 55 % en clair » | Ovale qui déborde ; opacité réglable (55 % clair / 90 % sombre) |
+| « Mets-moi une checklist pour les 3 testeurs, en vertical pour ma reMarkable » | `CHECKLIST-TEST-3-PERSONNES.pdf` au format 3:4 |
 
 ## Choix expliqués
 | Choix | Pourquoi |
@@ -52,6 +57,14 @@ Boucle courte, répétée une centaine de fois : **ma demande (souvent avec capt
 - **Un script cassé par une règle CSS posée dans le JavaScript** : vérifier la syntaxe à chaque modification.
 - **Cache du navigateur** : après une mise à jour, on voit parfois l'ancienne version → noms de fichiers versionnés, rechargement forcé.
 - **Mon propre jugement visuel** : plusieurs aller-retours (boutons dorés puis encre, logo, barre haute) → valider par une comparaison côte à côte avant d'appliquer.
+
+## Décisions récentes
+| Décision | Pourquoi |
+|---|---|
+| Garder 55 % d'opacité du fond en clair | Choix de l'auteur après comparaison côte à côte |
+| Ovale de fond **sans** flou sur les éléments | Les boutons et textes doivent rester nets ; seul le fond change |
+| Plan de salle : zoom de zone sans étape de plus | Garder l'objectif de réserver en moins de 60 secondes |
+| Écran de vue de la place en 16:9 | Fiabilité sous Safari et vidéo sans recadrage |
 
 ## Limites et à valider
 - Test à 3 personnes **non réalisé** (voir `TESTS.md`).

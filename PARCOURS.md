@@ -11,7 +11,7 @@ Parcours principal de Léa, du premier regard au billet. Chaque étape a un **se
 | 1. Découvrir | Ouvre l'app | Affiche du film du moment, titre, **séances du jour**, un bouton « Toutes les séances » | Curiosité | `01-accueil` |
 | 2. Comprendre | Touche l'affiche | Fiche : note, durée, séances rapides, réalisateur, synopsis replié, distribution ; bouton **Réserver** | Rapide | `02-fiche` |
 | 3. Séance | Vérifie le jour, garde 2 places | Progression 1/4, dates, séances (complète grisée), tarifs réduits repliés | Confiance | `03-seance` |
-| 4. Places | Les sièges sont déjà proposés | Plan de salle, légende, « Voir depuis ma place », **Acheter · 36 €** | Contrôle | `04-places` |
+| 4. Places | Les sièges sont déjà proposés ; la caméra zoome sur leur zone | Vue d'ensemble de la salle (Avant · Centre · Fond), zoom sur la zone, « Voir toute la salle », « Voir depuis ma place » (avec Changer de place / Acheter), **Acheter · 36 €** | Contrôle | `04-places` |
 | 5. Payer | Ajoute une gourmandise (facultatif), coche les CGV, valide | Bannières de suggestions, total TTC, « Commande avec obligation de paiement · 38,40 € TTC » | Vigilance | `05-commande`, `06-petite-faim` |
 | **Imprévu** | Carte refusée | « Paiement refusé par la banque. **Rien n'a été débité**, commande conservée » + [Changer de moyen] [Réessayer] | Inquiétude → soulagement | `07-paiement-refuse` |
 | 6. Entrer | Montre son billet | QR, coche animée, « Profitez de la séance », disponible hors ligne | **Pic** et fin positifs | `08-billet` |
