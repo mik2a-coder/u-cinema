@@ -22,6 +22,14 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
 
+## Version 93 — 18 novembre 2026
+
+| N° | Demande | Ce qui a été fait | Où le voir |
+|---|---|---|---|
+| 1 | Checklist à cases à cocher, facile / difficile / à améliorer | Feuille d'une page : pour chaque tâche et chaque personne, **résultat** (réussi seul, aidé, échec), **difficulté** (facile, moyen, difficile) et **ce qu'il faut améliorer** (cases), plus l'avis général | `documents/CHECKLIST-TESTS.md`, `A-RENDRE/CHECKLIST-TEST-3-PERSONNES.pdf` |
+| 2 | Politiques d'achat, d'annulation, avoir et horaires : être dans les règles, toutes les contraintes d'un cinéma | Nouvelles sections « Annulation, avoir et remboursement », « Horaires et organisation du cinéma » et « Règles du cinéma » dans les informations légales ; CGV complétées (frais de service, réservation, annulation) ; **avoir valable 12 mois** (date affichée, avoir périmé non proposé) ; remboursement intégral si le cinéma annule ; rappels sur les pages Séance et Commande ; horaires dans le choix du cinéma ; assistant qui répond sur horaires, règles et annulation. Document `POLITIQUES.md` avec références juridiques | Pied de page de chaque écran, étapes Séance et Commande |
+| 3 | Paragraphe des idées ajoutées avec plus-value dans le rendu | Nouveau chapitre « Idées ajoutées et plus-values » (jeu hors connexion, billets hors ligne, assistant, vue depuis la place, règles claires, points, enfants, fiches personnes, personnages, accessibilité…) | `documents/IDEES.md`, PDF |
+
 ## Version 92 — 18 novembre 2026
 
 | N° | Demande | Ce qui a été fait | Où le voir |
@@ -210,3 +218,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v90 | 18/11/2026 | Correctif paiement (conflit de classe avec la page réseau) ; affiches de l'introduction préchargées |
 | v91 | 18/11/2026 | Personnages du compte, plan de salle complet, deux réalisateurs, bande-annonce de la salle, test simplifié |
 | v92 | 18/11/2026 | Onglet Enfants (4 films ajoutés), boutons de l'introduction, bandes-annonces pour tous, prompts du journal |
+| v93 | 18/11/2026 | Politiques d'achat et horaires complets, avoir de 12 mois, checklist à cocher, chapitre « Idées ajoutées » |

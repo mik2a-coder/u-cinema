@@ -1716,7 +1716,7 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
     <div class="onb-text"><div class="onb-logo" aria-hidden="true"><img class="lg-mark" src="img/logo-mark3.png" alt="" width="44" height="44" decoding="async"><span class="lg-word"><i>U</i>CINEMÀ</span></div><div class="eyebrow" id="onbEye"></div><h1 class="display" id="onbTitle"></h1><p id="onbSub"></p>
       <div class="dots" id="onbDots" aria-hidden="true"><i></i><i></i><i></i></div></div>
     <div class="onb-actions"><button class="btn" id="onbNext"><span>Suivant</span></button><button class="btn alt onb-skip" id="onbSkip" type="button"><span>Passer l’intro</span></button></div>
-    <footer class="foot onb-foot"><button type="button" class="textlink" id="onbLegal">Confidentialité et mentions légales</button><span aria-hidden="true">·</span><button type="button" class="textlink" id="onbA11y">Options d’accessibilité</button></footer>
+    <footer class="foot onb-foot"><button type="button" class="textlink" id="onbLegal">Règles, confidentialité et mentions légales</button><span aria-hidden="true">·</span><button type="button" class="textlink" id="onbA11y">Options d’accessibilité</button></footer>
   </section>
 
   <!-- 2 -->
@@ -1736,7 +1736,7 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
       <div class="sec-h"><h2 id="nowH">À l’affiche</h2><button id="seeSoon" hidden>Voir les films à venir <span data-ic="chev"></span></button></div>
       <div class="pbar" id="pbar" hidden></div>
       <div class="now" id="now"></div>
-      <footer class="foot"><button type="button" class="textlink" data-legal>Confidentialité et mentions légales</button></footer>
+      <footer class="foot"><button type="button" class="textlink" data-legal>Règles, confidentialité et mentions légales</button></footer>
     </div>
     <div class="hfade"></div>
     <nav class="nav" aria-label="Navigation principale">
@@ -1765,7 +1765,7 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
     <div class="d-scroll" id="dScroll">
       <div class="d-spacer"><button class="trailer" id="trailerBtn"><span data-ic="play"></span>Bande-annonce</button></div>
       <div class="d-body" id="dBody"></div>
-      <footer class="foot"><button type="button" class="textlink" data-legal>Confidentialité et mentions légales</button></footer>
+      <footer class="foot"><button type="button" class="textlink" data-legal>Règles, confidentialité et mentions légales</button></footer>
     </div>
     <div class="d-bar"><button class="round" aria-label="Partager" data-toast="Lien copié" data-ic="share"></button><button class="ff2" id="followFilm" aria-pressed="false" aria-label="Suivre ce film"><span data-ic="bell"></span><span class="ff-t">Suivre</span></button><button class="btn cta gold" id="ctaMain" data-go="book"><span>Réserver</span><span data-ic="arrow"></span></button></div>
   </section>
@@ -1779,9 +1779,10 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
       <h2 class="h2">Choisir une date</h2><div class="dates" id="dates"></div>
       <h2 class="h2" style="margin-top:14px">Choisir une séance</h2><div class="afil" id="afil"></div><div class="slabel">Dolby Atmos · Salle 2 · Boucle magnétique</div><div class="times" id="times"></div>
       <h2 class="h2" style="margin-top:14px">Tarifs</h2><div id="tarifs"></div><p class="tnote" id="tnote"></p>
+      <p class="tnote polnote">Réservation jusqu’à 10 min avant la séance · annulation jusqu’à 2 h avant, rendue en avoir valable 12 mois. <button type="button" class="lnk" data-legal="annulation">Règles d’annulation</button> · <button type="button" class="lnk" data-legal="horaires">Horaires du cinéma</button></p>
       <div class="pmrnote" id="pmrNote" role="status" hidden></div>
       <div style="height:8px"></div>
-      <footer class="foot"><button type="button" class="textlink" data-legal>Confidentialité et mentions légales</button></footer>
+      <footer class="foot"><button type="button" class="textlink" data-legal>Règles, confidentialité et mentions légales</button></footer>
     </div>
     <div class="bottom"><button class="btn" id="toSeats"><span>Choisir mes places</span><span data-ic="arrow"></span></button></div>
   </section>
@@ -1830,9 +1831,9 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
       <h2 class="h2" style="margin-top:20px">Paiement</h2>
       <div id="pays"></div>
       <button class="promo" id="promo"></button><div class="promo-msg" id="pmsg" aria-live="polite"></div><div class="rwbox" id="rwBox"></div>
-      <div class="totals" id="totals"></div><p class="tnote" style="margin-top:10px">Prix en euros, toutes taxes comprises (TVA incluse), frais de service inclus.</p>
+      <div class="totals" id="totals"></div><p class="tnote" style="margin-top:10px">Prix en euros, toutes taxes comprises (TVA incluse), frais de service inclus.</p><p class="tnote">Annulation jusqu’à 2 h avant la séance, rendue en <b>avoir</b> valable 12 mois (pas de remboursement). <button type="button" class="lnk" data-legal="annulation">Voir les règles</button></p>
       <label class="cgv" for="cgv"><input type="checkbox" id="cgv"><span>J’ai lu et j’accepte les <button type="button" class="lnk" data-legal="cgv">conditions générales de vente</button>. Je reconnais que le <b>droit de rétractation ne s’applique pas</b> aux billets de cinéma (activité de loisirs fournie à une date déterminée). <button type="button" class="lnk" data-legal="confidentialite">Comment sont traitées mes données ?</button></span></label>
-      <footer class="foot"><button type="button" class="textlink" data-legal>Confidentialité et mentions légales</button></footer><div class="payerr" id="payErr" role="alert" hidden></div><div style="height:20px"></div>
+      <footer class="foot"><button type="button" class="textlink" data-legal>Règles, confidentialité et mentions légales</button></footer><div class="payerr" id="payErr" role="alert" hidden></div><div style="height:20px"></div>
     </div>
     <div class="bottom"><button class="btn" id="confirm" disabled><span>Commande avec obligation de paiement</span><span data-ic="arrow"></span></button></div>
   </section>
@@ -1845,7 +1846,7 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
       <div class="t-act"><button class="btn wallet" id="wallet"><span data-ic="wallet"></span><span id="wLbl">Ajouter à Wallet</span></button>
         <button class="btn" id="seeTickets"><span>Voir mes billets</span></button>
         <p class="endnote">Bonne séance ! Votre billet reste disponible dans « Mes billets », même sans réseau.</p><button class="link" data-go="home">Retour à l’accueil</button></div>
-      <footer class="foot"><button type="button" class="textlink" data-legal>Confidentialité et mentions légales</button></footer>
+      <footer class="foot"><button type="button" class="textlink" data-legal>Règles, confidentialité et mentions légales</button></footer>
     </div>
   </section>
 
@@ -2381,7 +2382,7 @@ function recordBooking(){
   ACC.bookings=ACC.bookings.slice(0,20);ACC.points+=Math.round(m.tot);if(m.cr)ACC.credit=+Math.max(0,ACC.credit-m.cr).toFixed(2);if(m.rwOff)ACC.rw.off5--;if(m.rwSn)ACC.rw.snack--;ST.useCredit=ST.useOff5=ST.useSnack=false;saveACC();logAct('book',f.id,{bk:ACC.bookings[0].date+'|'+ACC.bookings[0].time})}catch(e){}
 }
 const cxLeft=b=>new Date(b.date+'T'+b.time+':00').getTime()-Date.now();
-function cancelBlock(b){return cxLeft(b)>=2*3600e3?`<p class="vtxt small" style="margin-top:14px;text-align:center">Annulation possible jusqu’à 2 h avant la séance. Le montant est rendu sous forme d’avoir de ${eur(b.total)} (pas de remboursement).</p><button class="btn alt" id="bkCancel" style="margin-top:8px"><span>Annuler la réservation</span></button>`:`<p class="vtxt small" role="note" style="margin-top:14px;text-align:center"><b>Annulation impossible</b> : elle n’est possible que jusqu’à 2 h avant la séance.</p>`}
+function cancelBlock(b){return cxLeft(b)>=POL.cx*3600e3?`<p class="vtxt small" style="margin-top:14px;text-align:center">Annulation possible jusqu’à ${POL.cx} h avant la séance. Le montant est rendu sous forme d’avoir de ${eur(b.total)}, valable ${POL.creditMonths} mois (pas de remboursement). <button type="button" class="lnk" data-legal="annulation">Voir les règles</button></p><button class="btn alt" id="bkCancel" style="margin-top:8px"><span>Annuler la réservation</span></button>`:`<p class="vtxt small" role="note" style="margin-top:14px;text-align:center"><b>Annulation impossible</b> : elle n’est possible que jusqu’à 2 h avant la séance.</p>`}
 const fdateStr=iso=>cap(new Date(iso+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'}).replace('.',''));
 const stars=(id,n)=>`<div class="r5" role="radiogroup" aria-label="Votre note">${[1,2,3,4,5].map(k=>`<button type="button" role="radio" aria-checked="${n===k}" aria-label="${k} sur 5" data-rate="${k}" data-f="${id}" class="${k<=n?'on':''}">${IC.star}</button>`).join('')}</div>`;
 function renderAccount(){
@@ -2401,7 +2402,7 @@ function renderAccount(){
    <span class="lc-face lc-back"><span class="lc-qr">${qrSVG('member-4821')}</span><small>À présenter en caisse pour cumuler vos points</small></span>
   </span></button></div>
  <div class="lc-prog"><div class="bar"><i style="width:${pct}%"></i></div><p>${nx?`Plus que <b>${(nx[1]-pts).toLocaleString('fr-FR')} points</b> pour passer <b>${nx[0]}</b>`:'<b>Niveau maximum atteint</b>'} · 1 point par euro dépensé</p></div>
-${ACC.credit>0?`<div class="acc-credit"><span data-ic="wallet"></span><div><strong>Avoir disponible : ${eur(ACC.credit)}</strong><small>Utilisable à votre prochaine commande. Une annulation donne un avoir, jamais un remboursement.</small></div></div>`:''}
+${creditNow()>0?`<div class="acc-credit"><span data-ic="wallet"></span><div><strong>Avoir disponible : ${eur(creditNow())}</strong><small>Valable jusqu’au ${creditUntil()}, utilisable à votre prochaine commande. Une annulation par vos soins donne un avoir, jamais un remboursement. <button type="button" class="lnk" data-legal="annulation">Voir les règles</button></small></div></div>`:''}
  <h3 class="acc-h">Mes récompenses</h3>
  <p class="rw-bal"><b>${ptsFree().toLocaleString('fr-FR')}</b> points à dépenser</p>
  ${RW.map(r=>{const n=ACC.rw[r.k]||0,ok=ptsFree()>=r.pts;return `<div class="rw"><div class="grow"><strong>${r.n}</strong><small>${r.d}</small>${n?`<small class="rw-own">${n} disponible${n>1?'s':''} : à activer dans votre commande</small>`:''}</div><button type="button" class="btn mini${ok?'':' alt'}" data-unlock="${r.k}" ${ok?'':'disabled'}><span>${ok?'Débloquer · '+r.pts+' pts':'Encore '+(r.pts-ptsFree())+' pts'}</span></button></div>`}).join('')}
@@ -2425,7 +2426,7 @@ ${ACC.credit>0?`<div class="acc-credit"><span data-ic="wallet"></span><div><stro
  <p class="acc-note">Historique et notes de départ : données de démonstration. Tout reste sur cet appareil.</p>
  </div></div>
 
- <footer class="foot"><button type="button" class="textlink" data-legal>Confidentialité et mentions légales</button><small id="appVer" style="display:block;color:var(--muted);margin-top:6px;font-size:calc(var(--fs-micro)*var(--ts,1))"></small></footer>`;
+ <footer class="foot"><button type="button" class="textlink" data-legal>Règles, confidentialité et mentions légales</button><small id="appVer" style="display:block;color:var(--muted);margin-top:6px;font-size:calc(var(--fs-micro)*var(--ts,1))"></small></footer>`;
  paintIcons($('#accScroll'));try{caches.keys().then(k=>{const v=k.filter(x=>/^cinelux2-v/.test(x)).sort((a,b)=>parseInt(a.slice(10))-parseInt(b.slice(10))).pop(),e=$('#appVer');if(e)e.textContent='Version '+(v?v.slice(9):'locale')})}catch(e){}
 }
 (function(){
@@ -2450,8 +2451,8 @@ ${ACC.credit>0?`<div class="acc-credit"><span data-ic="wallet"></span><div><stro
   if(bk){const up=ACC.bookings.filter(b=>new Date(b.date+'T23:59:00')>=new Date(TODAY));const b=up[+bk.dataset.bk],f=FILMS.find(x=>x.id===b.id);
    openSheet('Mon billet',`<div class="bk"><div class="bk-top"><span class="mini-th">${poster(f.kind)}</span><div><strong>${esc(f.title)}</strong><small>${fdateStr(b.date)} · ${b.time}</small></div></div>
     <div class="bk-g"><div><small>CINÉMA</small><b>${esc(CINEMAS[b.cin].n)}</b></div><div><small>PLACES</small><b>${b.seats.join(' · ')}</b></div><div><small>BILLETS</small><b>${b.count}</b></div><div><small>TOTAL TTC</small><b>${eur(b.total)}</b></div></div>
-    <div class="bk-qr">${qrSVG('bk-'+b.id+b.date+b.time)}</div><p class="vtxt small" style="text-align:center">À présenter à l’entrée de la salle.</p>${cancelBlock(b)}</div>`,bb=>{bb.onclick=ev=>{const c=ev.target.closest('#bkCancel');if(!c)return;if(cxLeft(b)<2*3600e3){toast('Annulation impossible moins de 2 h avant la séance');closeSheet();return}if(!c.dataset.sure){c.dataset.sure='1';c.querySelector('span').textContent='Confirmer · avoir de '+eur(b.total);return}
-     const i=ACC.bookings.indexOf(b);if(i>=0){ACC.bookings.splice(i,1);ACC.points=Math.max(0,ACC.points-Math.round(b.total));ACC.credit=+((ACC.credit||0)+b.total).toFixed(2);saveACC();logAct('cancel',b.id)}closeSheet();renderAccount();toast('Réservation annulée · avoir de '+eur(b.total)+' ajouté à votre compte')}});return}
+    <div class="bk-qr">${qrSVG('bk-'+b.id+b.date+b.time)}</div><p class="vtxt small" style="text-align:center">À présenter à l’entrée de la salle.</p>${cancelBlock(b)}</div>`,bb=>{bb.onclick=ev=>{const c=ev.target.closest('#bkCancel');if(!c)return;if(cxLeft(b)<POL.cx*3600e3){toast('Annulation impossible moins de 2 h avant la séance');closeSheet();return}if(!c.dataset.sure){c.dataset.sure='1';c.querySelector('span').textContent='Confirmer · avoir de '+eur(b.total);return}
+     const i=ACC.bookings.indexOf(b);if(i>=0){ACC.bookings.splice(i,1);ACC.points=Math.max(0,ACC.points-Math.round(b.total));ACC.credit=+(creditNow()+b.total).toFixed(2);{const e=new Date();e.setMonth(e.getMonth()+POL.creditMonths);ACC.creditExp=dIso(e)}saveACC();logAct('cancel',b.id)}closeSheet();renderAccount();toast('Réservation annulée · avoir de '+eur(b.total)+' ajouté à votre compte')}});return}
   if(e.target.closest('#accAv,#accAvLink'))openAvatars();
   if(e.target.closest('#accA11y'))openA11y();
   if(e.target.closest('#accLegal'))openLegal();
@@ -2741,7 +2742,7 @@ function renderPerson(){
  <h2 class="h2">Filmographie à l’affiche</h2>
  <div class="per-films">${fl.map(f=>`<button type="button" class="acc-row" data-pfilm="${f.id}"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>${esc(perRole(f,n))}</small><small>${f.year} · ${f.genre}${isSoon(f)?' · sortie le '+relLabel(f):f.rate!=null?' · ★ '+rt(f):''}</small></span><span data-ic="chev"></span></button>`).join('')}</div>
  <button type="button" class="btn alt per-all" id="perAll"><span>Voir ses films dans la liste</span></button>
- ${'<footer class="foot"><button type="button" class="textlink" data-legal>Confidentialité et mentions légales</button></footer>'}</div>`;
+ ${'<footer class="foot"><button type="button" class="textlink" data-legal>Règles, confidentialité et mentions légales</button></footer>'}</div>`;
  paintIcons($('#perScroll'));
 }
 HOOKS.person=renderPerson;
@@ -2815,7 +2816,7 @@ function renderDetail(){
  <div class="meta">${f.dur}<i></i>${f.genres}<i></i>${f.year}</div>
  ${isSoon(f)?'':quickSlots()}
  <div class="dir"><div class="avs">${dirPhoto(f)}</div><div class="grow"><small>${TM(f).role.toUpperCase()}</small><strong class="dnames">${dirNames(f).map(n=>`<button type="button" class="nm dn" data-actor="${esc(n)}">${esc(n)}</button>`).join(' et ')}</strong></div><button class="follow" id="follow" aria-pressed="${dirNames(f).every(n=>ACC.fp[n])}">${dirLbl(f)}</button></div>
- <div class="synh"><h3>Synopsis</h3></div><p class="syn clamp" id="syn">${f.syn}</p><button class="synmore" id="synMore" aria-expanded="false" aria-controls="syn">Lire la suite</button>${castHtml(f)}<footer class="foot"><button type="button" class="textlink" data-legal>Confidentialité et mentions légales</button></footer>`;
+ <div class="synh"><h3>Synopsis</h3></div><p class="syn clamp" id="syn">${f.syn}</p><button class="synmore" id="synMore" aria-expanded="false" aria-controls="syn">Lire la suite</button>${castHtml(f)}<footer class="foot"><button type="button" class="textlink" data-legal>Règles, confidentialité et mentions légales</button></footer>`;
  paintFollow(f);
  $('#dScroll').scrollTop=0;
  $('#favBtn').setAttribute('aria-pressed',!!ST.fav[f.id]);paintFav();paintCta(f);armNudge();
@@ -2904,6 +2905,10 @@ async function eraseAll(){try{localStorage.clear();sessionStorage.clear()}catch(
  try{if('caches' in window)for(const k of await caches.keys())await caches.delete(k)}catch(e){}
  try{if('serviceWorker' in navigator)for(const r of await navigator.serviceWorker.getRegistrations())await r.unregister()}catch(e){}
  location.hash='';location.reload()}
+/* règles du cinéma : une seule source pour le code et pour les textes affichés */
+const POL={cx:2,gap:45,close:10,creditMonths:12,open:'16 h 30',shut:'1 h 00',first:'17 h 15',last:'23 h 15'};
+const creditNow=()=>{const a=ACC.credit||0;if(a<=0)return 0;if(ACC.creditExp&&new Date(ACC.creditExp+'T23:59:59')<new Date())return 0;return a};
+const creditUntil=()=>{if(!ACC.creditExp)return '';return new Date(ACC.creditExp+'T12:00:00').toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})};
 const TODO=t=>`<span class="todo">[À COMPLÉTER : ${t}]</span>`;
 function legalSections(){const keys=storedKeys();return [
 ['confidentialite','Politique de confidentialité (RGPD)',`
@@ -2933,10 +2938,26 @@ function legalSections(){const keys=storedKeys();return [
  <p><b>Prix.</b> Les prix sont en euros, toutes taxes comprises, frais de service inclus. Le total à payer est affiché avant la commande.</p>
  <p><b>Commande.</b> Le contrat est conclu lorsque vous validez avec le bouton « Commande avec obligation de paiement ». Les billets sont délivrés sous forme numérique (QR code).</p>
  <p><b>Pas de droit de rétractation.</b> Conformément à l’article L.221-28 12° du Code de la consommation, le droit de rétractation ne s’applique pas aux activités de loisirs fournies à une date déterminée, ce qui est le cas des séances de cinéma.</p>
- <p><b>Modification, annulation.</b> ${TODO('conditions de report, d’annulation et de remboursement')}</p>
+ <p><b>Frais de service.</b> ${eur(FEE)} par billet, affichés avant la commande et compris dans le total.</p>
+ <p><b>Réservation, modification, annulation.</b> Réservation en ligne possible jusqu’à ${POL.close} minutes avant la séance. Annulation par vos soins jusqu’à ${POL.cx} h avant, remboursée sous forme d’<b>avoir</b> valable ${POL.creditMonths} mois. Séance annulée par le cinéma : remboursement intégral. Détail dans « Annulation, avoir et remboursement ».</p>
  <p><b>Tarifs réduits.</b> Un justificatif est demandé à l’entrée (carte étudiante, attestation France Travail, carte mobilité inclusion ou d’invalidité). Il n’est ni demandé ni conservé en ligne.</p>
  <p><b>Réclamations et médiation.</b> Après réclamation écrite restée sans réponse satisfaisante, vous pouvez saisir gratuitement le médiateur de la consommation : ${TODO('nom, adresse et site du médiateur')}.</p>
  <p><b>Droit applicable.</b> Droit français.</p>`],
+['annulation','Annulation, avoir et remboursement',`
+ <h4>Si vous annulez</h4>
+ <p>Depuis « Mon compte » › « Mes réservations », jusqu’à <b>${POL.cx} heures avant</b> le début de la séance. Passé ce délai, ou une fois la séance commencée, la réservation <b>n’est ni annulable ni remboursable</b>.</p>
+ <p>Vous recevez un <b>avoir</b> du montant payé (frais de service compris), <b>valable ${POL.creditMonths} mois</b> à compter de l’annulation et utilisable dès la commande suivante. Ce n’est <b>pas un remboursement en argent</b> : la loi ne prévoit ni annulation ni remboursement des séances de loisirs (art. L.221-28 12° du Code de la consommation) ; cette possibilité est un geste commercial. Les points gagnés sur la commande annulée sont retirés.</p>
+ <h4>Si le cinéma annule ou modifie la séance</h4>
+ <p>Séance supprimée, panne, cas de force majeure : vous êtes prévenu, et vous obtenez au choix le <b>remboursement intégral</b> sur le moyen de paiement utilisé ou une autre séance. Délai de remboursement : ${TODO('délai en jours')}.</p>
+ <h4>Autres cas</h4>
+ <ul class="lgl"><li><b>Absence ou retard :</b> le billet n’est ni remboursé ni échangé.</li><li><b>Modification :</b> il n’y a pas de modification de séance ; annulez (si le délai le permet) puis réservez à nouveau.</li><li><b>Paiement refusé :</b> rien n’est débité, la commande est conservée.</li><li><b>Doublons :</b> on ne peut pas réserver deux fois la même séance, ni deux films qui se chevauchent ; il faut au moins ${POL.gap} minutes entre deux films.</li><li><b>Billet perdu :</b> il reste dans « Mes billets », même sans réseau.</li></ul>`],
+['horaires','Horaires et organisation du cinéma',`
+ <p><i>Horaires de démonstration, identiques dans les quatre cinémas ; à adapter à chaque établissement.</i></p>
+ <ul class="lgl"><li><b>Accueil et caisses :</b> tous les jours de ${POL.open} à ${POL.shut} ; l’établissement reste ouvert jusqu’à la fin de la dernière séance.</li><li><b>Séances :</b> de ${POL.first} à ${POL.last}. Les films longs peuvent se terminer après minuit.</li><li><b>Salles :</b> ouvertes 15 minutes avant la séance.</li><li><b>Réservation en ligne :</b> jusqu’à ${POL.close} minutes avant le début.</li><li><b>Retrait comptoir (friandises) :</b> 30 minutes avant la première séance, jusqu’au début de la dernière.</li><li><b>Début de séance :</b> l’horaire affiché est celui du début des publicités et bandes-annonces ; le film commence environ 15 minutes plus tard.</li><li><b>Jours fériés et fermetures exceptionnelles :</b> ${TODO('liste et horaires')}.</li></ul>
+ <h4>Séances adaptées</h4><p>Audiodescription et sous-titres pour sourds et malentendants sur certaines séances (filtres à l’étape « Séance »), boucle magnétique en salle, emplacements fauteuil roulant avec accompagnant.</p>`],
+['reglement','Règles du cinéma (règlement intérieur type)',`
+ <p><i>Modèle à valider par l’exploitant.</i></p>
+ <ul class="lgl"><li><b>Billet :</b> contrôlé à l’entrée de la salle (QR code). Tarif réduit : justificatif demandé à l’entrée ; à défaut, la différence est à régler.</li><li><b>Âge :</b> certains films sont interdits aux moins de 12, 16 ou 18 ans (classification du CNC) ; une pièce d’identité peut être demandée. Ce prototype n’affiche pas encore la classification de chaque film.</li><li><b>Retard :</b> l’entrée reste possible après le début de la séance, sans remboursement ; les places numérotées sont gardées.</li><li><b>Silence :</b> téléphones en mode silencieux et écrans éteints pendant la séance.</li><li><b>Images :</b> il est interdit de filmer, photographier ou enregistrer le film (droit d’auteur).</li><li><b>Restauration :</b> friandises et boissons vendues sur place ; la consommation de boissons alcoolisées apportées de l’extérieur est interdite.</li><li><b>Sécurité :</b> sacs et bagages pouvant être contrôlés ; respect des consignes d’évacuation et de la capacité de la salle (${HALL} places).</li><li><b>Accessibilité :</b> emplacements fauteuil roulant et accompagnant, chiens guides et d’assistance acceptés ; autres animaux non admis.</li><li><b>Objets trouvés :</b> déposés à l’accueil, conservés ${TODO('durée')}.</li><li><b>Respect :</b> le personnel peut refuser l’accès ou exclure toute personne gênant les autres spectateurs, sans remboursement.</li></ul>`],
 ['mentions','Mentions légales',`
  <p>Éditeur : ${TODO('nom ou raison sociale, forme juridique, capital, adresse, SIRET')}. Directeur de la publication : ${TODO('nom')}.</p>
  <p>Hébergement : ${TODO('nom, adresse et contact de l’hébergeur')} (en phase de test, l’application est servie depuis un serveur personnel).</p>
@@ -2949,7 +2970,7 @@ function legalSections(){const keys=storedKeys();return [
  <p>Signaler un problème : ${TODO('adresse de contact accessibilité')}. En l’absence de réponse, vous pouvez saisir le Défenseur des droits (defenseurdesdroits.fr).</p>`]]}
 function openLegal(openId){
  const secs=legalSections();
- openSheet('Données et confidentialité',`<div class="lwarn"><b>Texte-type à faire valider par un juriste</b> avant toute mise en service réelle. Les champs <span class="todo">[À COMPLÉTER]</span> sont à renseigner avec les informations du responsable du traitement.</div>`
+ openSheet('Règles et informations légales',`<div class="lwarn"><b>Texte-type à faire valider par un juriste</b> avant toute mise en service réelle. Les champs <span class="todo">[À COMPLÉTER]</span> sont à renseigner avec les informations du responsable du traitement.</div>`
   +secs.map(x=>`<details class="ldet" id="ld-${x[0]}"><summary>${x[1]}</summary><div class="lb">${x[2]}</div></details>`).join(''),b=>{
   const d=b.querySelector('#ld-'+openId);if(d){d.open=true;setTimeout(()=>d.scrollIntoView({block:'start',behavior:'smooth'}),60)}
   b.addEventListener('click',e=>{
@@ -3082,7 +3103,7 @@ $('#afil').addEventListener('click',e=>{const b=e.target.closest('.fchip');if(!b
 $('#dates').addEventListener('click',e=>{const b=e.target.closest('.date');if(b){ST.date=+b.dataset.i;fixTime();ST.seats=[];renderBook()}});
 $('#times').addEventListener('click',e=>{const b=e.target.closest('.time');if(b&&!b.disabled&&!b.classList.contains('dim')){ST.time=+b.dataset.i;ST.seats=[];renderBook()}});
 $('#toSeats').onclick=()=>go('seats');
-function openCinema(){openSheet('Choisir un cinéma',CINEMAS.map((c,i)=>`<button class="opt" role="radio" aria-checked="${i===ST.cinema}" data-i="${i}"><span data-ic="pin"></span><span class="grow"><strong>${c.n}</strong><small>${c.a} · ${c.d}</small></span>${i===ST.cinema?'<span class="ok" data-ic="check"></span>':''}</button>`).join(''),b=>{
+function openCinema(){openSheet('Choisir un cinéma',CINEMAS.map((c,i)=>`<button class="opt" role="radio" aria-checked="${i===ST.cinema}" data-i="${i}"><span data-ic="pin"></span><span class="grow"><strong>${c.n}</strong><small>${c.a} · ${c.d}</small><small>Ouvert ${POL.open} – ${POL.shut}</small></span>${i===ST.cinema?'<span class="ok" data-ic="check"></span>':''}</button>`).join(''),b=>{
  b.onclick=e=>{const o=e.target.closest('.opt');if(!o)return;ST.cinema=+o.dataset.i;ST.seats=[];renderBook();if(cur==='seats')renderSeats();closeSheet();toast(cin().n)}})}
 $('#cinemaBtn').onclick=openCinema;$('#cinemaBtn2').onclick=openCinema;
 
@@ -3174,10 +3195,10 @@ const ptsFree=()=>Math.max(0,ACC.points-(ACC.spent||0));
 function money(){const t=ticketsTotal(),s=SNACKS.reduce((a,x,i)=>a+x.p*ST.snacks[i],0),fee=FEE*ST.count,disc=ST.promo?t*.1:0;
  const top=Math.max(0,...TARIFS.filter(x=>ST.tq[x.k]>0).map(x=>x.p)),
   rwOff=ST.useOff5&&ACC.rw.off5>0?+(top*.05).toFixed(2):0,rwSn=ST.useSnack&&ACC.rw.snack>0?RW[0].val:0,
-  sub=Math.max(0,t+s+fee-disc-rwOff-rwSn),cr=ST.useCredit&&ACC.credit>0?Math.min(ACC.credit,sub):0;
+  sub=Math.max(0,t+s+fee-disc-rwOff-rwSn),cr=ST.useCredit&&creditNow()>0?Math.min(creditNow(),sub):0;
  return{t,s,fee,disc,rwOff,rwSn,cr,tot:+(sub-cr).toFixed(2)}}
 function renderRewards(){const b=$('#rwBox');if(!b)return;const it=[];
- if(ACC.credit>0)it.push(['credit','Utiliser mon avoir','Disponible : '+eur(ACC.credit),!!ST.useCredit]);
+ if(creditNow()>0)it.push(['credit','Utiliser mon avoir','Disponible : '+eur(creditNow())+' · valable jusqu’au '+creditUntil(),!!ST.useCredit]);
  if(ACC.rw.snack>0)it.push(['snack',RW[0].n,'Gagnée avec vos points · '+eur(RW[0].val)+' déduits',!!ST.useSnack]);
  if(ACC.rw.off5>0)it.push(['off5',RW[1].n,'Gagnée avec vos points',!!ST.useOff5]);
  b.hidden=!it.length;b.innerHTML=it.length?`<h3 class="rw-h">Mes avantages</h3>`+it.map(x=>`<button type="button" class="opt" role="switch" aria-checked="${x[3]}" data-rwu="${x[0]}"><span class="grow"><strong>${x[1]}</strong><small>${x[2]}</small></span><span class="sw2" aria-hidden="true"><i></i></span></button>`).join(''):''}
@@ -3433,7 +3454,9 @@ function mvFaq(t,raw){
  const ft=mvTitle(raw)||FILMS.find(f=>f.id===(MV.st.shown||[]).slice(-1)[0]);
  const tr=TARIFS.map(x=>`${x.n} : ${eur(x.p)}`).join(' · ');
  if(/\b(tarif|prix|combien|coute|cout)\b/.test(t)&&!/(durer|temps)/.test(t))return `<p>Nos tarifs : ${esc(tr)}. Frais de service : ${eur(FEE)} par billet.</p>`;
- if(/(annul|rembours|avoir)/.test(t))return '<p>Vous pouvez annuler jusqu’à <b>2 h avant la séance</b>, depuis « Mon compte » > « Mes réservations ». Le montant est rendu sous forme d’<b>avoir</b> (pas de remboursement), utilisable à votre prochaine commande.</p>';
+ if(/(annul|rembours|avoir)/.test(t))return `<p>Vous pouvez annuler jusqu’à <b>${POL.cx} h avant la séance</b>, depuis « Mon compte » › « Mes réservations ». Le montant est rendu sous forme d’<b>avoir valable ${POL.creditMonths} mois</b> (pas de remboursement en argent). Si c’est le cinéma qui annule la séance, vous êtes remboursé intégralement.</p>`;
+ if(/(horaire d ouverture|heures? d ouverture|ouvert|ferme|fermeture|jusqu a quelle heure)/.test(t))return `<p>Accueil et caisses : tous les jours de ${POL.open} à ${POL.shut}. Séances de ${POL.first} à ${POL.last}. Réservation en ligne jusqu’à ${POL.close} minutes avant la séance.</p>`;
+ if(/(reglement|regles du cinema|interdit|puis je|retard|nourriture|manger|apporter)/.test(t))return '<p>Quelques règles : billet contrôlé à l’entrée, téléphone en silencieux, interdiction de filmer, boissons alcoolisées extérieures interdites, entrée possible après le début sans remboursement. Tout est dans « Règles et informations légales » (lien en bas de chaque page).</p>';
  if(/(point|fidelite|recompense|carte or|niveau)/.test(t))return `<p>Vous gagnez <b>1 point par euro dépensé</b>. Vous avez ${ptsFree().toLocaleString('fr-FR')} points à dépenser : ${RW.map(r=>`${r.n} (${r.pts} pts)`).join(', ')}. C’est dans « Mon compte » > « Mes récompenses ».</p>`;
  if(/(handicap|pmr|fauteuil|accessib|malvoyant|sourd|malentendant)/.test(t))return '<p>Nos salles sont accessibles : emplacements fauteuil roulant et places accompagnant, boucle magnétique, audiodescription et sous-titres sourds et malentendants sur certaines séances. Choisissez le tarif adapté à l’étape « Séance ».</p>';
  if(/(adresse|ou etes|ou se trouve|quel cinema|quels cinemas|cinemas)/.test(t))return `<p>Nos cinémas : ${CINEMAS.map(c=>`${esc(c.n)} (${esc(c.a)})`).join(' ; ')}.</p>`;

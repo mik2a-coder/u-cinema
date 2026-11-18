@@ -3,17 +3,15 @@
 > À mener avec de vraies personnes. Les résultats ci-dessous sont **volontairement vides** : ne rien inventer.
 > Le cours : « cinq participants suffisent » ; ici, 3 pour la version améliorée.
 
-## Le test en 5 minutes par personne (version simplifiée)
-**Pour qui ?** 3 personnes, de préférence avec un téléphone. **Matériel ?** le lien du prototype (https://mik2a-coder.github.io/u-cinema/) et la feuille `CHECKLIST-TESTS.md`.
+## Le test en 5 minutes par personne (version à cocher)
+**Pour qui ?** 3 personnes, de préférence avec un téléphone. **Matériel ?** le lien du prototype et la feuille `CHECKLIST-TESTS.md` (cases à cocher). **À dire :** « On teste l'application, pas vous. » Ne jamais aider.
 
-**À dire en une phrase :** « On teste l'application, pas vous. Dites à voix haute ce que vous pensez. » Ne jamais aider.
-
-**3 tâches seulement** (cocher ✔ réussi sans aide ou ✖ aidé / échec, noter les secondes) :
-1. « Vous voulez voir un film **ce soir** avec un ami : réservez **deux places**. » (objectif : moins de 60 s)
-2. « **Retrouvez votre billet** » (la carte de paiement de test passe toute seule). (objectif : moins de 20 s)
-3. « **Choisissez votre personnage** dans le compte. » (objectif : moins de 20 s)
-
-**2 questions :** « Qu'est-ce qui vous a arrêté ? » · « Qu'est-ce qui vous a plu ? »
+**3 tâches** : réserver deux places pour ce soir (moins de 60 s) · retrouver son billet (moins de 20 s) · choisir son personnage (moins de 20 s).
+Pour chaque tâche et chaque personne, **trois choix à cocher** :
+- **Résultat** : réussi seul · aidé · échec ;
+- **Difficulté** : facile · moyen · difficile ;
+- **À améliorer** : boutons plus visibles · moins d'étapes · textes plus simples · plus rapide · autre ;
+puis l'**avis général** : content · mitigé · pas content.
 
 ## Résultats (à remplir avec de vraies personnes : ne rien inventer)
 | Tâche | Personne 1 | Personne 2 | Personne 3 |
@@ -21,8 +19,7 @@
 | 1. Réserver 2 places | | | |
 | 2. Retrouver le billet | | | |
 | 3. Choisir son personnage | | | |
-| Ce qui l'a arrêté | | | |
-| Ce qui lui a plu | | | |
+| À améliorer (≥ 2 personnes) | | | |
 
 ## Synthèse (gravité × fréquence) → corrections → nouveau test
 | Problème | Gravité (1–3) | Fréquence | Correction prévue | Corrigé ? |
@@ -45,6 +42,7 @@
 | Page « Plus de réseau » | Joueur automatique : 3 parties sur 3 gagnées jusqu'à l'arrivée ; une partie sans saut finit par la chute du chat sur un objet ; saut visible en entier dans le cadre | vérifié (Chrome, v86) ; à essayer sur iPhone et Safari |
 | Bouton de commande | Sur la page Commande, le bouton garde sa taille (≈ 52 px de haut, en bas de page) avec et sans CGV cochées ; achat jusqu'au billet | vérifié (v90) après un conflit de classe repéré sur une vidéo d'écran |
 | Bandes-annonces | Pour les 22 films : lien YouTube vérifié (réponse « oEmbed » valide) et extrait de la fiche révélé en environ 2,5 s (Chrome) | voir v92 |
+| Règles d'achat | Annulation refusée à moins de 2 h ; avoir créé avec une date à 12 mois, affiché dans Compte et à la commande ; avoir périmé ignoré ; doublon et chevauchement refusés (45 min) | vérifié (v93) |
 | Contraste | Mesure des paires texte/fond sur 5 palettes | ≥ 4,5 : 1 (voir `DESIGN.md`) |
 
 ## Revues déjà intégrées — la version améliorée (1 relecteur : l'auteur)

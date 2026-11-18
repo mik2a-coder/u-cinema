@@ -46,6 +46,8 @@ puis ouvrir http://localhost:8731/index.html (les extraits vidéo demandent un s
 | **Dossier à rendre (PDF, tout-en-un)** | `A-RENDRE/RENDU-U-CINEMA.pdf` |
 | Direction artistique et palette (60-30-10) | `documents/DIRECTION-ARTISTIQUE.md` |
 | Journal des versions (v82 à v86, fichiers modifiés, historique complet) | `documents/VERSIONS.md` |
+| Politiques d'achat, d'annulation, horaires et règles du cinéma | `documents/POLITIQUES.md` |
+| Idées ajoutées et plus-values | `documents/IDEES.md` |
 | Critères et preuves | `documents/BAREME.md` |
 | Brief et persona | `documents/BRIEF-PERSONA.md` |
 | Parcours utilisateur | `documents/PARCOURS.md` + `rendu/captures/` |

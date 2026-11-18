@@ -231,3 +231,8 @@ Principe : couleurs, tailles, rayons et espaces passent par des variables ; une 
 - **Onglet Enfants** (4ᵉ onglet de l'accueil, marqué d'une étoile dorée) : films dont les genres contiennent « Animation » ou « Famille ». Un bandeau `.kidsbar` (mascotte assise, titre Bebas, une phrase) accompagne la liste ; le titre de section devient « Pour les enfants ».
 - **Introduction** : bouton principal « Suivant » (puis « Commencer »), bouton secondaire plein « Passer l'intro » (verre clair), tous deux de 264 px, l'un sous l'autre.
 - **Bande-annonce** : lien discret « Ouvrir sur YouTube » dans la fenêtre vidéo, en secours.
+
+## 14. Version 93 : règles du cinéma affichées
+- **Une seule source** : l'objet `POL` (annulation 2 h, 45 min entre films, fermeture des réservations 10 min avant, avoir 12 mois, horaires) alimente le code **et** les textes affichés.
+- **Où l'utilisateur les voit** : phrase d'information sous les tarifs (étape Séance) et sous le total (Commande), avec liens « Règles d'annulation » et « Horaires du cinéma » ; fenêtre « Règles et informations légales » (pied de page) avec les sections annulation, horaires, règlement, CGV ; horaires dans le choix du cinéma ; avoir daté dans Compte et à la commande.
+- **Champs « À COMPLÉTER »** (surlignés) : uniquement les informations que seul un exploitant réel connaît (raison sociale, médiateur, jours fériés, délai de remboursement).
