@@ -1547,6 +1547,19 @@ body:has(#s-home.active) #dtop.sc::before{opacity:1}
 /* liste des films : toutes les affiches sur la même ligne de base, grille alignée sur le titre de section */
 .ncard{align-self:start}.ncard .img{aspect-ratio:2/3;height:auto!important}
 #seeSoon[hidden]{display:none!important}
+/* fenêtres (modales) : centrées, avec voile adapté au thème ; sur tout le site */
+.sheet-back{background:rgba(8,6,4,.66)}
+:root.light .sheet-back{background:rgba(40,30,12,.42)}
+.hc .sheet-back{background:rgba(0,0,0,.82)}
+.sheet,.sheet.open{left:50%!important;right:auto!important;top:50%;bottom:auto!important;width:min(560px,calc(100% - 32px))!important;max-height:min(86%,780px)!important;border-radius:var(--r-xl)!important;border:1px solid var(--line)!important;box-shadow:0 30px 80px -20px rgba(0,0,0,.65)!important}
+.sheet{transform:translate(-50%,-46%) scale(.96)!important;opacity:0;visibility:hidden;transition:opacity .22s,transform .3s cubic-bezier(.2,.8,.2,1),visibility 0s .3s!important}
+.sheet.open{transform:translate(-50%,-50%)!important;opacity:1;visibility:visible;transition:opacity .22s,transform .32s cubic-bezier(.2,.9,.25,1.02)!important}
+:root.light .sheet,:root.light .sheet.open{box-shadow:0 30px 80px -24px rgba(60,44,16,.5)!important}
+.sheet .grab{display:none}
+.sheet h3{padding:22px 64px 12px 22px}
+.sheet .sbody{padding:0 20px 22px}
+.sheet-x{position:absolute;top:12px;right:12px;width:40px;height:40px;z-index:2}
+.viewport.rm .sheet,.viewport.rm .sheet.open{transition:none!important}
 </style>
 </head>
 <body>
@@ -1703,7 +1716,7 @@ body:has(#s-home.active) #dtop.sc::before{opacity:1}
   </section>
 
   <div class="sheet-back" id="sheetBack"></div>
-  <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle"><div class="grab" id="grab"><i></i></div><h3 id="sheetTitle"></h3><div class="sbody" id="sheetBody"></div></div>
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle"><button type="button" class="round sheet-x" id="sheetX" aria-label="Fermer" data-ic="close"></button><div class="grab" id="grab"><i></i></div><h3 id="sheetTitle"></h3><div class="sbody" id="sheetBody"></div></div>
   <div class="sr" id="live" aria-live="polite"></div>
   <div class="net" id="net" role="status" aria-live="polite" hidden></div>
   <div class="muv" id="muv" data-scr="onb">
@@ -1910,6 +1923,7 @@ function openSheet(title,html,mount){
 }
 function closeSheet(){if(!SH.open)return;SH.open=false;SH.el.querySelectorAll('iframe').forEach(i=>i.remove());SH.el.style.transform='';SH.el.classList.remove('open','drag');SH.back.classList.remove('open');SH.ret&&SH.ret.focus&&SH.ret.focus({preventScroll:true})}
 SH.back.addEventListener('click',closeSheet);
+$('#sheetX').addEventListener('click',closeSheet);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
 (function(){const g=$('#grab');let y0=null,dy=0;
  g.addEventListener('pointerdown',e=>{y0=e.clientY;dy=0;SH.el.classList.add('drag');g.setPointerCapture(e.pointerId)});
