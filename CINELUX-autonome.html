@@ -2016,12 +2016,13 @@ function go(n){
  if(prev==='detail'){document.querySelectorAll('#dVisual .d-video').forEach(v=>{v.style.transition='opacity .14s';v.classList.remove('on')});const ex=document.querySelector('#exSound');if(ex)ex.remove();setTimeout(stopExtract,170)}
  {const sc0=from.querySelector('.scroll,.d-scroll');if(sc0)SCR[prev]=sc0.scrollTop}
  if(prev==='home'&&n==='detail'&&!RET)RET={tab:ST.tab,cur:ST.cur,q:ST.q};
- if(n==='home'&&prev==='detail'&&RET){const r=RET;RET=null;try{ST.tab=r.tab;ST.q=r.q||'';$('#q').value=ST.q;const idx=r.film?tabList(r.tab).findIndex(x=>x.id===r.film):-1;ST.cur=r.cur>=0?r.cur:Math.max(0,idx);renderTabs();renderFan();renderNow()}catch(e){}}
+ let fromList=false;
+ if(n==='home'&&prev==='detail'&&RET){const r=RET;fromList=!!r.film;RET=null;try{ST.tab=r.tab;ST.q=r.q||'';$('#q').value=ST.q;const idx=r.film?tabList(r.tab).findIndex(x=>x.id===r.film):-1;ST.cur=r.cur>=0?r.cur:Math.max(0,idx);renderTabs();renderFan();if(ST.nowKey!==ST.tab+'|'+(ST.q||''))renderNow()}catch(e){}}
  else if(n==='home')RET=null;
  const restore=dir<0&&SCR[n]!=null?SCR[n]:null;
  const reduce=A11Y.rm||matchMedia('(prefers-reduced-motion:reduce)').matches;
  /* Transition vue (Chrome, Safari récents) : l'écran qui part s'efface vite, celui qui arrive glisse et se pose ; sur grand écran l'affiche voyage de la carte à la fiche */
- if(document.startViewTransition&&!reduce&&!NOVT&&((prev==='home'&&n==='detail')||(prev==='detail'&&n==='home'))&&innerWidth>=600&&!document.querySelector('.d-video')){
+ if(document.startViewTransition&&!reduce&&!NOVT&&((prev==='home'&&n==='detail')||(prev==='detail'&&n==='home'))&&innerWidth>=600&&!document.querySelector('.d-video')&&!(prev==='detail'&&n==='home'&&(fromList||(restore!=null&&restore>40)))){
   const root=document.documentElement,wide=innerWidth>=600;
   let src=null;if(wide){if(n==='detail'&&prev==='home')src=VTSRC&&VTSRC.isConnected?VTSRC:document.querySelector('#fan .fcard.c');else if(prev==='detail'&&n==='home')src=document.querySelector('#s-detail .d-sharp')}
   VTSRC=null;if(src)src.style.viewTransitionName='film-poster';
@@ -2161,6 +2162,7 @@ function filmMatch(f,n){
 function peopleIndex(){const m=new Map();FILMS.forEach(f=>SROLES.forEach(([k,l0])=>(k==='dir'?dirNames(f):f[k]||[]).forEach(nm=>{const l=k==='dir'?TM(f).role:l0;let p=m.get(nm);if(!p){p={name:nm,roles:[],films:[]};m.set(nm,p)}if(!p.roles.includes(l))p.roles.push(l);if(!p.films.includes(f))p.films.push(f)})));return[...m.values()]}
 function todaySlots(){const ds=defaultSlot(),d=ds.date,l=TIMES.map((t,i)=>i).filter(i=>okSlot(d,i)).slice(0,4);return{d,l,next:ds.time}}
 function renderNow(){
+ ST.nowKey=ST.tab+'|'+(ST.q||'');
  {const b=$('#seeSoon');if(b)b.hidden=!!ST.q||ST.tab===2;const nw=$('#now');if(nw)nw.classList.toggle('res',!!ST.q)}
  {const h=$('#nowH');if(h)h.textContent=ST.q?'Résultats':['À l’affiche','Nouveautés','Bientôt en salle'][ST.tab]||'À l’affiche'}
  /* Loi de Postel : on accepte ce que les gens tapent (majuscules, accents, espaces en trop) */
