@@ -1728,6 +1728,7 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
 .t-head .eyebrow{margin-bottom:6px}.ticket .perf::before,.ticket .perf::after{background:var(--bg)!important}
 .per-all{width:auto;align-self:flex-start;padding:0 22px}
 @media (min-width:900px){#s-detail .d-bar{background:linear-gradient(to top,color-mix(in srgb,var(--bg) 94%,transparent) 55%,transparent);padding-top:24px}}
+.mv-ul{margin:4px 0 8px 18px;padding:0}.mv-ul li{margin:2px 0}
 </style>
 </head>
 <body>
@@ -3484,7 +3485,7 @@ function mvFilters(){
 }
 function mvChips(){
  const f=mvFilters(),box=$('#muvChips');
- const sugg=f.length?[['more','Autre proposition'],['demain','Demain'],['court','Plus court'],['reset','Recommencer']]:[['ce soir','Ce soir'],['en famille','En famille'],['pour rire','Pour rire'],['de l’action','De l’action'],['de l’émotion','De l’émotion'],['de la science-fiction','Science-fiction'],['surprends-moi','Surprends-moi'],['selon mes goûts','Selon mes goûts'],['bientôt en salle','Bientôt en salle']];
+ const sugg=f.length?[['more','Autre proposition'],['demain','Demain'],['court','Plus court'],['réserver','Réserver pour moi'],['reset','Recommencer']]:[['réserver','Réserver pour moi'],['ce soir','Ce soir'],['en famille','En famille'],['pour rire','Pour rire'],['de l’action','De l’action'],['de l’émotion','De l’émotion'],['de la science-fiction','Science-fiction'],['surprends-moi','Surprends-moi'],['selon mes goûts','Selon mes goûts'],['bientôt en salle','Bientôt en salle']];
  box.innerHTML=(f.length?`<div class="mv-act" aria-label="Critères actifs">${f.map(([k,l])=>`<button type="button" class="mv-f" data-mv-rm="${esc(k)}" aria-label="Retirer le critère ${esc(l)}">${esc(l)}<i aria-hidden="true">×</i></button>`).join('')}</div>`:'')+`<div class="mv-sg">${sugg.map(([k,l])=>`<button type="button" class="mv-s" data-mv-q="${esc(k)}">${esc(l)}</button>`).join('')}</div>`;
 }
 function mvAnswer(){
@@ -3519,7 +3520,8 @@ function mvBookIntent(t){
  const c=/\b(\d+|un|une|deux|trois|quatre|cinq|six|sept|huit)\s+(places?|billets?|sieges?|fauteuils?|personnes?)\b/.exec(t);
  const want=/\b(reserv\w*|prend\w*|prendre|acheter|achete\w*|book|veux|voudrais|aimerais|besoin)\b/.test(t),side=/(cote a cote|cote-a-cote|a cote|ensemble|cote a cote)/.test(t),pl=/\b(places?|billets?|sieges?)\b/.test(t);
  if(c&&(want||side||/(fond|devant|milieu|centre|soir|demain|\d\s*h)/.test(t))){const raw=+c[1]||MVN[c[1]]||1;return{n:Math.min(8,Math.max(1,raw)),side,cap:raw>8}}
- if(want&&pl&&!mvTitle(t))return{n:2,side};
+ if(want&&pl&&!mvTitle(t))return{n:null,side};
+ if(/\b(reserv\w*|book)\b/.test(t))return{n:null,side};
  return null}
 function mvTimeOf(t){const re=/\b(\d{1,2})\s*(?:h|:|heures?)\s*(\d{2})?/g;let m;while((m=re.exec(t))){if(/(avant|apres)\s*$/.test(t.slice(0,m.index)))continue;const h=+m[1];if(h>=0&&h<24)return h*60+(+(m[2]||0))}return null}
 function mvBook(raw,t,bi){
@@ -3559,16 +3561,103 @@ function mvFaq(t,raw){
  if(ft&&/(qui joue|acteur|actrice|casting|distribution|realis|musique|compositeur)/.test(t))return `<p>${esc(ft.title)} : réalisé par ${esc(ft.dir)}. Avec ${esc((ft.cast||[]).join(', '))}.${(ft.music||[]).length?' Musique : '+esc(ft.music.join(', '))+'.':''}</p>${mvCard(ft,mvDayIdx())}`;
  if(/(que sais|tu sais faire|aide moi|aide$|^aide|comment ca marche|help)/.test(t))return '<p>Je peux : <b>vous conseiller un film</b> (« un film drôle ce soir »), <b>préparer une réservation</b> (« deux places côte à côte au fond pour un film drôle ce soir à 20 h »), donner les <b>horaires, tarifs, durées</b>, le <b>casting</b> d’un film, ou vous expliquer l’<b>annulation</b> et les <b>points</b>.</p>';
  return null}
-function mvAsk(raw){
+
+/* ---- réservation guidée : l'assistant pose une question à la fois pour compléter ce qui manque, puis ouvre le récapitulatif (le paiement reste à l'utilisateur) ---- */
+const mvOkF=(f,d,i)=>!TIMES[i].full&&!isPast(d,i)&&!isCx(d,i)&&!bkConflict(d,i,f);
+const mvSlotsDay=(f,d)=>TIMES.map((x,i)=>i).filter(i=>mvOkF(f,d,i));
+const mvYes=t=>/\b(oui|ok|d accord|vas y|yes|bien sur|volontiers|carrement|avec plaisir)\b/.test(t)?1:/\b(non|pas|sans|nan|no|jamais)\b/.test(t)?0:null;
+function mvChoices(arr){const box=$('#muvChips');if(box)box.innerHTML=`<div class="mv-sg">${arr.concat([['bk:x','Laisser tomber']]).map(([k,l])=>`<button type="button" class="mv-s" data-mv-q="${esc(k)}">${esc(l)}</button>`).join('')}</div>`}
+function mvBkStart(raw,t,bi){
+ mvReset();mvParse(raw);const st=MV.st,b=MV.bk={f:mvTitle(raw)||null,d:null,tm:null,ti:null,n:bi&&bi.n&&(bi.exact||bi.side||/\d|un|une|deux|trois|quatre|cinq|six|sept|huit/.test(t))?bi.n:null,z:null,zAny:false,sn:undefined,cr:undefined,rs:undefined,r5:undefined,ask:null,cap:!!(bi&&bi.cap),auto:false};
+ if(!/\b(\d+|un|une|deux|trois|quatre|cinq|six|sept|huit)\s+(places?|billets?|sieges?|fauteuils?|personnes?)\b/.test(t))b.n=null;
+ if(/apres.?demain/.test(t))b.d=2;else if(st.when!=null)b.d=st.when;
+ b.tm=mvTimeOf(t);if(b.tm==null&&/\bsoir\b/.test(t))b.tm=20*60;
+ if(/(fond|arriere|derriere|dernier|dernieres|haut)/.test(t))b.z=2;else if(/(milieu|centre|central)/.test(t))b.z=1;else if(/(devant|avant|premier|pres de l ecran)/.test(t))b.z=0;else if(/(peu importe|n importe|indifferent)/.test(t))b.zAny=true;
+ if(!b.f&&(st.tags.length||st.people.length))b.auto=true;
+ if(b.f&&isSoon(b.f)){const f=b.f;MV.bk=null;mvSay(`<p>${esc(f.title)} sort le ${esc(relLabel(f))} : pas encore de séances à réserver. Je peux vous ouvrir sa fiche pour activer un rappel.</p>${mvCard(f,mvDayIdx())}`,'bot',true);MV.mood('sad');mvChips();return}
+ MV.mood('think');setTimeout(mvBkNext,350)}
+function mvBkNext(){
+ const b=MV.bk;if(!b)return;const ask=(txt,ch,key)=>{b.ask=key;mvSay(txt);mvChoices(ch);MV.mood('happy')};
+ // 1. film
+ if(!b.f){
+  const d0=b.d!=null?b.d:mvDayIdx();
+  if(b.auto){const pool=FILMS.map(f=>[f,mvScore(f,d0)]).filter(x=>x[1]>=0&&mvSlotsDay(x[0],d0).length&&(b.tm==null||mvSlotsDay(x[0],d0).some(i=>Math.abs(mvT(i)-b.tm)<=75))).sort((a,c)=>c[1]-a[1]);
+   if(pool.length){b.f=pool[0][0];b.auto=false;mvSay(`<p>Je vous propose <b>${esc(b.f.title)}</b> (${esc(b.f.genre)} · ${esc(b.f.dur)}).</p>`,'bot',true)}
+   else{b.auto=false;mvSay('Je ne trouve pas de film avec ces critères pour ce moment. Choisissez-en un :')}}
+  if(!b.f){const top=FILMS.filter(f=>!isSoon(f)&&TIMES.some((x,i)=>[0,1,2,3,4].some(dd=>mvOkF(f,dd,i)))).sort((a,c)=>(c.rate||0)-(a.rate||0)).slice(0,4);
+   ask('Quel film vous ferait plaisir ? Choisissez-en un, une ambiance, ou écrivez un titre.',[...top.map(f=>['bk:f:'+f.id,f.title]),['bk:g:pour rire','Pour rire'],['bk:g:en famille','En famille'],['bk:g:de l’action','De l’action']],'film');return}}
+ const f=b.f;
+ // 2. jour
+ if(b.d==null){const days=[0,1,2,3,4].filter(dd=>mvSlotsDay(f,dd).length);
+  if(!days.length){MV.bk=null;mvSay(`Je ne trouve aucune séance libre de ${esc(f.title)} cette semaine.`);MV.mood('sad');mvChips();return}
+  if(days.length===1)b.d=days[0];else{ask(`Quel jour pour <b>${esc(f.title)}</b> ?`.replace(/<\/?b>/g,''),days.map(dd=>['bk:d:'+dd,dayLabel(dd)]),'d');return}}
+ // 3. heure
+ {const sl=mvSlotsDay(f,b.d);
+  if(!sl.length){const dd=b.d;b.d=null;b.tm=null;mvSay(`Plus de séance ${mvDayWord(dd)} : choisissons un autre jour.`);return mvBkNext()}
+  if(b.ti==null){
+   if(b.tm!=null){const near=sl.slice().sort((a,c)=>Math.abs(mvT(a)-b.tm)-Math.abs(mvT(c)-b.tm))[0];if(Math.abs(mvT(near)-b.tm)<=75){b.ti=near;if(mvT(near)!==b.tm)mvSay(`La séance la plus proche de ${Math.floor(b.tm/60)} h est à ${TIMES[near].t}.`)}}
+   if(b.ti==null){ask(`À quelle heure ${mvDayWord(b.d)} ?`,sl.map(i=>['bk:t:'+i,TIMES[i].t+(TIMES[i].low?' (presque complet)':'')]),'ti');return}}}
+ // 4. nombre de places
+ if(b.n==null){ask('Pour combien de personnes ?',[1,2,3,4,5,6].map(k=>['bk:n:'+k,k+(k>1?' places':' place')]),'n');return}
+ // 5. emplacement
+ if(b.z==null&&!b.zAny){ask('Où voulez-vous vous asseoir ? Les places seront toujours côte à côte quand c’est possible.',[['bk:z:0','Devant'],['bk:z:1','Au centre'],['bk:z:2','Au fond'],['bk:z:x','Peu importe']],'z');return}
+ // 6. friandise
+ if(b.sn===undefined){ask('Une petite faim ? Je peux ajouter une friandise à la commande.',[...(b.n>1?[['bk:s:0','Menu Duo · 12,50 €']]:[['bk:s:1','Menu Solo · 8,90 €']]),['bk:s:2','Pop-corn salé · 6,50 €'],['bk:s:7','Bonbons · 4,00 €'],['bk:s:x','Non merci']],'sn');return}
+ // 7. avantages
+ if(ACC.rw.snack>0&&b.rs===undefined){ask(`Vous avez une <b>friandise offerte</b> (points). La déduire de cette commande ?`.replace(/<\/?b>/g,''),[['bk:rs:1','Oui, l’utiliser'],['bk:rs:0','Non, la garder']],'rs');return}
+ if(ACC.rw.off5>0&&b.r5===undefined){ask('Vous avez une remise de −5 % sur une place (points). L’utiliser maintenant ?',[['bk:r5:1','Oui, l’utiliser'],['bk:r5:0','Non, la garder']],'r5');return}
+ if(creditNow()>0&&b.cr===undefined){ask(`Vous avez un avoir de ${eur(creditNow())} (valable jusqu’au ${creditUntil()}). L’utiliser pour cette commande ?`,[['bk:c:1','Oui, l’utiliser'],['bk:c:0','Non, plus tard']],'cr');return}
+ mvBkFinish()}
+function mvBkFinish(){
+ const b=MV.bk;if(!b)return;const f=b.f,n=Math.min(8,Math.max(1,b.n));
+ mvGoFilm(f.id);renderDetail();ST.date=b.d;ST.time=b.ti;ST.count=n;ST.tq={plein:n,etu:0,chom:0,han:0,acc:0};ST.pmrN=0;ST.promo=0;
+ const tk=taken();ST.tk=tk;let ids=b.z!=null?autoSeatsZone(tk,b.z):null,fell=false;if(!ids){ids=autoSeats(tk);fell=b.z!=null}
+ if(!ids||ids.length<n){MV.bk=null;mvSay(`Il n’y a plus ${n} places libres pour cette séance. Voulez-vous une autre heure ?`);MV.mood('sad');mvChips();return}
+ ST.seats=ids.slice(0,n);ST.zPick=b.z!=null&&!fell;ST.zone=zoneOf(ST.seats[0]);
+ if(b.sn!=null&&b.sn!=='x'&&SNACKS[b.sn])ST.snacks[b.sn]=1;
+ ST.useCredit=b.cr===1;ST.useSnack=b.rs===1;ST.useOff5=b.r5===1;
+ const srt=ST.seats.slice().sort((a,c)=>a.localeCompare(c,'fr',{numeric:true})),contig=srt.every((id,i)=>i===0||(id[0]===srt[i-1][0]&&+id.slice(1)===+srt[i-1].slice(1)+1)),m=money();
+ const lines=[`${n} place${n>1?'s':''}${n>1&&contig?' côte à côte':''} ${['à l’avant','au centre','au fond'][zoneOf(ST.seats[0])]} : ${srt.join(', ')}`];
+ if(b.sn!=null&&b.sn!=='x'&&SNACKS[b.sn])lines.push(SNACKS[b.sn].n);if(m.rwSn)lines.push('friandise offerte utilisée');if(m.rwOff)lines.push('−5 % utilisé');if(m.cr)lines.push('avoir utilisé : '+eur(m.cr));
+ const why=[];if(fell)why.push('Plus de place libre dans la zone demandée : je vous ai placé au mieux.');if(b.cap)why.push('Je réserve 8 places au maximum par commande.');if(n>1&&!contig)why.push('Pas de places côte à côte disponibles : elles sont proches mais séparées.');
+ mvSay(`<p><b>C’est prêt.</b> <b>${esc(f.title)}</b>, ${mvDayWord(b.d)} à <b>${TIMES[b.ti].t}</b>.</p><ul class="mv-ul">${lines.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><p>Total à payer : <b>${eur(m.tot)}</b>.${why.length?' '+esc(why.join(' ')):''}</p><p>Je vous emmène au récapitulatif : <b>rien n’est payé</b> tant que vous n’avez pas validé.</p>`,'bot',true);
+ MV.bk=null;MV.mood('happy');haptic('success');setTimeout(()=>{mvClose();setTimeout(()=>go('order'),220)},1700)}
+function mvBkKey(k){
+ const b=MV.bk;if(k==='bk:x'){MV.bk=null;mvSay('D’accord, on laisse tomber. Dites-moi quand vous voulez réserver !');mvChips();return}
+ if(!b)return;const [,key,val]=k.split(':');
+ if(key==='f'){b.f=FILMS.find(x=>x.id===val)||null;b.d=b.d;}
+ else if(key==='g'){mvParse(val);b.auto=true}
+ else if(key==='d'){b.d=+val;b.ti=null}
+ else if(key==='t')b.ti=+val;
+ else if(key==='n')b.n=+val;
+ else if(key==='z'){if(val==='x'){b.zAny=true;b.z=null}else b.z=+val}
+ else if(key==='s')b.sn=val==='x'?'x':+val;
+ else if(key==='rs')b.rs=+val;else if(key==='r5')b.r5=+val;else if(key==='c')b.cr=+val;
+ MV.mood('think');setTimeout(mvBkNext,300)}
+function mvBkText(raw,t){
+ const b=MV.bk;if(/^(laisse tomber|laisser tomber|annule|annuler|stop|non merci laisse|tant pis|abandon)/.test(t)){mvBkKey('bk:x');return}
+ const a=b.ask,y=mvYes(t);
+ if(a==='film'){const f=mvTitle(raw);if(f)b.f=f;else{mvParse(raw);if(MV.st.tags.length||MV.st.people.length)b.auto=true;else{mvSay('Je n’ai pas reconnu ce film. Touchez une proposition ci-dessous, ou donnez-moi une ambiance (« un film drôle », « en famille »).');return mvBkNext()}}}
+ else if(a==='d'){if(/apres.?demain/.test(t))b.d=2;else{const p=MV.st.when;mvParse(raw);if(MV.st.when!=null&&MV.st.when!==p)b.d=MV.st.when;else{const w=[0,1,2,3,4].find(i=>t.includes(mvNorm(dayLabel(i)).split(' ')[0].replace('.','')));if(w!=null)b.d=w}}if(b.d==null){mvSay('Quel jour ? Touchez une option ci-dessous.');return mvBkNext()}b.ti=null}
+ else if(a==='ti'){const tm=mvTimeOf(t);if(tm==null){mvSay('Donnez-moi une heure (par exemple 20 h) ou touchez un horaire ci-dessous.');return mvBkNext()}b.tm=tm;b.ti=null}
+ else if(a==='n'){const c=/\b(\d+|un|une|deux|trois|quatre|cinq|six|sept|huit)\b/.exec(t);if(!c){mvSay('Combien de places ? Touchez un nombre ci-dessous.');return mvBkNext()}const v=+c[1]||MVN[c[1]]||1;b.n=Math.min(8,Math.max(1,v));b.cap=v>8}
+ else if(a==='z'){if(/(fond|arriere|derriere|dernier|haut)/.test(t))b.z=2;else if(/(milieu|centre|central)/.test(t))b.z=1;else if(/(devant|avant|premier|proche)/.test(t))b.z=0;else if(/(importe|indifferent|egal)/.test(t))b.zAny=true;else{mvSay('Devant, au centre ou au fond ? Touchez une option ci-dessous.');return mvBkNext()}}
+ else if(a==='sn'){if(y===0||/(rien|non)/.test(t))b.sn='x';else{const i=SNACKS.findIndex(x=>t.includes(mvNorm(x.n).split(' ')[0]));if(i>=0)b.sn=i;else if(y===1)b.sn=b.n>1?0:1;else{mvSay('Quelle friandise ? Touchez une option ci-dessous, ou « non merci ».');return mvBkNext()}}}
+ else if(a==='rs'||a==='r5'||a==='cr'){if(y==null){mvSay('Oui ou non ? Touchez une option ci-dessous.');return mvBkNext()}b[a]=y}
+ else if(!a){return mvBkNext()}
+ MV.mood('think');setTimeout(mvBkNext,300)}
+function mvAsk(raw,label){
  raw=raw.trim();if(!raw)return;
  {const K={more:'autre proposition',court:'plus court',demain:'demain'};if(K[raw.toLowerCase()])raw=K[raw.toLowerCase()]}
- mvSay(raw,'me');haptic('tick');
+ mvSay(label||raw,'me');haptic('tick');
  const t=mvNorm(raw);
+ if(raw.startsWith('bk:')){mvBkKey(raw);return}
+ if(MV.bk){mvBkText(raw,t);return}
  if(/^(recommencer|reset|annuler|efface)/.test(t)){mvReset();mvSay('C’est reparti ! Qu’est-ce qui vous ferait plaisir ?');MV.mood('happy');mvChips();return}
  if(/^(autre proposition|une autre|autre idee|encore)/.test(t)){mvAnswer();return}
  if(/^(merci|super|parfait|top)/.test(t)){mvSay('Avec plaisir ! Bonne séance 🍿');MV.mood('happy');return}
  if(/^(salut|salute|bonjour|coucou|hello|hey)/.test(t)&&t.length<14){mvSay('Salute ! Dites-moi ce que vous aimeriez voir, ou touchez une suggestion.');MV.mood('happy');return}
- {const bi=mvBookIntent(t);if(bi){mvBook(raw,t,bi);return}}
+ {const bi=mvBookIntent(t);if(bi){mvBkStart(raw,t,bi);return}}
  const ft=mvTitle(raw);
  if(ft&&/(reserv|seance|horaire|quand|a quelle heure|place)/.test(t)){
   const d=mvDayIdx(),sl=isSoon(ft)?[]:mvSlots(ft,d).slice(0,4);
@@ -3614,7 +3703,7 @@ function mvGoFilm(id){const f=FILMS.find(x=>x.id===id);if(!f)return false;ST.tab
 document.addEventListener('click',e=>{
  const fab=e.target.closest('#muvFab');if(fab){MV.open?mvClose():mvOpen();return}
  if(e.target.closest('#muvX')){mvClose();return}
- const q=e.target.closest('[data-mv-q]');if(q){mvAsk(q.dataset.mvQ);return}
+ const q=e.target.closest('[data-mv-q]');if(q){mvAsk(q.dataset.mvQ,q.textContent.trim());return}
  const rm=e.target.closest('[data-mv-rm]');if(rm){mvRemove(rm.dataset.mvRm);return}
  const o=e.target.closest('[data-mv-open]');if(o&&mvGoFilm(o.dataset.mvOpen)){mvClose();setTimeout(()=>go('detail'),200);return}
  const b=e.target.closest('[data-mv-book]');if(b&&mvGoFilm(b.dataset.mvBook)){mvClose();renderDetail();ST.date=+b.dataset.di;ST.time=+b.dataset.ti;setTimeout(()=>go('book'),200)}

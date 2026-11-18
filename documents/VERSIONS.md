@@ -22,6 +22,13 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
 
+## Version 100 — 18 novembre 2026
+
+| Demande | Ce qui a été fait | Où le voir |
+|---|---|---|
+| Assistant qui mène la réservation du début à la fin, en posant des questions pour compléter | **Réservation guidée** : l'assistant déduit ce que dit l'utilisateur (film ou ambiance, jour, heure, nombre de places, emplacement) et **pose une seule question à la fois** pour le reste, avec des boutons de réponse ; on peut aussi répondre en écrivant (« demain », « à 21 h », « 3 », « au fond », « non merci »). Chaque étape propose « Laisser tomber ». Bouton de départ « Réserver pour moi » | Assistant |
+| Qu'il propose une friandise et l'usage de l'avoir | Avant le récapitulatif, l'assistant propose **une friandise** (menu duo ou solo, pop-corn, bonbons), puis **la friandise offerte** et **le −5 %** s'ils sont débloqués, puis **l'avoir** s'il en reste (avec sa date de validité) ; le récapitulatif affiche le détail et le total. **Le paiement reste à l'utilisateur** : l'assistant ouvre la commande, il ne la valide jamais | Assistant › Commande |
+
 ## Version 99 — 18 novembre 2026
 
 | Demande | Ce qui a été fait | Où le voir |
@@ -283,3 +290,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v97 | 18/11/2026 | Tuiles du compte cliquables (fenêtres) ; dossier prêt pour les avatars en photos |
 | v98 | 18/11/2026 | Audit UX/UI en équipe : assistant jamais sans réponse, correctifs QA, accessibilité, UI, confidentialité |
 | v99 | 18/11/2026 | Avatars en portraits |
+| v100 | 18/11/2026 | Réservation guidée par l'assistant, avec friandise et avoir |

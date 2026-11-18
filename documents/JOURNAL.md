@@ -63,6 +63,9 @@ Boucle courte, répétée une centaine de fois : **ma demande (souvent avec capt
 
 > Prompt de départ : « Agis comme un expert UX/UI avec l'aide d'une équipe d'agents : contrôle tout, mets à jour les documents. » Version améliorée : « 4 agents en lecture seule par domaine, chacun avec un périmètre, une méthode de mesure, un format de rapport court et l'interdiction de modifier le projet ; les corrections restent chez moi, puis tests et documents. »
 
+## Exemple de prompt : l'assistant qui mène la réservation
+> « Fais en sorte que l'assistant réserve du début à la fin : il déduit ce que j'ai déjà dit, pose **une seule question à la fois** pour ce qui manque (film, jour, heure, nombre de places, emplacement) avec des boutons de réponse, propose ensuite une friandise puis l'usage de mon avoir et de mes récompenses, et ouvre le récapitulatif. Il ne valide **jamais** le paiement à ma place. Chaque réponse doit mener à une suite, sans impasse. Prouve-le par un test qui clique toutes les suggestions. »
+
 ## Choix expliqués
 | Choix | Pourquoi |
 |---|---|

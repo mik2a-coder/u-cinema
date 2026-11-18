@@ -243,3 +243,8 @@ Principe : couleurs, tailles, rayons et espaces passent par des variables ; une 
 - **Historique du navigateur** : chaque écran est une entrée (`history.pushState`) ; l'application revient en arrière avec `history.back()` quand la cible est l'écran précédent, pour garder la pile cohérente.
 - **États sélectionnés** : un filtre ou une option choisie change de fond (or), reçoit une coche et un halo ; le survol seul ne suffit pas.
 - **Pied de page** : le lien légal est le dernier élément du contenu de chaque écran, avec une marge basse égale à la hauteur des barres de boutons.
+
+## 16. Version 100 : réservation guidée
+- **Une question à la fois** dans l'assistant, boutons de réponse (`.mv-s`) construits par `mvChoices()`, toujours accompagnés de « Laisser tomber » ; les réponses écrites sont comprises à l'étape en cours.
+- **Ordre** : film → jour → heure → nombre de places → emplacement → friandise → friandise offerte → −5 % → avoir → récapitulatif. Une étape déjà renseignée par l'utilisateur est sautée.
+- **Garde-fou** : le récapitulatif affiche le détail et le total, puis ouvre la page Commande ; la validation du paiement reste un acte de l'utilisateur.
