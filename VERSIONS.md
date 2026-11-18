@@ -2,6 +2,12 @@
 
 Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` dans `sw.js`), affiché en bas de la page **Compte** (« Version vNN »). Pour passer d'une version à l'autre : recharger sans cache (Cmd + Option + R sur Safari).
 
+## Version 85 — 18 novembre 2026
+
+| Demande | Ce qui a été fait | Où le voir |
+|---|---|---|
+| Utiliser la planche de sprites 2D | Cycle de course en 6 images, pose de saut, et obstacles de la planche (caisse, barrière, rocher) | Page « Plus de réseau » |
+
 ## Version 84 — 18 novembre 2026
 
 | Demande | Ce qui a été fait | Où le voir |
@@ -121,3 +127,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v82 | 18/11/2026 | Revue en 24 points (voir ci-dessus) |
 | v83 | 18/11/2026 | Page « Plus de réseau » avec mini-jeu du chat |
 | v84 | 18/11/2026 | Mini-jeu : chat animé qui court et saute, tête triste en haut |
+| v85 | 18/11/2026 | Mini-jeu : cycle de course en 6 images et obstacles de la planche de sprites |

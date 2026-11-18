@@ -10,9 +10,9 @@ const send=(method,params={})=>new Promise(r=>{const i=++id;pend[i]=r;ws.send(JS
 await send('Page.enable');await send('Page.navigate',{url:'http://localhost:8731/manifest.webmanifest'});await sleep(1000);
 const FR=JSON.parse(process.argv[2]||'[]');
 const js=`(async()=>{const L=src=>new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.src=src});
- const A=await L('/img/chat/sheet-poses.webp'),B=await L('/img/chat/sheet-ref.webp');
- const out={size:[A.naturalWidth,A.naturalHeight,B.naturalWidth,B.naturalHeight]};
- for(const [name,sh,x,y,w,h] of ${JSON.stringify(FR)}){const im=sh==='A'?A:B;const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,x,y,w,h,0,0,w,h);
+ const A=await L('/img/chat/sheet-poses.webp'),B=await L('/img/chat/sheet-ref.webp'),C=await L('/img/chat/sheet-sprites.webp');
+ const out={size:[C.naturalWidth,C.naturalHeight]};
+ for(const [name,sh,x,y,w,h] of ${JSON.stringify(FR)}){const im=sh==='A'?A:sh==='B'?B:C;const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,x,y,w,h,0,0,w,h);
   const d=g.getImageData(0,0,w,h),p=d.data;
   // fond blanc -> transparent (progressif), puis rognage
   for(let i=0;i<p.length;i+=4){const r=p[i],gg=p[i+1],b=p[i+2],mn=Math.min(r,gg,b),sat=Math.max(r,gg,b)-mn;
