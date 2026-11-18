@@ -1531,6 +1531,10 @@ body:has(#s-detail.active) .toast{bottom:118px}
 .seat[aria-pressed=true] .s{animation:seatPop .38s cubic-bezier(.3,1.6,.5,1) 1}@keyframes seatPop{0%{transform:scale(.7)}100%{transform:scale(1)}}
 .viewport.rm #sgrid,.viewport.rm .seat .s{transition:none!important;animation:none!important}
 .sv-act{grid-column:1/-1;display:flex;gap:10px;margin-top:10px}.sv-act .btn{flex:1;min-height:52px}
+.acc-sub{margin:10px 20px 4px;color:var(--muted);font-size:calc(var(--fs-xs)*var(--ts,1));letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.acc-row .acc-open{display:flex;align-items:center;gap:14px;flex:1;min-width:0;text-align:left;background:none;border:0;padding:0;color:inherit;cursor:pointer}
+.acc-row .mini-th.ph{display:grid;place-items:center;overflow:hidden;border-radius:50%;width:50px;height:50px;background:var(--surface2)}.acc-row .mini-th.ph img{width:100%;height:100%;object-fit:cover}
+.pbar{display:flex;align-items:center;gap:12px;margin:0 max(16px,4vw) 14px;padding:12px 16px;border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--line)}.pbar[hidden]{display:none}.pbar small{display:block;color:var(--muted);font-size:calc(var(--fs-xs)*var(--ts,1))}
 </style>
 </head>
 <body>
@@ -1580,6 +1584,7 @@ body:has(#s-detail.active) .toast{bottom:118px}
       <div class="ftitle" id="ftitle"></div>
       <div class="dots" id="fdots" aria-hidden="true"></div>
       <div class="sec-h"><h2 id="nowH">À l’affiche</h2><button id="seeSoon" hidden>Voir les films à venir <span data-ic="chev"></span></button></div>
+      <div class="pbar" id="pbar" hidden></div>
       <div class="now" id="now"></div>
       <footer class="foot"><button type="button" class="textlink" data-legal>Confidentialité et mentions légales</button></footer>
     </div>
@@ -1822,7 +1827,7 @@ FILMS.forEach(f=>{f.type='film';f.kind=f.id});
 const ACC_DEF=()=>({v:1,since:2024,points:1240,hist:[{id:'hailmary',date:'2026-03-22',cin:0},{id:'michael',date:'2026-04-26',cin:1},{id:'prada2',date:'2026-05-03',cin:0},{id:'toystory5',date:'2026-06-20',cin:2},{id:'odyssey',date:'2026-07-18',cin:0}],ratings:{hailmary:5,michael:3},remind:{},bookings:[]});
 let ACC=(()=>{try{const x=JSON.parse(localStorage.getItem('cinelux-acc'));if(x&&x.v===1)return x}catch(e){}return ACC_DEF()})();
 {const seen=new Set();ACC.bookings=(ACC.bookings||[]).filter(b=>{const k=b.id+'|'+b.date+'|'+b.time;if(seen.has(k))return false;seen.add(k);return true})}
-ACC.log=ACC.log||[];ACC.follows=ACC.follows||{};
+ACC.log=ACC.log||[];ACC.follows=ACC.follows||{};ACC.fp=ACC.fp||{};
 function logAct(t,id,x){try{ACC.log.unshift(Object.assign({t,id,ts:Date.now()},x||{}));ACC.log=ACC.log.slice(0,60);saveACC()}catch(e){}}
 function saveACC(){try{localStorage.setItem('cinelux-acc',JSON.stringify(ACC))}catch(e){}}
 IC.bell=P('<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>');
@@ -2089,9 +2094,11 @@ function renderNow(){
  /* Loi de Postel : on accepte ce que les gens tapent (majuscules, accents, espaces en trop) */
  const norm=x=>String(x).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
  const q=norm(ST.q),l=(q?FILMS:list()).filter(f=>!q||filmMatch(f,q).r<9),nxs=todaySlots();
+ {const pb=ST.q&&peopleIndex().find(x=>norm(x.name)===q);window.__pb=pb||null;const pbar=$('#pbar');if(pbar){pbar.hidden=!pb;if(pb){const on=!!ACC.fp[pb.name];pbar.innerHTML=`<span class="grow"><strong>${esc(pb.name)}</strong><small>${pb.roles.join(' · ')} · ${pb.films.length} film${pb.films.length>1?'s':''}</small></span><button type="button" class="follow" id="pfollow" aria-pressed="${on}">${on?'Suivi':'Suivre'}</button>`}}}
  $('#now').innerHTML=l.length?l.map(f=>`<button class="ncard" data-id="${f.id}"><div class="img">${poster(f.kind)}${f.rate==null?`<div class="rate soon">${relShort(f)}</div>`:`<div class="rate">${IC.star}${rt(f)}</div>`}</div><h4>${f.title}</h4><span>${f.genre}</span>${isSoon(f)||!nxs.l.length?'':`<small class="nx">${dayLabel(nxs.d)} · ${TIMES[nxs.next].t}</small>`}</button>`).join(''):`<div class="emptyst"><b>Aucun film ne correspond à « ${esc(ST.q.trim())} »</b><p>Essayez un genre :</p><div class="eg">${[...new Set(FILMS.map(f=>f.genre))].map(g=>`<button type="button" data-g="${g}">${g}</button>`).join('')}</div><button type="button" class="link" id="clrq">Effacer la recherche</button></div>`;
 }
 $('#seeSoon').addEventListener('click',()=>{ST.tab=2;ST.cur=0;ST.q='';$('#q').value='';renderTabs();renderFan();renderNow();haptic('tick')});
+$('#pbar').addEventListener('click',e=>{const b=e.target.closest('#pfollow');if(!b||!window.__pb)return;const pb=window.__pb,on=!ACC.fp[pb.name];if(on)ACC.fp[pb.name]=Date.now();else delete ACC.fp[pb.name];saveACC();logAct(on?'followp':'unfollowp',pb.films[0].id,{name:pb.name});haptic('soft');b.setAttribute('aria-pressed',on);b.textContent=on?'Suivi':'Suivre';toast(on?'Vous suivez '+pb.name:'Vous ne suivez plus '+pb.name)});
 $('#now').addEventListener('click',e=>{const c=e.target.closest('.ncard');if(!c)return;const id=c.dataset.id;VTSRC=c.querySelector('.img');RET={tab:ST.tab,cur:ST.cur,q:ST.q,film:id};ST.tab=0;ST.cur=list().findIndex(f=>f.id===id);renderTabs();renderFan();go('detail')});
 $('#now').addEventListener('click',e=>{const g=e.target.closest('[data-g]');if(g){ST.q=g.dataset.g;$('#q').value=ST.q;renderNow()}if(e.target.closest('#clrq')){ST.q='';$('#q').value='';renderNow()}});
 $('#q').addEventListener('input',e=>{const v=e.target.value,n=SBASE(v).replace(/\s+/g,' ').trim(),hasF=FILMS.some(f=>filmMatch(f,n).r<9),hasC=n.length>=2&&CINEMAS.some(c=>SBASE(c.n+' '+c.a).includes(n));ST.q=(hasF||!hasC)?v:'';renderNow()});
@@ -2191,9 +2198,14 @@ function renderAccount(){
  </div><div class="acc-right">
  <h3 class="acc-h">Mes réservations</h3>
  ${up.length?up.map((b,i)=>{const f=F(b.id);return f?`<button class="acc-row" data-bk="${i}"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>${fdateStr(b.date)} · ${b.time} · ${esc(CINEMAS[b.cin].s)}</small><small>Places ${b.seats.join(', ')} · ${eur(b.total)}</small></span><span data-ic="chev"></span></button>`:''}).join(''):`<div class="acc-empty"><b>Aucune réservation à venir</b><p>Choisissez un film et une séance : votre billet apparaîtra ici.</p><button class="btn mini" data-go="home"><span>Voir les films</span></button></div>`}
+ <h3 class="acc-h">Mes suivis</h3>
+ ${(()=>{const fl=Object.keys(ACC.follows||{}).map(F).filter(Boolean),pl=Object.keys(ACC.fp||{});
+  const rf=fl.map(f=>`<div class="acc-row static"><button class="acc-open" data-openfilm="${f.id}"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>Film suivi${isSoon(f)?' · sortie le '+relLabel(f):''}</small></span></button><button class="link rm" data-unfollow-film="${f.id}">Ne plus suivre</button></div>`).join('');
+  const rp=pl.map(n=>{const ph=PIMG[n],pi=peopleIndex().find(x=>x.name===n);return `<div class="acc-row static"><button class="acc-open" data-person="${esc(n)}"><span class="mini-th ph">${ph?`<img src="${ph}" alt="" loading="lazy">`:`<b>${esc(initials(n))}</b>`}</span><span class="grow"><strong>${esc(n)}</strong><small>${pi?pi.roles.join(' · '):'Personne suivie'}</small></span></button><button class="link rm" data-unfollow-person="${esc(n)}">Ne plus suivre</button></div>`}).join('');
+  return (rf||rp)?`${rf?'<h4 class="acc-sub">Films</h4>'+rf:''}${rp?'<h4 class="acc-sub">Acteurs et réalisateurs</h4>'+rp:''}`:'<div class="acc-empty"><b>Vous ne suivez rien pour l’instant</b><p>Touchez la cloche sur une fiche film, ou « Suivre » à côté d’un réalisateur ou d’un nom recherché.</p></div>'})()}
  <h3 class="acc-h">Activité récente</h3>
- ${(()=>{const LBL={book:'Réservation effectuée',cancel:'Réservation annulée',fav:'Ajouté aux favoris',unfav:'Retiré des favoris',follow:'Film suivi',unfollow:'Film non suivi'};
-  const h=(ACC.log||[]).slice(0,12).map((a,i)=>{const f=F(a.id);if(!f)return'';const d=new Date(a.ts);return `<button class="acc-row" data-act="${i}"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>${LBL[a.t]||a.t}</small><small>${d.toLocaleDateString('fr-FR',{day:'numeric',month:'short'})} · ${d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</small></span><span data-ic="chev"></span></button>`}).join('');
+ ${(()=>{const LBL={book:'Réservation effectuée',cancel:'Réservation annulée',fav:'Ajouté aux favoris',unfav:'Retiré des favoris',follow:'Film suivi',unfollow:'Film non suivi',followp:'Personne suivie',unfollowp:'Personne non suivie'};
+  const h=(ACC.log||[]).slice(0,12).map((a,i)=>{const f=F(a.id);if(!f)return'';const d=new Date(a.ts);return `<button class="acc-row" data-act="${i}"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>${LBL[a.t]||a.t}${a.name?' : '+esc(a.name):''}</small><small>${d.toLocaleDateString('fr-FR',{day:'numeric',month:'short'})} · ${d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</small></span><span data-ic="chev"></span></button>`}).join('');
   return h||'<div class="acc-empty"><b>Aucune activité pour l’instant</b><p>Vos réservations, favoris et films suivis apparaîtront ici.</p></div>'})()}
  ${rem.length?`<h3 class="acc-h">Mes rappels de sortie</h3>${rem.map(f=>`<div class="acc-row static"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>Sortie le ${relLabel(f)}</small></span><button class="link rm" data-unremind="${f.id}">Retirer</button></div>`).join('')}`:''}
 
@@ -2214,6 +2226,10 @@ function renderAccount(){
    toast(prev===k?'Note retirée':`Note enregistrée : ${k}/5`,{undo:()=>{if(prev)ACC.ratings[id]=prev;else delete ACC.ratings[id];saveACC();renderAccount()}});return}
   const c=e.target.closest('#lcard');if(c){const on=c.getAttribute('aria-pressed')!=='true';c.setAttribute('aria-pressed',on);c.classList.toggle('flip',on);haptic('tick');return}
   const u=e.target.closest('[data-unremind]');if(u){delete ACC.remind[u.dataset.unremind];saveACC();renderAccount();return}
+  const uf=e.target.closest('[data-unfollow-film]');if(uf){delete ACC.follows[uf.dataset.unfollowFilm];saveACC();logAct('unfollow',uf.dataset.unfollowFilm);haptic('tick');renderAccount();toast('Vous ne suivez plus ce film');return}
+  const up=e.target.closest('[data-unfollow-person]');if(up){const n=up.dataset.unfollowPerson,pi=peopleIndex().find(x=>x.name===n);delete ACC.fp[n];saveACC();logAct('unfollowp',pi?pi.films[0].id:'hailmary',{name:n});haptic('tick');renderAccount();toast('Vous ne suivez plus '+n);return}
+  const of=e.target.closest('[data-openfilm]');if(of){for(const t of [0,1,2]){const i=tabList(t).findIndex(f=>f.id===of.dataset.openfilm);if(i>=0){ST.tab=t;ST.cur=i;break}}renderTabs();renderFan();go('detail');return}
+  const op=e.target.closest('[data-person]');if(op){RET=null;ST.q=op.dataset.person;$('#q').value=ST.q;renderNow();go('home');return}
   const ac=e.target.closest('[data-act]');
   if(ac){const a=ACC.log[+ac.dataset.act];if(!a)return;
    if(a.t==='book'&&a.bk){const up=ACC.bookings.filter(b=>new Date(b.date+'T23:59:00')>=new Date(TODAY)),i=up.findIndex(b=>b.id===a.id&&b.date+'|'+b.time===a.bk);const r=i>=0&&sc.querySelector(`[data-bk="${i}"]`);if(r){r.click();return}}
@@ -2415,7 +2431,7 @@ function renderDetail(){
  ${f.rate==null?`<div class="soonb">Dans les salles <b>le ${relLabel(f)}</b></div>`:`<div class="rating">${IC.star}<b>${rt(f)}</b><span class="muted">/10 · note du public</span></div>`}
  <div class="meta">${f.dur}<i></i>${f.genres}<i></i>${f.year}</div>
  ${isSoon(f)?'':quickSlots()}
- <div class="dir"><div class="avs">${dirPhoto(f)}</div><div class="grow"><small>${TM(f).role.toUpperCase()}</small><strong>${f.dir}</strong></div><button class="follow" id="follow" aria-pressed="${!!ST.follow[f.id]}">${ST.follow[f.id]?'Suivi':'Suivre'}</button></div>
+ <div class="dir"><div class="avs">${dirPhoto(f)}</div><div class="grow"><small>${TM(f).role.toUpperCase()}</small><strong>${f.dir}</strong></div><button class="follow" id="follow" aria-pressed="${dirNames(f).every(n=>ACC.fp[n])}">${dirNames(f).every(n=>ACC.fp[n])?'Suivi':'Suivre'}</button></div>
  <div class="synh"><h3>Synopsis</h3></div><p class="syn clamp" id="syn">${f.syn}</p><button class="synmore" id="synMore" aria-expanded="false" aria-controls="syn">Lire la suite</button>${castHtml(f)}<footer class="foot"><button type="button" class="textlink" data-legal>Confidentialité et mentions légales</button></footer>`;
  paintFollow(f);
  $('#dScroll').scrollTop=0;
@@ -2424,7 +2440,8 @@ function renderDetail(){
 }
 function paintFav(){const f=film(),on=!!ST.fav[f.id],b=$('#favBtn');b.querySelector('svg').style.fill=on?'var(--accent)':'none';b.querySelector('svg').style.color=on?'var(--accent)':'currentColor';b.setAttribute('aria-pressed',on)}
 $('#favBtn').onclick=()=>{const f=film();const flip=()=>{ST.fav[f.id]=!ST.fav[f.id];paintFav();logAct(ST.fav[f.id]?'fav':'unfav',f.id)};flip();haptic('soft');toast(ST.fav[f.id]?'Ajouté aux favoris':'Retiré des favoris',{undo:flip})};
-$('#dBody').addEventListener('click',e=>{const b=e.target.closest('#follow');if(!b)return;const f=film();ST.follow[f.id]=!ST.follow[f.id];b.setAttribute('aria-pressed',!!ST.follow[f.id]);b.textContent=ST.follow[f.id]?'Suivi':'Suivre';haptic('soft');toast(ST.follow[f.id]?'Vous suivez '+dirNames(f).join(' et '):'Vous ne suivez plus '+dirNames(f).join(' et '))});
+function togglePeople(names,fid){const on=!names.every(n=>ACC.fp[n]);names.forEach(n=>{if(on)ACC.fp[n]=Date.now();else delete ACC.fp[n]});saveACC();logAct(on?'followp':'unfollowp',fid,{name:names.join(' et ')});haptic(on?'soft':'tick');return on}
+$('#dBody').addEventListener('click',e=>{const b=e.target.closest('#follow');if(!b)return;const f=film(),nm=dirNames(f),on=togglePeople(nm,f.id);b.setAttribute('aria-pressed',on);b.textContent=on?'Suivi':'Suivre';toast(on?'Vous suivez '+nm.join(' et '):'Vous ne suivez plus '+nm.join(' et '),{undo:()=>{togglePeople(nm,f.id);b.setAttribute('aria-pressed',!on);b.textContent=on?'Suivre':'Suivi'}})});
 
 /* =============== 4. RÉSERVATION =============== */
 function cnt(){return TARIFS.reduce((a,t)=>a+ST.tq[t.k],0)}
