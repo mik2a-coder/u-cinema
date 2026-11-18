@@ -24,7 +24,7 @@ Parcours principal de Mika, du premier regard au billet. Chaque étape a un **se
 | Séance **annulée** | Barrée, « Annulée · voir 23:15 » |
 | **Déjà réservé** / séance qui chevauche | Créneau grisé « Déjà réservé » ou « Autre séance prévue » ; refus au paiement avec explication |
 | Paiement **refusé** | Message clair, commande conservée |
-| **Hors ligne** | Bandeau « Hors ligne · vos choix sont conservés », billet toujours lisible |
+| **Hors ligne ou réseau instable** | Page « Plus de réseau » : chat triste, message rassurant, **mini-jeu** (le chat court, saute des objets de cinéma, glisse à l'arrivée), « Réessayer » (teste vraiment la connexion) et « Continuer hors ligne » ; billet toujours lisible. Au paiement sans réseau : « Connexion nécessaire », commande conservée. Voir la page : https://mik2a-coder.github.io/u-cinema/#x:0:off |
 | **Recherche vide** | Suggestions de genres + « Effacer la recherche » |
 | **Annulation** d'une réservation | Depuis « Mon billet » : confirmation, points rendus |
 

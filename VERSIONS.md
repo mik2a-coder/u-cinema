@@ -2,6 +2,26 @@
 
 Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` dans `sw.js`), affiché en bas de la page **Compte** (« Version vNN »). Pour passer d'une version à l'autre : recharger sans cache (Cmd + Option + R sur Safari).
 
+## Fichiers créés ou modifiés (versions 82 à 86)
+
+| Fichier ou dossier | Version | Modification |
+|---|---|---|
+| `index.html` | v82–v86 | Toutes les évolutions de l'application (fiches personnes, assistant, avoir, récompenses, en-têtes, vue de salle, extraits, page « Plus de réseau », mini-jeu) |
+| `sw.js` | v82–v86 | Numéro de cache `cinelux2-v82` à `v86`, nouvelles icônes mises en cache |
+| `manifest.webmanifest` | v82 | Icône « maskable » dédiée |
+| `icons/` (favicon-32, favicon-48, icon-192, icon-512, apple-touch-icon, icon-512-maskable) | v82 | Nouvelles icônes à partir du logo du chat |
+| `img/og.jpg` | v82 | Image d'aperçu de lien 1200×630 |
+| `img/chat/` (`c01` à `c11`, `triste`, `raw01` à `raw11`, 3 planches) | v84–v86 | Poses du chat pour le mini-jeu et la page d'erreur |
+| `tools/make-icons.mjs`, `tools/og.html` | v82 | Fabrication des icônes et de l'image d'aperçu |
+| `tools/cut-chat.mjs`, `tools/clean-sprites.mjs` | v84–v86 | Découpe et nettoyage des poses du chat |
+| `tools/scenarios/audit-entete.json` | v82 | Contrôle des chevauchements d'en-têtes |
+| `tools/build-rendu.py` | v82 | Dossier de rendu au style « artefact », sans notes de notation |
+| `DIRECTION-ARTISTIQUE.md`, `VERSIONS.md` | v82–v86 | Nouveaux documents |
+| `BRIEF-PERSONA.md`, `PARCOURS.md`, `BAREME.md`, `DESIGN.md`, `TESTS.md`, `JOURNAL.md`, `README.md` | v82–v86 | Personas Mika (Ajaccio) et Ghjuvana Maria (Bastia), page d'erreur, tests, décisions |
+| `RENDU-U-CINEMA.pdf`, `CHECKLIST-TEST-3-PERSONNES.pdf`, `CINELUX-autonome.html` | v82–v86 | Régénérés à chaque version |
+
+**Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
+
 ## Version 86 — 18 novembre 2026
 
 | Demande | Ce qui a été fait | Où le voir |

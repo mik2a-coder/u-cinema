@@ -56,6 +56,7 @@ Ne jamais aider. Noter : hésitations, retours en arrière, mots employés, temp
 | Fiches personnes | Pour les 146 noms de la programmation : la fiche s'ouvre, affiche le bon nom et au moins un film | 146 / 146 |
 | Règle des 45 minutes | Pour chaque créneau : conflit calculé = conflit attendu (fin du film + 45 min) | cohérent sur les 6 créneaux |
 | Assistant | « deux places côte à côte au fond… ce soir 20h » mène au récapitulatif avec les bonnes places, l'horaire le plus proche et le total | vérifié ; refus propre pour un film pas encore en salle |
+| Page « Plus de réseau » | Joueur automatique : 3 parties sur 3 gagnées jusqu'à l'arrivée ; une partie sans saut finit par la chute du chat sur un objet ; saut visible en entier dans le cadre | vérifié (Chrome, v86) ; à essayer sur iPhone et Safari |
 | Contraste | Mesure des paires texte/fond sur 5 palettes | ≥ 4,5 : 1 (voir `DESIGN.md`) |
 
 ## Revues déjà intégrées — la version améliorée (1 relecteur : l'auteur)

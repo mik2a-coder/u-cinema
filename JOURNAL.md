@@ -78,6 +78,15 @@ Détail point par point dans `VERSIONS.md`. Décisions de conception :
 | Fondu de la barre du haut raccourci | Les titres des écrans à en-tête fixe restaient grisés sous le dégradé |
 | Écran de salle au format cinéma (2,3 : 1) | Rogne les bandes noires des bandes-annonces et agrandit l'image utile |
 
+## 18 novembre 2026 — versions 83 à 86 : page « Plus de réseau » et mini-jeu
+| Décision | Pourquoi |
+|---|---|
+| Page dédiée plutôt qu'un simple bandeau | Un réseau coupé en plein trajet (train, zones blanches) doit être expliqué et rassurer |
+| « Continuer hors ligne » toujours proposé | Le billet doit rester accessible sans réseau |
+| Mini-jeu au chat, démarrage à l'action de l'utilisateur | Faire patienter sans imposer de mouvement (« Réduire les animations ») |
+| Poses issues des planches de U Ghjattu-Volpe | Cohérence avec la mascotte, aucun dessin ajouté par l'assistant |
+| Jeu rendu plus facile (vitesse douce, saut mémorisé, collisions indulgentes) | Retour de l'auteur : « trop difficile » |
+
 ## Limites et à valider
 - Test à 3 personnes **non réalisé** (voir `TESTS.md`).
 - Bandes-annonces verticales officielles trouvées pour 3 films sur 18 ; les autres s'affichent en 16:9 dans le cadre.

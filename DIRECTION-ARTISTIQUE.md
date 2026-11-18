@@ -48,6 +48,7 @@ Le prototype est codé (HTML), il n'existe donc pas de maquette Figma : chaque �
 | Séance | Choisir cinéma, jour, heure, tarifs | [#book](https://mik2a-coder.github.io/u-cinema/#book:0) |
 | Places | Choisir ses sièges, voir la vue depuis la place | [#seats](https://mik2a-coder.github.io/u-cinema/#seats:0) |
 | Commande | Contrôler, ajouter une friandise, utiliser avoir et récompenses, payer | [#order](https://mik2a-coder.github.io/u-cinema/#order:0) |
+| Page « Plus de réseau » (erreur) | Rassurer, laisser patienter avec le mini-jeu du chat, proposer « Réessayer » ou « Continuer hors ligne » | [Voir la page d'erreur](https://mik2a-coder.github.io/u-cinema/#x:0:off) |
 | Billet | Présenter son QR code, même hors ligne | [#ticket](https://mik2a-coder.github.io/u-cinema/#ticket:0) |
 | Compte | Réservations, rappels, suivis, films vus, points, avoir, récompenses | [#account](https://mik2a-coder.github.io/u-cinema/#account) |
 
@@ -67,4 +68,4 @@ Règles d'accessibilité : cibles tactiles ≥ 44 px ; focus visible (contour or
 2. **Vérifier dans Safari** (Mac et iPhone) la vue depuis la place, l'en-tête et le fond de l'accueil : cela n'a pu être testé qu'avec Chrome.
 3. **Extraits verticaux** : fournir les liens officiels des Shorts des 15 autres films (3 films en disposent déjà).
 4. **Biographies** : relire les résumés (sources publiques) avant diffusion ; 15 noms n'ont qu'un rôle et une filmographie.
-5. **Passation technique** : un seul fichier `index.html`, un `sw.js` (cache `cinelux2-vNN`), un manifeste ; `tools/` regroupe les scénarios de test et la fabrication des documents. Une version « autonome » (`CINELUX-autonome.html`) fonctionne sans réseau.
+5. **Passation technique** : un seul fichier `index.html`, un `sw.js` (cache `cinelux2-vNN`), un manifeste ; `tools/` regroupe les scénarios de test et la fabrication des documents. La **page d'erreur réseau** (mascotte triste, mini-jeu, objets de cinéma) suit la même palette. Une version « autonome » (`CINELUX-autonome.html`) fonctionne sans réseau.
