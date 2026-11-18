@@ -223,7 +223,7 @@ Principe : couleurs, tailles, rayons et espaces passent par des variables ; une 
 
 ## 12. Version 91 : plan de salle complet, personnages, deux réalisateurs
 - **Plan de salle** : toute la salle est visible d'un coup, sans zoom par zone ni bouton « Voir toute la salle ». Les zones (Avant, Centre, Fond) ne servent plus qu'à l'assistant (« au fond »).
-- **Personnage du compte** : 10 avatars dessinés (mascotte, astronaute, guerrier, héros masqué, héroïne à cape, chasseur casqué, plombier moustachu, aventurier, shérif, navigatrice), choix dans une fenêtre centrée (`.avgrid`, `.avp`), pastille ✎ sur la photo ; l'initiale reste possible.
+- **Personnage du compte** : 10 portraits (depuis la v99 ; dessins vectoriels en secours) (mascotte, astronaute, guerrier, héros masqué, héroïne à cape, chasseur casqué, plombier moustachu, aventurier, shérif, navigatrice), choix dans une fenêtre centrée (`.avgrid`, `.avp`), pastille ✎ sur la photo ; l'initiale reste possible.
 - **Deux réalisateurs** : chaque nom est un lien vers sa fiche ; « Suivre » ouvre « Qui voulez-vous suivre ? » (un interrupteur par personne, ou « Suivre les deux ») ; le bouton indique « Suivi 1/2 » si un seul est suivi.
 - **Bande-annonce dans la salle** : lancement automatique si les extraits sont acceptés ; sinon, ou si la vidéo n'apparaît pas au bout de 7 s, bouton « Lancer la bande-annonce » (un toucher, qui demande l'accord si besoin) ; la vidéo repart quand on change de place.
 

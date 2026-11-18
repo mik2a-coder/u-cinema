@@ -22,6 +22,12 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
 
+## Version 99 — 18 novembre 2026
+
+| Demande | Ce qui a été fait | Où le voir |
+|---|---|---|
+| Utiliser les avatars fournis | Les 10 portraits de la planche « Mon personnage » (mascotte, astronaute, guerrier, héros masqué, héroïne, chasseur casqué, plombier, aventurier, shérif, navigatrice) remplacent les dessins, dans le sélecteur et sur la photo du compte | Compte › Mon personnage |
+
 ## Version 98 — 18 novembre 2026 (audit UX/UI en équipe)
 
 **Dispositif :** 4 agents de revue en lecture seule (accessibilité, UI visuelle et responsive, QA fonctionnelle, cohérence documentaire) ; les corrections et les tests ont été faits par l'auteur du projet avec l'assistant, pour éviter les conflits d'écriture. Chaque défaut ci-dessous a été constaté par un agent avant d'être corrigé.
@@ -276,3 +282,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v96 | 18/11/2026 | Défilement au bord de la fenêtre, plan de salle ajusté, étoiles lisibles, bouton Retour du navigateur, lien légal en pied de page, état des filtres |
 | v97 | 18/11/2026 | Tuiles du compte cliquables (fenêtres) ; dossier prêt pour les avatars en photos |
 | v98 | 18/11/2026 | Audit UX/UI en équipe : assistant jamais sans réponse, correctifs QA, accessibilité, UI, confidentialité |
+| v99 | 18/11/2026 | Avatars en portraits |
