@@ -1529,6 +1529,7 @@ body:has(#s-detail.active) .toast{bottom:118px}
 :root.light .zpill{background:rgba(255,255,255,.78);color:#1E1810;border-color:rgba(60,44,16,.16)}
 .seat[aria-pressed=true] .s{animation:seatPop .38s cubic-bezier(.3,1.6,.5,1) 1}@keyframes seatPop{0%{transform:scale(.7)}100%{transform:scale(1)}}
 .viewport.rm #sgrid,.viewport.rm .seat .s{transition:none!important;animation:none!important}
+.sv-act{grid-column:1/-1;display:flex;gap:10px;margin-top:10px}.sv-act .btn{flex:1;min-height:52px}
 </style>
 </head>
 <body>
@@ -1651,6 +1652,7 @@ body:has(#s-detail.active) .toast{bottom:118px}
     <button class="round sv-close" id="svClose" aria-label="Retour au plan de salle" data-ic="back"></button>
     <div class="sv-hud"><div class="sv-info"><small id="svSub"></small><strong id="svTitle"></strong></div>
       <div class="sv-nav" id="svNav"><button class="round" id="svPrev" aria-label="Place précédente" data-ic="back"></button><button class="round" id="svNext" aria-label="Place suivante" data-ic="chev"></button></div>
+      <div class="sv-act"><button class="btn alt" id="svChange" type="button"><span>Changer de place</span></button><button class="btn" id="svBuy" type="button"><span id="svBuyT">Acheter</span></button></div>
       <p class="sv-note">Simulation indicative : la vue réelle dépend de la salle.</p></div>
   </div>
 
@@ -2299,7 +2301,7 @@ function openSeatView(){
  const r0=sc.getBoundingClientRect(),b=btn.getBoundingClientRect(),zoom=parseFloat(getComputedStyle(sc).zoom)||1;
  const cx=(b.left+b.width/2-r0.left)/zoom,cy=(b.top+b.height/2-r0.top)/zoom;
  sv.hidden=false;sv.style.setProperty('--ox',cx+'px');sv.style.setProperty('--oy',cy+'px');
- svBuild();svAim(ids[0],true);
+ svBuild();svAim(ids[0],true);$('#svBuyT').textContent='Acheter · '+($('#buyPrice')?$('#buyPrice').textContent:'');
  const panel=$('#s-seats .panel');panel.style.transformOrigin=`${cx}px ${cy - (panel.offsetTop||0)}px`;
  void sv.offsetWidth;sc.classList.add('diving');sv.classList.add('show');haptic('soft');
  svTrailer();
@@ -2321,6 +2323,8 @@ function closeSeatView(){
 }
 $('#vfs').onclick=openSeatView;
 $('#svClose').onclick=closeSeatView;
+$('#svChange').onclick=closeSeatView;
+$('#svBuy').onclick=()=>{closeSeatView();setTimeout(()=>{const b=$('#buy');if(b&&!b.disabled)b.click()},560)};
 $('#svPrev').onclick=()=>{SV.i=(SV.i-1+SV.ids.length)%SV.ids.length;svAim(SV.ids[SV.i]);haptic('tick')};
 $('#svNext').onclick=()=>{SV.i=(SV.i+1)%SV.ids.length;svAim(SV.ids[SV.i]);haptic('tick')};
 document.addEventListener('keydown',e=>{if(!SV.open)return;if(e.key==='Escape'){e.preventDefault();e.stopPropagation();closeSeatView()}else if(e.key==='ArrowRight'&&SV.ids.length>1)$('#svNext').click();else if(e.key==='ArrowLeft'&&SV.ids.length>1)$('#svPrev').click()},true);

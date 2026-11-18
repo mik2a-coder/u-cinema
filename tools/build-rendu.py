@@ -67,6 +67,7 @@ sections=[
  ('Prototype mobile et grand écran','<p>Prototype en ligne : <a href="https://mik2a-coder.github.io/u-cinema/">https://mik2a-coder.github.io/u-cinema/</a></p><h3>Téléphone (390 px)</h3>'+gallery('mobile',CAP)+'<h3>Grand écran (1280 px)</h3>'+gallery('bureau',CAP)),
  ('Design system (variables et composants)',md(read('DESIGN.md'),2)),
  ('Tests et version améliorée',md(read('TESTS.md'),2)),
+ ('Checklist de test (3 participants)',md(read('CHECKLIST-TESTS.md'),2)),
  ('Journal',md(read('JOURNAL.md'),2)),
  ('Annexe : grille « Peaufiner » et notes de conception',md(read('V2-NOTES.md'),2)),
  ('Annexe : conformité (RGPD, consommation, accessibilité)',md(read('CONFORMITE.md'),2)),
@@ -95,3 +96,10 @@ open('rendu/dossier.html','w',encoding='utf-8').write(doc)
 chrome='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 subprocess.run([chrome,'--headless=new','--disable-gpu','--no-pdf-header-footer','--print-to-pdf=RENDU-U-CINEMA.pdf','file://'+os.path.abspath('rendu/dossier.html')],check=True,capture_output=True)
 print('RENDU-U-CINEMA.pdf',os.path.getsize('RENDU-U-CINEMA.pdf')//1024,'Ko')
+
+# Checklist seule, A4 paysage, à imprimer
+chk_css=css.replace('@page{size:A4;margin:16mm 14mm}','@page{size:A4 landscape;margin:10mm}').replace('font:10.5pt/1.5','font:9.5pt/1.35').replace('font-size:8.8pt','font-size:8pt')
+chk=f'''<!doctype html><html lang="fr"><meta charset="utf-8"><title>Checklist de test</title><style>{chk_css}h2{{page-break-after:avoid}}td{{height:8mm}}td:nth-last-child(1),td:nth-last-child(2){{min-width:34mm}}</style><body>{md(read('CHECKLIST-TESTS.md'),1)}</body></html>'''
+open('rendu/checklist.html','w',encoding='utf-8').write(chk)
+subprocess.run([chrome,'--headless=new','--disable-gpu','--no-pdf-header-footer','--print-to-pdf=CHECKLIST-TEST-3-PERSONNES.pdf','file://'+os.path.abspath('rendu/checklist.html')],check=True,capture_output=True)
+print('CHECKLIST-TEST-3-PERSONNES.pdf',os.path.getsize('CHECKLIST-TEST-3-PERSONNES.pdf')//1024,'Ko')

@@ -37,6 +37,7 @@ puis ouvrir http://localhost:8731/index.html (les extraits vidéo demandent un s
 | Parcours utilisateur | `PARCOURS.md` + `rendu/captures/` |
 | Design system (variables, composants) | `DESIGN.md` |
 | Tests (protocole, contrôles, revues) | `TESTS.md`, `tools/scenarios/` |
+| **Checklist à utiliser pendant les 3 tests** | `CHECKLIST-TESTS.md` · `CHECKLIST-TEST-3-PERSONNES.pdf` (A4 paysage, à imprimer) |
 | Journal (outils, prompts, choix) | `JOURNAL.md` |
 | Notes de conception, grille Peaufiner | `V2-NOTES.md` |
 | Conformité | `CONFORMITE.md` |
