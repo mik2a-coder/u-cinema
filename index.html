@@ -1197,7 +1197,7 @@ html.vt-back::view-transition-new(root){animation:vtInB .46s cubic-bezier(.16,1,
 .sv-world i{position:absolute;display:block;transform-style:flat;backface-visibility:visible}
 .sv-screen{background:#0a0a0a;box-shadow:0 0 0 .1em #040404,0 0 0 .3em #17100d,0 0 140px 40px color-mix(in srgb,var(--sc) 42%,transparent);overflow:hidden}
 .sv-screen img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.1) contrast(1.05)}
-.sv-vid{position:absolute;inset:0;overflow:hidden;clip-path:inset(0);contain:paint;opacity:0;transition:opacity 1.2s;pointer-events:none}.sv-vid.on{opacity:1}.sv-vid iframe{position:absolute;left:0;top:-14.5%;width:100%;height:129%;border:0;pointer-events:none;transform:scale(1.14)}
+.sv-vid{position:absolute;inset:0;overflow:hidden;clip-path:inset(0);contain:paint;opacity:0;transition:opacity 1.2s;pointer-events:none}.sv-vid.on{opacity:1}.sv-vid iframe{position:absolute;left:0;top:0;width:100%;height:100%;border:0;pointer-events:none;transform:scale(1.06)}
 .sv-screen::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 100% at 50% 40%,transparent 55%,rgba(0,0,0,.45))}
 .sv-reflet{background:radial-gradient(ellipse,color-mix(in srgb,var(--sc) 50%,transparent),transparent 70%);filter:blur(6px)}
 .sv-front{background:repeating-linear-gradient(90deg,rgba(0,0,0,.3) 0 7px,transparent 7px 14px),linear-gradient(90deg,#4a1216 0,#2a0a0d 14%,#0b0807 22%,#0b0807 78%,#2a0a0d 86%,#4a1216 100%)}
@@ -1537,6 +1537,8 @@ body:has(#s-detail.active) .toast{bottom:118px}
 /* téléphone : le logo de l'app en haut à gauche (le compte reste dans le menu du bas) */
 .avatar.brand-m{width:48px;height:48px;border:0;border-radius:0;overflow:visible;background:none}.avatar.brand-m .lg-mark{width:48px!important;height:48px!important;margin:0}
 #avatar{display:none!important}
+/* vue depuis la place : écran 16:9 (la vidéo remplit exactement le plan, rien ne dépasse, y compris sous Safari) */
+.sv-screen,.sv-vid{-webkit-mask-image:-webkit-radial-gradient(white,black);isolation:isolate}
 </style>
 </head>
 <body>
@@ -2278,7 +2280,7 @@ function svBuild(){
  add(2*H,len,0,5.6,zMid,' rotateX(90deg)','sv-ceil');
  add(2*H,6,0,2.6,-.4,'','sv-front');
  // écran : cadre, image, reflet sur la scène
- add(8.0,3.5,0,2.5,0,'','sv-screen','',`<img src="img/scene/${f.id}.jpg" alt="">`);
+ add(7.2,4.05,0,2.5,0,'','sv-screen','',`<img src="img/scene/${f.id}.jpg" alt="">`);
  add(8.5,.9,0,.45,.02,' rotateX(90deg)','sv-reflet');
  // fauteuils, spectateurs
  const mkRim='';
