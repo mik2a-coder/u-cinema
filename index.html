@@ -1685,6 +1685,29 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
 @media (max-width:480px){.tabs{gap:2px!important;padding-left:12px!important;padding-right:12px!important;justify-content:space-between}.tabs button{padding:0 2px;font-size:calc(var(--fs-xs)*var(--ts,1))}}
 :root:not(.light) #dtop::before{background:linear-gradient(to bottom,color-mix(in srgb,var(--bg) 46%,transparent) 0,color-mix(in srgb,var(--bg) 40%,transparent) 62%,color-mix(in srgb,var(--bg) 14%,transparent) 88%,transparent 100%)}
 #tkCancel{width:100%}#tkCancel .btn{margin-top:6px}
+/* v96 : sur grand écran la barre de défilement est au bord de la fenêtre ; seule la colonne de contenu est centrée */
+@media (min-width:600px){
+ #s-book .scroll,#s-order .scroll{max-width:none!important;width:100%!important;margin:0!important;padding-left:max(0px,calc((100% - 780px)/2))!important;padding-right:max(0px,calc((100% - 780px)/2))!important}
+ #s-ticket .scroll{max-width:none!important;width:100%!important;margin:0!important;padding-left:max(0px,calc((100% - 560px)/2))!important;padding-right:max(0px,calc((100% - 560px)/2))!important}
+}
+/* v96 : étoiles des notes plus lisibles (contraste ≥ 4,5 : 1, contour renforcé) */
+.r5 button{color:color-mix(in srgb,var(--text) 62%,var(--surface))}
+.r5 button svg{stroke:currentColor;stroke-width:1.9px}
+.r5 button.on{color:var(--accent-text)}.r5 button.on svg{fill:currentColor;stroke:var(--accent-text)}
+:root.light .r5 button.on{color:#7A5208}:root.light .r5 button.on svg{stroke:#5E3E05}
+.acc-row .rh{color:var(--accent-text);font-weight:700}
+/* accueil : le défilement est au bord de la fenêtre */
+@media (min-width:600px){#s-home .hbody{max-width:none!important;width:100%!important;margin:0!important;padding-left:max(24px,calc((100% - 1240px)/2))!important;padding-right:max(24px,calc((100% - 1240px)/2))!important}}
+/* v96 : le lien « Règles, confidentialité et mentions légales » est toujours le dernier élément de la page, jamais derrière un bouton */
+#dBody .foot{padding-bottom:calc(var(--bot) + 120px)}
+#s-book .foot,#s-order .foot{padding-bottom:calc(var(--bot) + 96px)}
+#s-home .foot,#s-account .foot,#s-person .foot,#s-ticket .foot{padding-bottom:calc(var(--bot) + 84px)}
+.seats-foot{padding:0 0 calc(var(--bot) - 14px);flex:none}.seats-foot .textlink{padding:6px 8px}
+/* v96 : une option sélectionnée change nettement d'état (fond doré, coche, texte foncé) */
+.fchip[aria-pressed=true],:root.light .fchip[aria-pressed=true]{background:var(--accent)!important;color:var(--on-accent)!important;border-color:var(--accent2)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 35%,transparent),0 8px 18px -12px var(--glow)!important}
+.fchip[aria-pressed=true] svg,:root.light .fchip[aria-pressed=true] svg{color:var(--on-accent)!important}
+.fchip[aria-pressed=true]::before{content:"✓";font-weight:800;margin-right:2px}
+.fchip{transition:background .2s,color .2s,box-shadow .2s,border-color .2s}
 </style>
 </head>
 <body>
@@ -1767,7 +1790,6 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
     <div class="d-scroll" id="dScroll">
       <div class="d-spacer"><button class="trailer" id="trailerBtn"><span data-ic="play"></span>Bande-annonce</button></div>
       <div class="d-body" id="dBody"></div>
-      <footer class="foot"><button type="button" class="textlink" data-legal>Règles, confidentialité et mentions légales</button></footer>
     </div>
     <div class="d-bar"><button class="round" aria-label="Partager" data-toast="Lien copié" data-ic="share"></button><button class="ff2" id="followFilm" aria-pressed="false" aria-label="Suivre ce film"><span data-ic="bell"></span><span class="ff-t">Suivre</span></button><button class="btn cta gold" id="ctaMain" data-go="book"><span>Réserver</span><span data-ic="arrow"></span></button></div>
   </section>
@@ -1809,6 +1831,7 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
       <div style="flex:1"></div>
       <div class="sbar"><div><small>VOS PLACES</small><strong id="sSeats">—</strong><small id="sSub" style="letter-spacing:.02em;font-size:calc(var(--fs-xs)*var(--ts,1))"></small></div>
         <button class="split" id="buy"><span class="sl">Acheter</span><span class="sp" id="buyPrice">—</span><span class="sa" data-ic="arrow" aria-hidden="true"></span></button></div>
+      <footer class="foot seats-foot"><button type="button" class="textlink" data-legal>Règles, confidentialité et mentions légales</button></footer>
     </div>
   </section>
 
@@ -2133,8 +2156,15 @@ const ORDER=['onb','home','detail','book','seats','order','ticket'],LABELS=['Int
 let cur='onb';
 const HOOKS={account:()=>renderAccount(),detail:renderDetail,book:renderBook,seats:()=>{ST.zIntro=true;ST.zPick=false;ST.zone=null;ST.zOv=false;renderSeats()},order:renderOrder,ticket:renderTicket};
 let VTSRC=null,NOVT=false,VTID=0,RET=null;const SCR={};
+/* historique du navigateur : chaque écran est une entrée ; « Retour » (bouton du navigateur, geste, touche) revient à l'écran précédent */
+const HP={pop:0,done:false};
 function go(n){
- if(n===cur)return;const prev=cur,from=$('#s-'+cur),to=$('#s-'+n),dir=(n==='account'||n==='person')?1:(cur==='account'||cur==='person')?-1:(ORDER.indexOf(n)>=ORDER.indexOf(cur)?1:-1);
+ if(n===cur)return;
+ if(!HP.pop){const st=history.state;
+  if(st&&st.s===cur&&st.p===n){history.back();return}
+  if(n==='ticket')HP.done=true;else if(n==='detail'||n==='book')HP.done=false;
+  try{const d=(st&&st.d)||0;if(cur==='onb')history.replaceState({s:n,p:null,d:0},'');else history.pushState({s:n,p:cur,d:d+1},'')}catch(e){}}
+const prev=cur,from=$('#s-'+cur),to=$('#s-'+n),dir=(n==='account'||n==='person')?1:(cur==='account'||cur==='person')?-1:(ORDER.indexOf(n)>=ORDER.indexOf(cur)?1:-1);
  const finish=()=>{{const mv=$('#muv');if(mv)mv.dataset.scr=n;if(typeof MV!=='undefined'&&MV.open&&n!=='home')mvClose()}if(prev==='detail'&&n!=='detail')setTimeout(stopExtract,200);cur=n;if(n==='detail')setTimeout(startExtract,60);if(n==='home'&&typeof mvHello==='function')mvHello();markStep();if(typeof markDnav==='function')markDnav();setTimeout(()=>{to.setAttribute('tabindex','-1');to.focus({preventScroll:true});if(restore!=null){const s2=to.querySelector('.scroll,.d-scroll');if(s2)s2.scrollTop=restore}if(lastFilm){const c=to.querySelector('.ncard[data-id="'+lastFilm+'"]');if(c){const r=c.getBoundingClientRect();if(r.top<120||r.bottom>innerHeight-30)c.scrollIntoView({block:'center',behavior:A11Y.rm?'auto':'smooth'});c.classList.add('last');setTimeout(()=>c.classList.remove('last'),2400)}}},90);say(to.getAttribute('aria-label')||'')};
  if(prev==='detail'){document.querySelectorAll('#dVisual .d-video').forEach(v=>{v.style.transition='opacity .14s';v.classList.remove('on')});const ex=document.querySelector('#exSound');if(ex)ex.remove();setTimeout(stopExtract,170)}
  {const sc0=from.querySelector('.scroll,.d-scroll');if(sc0)SCR[prev]=sc0.scrollTop}
@@ -3151,7 +3181,18 @@ function renderSeats(){
  paintSeatsBar();rovingSeats();
  if(ST.zone==null)ST.zone=ST.seats.length?Math.max(0,zoneOf(ST.seats[0])):1;
  if(ST.zIntro){ST.zIntro=false;zoneIntro()}else applyZone();
+ fitSeats();
 }
+/* grand écran : le plan s'adapte à la hauteur de la fenêtre (rien n'est caché derrière la barre « Acheter », pas de défilement dans le panneau) */
+function fitSeats(){
+ const pn=document.querySelector('#s-seats .panel'),g=$('#sgrid'),c=$('#curve');if(!pn||!g||!c)return;
+ g.style.zoom='';c.style.zoom='';if(innerWidth<600)return;
+ const bg=parseFloat(getComputedStyle(g).zoom)||1,bc=parseFloat(getComputedStyle(c).zoom)||1;
+ let o=pn.scrollHeight-pn.clientHeight;if(o<=2)return;
+ const H=g.getBoundingClientRect().height+c.getBoundingClientRect().height;let f=Math.max(.55,(H-o-12)/H);
+ g.style.zoom=bg*f;c.style.zoom=bc*f;
+ o=pn.scrollHeight-pn.clientHeight;if(o>2){f=Math.max(.45,f*(H*f-o-8)/(H*f));g.style.zoom=bg*f;c.style.zoom=bc*f}}
+addEventListener('resize',()=>{if(cur==='seats')fitSeats()});
 /* Plan de salle au clavier : flèches pour se déplacer, un seul arrêt de tabulation (cours : « sans souris, touche Tab ») */
 function seatMatrix(){return [...document.querySelectorAll('#sgrid .srow')].map(r=>[...r.querySelectorAll('.seat')])}
 function rovingSeats(){const all=[...document.querySelectorAll('#sgrid .seat')];if(!all.length)return;const first=all.find(b=>b.getAttribute('aria-pressed')==='true')||all.find(b=>!b.disabled)||all[0];all.forEach(b=>b.tabIndex=(b===first&&!b.disabled)?0:-1)}
@@ -3546,12 +3587,19 @@ $('#avatar').innerHTML=avatarSVG('M','me');$('#avatar').style.cssText='display:b
 
 /* bouton retour du téléphone : revient à l'écran précédent, ferme un panneau, puis quitte */
 const PREV={book:'detail',seats:'book',order:'seats',ticket:'home'};Object.defineProperty(PREV,'detail',{get:()=>ST.dFrom==='person'?'person':'home',enumerable:true});Object.defineProperty(PREV,'person',{get:()=>ST.pFrom&&ST.pFrom!=='person'?ST.pFrom:'home',enumerable:true});
-try{history.replaceState({s:'root'},'');history.pushState({s:'app'},'')}catch(e){}
-let exitArmed=false;
-addEventListener('popstate',()=>{
- if(SH.open){closeSheet();history.pushState({s:'app'},'');return}
- if(PREV[cur]){go(PREV[cur]);history.pushState({s:'app'},'');return}
- if(cur==='home'||cur==='onb'){if(!exitArmed){exitArmed=true;toast('Appuyez encore pour quitter');history.pushState({s:'app'},'');setTimeout(()=>exitArmed=false,2200)}else history.back()}
+try{history.replaceState({s:cur,p:null,d:0},'')}catch(e){}
+addEventListener('popstate',e=>{
+ const keep=()=>{try{const h=history.state||{};history.pushState({s:cur,p:h.s,d:(h.d||0)+1},'')}catch(x){}};
+ if(SH.open){closeSheet();keep();return}
+ if(typeof OFF!=='undefined'&&OFF.on){offHide();keep();return}
+ if(typeof MV!=='undefined'&&MV.open){mvClose();keep();return}
+ if(typeof SV!=='undefined'&&SV.open){closeSeatView();keep();return}
+ const st=e.state;let t=st&&st.s;if(!t||t===cur)return;
+ if(cur==='ticket'&&(t==='book'||t==='seats'||t==='order'))t='home';
+ if(t==='onb')t='home';
+ if(HP.done&&cur==='home'&&['detail','book','seats','order','ticket'].includes(t)){if(st.d>0)history.go(-st.d);return}
+ if(!ORDER.includes(t)&&t!=='account'&&t!=='person')t='home';
+ HP.pop=1;try{go(t)}finally{HP.pop=0}
 });
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'))addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 

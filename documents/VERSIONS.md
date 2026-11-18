@@ -22,6 +22,16 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
 
+## Version 96 — 18 novembre 2026
+
+| N° | Demande | Ce qui a été fait | Où le voir |
+|---|---|---|---|
+| 1 | Pages de bureau mal adaptées, barre de défilement « trop au milieu » | Sur grand écran, la **barre de défilement est au bord de la fenêtre** (séance, commande, billet, accueil) : seule la colonne de contenu est centrée. Le **plan de salle s'adapte à la hauteur** de la fenêtre : plus de légende cachée derrière « Acheter » ni de défilement dans le panneau (testé de 1024×768 à 1920×1080) | Toutes les pages, bureau |
+| 2 | Contraste des étoiles dans « Films que j'ai vus » | Étoiles pleines en or foncé (clair) ou or vif (sombre) avec contour renforcé ; étoiles vides en contour plus marqué ; libellé « Votre note » plus gras | Compte |
+| 3 | Bouton « Retour » de Google Chrome inutilisable chez une collègue | Cause probable : l'application n'enregistrait pas chaque écran dans l'historique du navigateur (Chrome ignore les entrées ajoutées sans geste de l'utilisateur). Chaque changement d'écran crée maintenant une entrée ; « Retour » ramène à l'écran précédent, ferme d'abord une fenêtre, l'assistant ou la vue depuis la place s'ils sont ouverts ; après un achat, « Retour » du billet ramène à l'accueil | Tout le parcours |
+| 4 | Lien « Règles, confidentialité et mentions légales » toujours dans le pied de page, jamais derrière un bouton | Le lien est le **dernier élément de chaque page** (y compris le plan de salle), avec de la marge sous lui pour les barres de boutons ; le doublon de la fiche film est supprimé | Toutes les pages |
+| 5 | Changement d'état quand on sélectionne une option | Les filtres « Audiodescription » et « Sous-titres… » deviennent **dorés avec une coche** une fois choisis | Séance |
+
 ## Version 95 — 18 novembre 2026
 
 | Demande | Ce qui a été fait | Où le voir |
@@ -234,3 +244,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v93 | 18/11/2026 | Politiques d'achat et horaires complets, avoir de 12 mois, checklist à cocher, chapitre « Idées ajoutées » |
 | v94 | 18/11/2026 | Tête « Heureux » du chat dans la rubrique enfants |
 | v95 | 18/11/2026 | Annulation depuis le billet ; bande du haut translucide en mode sombre |
+| v96 | 18/11/2026 | Défilement au bord de la fenêtre, plan de salle ajusté, étoiles lisibles, bouton Retour du navigateur, lien légal en pied de page, état des filtres |

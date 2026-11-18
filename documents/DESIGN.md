@@ -236,3 +236,10 @@ Principe : couleurs, tailles, rayons et espaces passent par des variables ; une 
 - **Une seule source** : l'objet `POL` (annulation 2 h, 45 min entre films, fermeture des réservations 10 min avant, avoir 12 mois, horaires) alimente le code **et** les textes affichés.
 - **Où l'utilisateur les voit** : phrase d'information sous les tarifs (étape Séance) et sous le total (Commande), avec liens « Règles d'annulation » et « Horaires du cinéma » ; fenêtre « Règles et informations légales » (pied de page) avec les sections annulation, horaires, règlement, CGV ; horaires dans le choix du cinéma ; avoir daté dans Compte et à la commande.
 - **Champs « À COMPLÉTER »** (surlignés) : uniquement les informations que seul un exploitant réel connaît (raison sociale, médiateur, jours fériés, délai de remboursement).
+
+## 15. Version 96 : bureau, historique, états
+- **Bureau** : le conteneur qui défile occupe toute la largeur (la barre de défilement est au bord de la fenêtre) ; la colonne centrale est obtenue par un remplissage latéral (`padding-inline: max(0, (100% − largeur)/2)`).
+- **Plan de salle** : la fonction `fitSeats()` réduit le plan (et l'écran) juste assez pour que tout tienne dans le panneau, sans cacher la légende.
+- **Historique du navigateur** : chaque écran est une entrée (`history.pushState`) ; l'application revient en arrière avec `history.back()` quand la cible est l'écran précédent, pour garder la pile cohérente.
+- **États sélectionnés** : un filtre ou une option choisie change de fond (or), reçoit une coche et un halo ; le survol seul ne suffit pas.
+- **Pied de page** : le lien légal est le dernier élément du contenu de chaque écran, avec une marge basse égale à la hauteur des barres de boutons.

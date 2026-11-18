@@ -44,6 +44,7 @@ puis l'**avis général** : content · mitigé · pas content.
 | Bandes-annonces | Pour les 22 films : lien YouTube vérifié (réponse « oEmbed » valide) et extrait de la fiche révélé en environ 2,5 s (Chrome) | voir v92 |
 | Règles d'achat | Annulation refusée à moins de 2 h ; avoir créé avec une date à 12 mois, affiché dans Compte et à la commande ; avoir périmé ignoré ; doublon et chevauchement refusés (45 min) | vérifié (v93) |
 | Annulation depuis le billet | Après un achat à 2 jours : bouton présent, confirmation en 2 temps, avoir de 38,40 € à 12 mois, retour au Compte ; billet à moins de 2 h : « Annulation impossible » | vérifié (v95) |
+| Bureau et historique | Défilement au bord de la fenêtre sur 8 écrans (1280×720 à 1920×1080) ; plan de salle sans recouvrement de 1024×768 à 1920×1080 ; bouton Retour du navigateur : écran précédent, fenêtre fermée d'abord, billet → accueil ; lien légal visible et non recouvert sur 8 écrans | vérifié (v96, Chrome) |
 | Contraste | Mesure des paires texte/fond sur 5 palettes | ≥ 4,5 : 1 (voir `DESIGN.md`) |
 
 ## Revues déjà intégrées — la version améliorée (1 relecteur : l'auteur)
