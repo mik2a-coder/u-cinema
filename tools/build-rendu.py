@@ -50,7 +50,35 @@ def md(src,base=1):
         out.append('<p>'+inline(' '.join(buf))+'</p>')
     return '\n'.join(out)
 
-def read(f):return open(f,encoding='utf-8').read()
+
+def clean(t):
+    import re as _r
+    t=t.replace(' ; cela réduit le critère « peu de couleurs » de la grille Peaufiner','')
+    t=t.replace('grille « Peaufiner »','revue de conception')
+    t=_r.sub(r'^.*(Notes : grille Peaufiner|Lisibilité, cohérence \(grille).*$','',t,flags=_r.M)
+    t=_r.sub(r'Peaufiner : ','',t)
+    return t
+def sans_notes(t):
+    """Retire du dossier remis les notes de notation (points, statuts, auto-évaluation)."""
+    import re as _r
+    lines=t.split('\n');out=[];skip=False
+    for l in lines:
+        if l.startswith('| # | Critère'):skip=True
+        if skip:
+            if l.startswith('|'):continue
+            skip=False
+        if l.startswith('> Auto-évaluation'):continue
+        out.append(l)
+    t='\n'.join(out)
+    t=_r.sub(r' — \d+ points?','',t)
+    t=_r.sub(r'[^\n.;]*(grille « Peaufiner »|grille Peaufiner|Peaufiner :)[^\n]*','',t) if False else t
+    t=t.replace('(19 points, plus un)','').replace('Réponse à la page « Barème »','Critères et preuves')
+    t=_r.sub(r' Le point n.est acquis qu.une fois[^\n]*','',t)
+    return t
+
+def read(f):
+    return clean(open(f,encoding='utf-8').read())
+def _read_raw(f):return open(f,encoding='utf-8').read()
 def img(f):
     return 'data:image/jpeg;base64,'+base64.b64encode(open(f,'rb').read()).decode()
 
@@ -64,7 +92,7 @@ CAP={'10-fiche-personne':'Fiche personne','11-assistant':'Assistant : réservati
 
 sections=[
  ('Direction artistique et palette',md(read('DIRECTION-ARTISTIQUE.md'),2)),
- ('Barème',md(read('BAREME.md'),2)),
+ ('Critères et preuves',md(sans_notes(read('BAREME.md')),2)),
  ('Brief et persona',md(read('BRIEF-PERSONA.md'),2)),
  ('Parcours utilisateur',md(read('PARCOURS.md'),2)+'<h3>Les écrans du parcours (téléphone)</h3>'+gallery('mobile',CAP)),
  ('Prototype mobile et grand écran','<p>Prototype en ligne : <a href="https://mik2a-coder.github.io/u-cinema/">https://mik2a-coder.github.io/u-cinema/</a></p><h3>Téléphone (390 px)</h3>'+gallery('mobile',CAP)+'<h3>Grand écran (1280 px)</h3>'+gallery('bureau',CAP)),
@@ -73,7 +101,6 @@ sections=[
  ('Checklist de test (3 participants)',md(read('CHECKLIST-TESTS.md'),2)),
  ('Journal',md(read('JOURNAL.md'),2)),
  ('Journal des versions',md(read('VERSIONS.md'),2)),
- ('Annexe : grille « Peaufiner » et notes de conception',md(read('V2-NOTES.md'),2)),
  ('Annexe : conformité (RGPD, consommation, accessibilité)',md(read('CONFORMITE.md'),2)),
 ]
 toc=''.join(f'<li><a href="#s{i}">{t}</a></li>' for i,(t,_) in enumerate(sections))
@@ -116,7 +143,7 @@ logo=img('img/logo-mark3.png').replace('image/jpeg','image/png')
 doc=f'''<!doctype html><html lang="fr"><meta charset="utf-8"><title>U CINEMÀ — Dossier de rendu</title><style>{css}</style><body>
 <div class="cover"><img src="{logo}"><div class="ver">VERSION 82 · 18 NOVEMBRE 2026</div><h1><b>U</b> CINEMÀ</h1><div class="sub">Prototype d'application de réservation de cinéma, mobile et grand écran</div>
 <div class="pal"><i style="background:#FAF6EB"></i><i style="background:#F6EFDE"></i><i style="background:#16120A"></i><i style="background:#1E1810"></i><i style="background:#F0C05A"></i><i style="background:#B98322"></i><i style="background:#0B0A08"></i></div>
-<div class="meta"><strong>Exercice</strong> : « le meilleur prototype possible » (Prototyper en 2026 · Livrer)<br><strong>Auteur</strong> : Mika<br><strong>Prototype</strong> : <a href="https://mik2a-coder.github.io/u-cinema/">https://mik2a-coder.github.io/u-cinema/</a><br><strong>Code</strong> : <a href="https://github.com/mik2a-coder/u-cinema">https://github.com/mik2a-coder/u-cinema</a><br><strong>Contenu</strong> : direction artistique et palette, barème, brief et persona, parcours, design system, tests, journal des versions, annexes</div></div>
+<div class="meta"><strong>Exercice</strong> : « le meilleur prototype possible » (Prototyper en 2026 · Livrer)<br><strong>Auteur</strong> : Mika<br><strong>Prototype</strong> : <a href="https://mik2a-coder.github.io/u-cinema/">https://mik2a-coder.github.io/u-cinema/</a><br><strong>Code</strong> : <a href="https://github.com/mik2a-coder/u-cinema">https://github.com/mik2a-coder/u-cinema</a><br><strong>Contenu</strong> : direction artistique et palette, critères et preuves, brief et persona, parcours, design system, tests, journal des versions, annexes</div></div>
 <div class="toc"><h1>Sommaire</h1><ol>{toc}</ol></div>{body}</body></html>'''
 open('rendu/dossier.html','w',encoding='utf-8').write(doc)
 chrome='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
