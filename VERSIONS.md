@@ -2,6 +2,12 @@
 
 Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` dans `sw.js`), affiché en bas de la page **Compte** (« Version vNN »). Pour passer d'une version à l'autre : recharger sans cache (Cmd + Option + R sur Safari).
 
+## Version 84 — 18 novembre 2026
+
+| Demande | Ce qui a été fait | Où le voir |
+|---|---|---|
+| Chat qui court (et non assis) dans le mini-jeu, tête triste en haut de la page | Poses découpées dans les planches de U Ghjattu-Volpe : deux poses de course qui alternent, pose de saut en l'air ; tête « Triste » en haut de la page « Plus de réseau » (`img/chat/`, outil `tools/cut-chat.mjs`) | Page « Plus de réseau » |
+
 ## Version 83 — 18 novembre 2026
 
 | Demande | Ce qui a été fait | Où le voir |
@@ -114,3 +120,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v82 | 18/11/2026 | v82 : 24 points de la revue (fiches personnes, mes billets, assistant qui réserve, avoir/récompenses, annulation 2 h, 45 min entre séances, barre d'étapes, défilement, logo/icônes, écran de salle sans cadre, extraits sans bandes noires, en-têtes sans chevauchement) |
 | v82 | 18/11/2026 | Revue en 24 points (voir ci-dessus) |
 | v83 | 18/11/2026 | Page « Plus de réseau » avec mini-jeu du chat |
+| v84 | 18/11/2026 | Mini-jeu : chat animé qui court et saute, tête triste en haut |

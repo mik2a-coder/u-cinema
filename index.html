@@ -1654,7 +1654,7 @@ body:has(#s-home.active) #dtop.sc::before{opacity:1}
 .off{position:absolute;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:calc(var(--top) + 8px) 20px calc(var(--bot) + 8px);background:radial-gradient(ellipse 80% 60% at 50% 30%,color-mix(in srgb,var(--accent) 16%,var(--bg)),var(--bg));overflow-y:auto}
 .off[hidden]{display:none}
 .off-in{width:100%;max-width:560px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
-.off-cat{width:88px;height:auto}.off h1{font-size:calc(var(--fs-7xl)*var(--ts,1));line-height:1}
+.off-cat{width:104px;height:auto}.off h1{font-size:calc(var(--fs-7xl)*var(--ts,1));line-height:1}
 .off p{color:var(--muted);font-size:calc(var(--fs-md)*var(--ts,1));line-height:1.5;max-width:46ch}
 .off-game{position:relative;width:100%;border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--line);overflow:hidden;touch-action:manipulation;cursor:pointer}
 .off-game canvas{display:block;width:100%;height:170px}
@@ -1828,7 +1828,7 @@ body:has(#s-home.active) #dtop.sc::before{opacity:1}
   </section>
 
   <div class="off" id="off" role="dialog" aria-modal="true" aria-labelledby="offT" hidden>
-    <div class="off-in"><img class="off-cat" src="img/mascot-head.png" alt="" width="88" height="78">
+    <div class="off-in"><img class="off-cat" src="img/chat/triste.png" alt="" width="96" height="88">
       <h1 class="display" id="offT">Plus de réseau</h1><p id="offMsg">La connexion est coupée. Vos billets restent disponibles sur cet appareil. En attendant, aidez U Ghjattu-Volpe à sauter par-dessus les pop-corn.</p>
       <div class="off-game"><canvas id="offCv" aria-label="Mini-jeu : le chat saute par-dessus des seaux de pop-corn. Touchez l’écran ou appuyez sur Espace pour sauter." role="img"></canvas><div class="off-sc" aria-live="off"><span id="offScore">0</span> · record <span id="offBest">0</span></div></div>
       <p class="off-hint" id="offHint">Touchez le jeu ou appuyez sur Espace pour sauter</p>
@@ -2889,10 +2889,10 @@ function offShow(kind){
 function offHide(){const o=$('#off');if(!o||!OFF.on)return;OFF.on=false;o.hidden=true;cancelAnimationFrame(OFF.raf);OFF.g=null}
 function offGameInit(){
  const cv=$('#offCv'),dpr=Math.min(2,devicePixelRatio||1),W=cv.clientWidth||320,H=170;cv.width=W*dpr;cv.height=H*dpr;const x=cv.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);
- const img=new Image();img.src='img/mascot.png';
+ const IM={};['run','walk','jump'].forEach(k=>{const i=new Image();i.onload=()=>draw();i.src='img/chat/'+k+'.png';IM[k]=i});
  const cs=getComputedStyle(document.documentElement),col=k=>cs.getPropertyValue(k).trim()||'#888';
  const best=(()=>{try{return +localStorage.getItem('cinelux-off-best')||0}catch(e){return 0}})();
- const G=OFF.g={W,H,gy:H-34,y:0,vy:0,run:false,over:false,spd:3.6,sc:0,best,ob:[],t:0,next:90,img};
+ const G=OFF.g={W,H,gy:H-34,y:0,vy:0,run:false,over:false,spd:3.6,sc:0,best,ob:[],t:0,next:90};
  $('#offBest').textContent=best;$('#offScore').textContent=0;
  const draw=()=>{x.clearRect(0,0,W,H);
   x.strokeStyle=col('--line');x.lineWidth=2;x.beginPath();x.moveTo(0,G.gy+2);x.lineTo(W,G.gy+2);x.stroke();
@@ -2900,10 +2900,12 @@ function offGameInit(){
   G.ob.forEach(o=>{const b=o.x,t=G.gy-o.h;x.fillStyle='#fff';x.strokeStyle=col('--accent2');x.lineWidth=2;x.beginPath();x.moveTo(b,t+6);x.lineTo(b+o.w,t+6);x.lineTo(b+o.w-5,G.gy+1);x.lineTo(b+5,G.gy+1);x.closePath();x.fill();x.stroke();
    x.fillStyle='#C0392B';for(let k=0;k<3;k++)x.fillRect(b+7+k*((o.w-14)/3)+ (o.w-14)/6-3,t+9,6,G.gy-t-11);
    x.fillStyle='#F0C05A';for(let k=0;k<4;k++){x.beginPath();x.arc(b+5+k*((o.w-10)/3),t+5,6,0,7);x.fill()}});
-  const ch=54,cw=ch*(img.naturalWidth||465)/(img.naturalHeight||520);
-  if(img.complete&&img.naturalWidth)x.drawImage(img,46,G.gy-ch-G.y+4,cw,ch);else{x.fillStyle=col('--accent');x.fillRect(46,G.gy-ch-G.y+4,40,ch)}
+  /* le chat : deux poses de course qui alternent (la marche est retournée pour regarder vers la droite), pose de saut en l'air */
+  {const air=G.y>2,f=air?'jump':(G.run&&!G.over?((Math.floor(G.t/6)%2)?'walk':'run'):'run'),im=IM[f],ch=air?64:56;
+   if(im&&im.complete&&im.naturalWidth){const cw=ch*im.naturalWidth/im.naturalHeight,px=40,py=G.gy-ch-G.y+8;
+    if(f==='walk'){x.save();x.translate(px+cw,0);x.scale(-1,1);x.drawImage(im,0,py,cw,ch);x.restore()}else x.drawImage(im,px,py,cw,ch);G.cw=cw}}
   if(!G.run||G.over){x.fillStyle=col('--text');x.font='600 14px Inter,system-ui,sans-serif';x.textAlign='center';x.fillText(G.over?'Perdu ! Touchez pour rejouer':'Touchez pour commencer',W/2,34);x.textAlign='left'}};
- const hit=()=>{const cx0=52,cx1=46+(54*.9)-6,cy0=G.gy-G.y-46;return G.ob.some(o=>cx1>o.x+4&&cx0<o.x+o.w-4&&G.gy-G.y>G.gy-o.h+6)};
+ const hit=()=>{const cx0=58,cx1=40+(G.cw||60)-14;return G.ob.some(o=>cx1>o.x+4&&cx0<o.x+o.w-4&&G.gy-G.y>G.gy-o.h+6)};
  const step=()=>{if(!OFF.on)return;
   if(G.run&&!G.over){G.t++;G.spd=3.6+Math.min(5,G.sc/260);G.vy-=.62;G.y=Math.max(0,G.y+G.vy);if(G.y===0)G.vy=0;
    G.ob.forEach(o=>o.x-=G.spd);G.ob=G.ob.filter(o=>o.x>-60);G.next--;
@@ -2912,7 +2914,7 @@ function offGameInit(){
    if(hit()){G.over=true;haptic('error');const sc=Math.floor(G.sc);if(sc>G.best){G.best=sc;$('#offBest').textContent=sc;try{localStorage.setItem('cinelux-off-best',sc)}catch(e){}}}}
   draw();OFF.raf=requestAnimationFrame(step)};
  G.jump=()=>{if(G.over){G.ob=[];G.sc=0;G.over=false;G.run=true;G.y=0;G.vy=0;G.t=0;G.next=60;return}if(!G.run){G.run=true;return}if(G.y===0){G.vy=11.2;haptic('tick')}};
- cancelAnimationFrame(OFF.raf);img.onload=draw;draw();OFF.raf=requestAnimationFrame(step)}
+ cancelAnimationFrame(OFF.raf);draw();OFF.raf=requestAnimationFrame(step)}
 $('#off').addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;if(OFF.g&&e.target.closest('.off-game'))OFF.g.jump()});
 document.addEventListener('keydown',e=>{if(!OFF.on||!OFF.g)return;if(e.key==='Escape'){offHide();return}if((e.key===' '||e.key==='ArrowUp')&&!e.target.closest('button')){e.preventDefault();OFF.g.jump()}});
 $('#offClose').onclick=offHide;
