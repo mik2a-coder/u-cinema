@@ -16,6 +16,7 @@ Au-delà de l'énoncé (réserver des places en moins d'une minute), j'ai ajout�
 | **Partage d'une page** (fiche film, fiche personne) avec lien direct | Un film découvert ne se transmet pas | Un lien qui ouvre directement la bonne fiche, copie en un geste, applications de l'appareil et messageries | Fiche film, fiche personne |
 | **Fiches acteurs et réalisateurs avec suivi au choix** | Un nom cliqué ne menait nulle part | Découverte, biographie, filmographie ; suivi de l'un ou des deux réalisateurs | Fiche film › distribution |
 | **Personnage du compte** (10 avatars inspirés des films) | Compte impersonnel | Attachement émotionnel, personnalisation en un geste | Compte › photo |
+| **Économie d'énergie automatique** | Batterie faible en pleine journée, animations et vidéos qui la vident | Animations réduites et extraits coupés sous 20 %, rétablis à la recharge | Compte › Affichage et accessibilité |
 | **Accessibilité complète** : places fauteuil roulant et accompagnant, audiodescription, sous-titres, texte agrandi, contraste élevé, animations réductibles, mode auto clair/sombre | Exclusion de publics | Un service utilisable par tous, conforme à l'esprit de la directive européenne | Étapes « Séance » et « Places », Affichage et accessibilité |
 | **Extraits vidéo avec consentement** | YouTube reçoit l'adresse IP | Respect de la vie privée par défaut | Fiche film |
 | **Fond coloré tiré de l'affiche** et introduction animée | Page d'accueil froide | Ambiance « salle de cinéma » qui change avec chaque film | Introduction et accueil |

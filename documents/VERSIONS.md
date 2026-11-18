@@ -22,6 +22,15 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
 
+## Version 106 — 18 novembre 2026
+
+| Demande | Ce qui a été fait | Où le voir |
+|---|---|---|
+| Photos manquantes des réalisateurs et acteurs | 52 portraits ajoutés (sources : Wikipédia, vignettes de 320 px) ; chaque correspondance a été vérifiée sur la description. Quelques noms (producteurs, compositeurs peu connus) restent sans photo : leurs initiales s'affichent | Fiche film › distribution, fiche personne |
+| Batterie faible : animations réduites | Si la batterie est à 20 % ou moins et que l'appareil n'est pas en charge, les animations sont réduites et les extraits vidéo coupés ; retour automatique à la recharge. Réglage utilisateur jamais écrasé ; option « Économie d'énergie » dans Affichage et accessibilité | Compte › Affichage et accessibilité |
+
+**Limite connue :** la détection dépend de l'API Batterie du navigateur (Chrome, Android, Chrome bureau) ; elle n'existe pas sur Safari/iPhone. Testée avec une batterie simulée (15 %, en charge, 50 %, option désactivée), pas sur un vrai téléphone vide.
+
 ## Version 105 — 18 novembre 2026
 
 | Demande | Ce qui a été fait | Où le voir |
@@ -330,3 +339,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v103 | 18/11/2026 | Fenêtre de partage sans logo du site |
 | v104 | 18/11/2026 | Icône de partage à côté du titre (bureau) et décollée de la note (téléphone) |
 | v105 | 18/11/2026 | Compteur de places réparé, espaces insécables, lien d'évitement, cibles de 44 px, numéro de commande unique |
+| v106 | 18/11/2026 | 52 portraits ajoutés ; mode économie d'énergie quand la batterie est faible |
