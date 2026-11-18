@@ -248,3 +248,7 @@ Principe : couleurs, tailles, rayons et espaces passent par des variables ; une 
 - **Une question à la fois** dans l'assistant, boutons de réponse (`.mv-s`) construits par `mvChoices()`, toujours accompagnés de « Laisser tomber » ; les réponses écrites sont comprises à l'étape en cours.
 - **Ordre** : film → jour → heure → nombre de places → emplacement → friandise → friandise offerte → −5 % → avoir → récapitulatif. Une étape déjà renseignée par l'utilisateur est sautée.
 - **Garde-fou** : le récapitulatif affiche le détail et le total, puis ouvre la page Commande ; la validation du paiement reste un acte de l'utilisateur.
+
+## 17. Version 101 : partage
+- **Fenêtre « Partager »** (`openShare`) : carte du contenu (affiche ou portrait, titre, sous-titre), champ du lien + « Copier le lien » (retour « Lien copié ✓ »), puis lignes de services (`.opt.shl`) : appareil (si `navigator.share`), WhatsApp, SMS, e-mail, Facebook, X.
+- **Liens directs** : `#f=<id du film>` et `#p=<nom>` ; à l'ouverture, l'application passe l'introduction et affiche la page demandée.

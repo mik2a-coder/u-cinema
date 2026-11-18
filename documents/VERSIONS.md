@@ -22,6 +22,12 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
 
+## Version 101 — 18 novembre 2026
+
+| Demande | Ce qui a été fait | Où le voir |
+|---|---|---|
+| Partager une page, par exemple la fiche d'un film | Bouton **Partager** sur la **fiche film** et la **fiche personne** : fenêtre avec le titre, l'affiche, le **lien direct** à copier, « Partager avec… » (applications de l'appareil : Messages, AirDrop…), WhatsApp, SMS, e-mail, Facebook et X. Le lien ouvre directement la bonne page (`#f=hailmary`, `#p=Ryan%20Gosling`), même sans passer par l'introduction. Rien n'est envoyé tant que l'utilisateur ne choisit pas un service | Fiche film (bouton en bas à gauche), fiche personne (haut à droite) |
+
 ## Version 100 — 18 novembre 2026
 
 | Demande | Ce qui a été fait | Où le voir |
@@ -291,3 +297,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v98 | 18/11/2026 | Audit UX/UI en équipe : assistant jamais sans réponse, correctifs QA, accessibilité, UI, confidentialité |
 | v99 | 18/11/2026 | Avatars en portraits |
 | v100 | 18/11/2026 | Réservation guidée par l'assistant, avec friandise et avoir |
+| v101 | 18/11/2026 | Partage des fiches film et personne avec lien direct |

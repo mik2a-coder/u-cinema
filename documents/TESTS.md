@@ -47,6 +47,7 @@ puis l'**avis général** : content · mitigé · pas content.
 | Bureau et historique | Défilement au bord de la fenêtre sur 8 écrans (1280×720 à 1920×1080) ; plan de salle sans recouvrement de 1024×768 à 1920×1080 ; bouton Retour du navigateur : écran précédent, fenêtre fermée d'abord, billet → accueil ; lien légal visible et non recouvert sur 8 écrans | vérifié (v96, Chrome) |
 | Audit en équipe (v98) | 4 agents de revue (accessibilité, UI, QA, documents) ; 11 défauts QA, 12 d'accessibilité, 12 d'UI, 14 de cohérence documentaire constatés ; corrections vérifiées : 13 suggestions de l'assistant sur 13 répondent, 0 débordement sur 6 largeurs, 0 chevauchement d'en-tête, achat jusqu'au billet, historique du navigateur, piège du focus | vérifié (Chrome) |
 | Réservation guidée | Parcours complet par boutons (film, jour, heure, nombre, emplacement, friandise, friandise offerte, −5 %, avoir) jusqu'au récapitulatif avec les bonnes places et les avantages appliqués (total 34,30 € vérifié) ; parcours écrit (« Hoppers », « demain », « à 21h », « 3 », « centre », « non merci ») ; film pas encore sorti refusé avec rappel ; « laisser tomber » à tout moment | vérifié (v100) |
+| Partage | Fenêtre de partage sur bureau et téléphone ; copie du lien ; liens directs `#f=hoppers` et `#p=Ryan%20Gosling` ouvrent la bonne page | vérifié (v101) |
 | Contraste | Mesure des paires texte/fond sur 5 palettes | ≥ 4,5 : 1 (voir `DESIGN.md`) |
 
 ## Revues déjà intégrées — la version améliorée (1 relecteur : l'auteur)

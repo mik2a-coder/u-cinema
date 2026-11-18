@@ -1730,6 +1730,13 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
 .per-all{width:auto;align-self:flex-start;padding:0 22px}
 @media (min-width:900px){#s-detail .d-bar{background:linear-gradient(to top,color-mix(in srgb,var(--bg) 94%,transparent) 55%,transparent);padding-top:24px}}
 .mv-ul{margin:4px 0 8px 18px;padding:0}.mv-ul li{margin:2px 0}
+/* v101 : partage de page */
+.shp{display:flex;gap:12px;align-items:center;margin:0 0 12px;padding:10px 12px;border-radius:var(--r-lg);background:var(--surface2)}
+.shp .mini-th{width:46px;height:68px;flex:none;border-radius:var(--r-xs);overflow:hidden;position:relative;display:block}.shp strong{display:block;font-size:calc(var(--fs-lg)*var(--ts,1));line-height:1.2}.shp small{display:block;color:var(--muted);font-size:calc(var(--fs-xs)*var(--ts,1));margin-top:2px}
+.shurl{display:flex;gap:8px;margin:0 0 12px}.shurl input{flex:1;min-width:0;min-height:48px;padding:0 14px;border-radius:var(--r-pill);border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:calc(var(--fs-xs)*var(--ts,1))}
+.shurl .btn.mini{flex:none;min-height:48px;padding:0 18px;white-space:nowrap}
+.opt.shl{display:flex;margin-bottom:8px;text-decoration:none;color:inherit}.shi{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:color-mix(in srgb,var(--accent) 22%,var(--surface));color:var(--accent-text)}
+#sharePerson{margin-left:auto}
 </style>
 </head>
 <body>
@@ -1800,7 +1807,7 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
   </section>
 
   <section class="screen" id="s-person" aria-label="Fiche personne">
-    <div class="header"><button class="round" id="perBack" aria-label="Retour" data-ic="back"></button><h2 id="perT">Fiche</h2></div>
+    <div class="header"><button class="round" id="perBack" aria-label="Retour" data-ic="back"></button><h2 id="perT">Fiche</h2><button class="round" id="sharePerson" aria-label="Partager cette fiche" data-ic="share"></button></div>
     <div class="scroll" id="perScroll"></div>
   </section>
 
@@ -1813,7 +1820,7 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
       <div class="d-spacer"><button class="trailer" id="trailerBtn"><span data-ic="play"></span>Bande-annonce</button></div>
       <div class="d-body" id="dBody"></div>
     </div>
-    <div class="d-bar"><button class="round" aria-label="Partager" data-toast="Lien copié" data-ic="share"></button><button class="ff2" id="followFilm" aria-pressed="false" aria-label="Suivre ce film"><span data-ic="bell"></span><span class="ff-t">Suivre</span></button><button class="btn cta gold" id="ctaMain" data-go="book"><span>Réserver</span><span data-ic="arrow"></span></button></div>
+    <div class="d-bar"><button class="round" id="shareFilm" aria-label="Partager cette fiche" data-ic="share"></button><button class="ff2" id="followFilm" aria-pressed="false" aria-label="Suivre ce film"><span data-ic="bell"></span><span class="ff-t">Suivre</span></button><button class="btn cta gold" id="ctaMain" data-go="book"><span>Réserver</span><span data-ic="arrow"></span></button></div>
   </section>
 
   <!-- 4 -->
@@ -3731,6 +3738,30 @@ $('#avatar').innerHTML=avatarSVG('M','me');$('#avatar').style.cssText='display:b
 {const mq=location.hash.match(/[,:]q=([^,:]*)/);if(mq)setTimeout(()=>{const q=$('#q');q.value=decodeURIComponent(mq[1]);q.dispatchEvent(new Event('input'));ST.q=q.value;renderNow()},700)}
 {const [h,hi,fl]=location.hash.slice(1).split(':');if(hi)ST.cur=+hi;if(fl){fl.split(',').forEach(x=>{if(x==='hc')A11Y.hc=true;if(x==='l')A11Y.ts=1.15;if(x==='xl')A11Y.ts=1.3;if(x==='dys')A11Y.dys=true;if(x==='light')A11Y.mode='light';if(x==='novt')NOVT=true;if(x==='sv')setTimeout(()=>{if(cur==='seats')openSeatView()},1200);if(x==='novid')A11Y.vidAsked=true;if(x==='sn'){ST.snOpen=true;ST.snCat='popcorn'}if(x==='muv')setTimeout(()=>mvOpen(),900);if(x.startsWith('mq='))setTimeout(()=>{mvOpen();mvAsk(decodeURIComponent(x.slice(3)))},900);if(x==='dark')A11Y.mode='dark';if(x==='off')setTimeout(()=>offShow('offline'),1200);if(x==='rm')A11Y.rm=true});applyA11y()}if(h==='a11y'){go('home');setTimeout(openA11y,500)}else if((ORDER.includes(h)||h==='account')&&h!=='onb'){ST.booked=true;if(h!=='home')go('home');go(h)}}
 
+
+/* ---- partage d'une page (fiche film, fiche personne) : lien direct, copie, applications de l'appareil, messageries ---- */
+function shareUrl(kind,key){const base=/^https?:/.test(location.protocol)&&location.hostname!=='localhost'?location.origin+location.pathname:'https://mik2a-coder.github.io/u-cinema/';return base+'#'+kind+'='+encodeURIComponent(key)}
+function copyText(txt){return (navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(txt):Promise.reject()).catch(()=>{const i=document.createElement('input');i.value=txt;i.setAttribute('readonly','');i.style.cssText='position:fixed;opacity:0';document.body.appendChild(i);i.select();try{document.execCommand('copy')}catch(e){}i.remove()})}
+function openShare(o){
+ const enc=encodeURIComponent,u=o.url,t=o.text,nat=typeof navigator.share==='function';
+ const lk=(href,ic,lab,sub)=>`<a class="opt shl" href="${href}" target="_blank" rel="noopener noreferrer"><span class="shi">${ic}</span><span class="grow"><strong>${lab}</strong><small>${sub}</small></span></a>`;
+ openSheet('Partager',`<div class="shp"><span class="mini-th">${o.th}</span><div><strong>${esc(o.title)}</strong><small>${esc(o.sub)}</small></div></div>
+  <div class="shurl"><input id="shU" readonly value="${esc(u)}" aria-label="Lien à partager" onfocus="this.select()"><button type="button" class="btn mini" id="shCopy"><span>Copier le lien</span></button></div>
+  ${nat?`<button type="button" class="opt shl" data-sh="native"><span class="shi">↗</span><span class="grow"><strong>Partager avec…</strong><small>Messages, AirDrop, applications de l’appareil</small></span></button>`:''}
+  ${lk('https://wa.me/?text='+enc(t+' '+u),'W','WhatsApp','Envoyer à un contact ou un groupe')}
+  ${lk('sms:?&body='+enc(t+' '+u),'✉','SMS','Message texte')}
+  ${lk('mailto:?subject='+enc(o.title)+'&body='+enc(t+'\n\n'+u),'@','E-mail','Ouvre votre messagerie')}
+  ${lk('https://www.facebook.com/sharer/sharer.php?u='+enc(u),'f','Facebook','Publier sur votre profil')}
+  ${lk('https://twitter.com/intent/tweet?text='+enc(t)+'&url='+enc(u),'X','X (Twitter)','Publier un message')}
+  <p class="vtxt small" style="margin-top:10px">Rien n’est envoyé tant que vous ne choisissez pas un service. Le lien ouvre directement cette page.</p>`,
+ bb=>{bb.onclick=async e=>{
+  if(e.target.closest('#shCopy')){await copyText(u);const b=$('#shCopy');b.querySelector('span').textContent='Lien copié ✓';haptic('success');toast('Lien copié');setTimeout(()=>{if(b.isConnected)b.querySelector('span').textContent='Copier le lien'},2000);return}
+  if(e.target.closest('[data-sh=native]')){try{await navigator.share({title:o.title,text:t,url:u});closeSheet()}catch(x){}}}})}
+document.addEventListener('click',e=>{
+ if(e.target.closest('#shareFilm')){const f=film();if(!f)return;openShare({title:f.title,sub:`${f.genre} · ${f.dur} · ${f.year}`,th:poster(f.kind),text:`« ${f.title} » au U Cinemà (${f.genre}, ${f.dur}). Réservez vos places :`,url:shareUrl('f',f.id)})}
+ if(e.target.closest('#sharePerson')){const n=ST.person;if(!n)return;const pi=peopleIndex().find(x=>x.name===n);openShare({title:n,sub:(pi?pi.roles.join(' · '):'Fiche')+(pi?` · ${pi.films.length} film${pi.films.length>1?'s':''} à l’affiche`:''),th:PIMG[n]?`<img src="${PIMG[n]}" alt="" style="width:100%;height:100%;object-fit:cover">`:`<b style="display:grid;place-items:center;height:100%">${esc(initials(n))}</b>`,text:`${n} au U Cinemà : biographie et films à l’affiche.`,url:shareUrl('p',n)})}});
+/* lien partagé : on ouvre directement la page demandée */
+{const m=location.hash.match(/[#&,:](f|p)=([^&,]+)/);if(m){const key=decodeURIComponent(m[2]);setTimeout(()=>{if(m[1]==='f'&&FILMS.some(f=>f.id===key)){go('home');setTimeout(()=>openFilmId(key),450)}else if(m[1]==='p'&&peopleIndex().some(p=>p.name===key)){go('home');setTimeout(()=>openPerson(key),450)}},500)}}
 /* bouton retour du téléphone : revient à l'écran précédent, ferme un panneau, puis quitte */
 const PREV={book:'detail',seats:'book',order:'seats',ticket:'home'};Object.defineProperty(PREV,'detail',{get:()=>ST.dFrom==='person'?'person':'home',enumerable:true});Object.defineProperty(PREV,'person',{get:()=>ST.pFrom&&ST.pFrom!=='person'?ST.pFrom:'home',enumerable:true});
 try{history.replaceState({s:cur,p:null,d:0},'')}catch(e){}
