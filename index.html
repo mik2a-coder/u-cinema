@@ -1515,6 +1515,20 @@ body:has(#s-detail.active) .toast{bottom:118px}
 :root.light .ff2{background:rgba(255,255,255,.78);color:#1E1810;border-color:rgba(60,44,16,.16)}
 .ff2 svg{width:20px;height:20px;color:var(--accent-text)}.ff2:active{transform:scale(.95)}.ff2.pop svg{animation:bellRing .7s ease-out}
 @media (max-width:599px){.ff2{width:56px;padding:0}.ff2 .ff-t{display:none}}
+/* plan de salle : caméra (vue d'ensemble → zoom sur une zone), comme dans un plan de stade */
+#sgrid{transition:transform .8s cubic-bezier(.2,.8,.2,1)}#sgrid.notr{transition:none}
+#sgrid.ov{transform:scale(.78);transform-origin:50% 26%}
+#sgrid.ov .srow{opacity:.6!important}
+#sgrid.zf .srow{transition:opacity .6s,filter .6s,transform .3s}
+#sgrid.zf .srow:not(.in){opacity:.16!important;filter:blur(1.2px)}
+#sgrid.zf .srow.in{opacity:1!important}
+.zbtn{position:absolute;left:6px;right:6px;display:none;flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;padding:4px 16px;border-radius:20px;border:1.5px dashed color-mix(in srgb,var(--accent-text) 70%,transparent);background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--text);text-align:left;z-index:4;transition:background .25s,transform .25s}
+#sgrid.ov .zbtn{display:flex}.zbtn:hover,.zbtn:focus-visible{background:color-mix(in srgb,var(--accent) 26%,transparent)}.zbtn:active{transform:scale(.98)}
+.zbtn b{font-family:var(--display);font-weight:400;letter-spacing:.08em;font-size:calc(var(--fs-xl)*var(--ts,1));line-height:1}.zbtn small{color:var(--muted);font-size:calc(var(--fs-xs)*var(--ts,1))}
+.zpill{display:block;margin:6px auto 0;min-height:40px;padding:0 18px;border-radius:99px;border:1px solid var(--line);background:rgba(255,255,255,.1);font-weight:600;font-size:calc(var(--fs-sm)*var(--ts,1));color:var(--text)}
+:root.light .zpill{background:rgba(255,255,255,.78);color:#1E1810;border-color:rgba(60,44,16,.16)}
+.seat[aria-pressed=true] .s{animation:seatPop .38s cubic-bezier(.3,1.6,.5,1) 1}@keyframes seatPop{0%{transform:scale(.7)}100%{transform:scale(1)}}
+.viewport.rm #sgrid,.viewport.rm .seat .s{transition:none!important;animation:none!important}
 </style>
 </head>
 <body>
@@ -1623,6 +1637,7 @@ body:has(#s-detail.active) .toast{bottom:118px}
       <div class="screen-wrap" id="curve" aria-hidden="true"></div>
       <div class="sgrid" id="sgrid" role="group" aria-label="Plan de la salle"></div>
       <div class="legend"><span><i></i>Libre</span><span><i class="u"></i>Occupé</span><span><i class="y"></i>Votre place</span><span><i class="p"></i><span id="lgPmr">PMR</span></span></div>
+      <button class="zpill" id="zToggle" type="button" aria-pressed="false">Voir toute la salle</button>
       <button class="vfs" id="vfs" type="button" hidden><span data-ic="eye"></span><span>Voir depuis ma place</span></button>
       <div style="flex:1"></div>
       <div class="sbar"><div><small>VOS PLACES</small><strong id="sSeats">—</strong><small id="sSub" style="letter-spacing:.02em;font-size:calc(var(--fs-xs)*var(--ts,1))"></small></div>
@@ -1912,7 +1927,7 @@ const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 /* =============== NAVIGATION =============== */
 const ORDER=['onb','home','detail','book','seats','order','ticket'],LABELS=['Intro','Accueil','Fiche','Séances','Places','Commande','Billet'];
 let cur='onb';
-const HOOKS={account:()=>renderAccount(),detail:renderDetail,book:renderBook,seats:renderSeats,order:renderOrder,ticket:renderTicket};
+const HOOKS={account:()=>renderAccount(),detail:renderDetail,book:renderBook,seats:()=>{ST.zIntro=true;ST.zPick=false;ST.zone=null;ST.zOv=false;renderSeats()},order:renderOrder,ticket:renderTicket};
 let VTSRC=null,NOVT=false,VTID=0,RET=null;const SCR={};
 function go(n){
  if(n===cur)return;const prev=cur,from=$('#s-'+cur),to=$('#s-'+n),dir=n==='account'?1:cur==='account'?-1:(ORDER.indexOf(n)>=ORDER.indexOf(cur)?1:-1);
@@ -2593,8 +2608,29 @@ function homography(src,dst){const A=[];for(let i=0;i<4;i++){const[x,y]=src[i],[
  for(let c=0;c<8;c++){let p=c;for(let r=c+1;r<8;r++)if(Math.abs(A[r][c])>Math.abs(A[p][c]))p=r;[A[c],A[p]]=[A[p],A[c]];for(let r=0;r<8;r++)if(r!==c){const f=A[r][c]/A[c][c];for(let k=c;k<9;k++)A[r][k]-=f*A[c][k]}}
  const h=A.map((r,i)=>r[8]/r[i]);return `matrix3d(${h[0]},${h[3]},0,${h[6]},${h[1]},${h[4]},0,${h[7]},0,0,1,0,${h[2]},${h[5]},0,1)`}
 function fitScreen(){const e=document.querySelector('#curve .scr');if(e)e.style.transform=homography([[0,0],[480,0],[480,270],[0,270]],[[8,2],[336,2],[302,148],[42,148]])}
+/* Plan de salle en zones : la caméra part de la salle entière puis zoome sur la zone des places proposées (comme un plan de stade) */
+const ZONES=[{n:'Avant',rows:[0,1,2]},{n:'Centre',rows:[3,4,5]},{n:'Fond',rows:[6,7]}];
+const zoneOf=id=>ZONES.findIndex(z=>z.rows.includes(ROWS.indexOf(id[0])));
+function autoSeatsZone(tk,z){const n=ST.count,blk=new Set([...tk,...PMR]);let best=null;
+ for(const i of ZONES[z].rows){const R=ROWS[i];for(let st=1;st+n-1<=8;st++){const ids=[];let ok=true;for(let k=0;k<n;k++){const id=R+(st+k);if(blk.has(id)){ok=false;break}ids.push(id)}
+  if(ok){const c=Math.abs(st+(n-1)/2-4.5)+Math.abs(i-ZONES[z].rows[Math.floor(ZONES[z].rows.length/2)])*.2;if(!best||c<best.c)best={c,ids}}}}
+ return best?best.ids:null}
+function applyZone(){
+ const g=$('#sgrid');if(!g)return;const rows=[...g.querySelectorAll('.srow')];
+ rows.forEach((r,i)=>{r.classList.toggle('in',ZONES[ST.zone]&&ZONES[ST.zone].rows.includes(i))});
+ g.querySelectorAll('.zbtn').forEach(x=>x.remove());
+ ZONES.forEach((z,zi)=>{const rs=z.rows.map(i=>rows[i]);if(!rs[0])return;const top=rs[0].offsetTop,bot=rs[rs.length-1].offsetTop+rs[rs.length-1].offsetHeight;
+  const free=z.rows.reduce((a,i)=>a+[...rows[i].querySelectorAll('.seat')].filter(x=>!x.disabled).length,0);
+  const b=document.createElement('button');b.type='button';b.className='zbtn';b.dataset.z=zi;b.style.cssText=`top:${top-4}px;height:${bot-top+8}px`;
+  b.setAttribute('aria-label',`Zone ${z.n}, ${free} places libres`);b.innerHTML=`<b>${z.n}</b><small>${free} libres</small>`;g.appendChild(b)});
+ g.classList.toggle('ov',!!ST.zOv);g.classList.toggle('zf',!ST.zOv);
+ const t=$('#zToggle');if(t){t.textContent=ST.zOv?'Revenir à ma zone':'Voir toute la salle';t.setAttribute('aria-pressed',!!ST.zOv)}}
+function zoneIntro(){const g=$('#sgrid');
+ if(A11Y.rm){ST.zOv=false;applyZone();return}
+ ST.zOv=true;g.classList.add('notr');applyZone();void g.offsetWidth;g.classList.remove('notr');
+ clearTimeout(ST.zt);ST.zt=setTimeout(()=>{if(cur==='seats'){ST.zOv=false;applyZone()}},700)}
 function renderSeats(){
- const f=film(),tk=taken();ST.tk=tk;if(ST.seats.length!==ST.count)ST.seats=autoSeats(tk);
+ const f=film(),tk=taken();ST.tk=tk;if(ST.seats.length!==ST.count){const zs=ST.zPick&&!ST.pmrN&&ST.zone!=null?autoSeatsZone(tk,ST.zone):null;ST.seats=zs||autoSeats(tk);if(!ST.zPick)ST.zone=ST.seats.length?Math.max(0,zoneOf(ST.seats[0])):1}
  $('#sFilm').textContent=f.title;
  $('#shBg').innerHTML=poster(f.kind)+`<img class="scene" src="img/scene/${f.id}.jpg" alt="" onerror="this.remove()">`;
  $('#pDate').innerHTML=`${dayLabel(ST.date)}${IC.chev.replace('<svg','<svg class="dd" style="transform:rotate(90deg)"')}`;
@@ -2605,10 +2641,14 @@ function renderSeats(){
  $('#sgrid').innerHTML=ROWS.map((R,ri)=>{const g=a=>a.map(n=>{const id=R+n,t=tk.has(id),on=ST.seats.includes(id);const pm=PMR.includes(id);return `<button class="seat${pm?' pmr':''}" data-id="${id}" aria-pressed="${on}" ${t?'disabled':''} aria-label="Rang ${R}, ${pm?'emplacement PMR fauteuil roulant':'place '+n}${t?', occupé':''}"><span class="s">${seatInner(id,on)}</span></button>`}).join('');
   return `<div class="srow${ri===4?' gap':''}" style="transform:scale(${(.9+ri*.0143).toFixed(3)});opacity:${(.84+ri*.023).toFixed(2)}"><span class="rl">${R}</span><div class="grp">${g([1,2,3,4])}</div><div class="aisle"></div><div class="grp">${g([5,6,7,8])}</div><span class="rl">${R}</span></div>`}).join('');
  paintSeatsBar();rovingSeats();
+ if(ST.zone==null)ST.zone=ST.seats.length?Math.max(0,zoneOf(ST.seats[0])):1;
+ if(ST.zIntro){ST.zIntro=false;zoneIntro()}else applyZone();
 }
 /* Plan de salle au clavier : flèches pour se déplacer, un seul arrêt de tabulation (cours : « sans souris, touche Tab ») */
 function seatMatrix(){return [...document.querySelectorAll('#sgrid .srow')].map(r=>[...r.querySelectorAll('.seat')])}
 function rovingSeats(){const all=[...document.querySelectorAll('#sgrid .seat')];if(!all.length)return;const first=all.find(b=>b.getAttribute('aria-pressed')==='true')||all.find(b=>!b.disabled)||all[0];all.forEach(b=>b.tabIndex=(b===first&&!b.disabled)?0:-1)}
+$('#sgrid').addEventListener('click',e=>{const b=e.target.closest('.zbtn');if(!b)return;ST.zone=+b.dataset.z;ST.zPick=true;ST.zOv=false;if(!ST.seats.every(id=>zoneOf(id)===ST.zone))ST.seats=[];haptic('soft');renderSeats()});
+$('#zToggle').onclick=()=>{ST.zOv=!ST.zOv;haptic('tick');applyZone()};
 $('#sgrid').addEventListener('focusin',e=>{const b=e.target.closest('.seat');if(!b)return;document.querySelectorAll('#sgrid .seat').forEach(x=>x.tabIndex=x===b?0:-1)});
 $('#sgrid').addEventListener('keydown',e=>{const b=e.target.closest('.seat');if(!b)return;const M=seatMatrix();let r=-1,c=-1;M.forEach((row,i)=>{const j=row.indexOf(b);if(j>=0){r=i;c=j}});if(r<0)return;
  const D={ArrowLeft:[0,-1],ArrowRight:[0,1],ArrowUp:[-1,0],ArrowDown:[1,0]}[e.key];
