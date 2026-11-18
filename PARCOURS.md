@@ -15,7 +15,7 @@ Parcours principal de Léa, du premier regard au billet. Chaque étape a un **se
 | 5. Payer | Ajoute une gourmandise (facultatif), coche les CGV, valide | Bannières de suggestions, total TTC, « Commande avec obligation de paiement · 38,40 € TTC » | Vigilance | `05-commande`, `06-petite-faim` |
 | **Imprévu** | Carte refusée | « Paiement refusé par la banque. **Rien n'a été débité**, commande conservée » + [Changer de moyen] [Réessayer] | Inquiétude → soulagement | `07-paiement-refuse` |
 | 6. Entrer | Montre son billet | QR, coche animée, « Profitez de la séance », disponible hors ligne | **Pic** et fin positifs | `08-billet` |
-| 7. Revenir | Ouvre le compte | Carte d'abonné, réservations, activité récente, notes | Appartenance | `09-compte` |
+| 7. Revenir | Ouvre le compte | Carte d'abonné, réservations, rappels de sortie, suivis, films vus et notes | Appartenance | `09-compte` |
 
 ## Imprévus prévus
 | Imprévu | Comportement |
@@ -26,9 +26,9 @@ Parcours principal de Léa, du premier regard au billet. Chaque étape a un **se
 | Paiement **refusé** | Message clair, commande conservée |
 | **Hors ligne** | Bandeau « Hors ligne · vos choix sont conservés », billet toujours lisible |
 | **Recherche vide** | Suggestions de genres + « Effacer la recherche » |
-| **Annulation** d'une réservation | Depuis « Mon billet » : confirmation, points rendus, trace dans l'activité |
+| **Annulation** d'une réservation | Depuis « Mon billet » : confirmation, points rendus |
 
 ## Parcours secondaires
 - **Choisir avec l'aide du chat** : « un film drôle ce soir en famille » → propositions tenant compte des séances et des goûts (notes).
-- **Suivre un film** : cloche à côté de « Réserver » ; l'action est tracée dans « Activité récente ».
+- **Suivre un film** : cloche à côté de « Réserver » ; le film apparaît dans « Mes suivis » du compte (comme les acteurs et réalisateurs suivis).
 - **Vue depuis ma place** : on « s'assoit » à la place choisie et la bande-annonce passe sur l'écran.

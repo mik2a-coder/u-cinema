@@ -53,7 +53,7 @@ Encercler **OK** ou **Pb** pour chaque participant ; noter le problème (et la m
 | « Petite faim » trouvée **si voulue**, ignorée **sinon** | OK·Pb | OK·Pb | OK·Pb | |
 | **Paiement refusé** · Comprend que rien n'est débité et sait quoi faire | OK·Pb | OK·Pb | OK·Pb | |
 | **Billet** · Reconnaît le QR ; billet lisible hors ligne | OK·Pb | OK·Pb | OK·Pb | |
-| **Compte** · Comprend carte, réservations, activité récente | OK·Pb | OK·Pb | OK·Pb | |
+| **Compte** · Comprend carte, réservations, rappels, suivis | OK·Pb | OK·Pb | OK·Pb | |
 | Annule une réservation avec confirmation | OK·Pb | OK·Pb | OK·Pb | |
 | **Assistant** · Comprend que le chat est cliquable, reçoit une proposition utile | OK·Pb | OK·Pb | OK·Pb | |
 | **Visuel** · Texte lisible en clair **et** en sombre | OK·Pb | OK·Pb | OK·Pb | |

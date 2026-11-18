@@ -1540,6 +1540,7 @@ body:has(#s-detail.active) .toast{bottom:118px}
 #avatar{display:none!important}
 /* vue depuis la place : écran 16:9 (la vidéo remplit exactement le plan, rien ne dépasse, y compris sous Safari) */
 .sv-screen,.sv-vid{-webkit-mask-image:-webkit-radial-gradient(white,black);isolation:isolate}
+.acc-row.static .link.rm,.acc-row .link.rm{margin-left:auto;flex:none;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -2203,16 +2204,13 @@ function renderAccount(){
  </div><div class="acc-right">
  <h3 class="acc-h">Mes réservations</h3>
  ${up.length?up.map((b,i)=>{const f=F(b.id);return f?`<button class="acc-row" data-bk="${i}"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>${fdateStr(b.date)} · ${b.time} · ${esc(CINEMAS[b.cin].s)}</small><small>Places ${b.seats.join(', ')} · ${eur(b.total)}</small></span><span data-ic="chev"></span></button>`:''}).join(''):`<div class="acc-empty"><b>Aucune réservation à venir</b><p>Choisissez un film et une séance : votre billet apparaîtra ici.</p><button class="btn mini" data-go="home"><span>Voir les films</span></button></div>`}
+ <h3 class="acc-h">Mes rappels de sortie</h3>
+ ${rem.length?rem.map(f=>`<div class="acc-row static"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>Sortie le ${relLabel(f)}</small></span><button class="link rm" data-unremind="${f.id}">Retirer</button></div>`).join(''):'<div class="acc-empty"><b>Aucun rappel de sortie</b><p>Sur la fiche d’un film à venir, touchez « Me prévenir à la sortie ».</p></div>'}
  <h3 class="acc-h">Mes suivis</h3>
  ${(()=>{const fl=Object.keys(ACC.follows||{}).map(F).filter(Boolean),pl=Object.keys(ACC.fp||{});
   const rf=fl.map(f=>`<div class="acc-row static"><button class="acc-open" data-openfilm="${f.id}"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>Film suivi${isSoon(f)?' · sortie le '+relLabel(f):''}</small></span></button><button class="link rm" data-unfollow-film="${f.id}">Ne plus suivre</button></div>`).join('');
   const rp=pl.map(n=>{const ph=PIMG[n],pi=peopleIndex().find(x=>x.name===n);return `<div class="acc-row static"><button class="acc-open" data-person="${esc(n)}"><span class="mini-th ph">${ph?`<img src="${ph}" alt="" loading="lazy">`:`<b>${esc(initials(n))}</b>`}</span><span class="grow"><strong>${esc(n)}</strong><small>${pi?pi.roles.join(' · '):'Personne suivie'}</small></span></button><button class="link rm" data-unfollow-person="${esc(n)}">Ne plus suivre</button></div>`}).join('');
   return (rf||rp)?`${rf?'<h4 class="acc-sub">Films</h4>'+rf:''}${rp?'<h4 class="acc-sub">Acteurs et réalisateurs</h4>'+rp:''}`:'<div class="acc-empty"><b>Vous ne suivez rien pour l’instant</b><p>Touchez la cloche sur une fiche film, ou « Suivre » à côté d’un réalisateur ou d’un nom recherché.</p></div>'})()}
- <h3 class="acc-h">Activité récente</h3>
- ${(()=>{const LBL={book:'Réservation effectuée',cancel:'Réservation annulée',fav:'Ajouté aux favoris',unfav:'Retiré des favoris',follow:'Film suivi',unfollow:'Film non suivi',followp:'Personne suivie',unfollowp:'Personne non suivie'};
-  const h=(ACC.log||[]).slice(0,12).map((a,i)=>{const f=F(a.id);if(!f)return'';const d=new Date(a.ts);return `<button class="acc-row" data-act="${i}"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>${LBL[a.t]||a.t}${a.name?' : '+esc(a.name):''}</small><small>${d.toLocaleDateString('fr-FR',{day:'numeric',month:'short'})} · ${d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</small></span><span data-ic="chev"></span></button>`}).join('');
-  return h||'<div class="acc-empty"><b>Aucune activité pour l’instant</b><p>Vos réservations, favoris et films suivis apparaîtront ici.</p></div>'})()}
- ${rem.length?`<h3 class="acc-h">Mes rappels de sortie</h3>${rem.map(f=>`<div class="acc-row static"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>Sortie le ${relLabel(f)}</small></span><button class="link rm" data-unremind="${f.id}">Retirer</button></div>`).join('')}`:''}
 
  <h3 class="acc-h">Films que j’ai vus</h3>
  <div class="acc-hist">${hist.map(h=>{const f=F(h.id);if(!f)return'';const n=ACC.ratings[h.id]||0;return `<div class="acc-row static hist"><span class="mini-th">${poster(f.kind)}</span><span class="grow"><strong>${esc(f.title)}</strong><small>${fdateStr(h.date)} · ${esc(CINEMAS[h.cin].s)}</small>${stars(h.id,n)}<small class="rh">${n?'Votre note : '+n+'/5':'Notez ce film'}</small></span></div>`}).join('')}</div>

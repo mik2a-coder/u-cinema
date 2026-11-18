@@ -122,7 +122,7 @@ Polices : **Bebas Neue** (titres, MAJUSCULES, `line-height .95`), **Inter** (tex
 | **Logo** | `.lg-mark` + `.lg-word` | Pastille du chat (image à fond transparent, sans filtre) + « **U** CINEMÀ » : U ambre, mot en encre, lettres espacées ; proportions du dessin d'origine (§ 6) |
 | **Bannière de petite faim** | `.bn` | Photo, accroche, bouton « Commander · prix » ; carrousel à défilement doux ; repliée par défaut |
 | **Carte de fidélité** | `.lcard` | Carte or qui s'incline et se retourne (QR au dos), niveau, points, progression |
-| **Activité récente** | `.acc-row[data-act]` | Miniature, action (réservation, favori, suivi, annulation), date et heure ; un clic ouvre le billet ou la fiche |
+| **Mes suivis** | `.acc-row .acc-open` | Films, acteurs et réalisateurs suivis, avec photo ; « Ne plus suivre » à droite ; ordre de la page Compte : réservations · rappels de sortie · suivis · films vus |
 | **Assistant** | `.muv-*` | Chat-renard cliquable, yeux qui suivent la souris, panneau de conversation local (rien n'est envoyé) |
 | **Chip / Pill / Stepper / Onglets / Nav / Ticket / QR** | — | Inchangés (voir V1) ; nav flottante en verre, se rétracte au défilement |
 
