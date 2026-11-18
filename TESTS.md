@@ -52,6 +52,10 @@ Ne jamais aider. Noter : hésitations, retours en arrière, mots employés, temp
 | Débordement horizontal et boutons coupés | `node tools/shoot.mjs <l> <h> sortie tools/scenarios/audit-debordement.json` sur 360×640, 390×844, 430×932, 768×1024, 1024×768, 1440×900 ; 6 écrans (accueil, fiche, réservation, places, commande, compte) | **0 défaut** sur les 6 tailles |
 | Parcours complet captures | `tools/scenarios/parcours-mobile.json` et `parcours-bureau.json` | 9 captures mobile + 6 bureau (`rendu/captures/`) |
 | Suite de vérifications fonctionnelles | 95 vérifications pendant le développement (recherche, parcours, tarifs, paiement refusé, modes clair/sombre, assistant, contrastes) | 95 / 95 au dernier passage complet, avant les ajouts du 17 novembre (le script n'est pas versionné) |
+| En-têtes sans chevauchement | `tools/scenarios/audit-entete.json` sur 1000×640, 1280×800, 1440×900 : titres, boutons retour et barres d'étapes de 7 écrans comparés à la barre du haut | aucun chevauchement (18 nov. 2026, v82) |
+| Fiches personnes | Pour les 146 noms de la programmation : la fiche s'ouvre, affiche le bon nom et au moins un film | 146 / 146 |
+| Règle des 45 minutes | Pour chaque créneau : conflit calculé = conflit attendu (fin du film + 45 min) | cohérent sur les 6 créneaux |
+| Assistant | « deux places côte à côte au fond… ce soir 20h » mène au récapitulatif avec les bonnes places, l'horaire le plus proche et le total | vérifié ; refus propre pour un film pas encore en salle |
 | Contraste | Mesure des paires texte/fond sur 5 palettes | ≥ 4,5 : 1 (voir `DESIGN.md`) |
 
 ## Revues déjà intégrées — la version améliorée (1 relecteur : l'auteur)
@@ -78,6 +82,12 @@ Ne jamais aider. Noter : hésitations, retours en arrière, mots employés, temp
 | Ligne dure entre la barre du haut et la page (Safari) | Fondu sans flou ni masque ; barre transparente sur l'accueil |
 | Fond de l'accueil sans forme | Ovale doux qui déborde de l'écran, opacité 55 % / 90 % |
 | Affiches de la liste mal alignées | Grille alignée sur le titre, aucune élévation au survol |
+| Barre d'étapes qui ne donne pas l'impression d'avancer | Segments atteints pleins et point lumineux sur l'étape en cours |
+| Titres coupés ou grisés sous la barre du haut | Fondu de la barre raccourci, en-tête du plan de salle décalé |
+| « Mes billets » sans effet malgré une réservation | Ouvre le billet ou la liste des billets, même après rechargement |
+| Nom d'acteur ou de compositeur qui ramène à l'accueil | Fiche personne dédiée (biographie, filmographie, retour) |
+| Vue depuis la place : fauteuils devant soi au premier rang, cadre autour de l'écran | Premier rang dégagé, écran sans cadre et plus grand |
+| Bandes noires dans le cadre vertical des affiches | Extraits recadrés plein cadre |
 
 ## Test à 3 personnes — à compléter
 Remplir la « Grille de résultats » ci-dessus avec de **vraies** observations, puis la synthèse gravité × fréquence, puis cocher « Corrigé ? ». Livrer ensuite un avant/après d'au moins 2 corrections.

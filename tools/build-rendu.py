@@ -7,6 +7,7 @@ os.chdir(ROOT)
 
 def inline(t):
     t=html.escape(t,quote=False).replace('&lt;br&gt;','<br>')
+    t=re.sub(r'`(#[0-9A-Fa-f]{6})`',lambda m:f'<span class="swc" style="background:{m.group(1)}"></span><code>{m.group(1)}</code>',t)
     t=re.sub(r'`([^`]+)`',r'<code>\1</code>',t)
     t=re.sub(r'\*\*([^*]+)\*\*',r'<strong>\1</strong>',t)
     t=re.sub(r'(?<![*\w])\*([^*\n]+)\*(?![*\w])',r'<em>\1</em>',t)
@@ -59,9 +60,10 @@ def gallery(prefix,caps):
         k=f[len(prefix):-4].lstrip('_')
         cells.append(f'<figure><img src="{img("rendu/captures/"+f)}"><figcaption>{caps.get(k,k)}</figcaption></figure>')
     return '<div class="gal">'+''.join(cells)+'</div>'
-CAP={'01-accueil':'Accueil','02-fiche':'Fiche film','03-seance':'Séance','04-places':'Places','05-commande':'Commande','06-petite-faim':'Petite faim','07-paiement-refuse':'Imprévu : paiement refusé','08-billet':'Billet','09-compte':'Compte','06-compte':'Compte'}
+CAP={'10-fiche-personne':'Fiche personne','11-assistant':'Assistant : réservation par la conversation','12-recapitulatif':'Récapitulatif avant paiement','13-recompenses':'Compte : avoir et récompenses','01-accueil':'Accueil','02-fiche':'Fiche film','03-seance':'Séance','04-places':'Places','05-commande':'Commande','06-petite-faim':'Petite faim','07-paiement-refuse':'Imprévu : paiement refusé','08-billet':'Billet','09-compte':'Compte','06-compte':'Compte'}
 
 sections=[
+ ('Direction artistique et palette',md(read('DIRECTION-ARTISTIQUE.md'),2)),
  ('Barème',md(read('BAREME.md'),2)),
  ('Brief et persona',md(read('BRIEF-PERSONA.md'),2)),
  ('Parcours utilisateur',md(read('PARCOURS.md'),2)+'<h3>Les écrans du parcours (téléphone)</h3>'+gallery('mobile',CAP)),
@@ -70,28 +72,51 @@ sections=[
  ('Tests et version améliorée',md(read('TESTS.md'),2)),
  ('Checklist de test (3 participants)',md(read('CHECKLIST-TESTS.md'),2)),
  ('Journal',md(read('JOURNAL.md'),2)),
+ ('Journal des versions',md(read('VERSIONS.md'),2)),
  ('Annexe : grille « Peaufiner » et notes de conception',md(read('V2-NOTES.md'),2)),
  ('Annexe : conformité (RGPD, consommation, accessibilité)',md(read('CONFORMITE.md'),2)),
 ]
 toc=''.join(f'<li><a href="#s{i}">{t}</a></li>' for i,(t,_) in enumerate(sections))
 body=''.join(f'<section id="s{i}"><div class="sh">{i+1}</div>'+h.replace('<h2>','<h2 class="first">',1)+'</section>' if False else f'<section id="s{i}"><p class="kick">Partie {i+1}</p><h1>{t}</h1>{h}</section>' for i,(t,h) in enumerate(sections))
 css='''
-@page{size:A4;margin:16mm 14mm}
-*{box-sizing:border-box}body{font:10.5pt/1.5 -apple-system,"Inter","Helvetica Neue",Arial,sans-serif;color:#1b160c}
-h2,h3{page-break-after:avoid}h1{font-size:22pt;line-height:1.1;margin:0 0 8mm;letter-spacing:-.01em}h2{font-size:14pt;margin:8mm 0 3mm;border-bottom:1px solid #d9cfb8;padding-bottom:1.5mm}h3{font-size:11.5pt;margin:6mm 0 2mm}h4{font-size:10.5pt;margin:4mm 0 1mm}
-.kick{font-size:8.5pt;letter-spacing:.16em;text-transform:uppercase;color:#8a5a00;margin:0 0 2mm;font-weight:700}
-section{page-break-before:always}p{margin:0 0 3mm}ul,ol{margin:0 0 3mm 5mm;padding-left:4mm}li{margin-bottom:1mm}
-table{width:100%;border-collapse:collapse;margin:3mm 0 5mm;font-size:8.8pt;page-break-inside:auto}tr{page-break-inside:avoid}th{background:#1e1810;color:#f4e4b6;text-align:left;padding:1.6mm 2mm}td{border-bottom:1px solid #e2d9c4;padding:1.6mm 2mm;vertical-align:top}
-code{font:8.6pt "SF Mono",Menlo,monospace;background:#f1ead9;padding:.2mm 1mm;border-radius:1mm}pre{font:8.4pt/1.35 "SF Mono",Menlo,monospace;background:#f6f1e3;padding:3mm;border-radius:2mm;white-space:pre-wrap}
-blockquote{margin:0 0 4mm;padding:2.5mm 4mm;border-left:3px solid #e4b243;background:#faf5e6;color:#4a3f27}a{color:#7a5206}hr{border:0;border-top:1px solid #d9cfb8;margin:5mm 0}
-.cover{page-break-after:always;min-height:240mm;display:flex;flex-direction:column;justify-content:center}.cover h1{font-size:44pt;margin:0 0 4mm}.cover .sub{font-size:14pt;color:#5f5642;margin-bottom:12mm}.cover .meta{font-size:10.5pt;line-height:1.8}
-.cover img{width:46mm;margin-bottom:8mm}.toc{page-break-after:always}.toc li{font-size:12pt;margin-bottom:2.5mm}
-.gal{display:flex;flex-wrap:wrap;gap:4mm}.gal figure{margin:0;width:calc(33.3% - 3mm);page-break-inside:avoid}.gal img{width:100%;border:1px solid #d9cfb8;border-radius:2mm}.gal figcaption{font-size:8pt;color:#5f5642;margin-top:1mm}
+@font-face{font-family:"Bebas Neue";src:url(../fonts/BebasNeue-400.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-weight:400 700;src:url(../fonts/Inter-400.woff2) format("woff2")}
+@page{size:A4;margin:15mm 13mm 16mm;background:#FAF6EB}
+:root{--bg:#FAF6EB;--paper:#FDFBF6;--sand:#F6EFDE;--ink:#16120A;--soft:#5F5642;--btn:#1E1810;--cream:#F4E4B6;--gold:#F0C05A;--gold2:#B98322;--goldt:#87611B;--line:#E4D9BF}
+*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+html{background:var(--bg)}body{margin:0;background:var(--bg);font:10pt/1.55 "Inter",-apple-system,"Helvetica Neue",Arial,sans-serif;color:var(--ink)}
+h1,h2,h3{font-family:"Bebas Neue","Oswald",Impact,sans-serif;font-weight:400;letter-spacing:.04em;color:var(--ink)}
+h2,h3,h4{page-break-after:avoid}
+h1{font-size:30pt;line-height:1;margin:0 0 7mm}
+h1::after{content:"";display:block;width:22mm;height:1.6mm;margin-top:3mm;border-radius:1mm;background:linear-gradient(90deg,var(--gold),var(--gold2))}
+h2{font-size:17pt;margin:9mm 0 3mm;padding-bottom:1.5mm;border-bottom:1px solid var(--line)}
+h3{font-size:13pt;margin:6mm 0 2mm;color:var(--goldt)}h4{font:700 10pt "Inter",sans-serif;margin:4mm 0 1mm;color:var(--soft)}
+.kick{font-size:8pt;letter-spacing:.2em;text-transform:uppercase;color:var(--goldt);margin:0 0 2mm;font-weight:700}
+section{page-break-before:always}p{margin:0 0 3mm}ul,ol{margin:0 0 3mm 5mm;padding-left:4mm}li{margin-bottom:1mm}li::marker{color:var(--gold2)}
+table{width:100%;border-collapse:separate;border-spacing:0;margin:3mm 0 6mm;font-size:8.6pt;page-break-inside:auto;background:var(--paper);border:1px solid var(--line);border-radius:3mm;overflow:hidden}
+tr{page-break-inside:avoid}th{background:var(--btn);color:var(--cream);text-align:left;padding:2mm 2.4mm;font-weight:600;letter-spacing:.02em}
+td{border-top:1px solid var(--line);padding:1.9mm 2.4mm;vertical-align:top}tbody tr:nth-child(even) td{background:rgba(246,239,222,.55)}
+td strong{color:var(--ink)}
+.swc{display:inline-block;width:3.6mm;height:3.6mm;border-radius:1mm;vertical-align:-.7mm;margin-right:1.4mm;border:1px solid rgba(22,18,10,.25)}
+code{font:8.2pt "SF Mono",Menlo,monospace;background:var(--sand);padding:.2mm 1.1mm;border-radius:1mm;color:var(--ink)}
+pre{font:8pt/1.4 "SF Mono",Menlo,monospace;background:var(--paper);border:1px solid var(--line);padding:3mm;border-radius:3mm;white-space:pre-wrap}
+blockquote{margin:0 0 4mm;padding:3mm 4.5mm;border-left:1.2mm solid var(--gold);background:var(--paper);border-radius:0 3mm 3mm 0;color:var(--soft)}
+a{color:var(--goldt);text-decoration-color:var(--gold)}hr{border:0;border-top:1px solid var(--line);margin:5mm 0}em{color:var(--soft)}
+.cover{page-break-after:always;min-height:262mm;display:flex;flex-direction:column;justify-content:center;position:relative}
+.cover img{width:40mm;margin-bottom:9mm}
+.cover h1{font-size:84pt;letter-spacing:.07em;margin:0 0 4mm}.cover h1 b{color:#B06F06;font-weight:400}.cover h1::after{display:none}
+.cover .sub{font-size:14pt;color:var(--soft);margin-bottom:10mm;max-width:130mm;line-height:1.35}
+.cover .pal{display:flex;height:16mm;border-radius:4mm;overflow:hidden;border:1px solid var(--line);margin:0 0 9mm}.cover .pal i{flex:1}
+.cover .meta{font-size:10pt;line-height:1.9;background:var(--paper);border:1px solid var(--line);border-radius:4mm;padding:5mm 7mm}
+.cover .ver{display:inline-block;margin-bottom:6mm;padding:1.4mm 4mm;border-radius:99px;background:var(--btn);color:var(--cream);font-size:9pt;font-weight:600;letter-spacing:.06em;width:fit-content}
+.toc{page-break-after:always}.toc ol{counter-reset:t;list-style:none;margin:0;padding:0}.toc li{counter-increment:t;font-size:12pt;padding:3mm 0;border-bottom:1px solid var(--line);display:flex;gap:4mm;align-items:baseline}.toc li::before{content:counter(t,decimal-leading-zero);font:15pt "Bebas Neue";color:var(--gold2);width:9mm}
+.gal{display:flex;flex-wrap:wrap;gap:4mm}.gal figure{margin:0;width:calc(33.3% - 3mm);page-break-inside:avoid}.gal img{width:100%;border:1px solid var(--line);border-radius:2.5mm}.gal figcaption{font-size:8pt;color:var(--soft);margin-top:1mm}
 '''
 logo=img('img/logo-mark3.png').replace('image/jpeg','image/png')
 doc=f'''<!doctype html><html lang="fr"><meta charset="utf-8"><title>U CINEMÀ — Dossier de rendu</title><style>{css}</style><body>
-<div class="cover"><img src="{logo}"><h1>U CINEMÀ</h1><div class="sub">Prototype d'application de réservation de cinéma — mobile et grand écran</div>
-<div class="meta"><strong>Exercice</strong> : « le meilleur prototype possible » (Prototyper en 2026 · Livrer)<br><strong>Auteur</strong> : Mika<br><strong>Date</strong> : 18 novembre 2026<br><strong>Prototype</strong> : <a href="https://mik2a-coder.github.io/u-cinema/">https://mik2a-coder.github.io/u-cinema/</a><br><strong>Code et documents</strong> : <a href="https://github.com/mik2a-coder/u-cinema">https://github.com/mik2a-coder/u-cinema</a><br><br>Ce dossier contient : barème, brief et persona, parcours, prototype (captures), design system, tests, journal, annexes.</div></div>
+<div class="cover"><img src="{logo}"><div class="ver">VERSION 82 · 18 NOVEMBRE 2026</div><h1><b>U</b> CINEMÀ</h1><div class="sub">Prototype d'application de réservation de cinéma, mobile et grand écran</div>
+<div class="pal"><i style="background:#FAF6EB"></i><i style="background:#F6EFDE"></i><i style="background:#16120A"></i><i style="background:#1E1810"></i><i style="background:#F0C05A"></i><i style="background:#B98322"></i><i style="background:#0B0A08"></i></div>
+<div class="meta"><strong>Exercice</strong> : « le meilleur prototype possible » (Prototyper en 2026 · Livrer)<br><strong>Auteur</strong> : Mika<br><strong>Prototype</strong> : <a href="https://mik2a-coder.github.io/u-cinema/">https://mik2a-coder.github.io/u-cinema/</a><br><strong>Code</strong> : <a href="https://github.com/mik2a-coder/u-cinema">https://github.com/mik2a-coder/u-cinema</a><br><strong>Contenu</strong> : direction artistique et palette, barème, brief et persona, parcours, design system, tests, journal des versions, annexes</div></div>
 <div class="toc"><h1>Sommaire</h1><ol>{toc}</ol></div>{body}</body></html>'''
 open('rendu/dossier.html','w',encoding='utf-8').write(doc)
 chrome='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'

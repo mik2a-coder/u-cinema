@@ -32,6 +32,8 @@ puis ouvrir http://localhost:8731/index.html (les extraits vidéo demandent un s
 | Pièce | Fichier |
 |---|---|
 | **Dossier à rendre (PDF, tout-en-un)** | `RENDU-U-CINEMA.pdf` |
+| Direction artistique et palette (60-30-10) | `DIRECTION-ARTISTIQUE.md` |
+| Journal des versions (v82 détaillée, historique complet) | `VERSIONS.md` |
 | Barème (auto-évaluation avec preuves) | `BAREME.md` |
 | Brief et persona | `BRIEF-PERSONA.md` |
 | Parcours utilisateur | `PARCOURS.md` + `rendu/captures/` |

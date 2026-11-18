@@ -204,3 +204,16 @@ Principe : couleurs, tailles, rayons et espaces passent par des variables ; une 
 - **Téléphone** : le logo de l'app en haut à gauche de l'accueil ; le compte est dans le menu du bas.
 - **Vue depuis la place** : scène en couches 2D (sans 3D CSS, fiable sous Safari) : fond rouge sombre uni sans détails (ni rayures ni rideau visible) et écran 16:9 (la vidéo y passe, seul point clair), rangées de fauteuils en velours rouge devant soi, de plus en plus petites et floues vers l'écran, spectateurs à peine visibles (opacité 38 %), fauteuils voisins au premier plan, lumière chaude ; ambiance sombre mais lisible (rouges profonds, vignettage doux) ; léger parallaxe à la souris ; arrivée en zoom, changement de place en fondu.
 - **Vue depuis la place (version immersive)** : écran presque pleine largeur (la bande-annonce y passe), salle très sombre en rouge profond avec vignettage fort, lumière de l'écran qui retombe sur les premières rangées, fauteuils voisins de notre rangée visibles de chaque côté en bas de l'image, têtes à peine visibles.
+
+
+## 11. Version 82 : nouveaux composants et règles
+- **Barre d'étapes** (`.stp-bar`) : segments atteints pleins (or), étape en cours épaissie avec un point lumineux, étapes à venir en gris. « Étape 2 sur 4 » = 2 segments sur 4.
+- **Barre de défilement** (grands écrans à la souris) : 10 px, pouce arrondi de 4 px, transparent au repos (22 %), plus marqué au survol (42 %), or sur le pouce survolé. Aucune barre sur écran tactile.
+- **Fiche personne** (`#s-person`) : photo ronde cerclée d'or (initiales si absente), rôles en puces, bouton « Suivre », biographie (résumé indicatif), filmographie en lignes `.acc-row`, lien « Voir ses films dans la liste », pied de page légal.
+- **Interrupteurs** (`.sw2`) : activé = **or profond** (`--accent2`), plus de bleu étranger à la palette.
+- **Avoir et récompenses** : carte « Avoir disponible » cerclée d'or (`.acc-credit`), cartes `.rw` (nom, description, bouton « Débloquer · N pts »), bloc « Mes avantages » de la commande (`.rwbox`, interrupteurs).
+- **Pied de page légal** : lien texte souligné `.textlink` « Confidentialité et mentions légales », présent sur tous les écrans ; ce n'est plus un bouton dans les préférences.
+- **Barre du haut (bureau)** : fondu limité à 94 px (`#dtop::before`) pour ne jamais recouvrir un titre placé dessous ; les en-têtes d'écran commencent à `--top` (96 px) ou plus.
+- **Vue depuis la place** : écran sans cadre (lueur seule), format 2,3 : 1 (2,05 : 1 sur téléphone), vidéo recadrée pour supprimer les bandes noires ; au premier et deuxième rang, les fauteuils voisins se réduisent aux bords.
+- **Introduction** : à chaque « Continuer », les trois affiches changent (glissement décalé de 60 ms, fondu) en même temps que le texte ; bouton de 264 px ; sans animation si « Réduire les animations ».
+- **Identité de l'onglet** : favicon, icône d'écran d'accueil (180, 192, 512, maskable) et image d'aperçu de lien 1200×630 générés à partir de `img/logo-mark3.png` (`tools/make-icons.mjs`).

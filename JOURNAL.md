@@ -66,6 +66,18 @@ Boucle courte, répétée une centaine de fois : **ma demande (souvent avec capt
 | Plan de salle : zoom de zone sans étape de plus | Garder l'objectif de réserver en moins de 60 secondes |
 | Écran de vue de la place en 16:9 | Fiabilité sous Safari et vidéo sans recadrage |
 
+## 18 novembre 2026 — version 82 : revue en 24 points
+Détail point par point dans `VERSIONS.md`. Décisions de conception :
+
+| Décision | Pourquoi |
+|---|---|
+| Annulation = **avoir** et jusqu'à 2 h avant | Règle commerciale demandée ; l'avoir est visible dans Compte et activable à la commande |
+| Récompenses séparées du niveau | Dépenser des points ne fait pas redescendre le niveau (`ACC.spent` distinct des points cumulés) |
+| Fiche personne dédiée plutôt qu'une recherche | Un nom cliqué doit ouvrir **sa** page, avec retour au même endroit |
+| Assistant qui réserve jusqu'au récapitulatif | On ne paie jamais à la place de l'utilisateur : il contrôle avant de payer |
+| Fondu de la barre du haut raccourci | Les titres des écrans à en-tête fixe restaient grisés sous le dégradé |
+| Écran de salle au format cinéma (2,3 : 1) | Rogne les bandes noires des bandes-annonces et agrandit l'image utile |
+
 ## Limites et à valider
 - Test à 3 personnes **non réalisé** (voir `TESTS.md`).
 - Bandes-annonces verticales officielles trouvées pour 3 films sur 18 ; les autres s'affichent en 16:9 dans le cadre.
