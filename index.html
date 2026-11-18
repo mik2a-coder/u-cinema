@@ -1605,6 +1605,10 @@ body:has(#s-home.active) #dtop.sc::before{opacity:1}
 .cgv.need{box-shadow:0 0 0 2.5px var(--accent-text),0 14px 30px -16px rgba(0,0,0,.4);animation:cgvNeed .6s cubic-bezier(.3,1.4,.5,1) 1}
 @keyframes cgvNeed{0%,100%{transform:none}20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
 .viewport.rm .cgv.need{animation:none}
+/* retour sur l'accueil : le dernier film choisi reste en vue et se signale un instant */
+.ncard.last .img{box-shadow:0 0 0 3px var(--accent-text),0 22px 40px -14px rgba(0,0,0,.6)!important;animation:lastRing 1.4s ease-out 1}
+@keyframes lastRing{0%{box-shadow:0 0 0 12px color-mix(in srgb,var(--accent-text) 0%,transparent),0 22px 40px -14px rgba(0,0,0,.6)}30%{box-shadow:0 0 0 7px color-mix(in srgb,var(--accent-text) 55%,transparent),0 22px 40px -14px rgba(0,0,0,.6)}100%{box-shadow:0 0 0 3px var(--accent-text),0 22px 40px -14px rgba(0,0,0,.6)}}
+.viewport.rm .ncard.last .img{animation:none}
 </style>
 </head>
 <body>
@@ -2010,12 +2014,12 @@ const HOOKS={account:()=>renderAccount(),detail:renderDetail,book:renderBook,sea
 let VTSRC=null,NOVT=false,VTID=0,RET=null;const SCR={};
 function go(n){
  if(n===cur)return;const prev=cur,from=$('#s-'+cur),to=$('#s-'+n),dir=n==='account'?1:cur==='account'?-1:(ORDER.indexOf(n)>=ORDER.indexOf(cur)?1:-1);
- const finish=()=>{{const mv=$('#muv');if(mv)mv.dataset.scr=n;if(typeof MV!=='undefined'&&MV.open&&n!=='home')mvClose()}if(prev==='detail'&&n!=='detail')setTimeout(stopExtract,200);cur=n;if(n==='detail')setTimeout(startExtract,60);markStep();if(typeof markDnav==='function')markDnav();setTimeout(()=>{to.setAttribute('tabindex','-1');to.focus({preventScroll:true});if(restore!=null){const s2=to.querySelector('.scroll,.d-scroll');if(s2)s2.scrollTop=restore}},90);say(to.getAttribute('aria-label')||'')};
+ const finish=()=>{{const mv=$('#muv');if(mv)mv.dataset.scr=n;if(typeof MV!=='undefined'&&MV.open&&n!=='home')mvClose()}if(prev==='detail'&&n!=='detail')setTimeout(stopExtract,200);cur=n;if(n==='detail')setTimeout(startExtract,60);markStep();if(typeof markDnav==='function')markDnav();setTimeout(()=>{to.setAttribute('tabindex','-1');to.focus({preventScroll:true});if(restore!=null){const s2=to.querySelector('.scroll,.d-scroll');if(s2)s2.scrollTop=restore}if(lastFilm){const c=to.querySelector('.ncard[data-id="'+lastFilm+'"]');if(c){const r=c.getBoundingClientRect();if(r.top<120||r.bottom>innerHeight-30)c.scrollIntoView({block:'center',behavior:A11Y.rm?'auto':'smooth'});c.classList.add('last');setTimeout(()=>c.classList.remove('last'),2400)}}},90);say(to.getAttribute('aria-label')||'')};
  if(prev==='detail'){document.querySelectorAll('#dVisual .d-video').forEach(v=>{v.style.transition='opacity .14s';v.classList.remove('on')});const ex=document.querySelector('#exSound');if(ex)ex.remove();setTimeout(stopExtract,170)}
  {const sc0=from.querySelector('.scroll,.d-scroll');if(sc0)SCR[prev]=sc0.scrollTop}
  if(prev==='home'&&n==='detail'&&!RET)RET={tab:ST.tab,cur:ST.cur,q:ST.q};
- let fromList=false;
- if(n==='home'&&prev==='detail'&&RET){const r=RET;fromList=!!r.film;RET=null;try{ST.tab=r.tab;ST.q=r.q||'';$('#q').value=ST.q;const idx=r.film?tabList(r.tab).findIndex(x=>x.id===r.film):-1;ST.cur=r.cur>=0?r.cur:Math.max(0,idx);renderTabs();renderFan();if(ST.nowKey!==ST.tab+'|'+(ST.q||''))renderNow()}catch(e){}}
+ let fromList=false,lastFilm=null;
+ if(n==='home'&&prev==='detail'&&RET){const r=RET;fromList=!!r.film;lastFilm=r.film||null;RET=null;try{ST.tab=r.tab;ST.q=r.q||'';$('#q').value=ST.q;const idx=r.film?tabList(r.tab).findIndex(x=>x.id===r.film):-1;ST.cur=r.cur>=0?r.cur:Math.max(0,idx);renderTabs();renderFan();if(ST.nowKey!==ST.tab+'|'+(ST.q||''))renderNow()}catch(e){}}
  else if(n==='home')RET=null;
  const restore=dir<0&&SCR[n]!=null?SCR[n]:null;
  const reduce=A11Y.rm||matchMedia('(prefers-reduced-motion:reduce)').matches;
