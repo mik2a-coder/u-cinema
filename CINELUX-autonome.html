@@ -1561,6 +1561,25 @@ body:has(#s-home.active) #dtop.sc::before{opacity:1}
 .sheet .sbody{padding:0 20px 22px}
 .sheet-x{position:absolute;top:12px;right:12px;width:40px;height:40px;z-index:2}
 .viewport.rm .sheet,.viewport.rm .sheet.open{transition:none!important}
+/* vue depuis la place : ambiance chaude et plus claire, rangées de velours rouge en perspective */
+.sv-room{perspective:none!important;background:linear-gradient(to bottom,#4a1218 0,#33090e 38%,#230609 100%)!important;--px:0;--py:0}
+.v-scene{position:absolute;inset:0;overflow:hidden}
+.v-scene.in{animation:vIn 1.5s cubic-bezier(.2,.8,.15,1) both}.v-scene.sw{animation:vSw .38s ease both}
+@keyframes vIn{from{opacity:0;transform:scale(.7) translateY(7%)}to{opacity:1;transform:none}}@keyframes vSw{from{opacity:.2}to{opacity:1}}
+.v-wall{position:absolute;left:0;right:0;top:0;background:repeating-linear-gradient(90deg,#6e141b 0 16px,#5a0f15 16px 32px),#5a0f15;-webkit-mask-image:linear-gradient(#000 62%,transparent);mask-image:linear-gradient(#000 62%,transparent);opacity:.92}
+.v-glow{position:absolute;inset:0;background:radial-gradient(70% 46% at 50% var(--sy),rgba(255,196,160,.34),rgba(255,150,120,.1) 55%,transparent 75%);pointer-events:none}
+.v-screen{position:absolute;overflow:hidden;background:#0a0807;border-radius:3px;box-shadow:0 0 0 .22em #1a0b09,0 0 90px 22px rgba(255,190,150,.35);transform:translate(calc(var(--px)*-6px),calc(var(--py)*-3px))}
+.v-screen>img{width:100%;height:100%;object-fit:cover;display:block}
+.v-stage{position:absolute;left:0;right:0;height:5%;background:linear-gradient(#2a0a0d,rgba(35,6,9,.2));pointer-events:none}
+.vr{position:absolute;inset:0;transform:translate(calc(var(--px)*var(--k)*-26px),calc(var(--py)*var(--k)*-10px))}
+.vs{position:absolute;display:block;border-radius:.2em .2em .07em .07em/.26em .26em .07em .07em;background:linear-gradient(#d3303a 0,#a3181f 14%,#6e0f16 55%,#3f070c 100%);box-shadow:inset 0 .07em 0 rgba(255,150,138,.7),inset 0 -.12em .22em rgba(0,0,0,.4),0 .22em .4em rgba(0,0,0,.4)}
+.vs::after{content:"";position:absolute;left:12%;right:12%;top:26%;bottom:14%;border-radius:.12em;background:linear-gradient(rgba(255,255,255,.06),rgba(0,0,0,.18))}
+.v-hd{position:absolute;border-radius:50% 50% 46% 46%}
+.v-nb{position:absolute;bottom:0;width:26%;height:30%;background:linear-gradient(#b02a32,#6e1017 40%,#3a070c);box-shadow:inset 0 .3em 0 rgba(255,150,138,.6);z-index:3;transform:translate(calc(var(--px)*-34px),calc(var(--py)*-12px))}
+.v-nb.l{left:-6%;border-radius:36% 70% 0 0/40% 55% 0 0}.v-nb.r{right:-6%;border-radius:70% 36% 0 0/55% 40% 0 0}
+.v-floor{position:absolute;left:0;right:0;bottom:0;height:16%;background:linear-gradient(transparent,rgba(20,3,5,.8));pointer-events:none;z-index:2}
+.sv-hud{background:linear-gradient(to top,rgba(20,4,6,.92),transparent)!important}
+.viewport.rm .v-scene.in,.viewport.rm .v-scene.sw{animation:none}
 </style>
 </head>
 <body>
@@ -2282,56 +2301,37 @@ const svSeatX=c=>c<4?-(.5+(3-c)*.55):.5+(c-4)*.55;
 function svGeom(id){const ri=Math.max(0,ROWS.indexOf(id[0])),ci=Math.max(0,Math.min(7,+id.slice(1)-1));return{ri,ci,row:id[0],x:svSeatX(ci),z:svZ(ri),y:svFl(ri)+1.12}}
 const SVHAIR=['#1a1410','#2a1c14','#3b2a1b','#0e0b09','#6a4a2a','#a77a3a','#8b8680','#c9bba0','#4a2a1e','#161616','#7a3b22'];
 const SVTOPS=['#1d2b3a','#2b2b30','#3a2a22','#25332b','#7a2a2e','#3d3a52','#a67c2d','#202020','#6b5a46','#2a3f4f','#44525e'];
-function svBuild(){
- const f=film(),S=SVU,H=SV3.halfW,tk=ST.tk||new Set(),els=[];
- const add=(w,h,x,y,z,tr,cls,st,inner,row)=>els.push(`<i class="${cls}"${row!=null?` data-r="${row}"`:''} style="width:${(w*S).toFixed(0)}px;height:${(h*S).toFixed(0)}px;left:${(-w*S/2).toFixed(0)}px;top:${(-h*S/2).toFixed(0)}px;transform:translate3d(${(x*S).toFixed(1)}px,${(-y*S).toFixed(1)}px,${(z*S).toFixed(1)}px)${tr||''};${st||''}">${inner||''}</i>`);
- const zEnd=svZ(7)+2.2,zMid=(zEnd-.4)/2,len=zEnd+.4,vr=Math.max(0,ROWS.indexOf((ST.seats[0]||'D4')[0]));
- // salle : sol, contremarches, lumières d'allée, murs en lattes, appliques, plafond à poutres, fond de scène
- add(2*H,svZ(0)-.575+.4,0,0,(svZ(0)-.575-.4)/2,' rotateX(90deg)','sv-floor');
- for(let r=0;r<8;r++){add(2*H,SV3.pitch,0,svFl(r),svZ(r),' rotateX(90deg)','sv-floor');add(2*H,SV3.rise,0,svFl(r)-SV3.rise/2,svZ(r)-SV3.pitch/2,'','sv-riser');
-  for(const ax of [-.5,.5])add(.05,.05,ax,svFl(r),svZ(r)-SV3.pitch/2+.02,'','sv-led');
-  for(const ax of [-.5,.5])add(.035,SV3.pitch,ax,svFl(r)+.004,svZ(r),' rotateX(90deg)','sv-ledline');
-  for(const sx of [-1,1])add(.3,.04,sx*(H-.1),svFl(r)+.03,svZ(r),' rotateY('+(sx<0?90:-90)+'deg)','sv-led')}
- add(len,6,-H,2.6,zMid,' rotateY(90deg)','sv-wall');add(len,6,H,2.6,zMid,' rotateY(-90deg)','sv-wall');
- for(let k=0;k<6;k++){const z=1.6+k*2.35,y=2.35+svFl(Math.min(7,Math.max(0,Math.round((z-SV3.z0)/SV3.pitch))))*.7;
-  for(const sx of [-1,1]){add(1.9,2.6,sx*(H-.015),y,z,' rotateY('+(sx<0?90:-90)+'deg)','sv-pool');add(.16,.34,sx*(H-.03),y,z,' rotateY('+(sx<0?90:-90)+'deg)','sv-sconce')}}
- for(let k=0;k<9;k++)add(2*H-.6,.06,0,5.52,.2+k*1.6,' rotateX(90deg)','sv-beam3');
- for(const sx of [-1,1])add(.07,len,sx*2.6,5.52,zMid,' rotateX(90deg)','sv-beam3');
- for(const sx of [-1,1])add(len,.05,sx*(H-.01),1.5,zMid,' rotateY('+(sx<0?90:-90)+'deg)','sv-ledline');
- add(2*H,len,0,5.6,zMid,' rotateX(90deg)','sv-ceil');
- add(2*H,6,0,2.6,-.4,'','sv-front');
- // écran : cadre, image, reflet sur la scène
- add(7.2,4.05,0,2.5,0,'','sv-screen','',`<img src="${SCENEDATA[f.id]||'img/scene/'+f.id+'.jpg'}" alt="">`);
- add(8.5,.9,0,.45,.02,' rotateX(90deg)','sv-reflet');
- // fauteuils, spectateurs
- const mkRim='';
- for(let r=0;r<8;r++){const z=svZ(r),fl=svFl(r),rr=rng('row'+r+f.id),far=vr-r>=2;
-  for(let c=0;c<8;c++){const id=ROWS[r]+(c+1),x=svSeatX(c);
-   add(.5,.9,x,fl+.64,z,'','sv-back','',`<u></u>`,r);
-   if(tk.has(id)||(far&&rr()<.68&&r<vr)){
-    const hair=SVHAIR[Math.floor(rr()*SVHAIR.length)],top=SVTOPS[Math.floor(rr()*SVTOPS.length)],long=rr()<.4,tall=rr()*.12,hx=x+(rr()-.5)*.12,tilt=(rr()-.5)*9;
-    add(.56,.44,hx,fl+.9,z-.02,'','sv-sh',`--top:${top}`,'',r);
-    if(long)add(.3,.62,hx,fl+1.02,z-.03,'','sv-hairlong',`--hair:${hair}`,'',r);
-    add(.11,.14,hx,fl+1.1,z-.032,'','sv-neck','','',r);
-    add(.22,.27,hx,fl+1.24+tall*.4,z-.045,` rotateZ(${tilt.toFixed(1)}deg)`,'sv-hd',`--hair:${hair}`,'',r)}
-  }
-  for(const ax of [-2.45,-1.9,-1.35,-.8,.8,1.35,1.9,2.45])add(.07,.42,ax,fl+.5,z+.012,'','sv-arm','','',r);
- }
- let dust='';for(let i=0;i<16;i++){const q=rng('d'+i);dust+=`<b style="left:${(q()*100).toFixed(0)}%;top:${(q()*80).toFixed(0)}%;--s:${(2+q()*3).toFixed(1)}px;--t:${(7+q()*8).toFixed(1)}s;--dl:${(-q()*10).toFixed(1)}s"></b>`}
- $('#svRoom').innerHTML=`<div class="sv-sway"><div class="sv-cam" id="svCam"><div class="sv-world" id="svWorld">${els.join('')}</div></div></div><div class="sv-beam"></div><div class="sv-dust">${dust}</div><div class="sv-bokeh"><b style="left:6%;top:18%;--s:90px"></b><b style="left:84%;top:26%;--s:70px"></b><b style="left:70%;top:62%;--s:120px"></b><b style="left:12%;top:70%;--s:100px"></b></div><div class="sv-own"><i></i><i></i></div><div class="sv-vig"></div><div class="sv-grade"></div><div class="sv-grain"></div>`;
- // couleur dominante de l'écran : elle teinte les contre-jours sur les têtes et les dossiers
- const im=$('#svWorld .sv-screen img'),r0=$('#svRoom');r0.style.setProperty('--sc','var(--accent)');
- if(im){const go=()=>{try{const c=document.createElement('canvas');c.width=c.height=8;const x=c.getContext('2d');x.drawImage(im,0,0,8,8);const d=x.getImageData(0,0,8,8).data;let R=0,G=0,B=0,n=0;for(let i=0;i<d.length;i+=4){R+=d[i];G+=d[i+1];B+=d[i+2];n++}R/=n;G/=n;B/=n;const m=Math.max(R,G,B)||1,k=Math.min(2.2,230/m);r0.style.setProperty('--sc',`rgb(${Math.min(255,R*k)|0},${Math.min(255,G*k)|0},${Math.min(255,B*k)|0})`)}catch(e){}};im.complete?go():im.addEventListener('load',go)}
+function svBuild(){}
+/* Vue depuis la place (2D en couches, sans 3D CSS : fiable sous Safari) : rangées de fauteuils en velours rouge devant soi, de plus en plus petites et floues vers l'écran, rideau et lumière chaude */
+function svScene(id,enter){
+ const f=film(),tk=ST.tk||new Set(),g=svGeom(id),ri=g.ri,ci=g.ci;
+ const room=$('#svRoom'),W=$('#sv').clientWidth||390,H=$('#sv').clientHeight||800,mob=H>W;
+ const cx=W/2,hy=H*(mob?.42:.37),u=mob?W*.36:H*.31,h0=H*(mob?.72:.82),K=d=>1/(.7+.85*d);
+ const pitch=1,aisle=.55,wx=c=>(c-ci)*pitch+(c>=4?aisle:0)-(ci>=4?aisle:0);
+ const rnd=rng('sv'+f.id+id);let out='';
+ // écran : plus petit quand on est loin
+ const sk=1.18-ri*.075;let sw=Math.min(W*.86,(mob?W*.78:H*.78))*sk;sw=Math.min(sw,(hy-H*.1)*16/9);const sh=sw*9/16,sy=hy-sh-H*.02;
+ out+=`<div class="v-wall" style="height:${(hy+H*.02).toFixed(0)}px"></div><div class="v-glow" style="--sy:${(sy+sh/2).toFixed(0)}px"></div>`;
+ out+=`<div class="v-screen" style="left:${(cx-sw/2).toFixed(0)}px;top:${sy.toFixed(0)}px;width:${sw.toFixed(0)}px;height:${sh.toFixed(0)}px"><img src="${SCENEDATA[f.id]||'img/scene/'+f.id+'.jpg'}" alt="" onerror="this.remove()"></div>`;
+ out+=`<div class="v-stage" style="top:${(hy-H*.012).toFixed(0)}px"></div>`;
+ // rangées devant soi, de la plus lointaine à la plus proche
+ for(let r=0;r<ri;r++){
+  const d=ri-r,k=K(d),y=hy+h0*k*.62,sW=.84*u*k,sH=.98*u*k,blur=Math.min(2.6,Math.max(0,(d-1.3)*.28)),dim=Math.max(.5,1-d*.07);
+  let row='';
+  for(let c=0;c<8;c++){
+   const x=cx+wx(c)*u*k;if(x<-sW||x>W+sW)continue;
+   const sid=ROWS[r]+(c+1),occ=tk.has(sid)||(rnd()<.18&&r<ri-1);
+   if(occ){const hc=SVHAIR[Math.floor(rnd()*SVHAIR.length)],hs=.46*u*k;row+=`<b class="v-hd" style="left:${(x-hs/2).toFixed(1)}px;top:${(y-sH-hs*.55).toFixed(1)}px;width:${hs.toFixed(1)}px;height:${(hs*1.12).toFixed(1)}px;background:${hc}"></b>`}
+   row+=`<i class="vs" style="left:${(x-sW/2).toFixed(1)}px;top:${(y-sH).toFixed(1)}px;width:${sW.toFixed(1)}px;height:${sH.toFixed(1)}px;font-size:${sW.toFixed(1)}px"></i>`}
+  out+=`<div class="vr" style="--k:${k.toFixed(3)};filter:blur(${blur.toFixed(2)}px) brightness(${dim.toFixed(2)})">${row}</div>`}
+ // fauteuils voisins au premier plan (bords)
+ out+=`<div class="v-nb l"></div><div class="v-nb r"></div><div class="v-floor"></div>`;
+ room.innerHTML=`<div class="v-scene${enter?' in':''}">${out}</div>`;
+ const t=room.querySelector('.v-scene');if(!enter&&!A11Y.rm){t.classList.add('sw')}
 }
 function svAim(id,enter){
- const g=svGeom(id),W=$('#sv').clientWidth||390,Hh=$('#sv').clientHeight||800,S=SVU,room=$('#svRoom'),w=$('#svWorld');
- const P=Math.max(240,Math.min(900,Math.round((W/2)/Math.tan(42*Math.PI/180))));
- room.style.perspective=P+'px';room.style.perspectiveOrigin=Hh>W?'50% 40%':'50% 44%';
- const fin=`translate3d(${(-g.x*S).toFixed(1)}px,${(g.y*S).toFixed(1)}px,${(P-g.z*S).toFixed(1)}px)`;
- if(enter&&!A11Y.rm){w.style.transition='none';w.style.transform=`translate3d(${(-g.x*S*.6).toFixed(1)}px,${((g.y+1.6)*S).toFixed(1)}px,${(P-(g.z+3.4)*S).toFixed(1)}px)`;$('#svCam').style.transition='none';$('#svCam').style.setProperty('--pitch','7deg');void w.offsetWidth;
-  w.style.transition='transform 1.9s cubic-bezier(.2,.75,.15,1)';$('#svCam').style.transition='';$('#svCam').style.setProperty('--pitch','0deg')}
- w.style.transform=fin;
- w.querySelectorAll('[data-r]').forEach(e=>{const d=g.ri-(+e.dataset.r);e.style.filter=A11Y.rm?'':d===1?'blur(2.2px)':d===2?'blur(.8px)':''});
+ const g=svGeom(id);
+ svScene(id,enter);
  $('#svTitle').textContent='Place '+id;
  $('#svSub').textContent=`Rang ${g.row} · ${(g.z).toFixed(0)} m de l’écran${PMR.includes(id)?' · emplacement fauteuil roulant':''}`;
  $('#svNav').style.display=SV.ids.length>1?'flex':'none';
@@ -2352,7 +2352,7 @@ function openSeatView(){
 /* la bande-annonce passe sur l'écran de la salle (muette, après l'arrivée à la place) */
 function svTrailer(){
  const f=film();if(!f||!f.yt)return;
- const go=()=>{if(!SV.open)return;const sc=document.querySelector('#svWorld .sv-screen');if(!sc||sc.querySelector('.sv-vid'))return;
+ const go=()=>{if(!SV.open)return;const sc=document.querySelector('#svRoom .v-screen');if(!sc||sc.querySelector('.sv-vid'))return;
   const w=document.createElement('div');w.className='sv-vid';const st=f.ts||30;
   w.innerHTML=`<iframe src="${ytSrc(f,{loop:1,playlist:f.yt,start:st,end:st+60})}" title="" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1" aria-hidden="true"></iframe>`;
   ytWhenPlaying(w.firstChild,()=>w.classList.add('on'));sc.appendChild(w)};
@@ -2371,7 +2371,7 @@ $('#svPrev').onclick=()=>{SV.i=(SV.i-1+SV.ids.length)%SV.ids.length;svAim(SV.ids
 $('#svNext').onclick=()=>{SV.i=(SV.i+1)%SV.ids.length;svAim(SV.ids[SV.i]);haptic('tick')};
 document.addEventListener('keydown',e=>{if(!SV.open)return;if(e.key==='Escape'){e.preventDefault();e.stopPropagation();closeSeatView()}else if(e.key==='ArrowRight'&&SV.ids.length>1)$('#svNext').click();else if(e.key==='ArrowLeft'&&SV.ids.length>1)$('#svPrev').click()},true);
 /* parallaxe : la tête bouge, l'écran reste ancré */
-$('#sv').addEventListener('pointermove',e=>{if(A11Y.rm||e.target.closest('.sv-hud,.sv-close'))return;const r=$('#sv').getBoundingClientRect(),x=((e.clientX-r.left)/r.width-.5),y=((e.clientY-r.top)/r.height-.5),c=$('#svCam');if(c){c.style.setProperty('--yaw',(x*16).toFixed(1)+'deg');c.style.setProperty('--pitch',(y*-8).toFixed(1)+'deg')}});
+$('#sv').addEventListener('pointermove',e=>{if(A11Y.rm||e.target.closest('.sv-hud,.sv-close'))return;const r=$('#sv').getBoundingClientRect(),x=((e.clientX-r.left)/r.width-.5)*2,y=((e.clientY-r.top)/r.height-.5)*2,c=$('#svRoom');if(c){c.style.setProperty('--px',x.toFixed(3));c.style.setProperty('--py',y.toFixed(3))}});
 addEventListener('resize',()=>{if(SV.open)svAim(SV.ids[SV.i])});
 
 
