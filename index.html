@@ -1678,10 +1678,11 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
 .avp .avi{width:64px;height:64px;border-radius:50%;overflow:hidden;display:block}.avp b{font-size:calc(var(--fs-sm)*var(--ts,1));line-height:1.2}.avp small{color:var(--muted);font-size:calc(var(--fs-micro)*var(--ts,1));line-height:1.25}
 .kt{color:var(--accent-text)!important}.kt::before{content:"★ ";font-size:.85em}
 .kidsbar{display:flex;align-items:center;gap:12px;margin:8px max(16px,4vw) 0;padding:10px 14px;border-radius:var(--r-lg);background:color-mix(in srgb,var(--accent) 18%,var(--surface));border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);position:relative;z-index:1}.kidsbar[hidden]{display:none}
-.kidsbar img{width:46px;height:auto;flex:none}.kidsbar b{display:block;font-family:var(--display);font-weight:400;letter-spacing:.06em;font-size:calc(var(--fs-xl)*var(--ts,1))}.kidsbar small{display:block;color:var(--muted);font-size:calc(var(--fs-xs)*var(--ts,1));line-height:1.35}
+.kidsbar img{width:46px;height:auto;flex:none;margin:-6px 0}.kidsbar b{display:block;font-family:var(--display);font-weight:400;letter-spacing:.06em;font-size:calc(var(--fs-xl)*var(--ts,1))}.kidsbar small{display:block;color:var(--muted);font-size:calc(var(--fs-xs)*var(--ts,1));line-height:1.35}
 @media (min-width:900px){.kidsbar{max-width:640px;margin-left:auto;margin-right:auto}}
 .onb-actions{flex-direction:column;gap:10px}.onb-actions .onb-skip{min-height:48px;font-weight:700}
 .ytlink{color:var(--accent-text);text-decoration:underline;text-underline-offset:3px;font-weight:600}
+@media (max-width:480px){.tabs{gap:2px!important;padding-left:12px!important;padding-right:12px!important;justify-content:space-between}.tabs button{padding:0 2px;font-size:calc(var(--fs-xs)*var(--ts,1))}}
 </style>
 </head>
 <body>
@@ -1727,7 +1728,7 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
       <button class="round" id="hA11y" aria-label="Affichage et accessibilité" data-ic="access"></button>
     </div>
     <div class="tabs" role="tablist" id="tabs"></div>
-    <div class="kidsbar" id="kidsBar" hidden><img src="img/chat/c11.png" alt="" width="46" height="42"><div><b>Rubrique enfants</b><small>Des dessins animés pour toute la famille, du plus petit au plus grand.</small></div></div>
+    <div class="kidsbar" id="kidsBar" hidden><img src="img/chat/heureux.png" alt="" width="46" height="58"><div><b>Rubrique enfants</b><small>Des dessins animés pour toute la famille, du plus petit au plus grand.</small></div></div>
     <div class="scroll hbody" id="hbody">
       <div class="fanwrap"><button class="fnav prev" id="fPrev" aria-label="Film précédent" data-ic="back"></button><div class="fan" id="fan" aria-roledescription="carrousel"></div><button class="fnav next" id="fNext" aria-label="Film suivant" data-ic="chev"></button></div>
       <div class="ftitle" id="ftitle"></div>

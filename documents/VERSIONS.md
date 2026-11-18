@@ -22,6 +22,12 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
 
+## Version 94 — 18 novembre 2026
+
+| Demande | Ce qui a été fait | Où le voir |
+|---|---|---|
+| Dessin « Heureux » du chat pour la rubrique enfants | La tête « Heureux » de la planche de U Ghjattu-Volpe remplace la mascotte assise dans le bandeau « Rubrique enfants » (détourée en gardant le pelage blanc et les dents) | Accueil > Enfants |
+
 ## Version 93 — 18 novembre 2026
 
 | N° | Demande | Ce qui a été fait | Où le voir |
@@ -219,3 +225,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v91 | 18/11/2026 | Personnages du compte, plan de salle complet, deux réalisateurs, bande-annonce de la salle, test simplifié |
 | v92 | 18/11/2026 | Onglet Enfants (4 films ajoutés), boutons de l'introduction, bandes-annonces pour tous, prompts du journal |
 | v93 | 18/11/2026 | Politiques d'achat et horaires complets, avoir de 12 mois, checklist à cocher, chapitre « Idées ajoutées » |
+| v94 | 18/11/2026 | Tête « Heureux » du chat dans la rubrique enfants |
