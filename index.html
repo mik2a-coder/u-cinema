@@ -1738,6 +1738,9 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
 #sharePerson{margin-left:auto}
 .d-topr{display:flex;gap:10px}
 @media (max-width:480px){#s-detail .d-chips .chip:nth-child(2){display:none}}
+.ttl{display:flex;align-items:flex-start;gap:14px}.ttl h1{flex:0 1 auto;min-width:0}.shr-t{flex:none;margin-top:14px}
+@media (max-width:599px){.shr-t{display:none}#s-detail .d-chips .chip:nth-child(n+2){display:none}}
+@media (min-width:600px){#s-detail .d-topr #shareFilm{display:none}}
 </style>
 </head>
 <body>
@@ -1815,7 +1818,7 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
   <!-- 3 -->
   <section class="screen" id="s-detail" aria-label="Fiche film">
     <div class="d-visual" id="dVisual"></div>
-    <div class="d-top"><button class="round" data-go="home" aria-label="Retour" data-ic="back"></button><div class="d-topr"><button class="round" id="shareFilm" aria-label="Partager cette fiche" data-ic="share"></button><button class="round" id="favBtn" aria-pressed="false" aria-label="Ajouter aux favoris" data-ic="heart"></button></div></div>
+    <div class="d-top"><button class="round" data-go="home" aria-label="Retour" data-ic="back"></button><div class="d-topr"><button class="round js-share-film" id="shareFilm" aria-label="Partager cette fiche" data-ic="share"></button><button class="round" id="favBtn" aria-pressed="false" aria-label="Ajouter aux favoris" data-ic="heart"></button></div></div>
     <div class="d-chips" id="dChips"></div>
     <div class="d-scroll" id="dScroll">
       <div class="d-spacer"><button class="trailer" id="trailerBtn"><span data-ic="play"></span>Bande-annonce</button></div>
@@ -2894,7 +2897,7 @@ function renderDetail(){
  const f=film();
  $('#dVisual').innerHTML=`<div class="d-blur">${poster(f.kind)}</div><div class="d-sharp">${poster(f.kind)}</div><div class="pblur"><i></i><i></i><i></i><i></i><i></i><i></i></div>`;
  $('#dChips').innerHTML=`<span class="chip">${f.genre}</span><span class="chip">${f.dur}</span>${f.rate==null?'':`<span class="chip">${IC.star}${rt(f)}/10</span>`}`
- $('#dBody').innerHTML=`<div class="eyebrow">${TM(f).art} ${f.dir}</div><h1 class="display">${f.title}</h1>
+ $('#dBody').innerHTML=`<div class="eyebrow">${TM(f).art} ${f.dir}</div><div class="ttl"><h1 class="display">${f.title}</h1><button type="button" class="round js-share-film shr-t" aria-label="Partager cette fiche">${IC.share}</button></div>
  ${f.rate==null?`<div class="soonb">Dans les salles <b>le ${relLabel(f)}</b></div>`:`<div class="rating">${IC.star}<b>${rt(f)}</b><span class="muted">/10 · note du public</span></div>`}
  <div class="meta">${f.dur}<i></i>${f.genres}<i></i>${f.year}</div>
  ${isSoon(f)?'':quickSlots()}
@@ -3758,7 +3761,7 @@ function openShare(o){
   if(e.target.closest('#shCopy')){await copyText(u);const b=$('#shCopy');b.querySelector('span').textContent='Lien copié ✓';haptic('success');toast('Lien copié');setTimeout(()=>{if(b.isConnected)b.querySelector('span').textContent='Copier le lien'},2000);return}
   if(e.target.closest('[data-sh=native]')){try{await navigator.share({title:o.title,text:t,url:u});closeSheet()}catch(x){}}}})}
 document.addEventListener('click',e=>{
- if(e.target.closest('#shareFilm')){const f=film();if(!f)return;openShare({title:f.title,sub:`${f.genre} · ${f.dur} · ${f.year}`,th:poster(f.kind),text:`« ${f.title} » au U Cinemà (${f.genre}, ${f.dur}). Réservez vos places :`,url:shareUrl('f',f.id)})}
+ if(e.target.closest('.js-share-film')){const f=film();if(!f)return;openShare({title:f.title,sub:`${f.genre} · ${f.dur} · ${f.year}`,th:poster(f.kind),text:`« ${f.title} » au U Cinemà (${f.genre}, ${f.dur}). Réservez vos places :`,url:shareUrl('f',f.id)})}
  if(e.target.closest('#sharePerson')){const n=ST.person;if(!n)return;const pi=peopleIndex().find(x=>x.name===n);openShare({title:n,sub:(pi?pi.roles.join(' · '):'Fiche')+(pi?` · ${pi.films.length} film${pi.films.length>1?'s':''} à l’affiche`:''),th:PIMG[n]?`<img src="${PIMG[n]}" alt="" style="width:100%;height:100%;object-fit:cover">`:`<b style="display:grid;place-items:center;height:100%">${esc(initials(n))}</b>`,text:`${n} au U Cinemà : biographie et films à l’affiche.`,url:shareUrl('p',n)})}});
 /* lien partagé : on ouvre directement la page demandée */
 {const m=location.hash.match(/[#&,:](f|p)=([^&,]+)/);if(m){const key=decodeURIComponent(m[2]);setTimeout(()=>{if(m[1]==='f'&&FILMS.some(f=>f.id===key)){go('home');setTimeout(()=>openFilmId(key),450)}else if(m[1]==='p'&&peopleIndex().some(p=>p.name===key)){go('home');setTimeout(()=>openPerson(key),450)}},500)}}

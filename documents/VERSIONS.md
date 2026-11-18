@@ -22,6 +22,12 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
 
+## Version 104 — 18 novembre 2026
+
+| Demande | Ce qui a été fait | Où le voir |
+|---|---|---|
+| Icône de partage non collée à la note sur smartphone ; à côté du titre sur bureau | **Bureau et tablette** : l'icône est placée juste à droite du **titre du film**. **Smartphone** : elle reste en haut, à côté du cœur, et seule la puce « genre » reste à gauche (la note et la durée sont déjà affichées plus bas), donc plus rien n'est collé | Fiche film |
+
 ## Version 103 — 18 novembre 2026
 
 | Demande | Ce qui a été fait | Où le voir |
@@ -38,7 +44,7 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 
 | Demande | Ce qui a été fait | Où le voir |
 |---|---|---|
-| Partager une page, par exemple la fiche d'un film | Bouton **Partager** sur la **fiche film** et la **fiche personne** : fenêtre avec le titre, l'affiche, le **lien direct** à copier, « Partager avec… » (applications de l'appareil : Messages, AirDrop…), WhatsApp, SMS, e-mail, Facebook et X. Le lien ouvre directement la bonne page (`#f=hailmary`, `#p=Ryan%20Gosling`), même sans passer par l'introduction. Rien n'est envoyé tant que l'utilisateur ne choisit pas un service | Fiche film (icône en haut, à côté du cœur), fiche personne (haut à droite) |
+| Partager une page, par exemple la fiche d'un film | Bouton **Partager** sur la **fiche film** et la **fiche personne** : fenêtre avec le titre, l'affiche, le **lien direct** à copier, « Partager avec… » (applications de l'appareil : Messages, AirDrop…), WhatsApp, SMS, e-mail, Facebook et X. Le lien ouvre directement la bonne page (`#f=hailmary`, `#p=Ryan%20Gosling`), même sans passer par l'introduction. Rien n'est envoyé tant que l'utilisateur ne choisit pas un service | Fiche film (icône à côté du titre sur bureau, en haut à côté du cœur sur téléphone), fiche personne (haut à droite) |
 
 ## Version 100 — 18 novembre 2026
 
@@ -312,3 +318,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v101 | 18/11/2026 | Partage des fiches film et personne avec lien direct |
 | v102 | 18/11/2026 | Icône de partage visible en haut de la fiche ; logo dans la fenêtre de partage |
 | v103 | 18/11/2026 | Fenêtre de partage sans logo du site |
+| v104 | 18/11/2026 | Icône de partage à côté du titre (bureau) et décollée de la note (téléphone) |
