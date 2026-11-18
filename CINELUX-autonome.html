@@ -1541,6 +1541,9 @@ body:has(#s-detail.active) .toast{bottom:118px}
 .acc-row.static .link.rm,.acc-row .link.rm{margin-left:auto;flex:none;white-space:nowrap}
 /* accueil : le fond coloré de l'affiche prend la forme d'un ovale doux (les boutons et textes ne sont jamais floutés) */
 #s-home .amb{top:0;bottom:0;height:100%!important;opacity:.9;-webkit-mask-image:radial-gradient(ellipse 60% 54% at 50% 50%,#000 58%,rgba(0,0,0,.62) 76%,rgba(0,0,0,.24) 90%,rgba(0,0,0,0) 100%);mask-image:radial-gradient(ellipse 60% 54% at 50% 50%,#000 58%,rgba(0,0,0,.62) 76%,rgba(0,0,0,.24) 90%,rgba(0,0,0,0) 100%)}
+/* accueil : tout en haut de page, la barre est transparente et l'ovale de couleur passe derrière elle ; elle ne se remplit qu'au défilement */
+body:has(#s-home.active) #dtop::before{opacity:0;transition:opacity .35s}
+body:has(#s-home.active) #dtop.sc::before{opacity:1}
 </style>
 </head>
 <body>
@@ -2981,6 +2984,7 @@ function mvHello(){try{if(sessionStorage.getItem('muvHi'))return;sessionStorage.
  setTimeout(()=>{if($('#muv').dataset.scr==='home'&&!MV.open){$('#muvHi').hidden=false;setTimeout(()=>{$('#muvHi').hidden=true},7000)}},5500)}
 
 {const o=mvOpen;mvOpen=function(){document.querySelectorAll('.muv-svg').forEach(x=>{x.classList.remove('blink');void x.offsetWidth;x.classList.add('blink')});return o.apply(this,arguments)}}
+{const hb=document.getElementById('hbody'),dt=document.getElementById('dtop');if(hb&&dt)hb.addEventListener('scroll',()=>dt.classList.toggle('sc',hb.scrollTop>8),{passive:true})}
 paintIcons();initPalette();loadA11y();renderOnb();mvHello();renderTabs();renderFan();renderNow();
 $('#avatar').innerHTML=avatarSVG('M','me');$('#avatar').style.cssText='display:block;width:100%;height:100%';
 {const mt=location.hash.match(/[,:]tab=(\d)/);if(mt){ST.tab=+mt[1];setTimeout(()=>{renderTabs();renderFan();renderNow()},400)}}
