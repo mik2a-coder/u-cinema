@@ -1,5 +1,5 @@
 #!/bin/bash
-# Double-clic : CINÉLUX V2 avec la barre d'appareils (Pixel, iPhone SE, tablette, bureau…), via serveur local
+# Double-clic : U CINEMÀ avec la barre d'appareils (Pixel, iPhone SE, tablette, bureau…), via serveur local
 cd "$(dirname "$0")"
 PORT=8731
 if ! lsof -ti tcp:$PORT >/dev/null 2>&1; then

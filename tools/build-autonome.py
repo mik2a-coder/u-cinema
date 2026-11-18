@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fabrique CINELUX-autonome.html : un seul fichier avec affiches, portraits, scènes et polices intégrés.
+"""Fabrique U-CINEMA-autonome.html : un seul fichier avec affiches, portraits, scènes et polices intégrés.
 Usage : python3 tools/build-autonome.py   (depuis le dossier CINELUX)"""
 import base64, os, re
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
@@ -26,5 +26,5 @@ css = re.sub(r"url\(([^)]+\.woff2)\)", lambda mm: "url(" + uri('fonts/' + mm.gro
 s = s.replace('<link rel="stylesheet" href="fonts/fonts.css">', "<style>" + css + "</style>", 1)
 import re as _re
 s = _re.sub(r'<link rel="(manifest|icon|apple-touch-icon)"[^>]*>\n', '', s)
-open('CINELUX-autonome.html', 'w', encoding='utf8').write(s)
-print(f"CINELUX-autonome.html : {len(s)//1024} Ko — {len(paths)} affiches, {len(dirs)} portraits, {len(scenes)} scènes")
+open('U-CINEMA-autonome.html', 'w', encoding='utf8').write(s)
+print(f"U-CINEMA-autonome.html : {len(s)//1024} Ko — {len(paths)} affiches, {len(dirs)} portraits, {len(scenes)} scènes")

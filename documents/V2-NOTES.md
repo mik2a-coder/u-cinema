@@ -1,7 +1,7 @@
 # U CINEMÀ V2 — Notes de conception
 
 Ce que le cours *Prototyper en 2026* a changé dans le prototype, écran par écran, avec la fonction du code correspondante.
-La V1 reste intacte dans `../CINELUX`. Ouvrir la V2 : `Ouvrir CINELUX V2.command`.
+La V1 reste intacte dans l'ancien dossier `CINELUX`. Ouvrir la V2 : `Ouvrir U CINEMA.command`.
 
 ## 1. Grille « Peaufiner » (diapositive 92) — contrôle du 16 novembre 2026
 
@@ -88,7 +88,7 @@ Contrôle automatique des boutons coupés ou inatteignables et des débordements
 **Catalogue** : 18 films de 2026 (`FILMS`) : 12 à l'affiche, 6 à venir. Distributions, équipes et résumés d'après Wikipédia ; dates de sortie France **indicatives** ; notes du public = démonstration. Onglets : **Films** (à l'affiche), **Nouveautés** (sorties des 4 derniers mois), **Prochainement** (« Me prévenir à la sortie » à la place de « Réserver », rappel gardé sur l'appareil).
 **Affiche** : plus de pastilles en bas ; la note est dans une pastille dorée à côté de l'année et du genre, sous le titre.
 **Fiche** : cartes de distribution sous le synopsis (photo, nom, nombre de films), fiche acteur en feuille, équipe (réalisation, production, musique).
-**Extrait de bande-annonce** : 3,5 s après l'affiche, la vidéo (YouTube sans cookie, muette, en boucle) apparaît en fondu dans l'affiche ; bouton de son ; « Bande-annonce » ouvre la vidéo complète. **Consentement avant tout chargement** (feuille « Extraits de bandes-annonces », oui/non d'égale importance) ; réglable dans *Affichage et accessibilité* ; coupé avec « Réduire les animations » ou économie de données. Nécessite un serveur http (`Ouvrir CINELUX V2.command` en lance un sur localhost:8731) : YouTube refuse les pages ouvertes en `file://`.
+**Extrait de bande-annonce** : 3,5 s après l'affiche, la vidéo (YouTube sans cookie, muette, en boucle) apparaît en fondu dans l'affiche ; bouton de son ; « Bande-annonce » ouvre la vidéo complète. **Consentement avant tout chargement** (feuille « Extraits de bandes-annonces », oui/non d'égale importance) ; réglable dans *Affichage et accessibilité* ; coupé avec « Réduire les animations » ou économie de données. Nécessite un serveur http (`Ouvrir U CINEMA.command` en lance un sur localhost:8731) : YouTube refuse les pages ouvertes en `file://`.
 **Vue depuis ma place** : sur le plan de salle, « Voir depuis ma place » plonge dans le siège choisi (zoom, cercle qui s'ouvre) et montre l'écran en perspective selon le rang et la colonne, les spectateurs devant, parallaxe au pointeur, flèches pour passer d'une place à l'autre. Simulation indicative.
 **Billet** : l'affiche entière en vedette sur fond flou, « 2 places » au lieu de « ADMET DEUX ».
 **Compte** (onglet « Compte ») : carte de fidélité (niveaux Bronze à Platine, points = 1 par euro, se retourne pour montrer le code), réservations à venir, rappels de sortie, historique des films vus avec notes en étoiles (annulables), préférences. Tout est en `localStorage` (`cinelux-acc`) ; inclus dans l'export et effacé avec « Tout effacer ». Historique et notes de départ : démonstration.

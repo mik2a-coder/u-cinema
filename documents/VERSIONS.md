@@ -16,11 +16,14 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 | `tools/cut-chat.mjs`, `tools/clean-sprites.mjs` | v84–v86 | Découpe et nettoyage des poses du chat |
 | `tools/scenarios/audit-entete.json` | v82 | Contrôle des chevauchements d'en-têtes |
 | `tools/build-rendu.py` | v82 | Dossier de rendu au style « artefact », sans notes de notation |
-| `DIRECTION-ARTISTIQUE.md`, `VERSIONS.md` | v82–v86 | Nouveaux documents |
+| `documents/DIRECTION-ARTISTIQUE.md`, `documents/VERSIONS.md` | v82–v86 | Nouveaux documents |
 | `BRIEF-PERSONA.md`, `PARCOURS.md`, `BAREME.md`, `DESIGN.md`, `TESTS.md`, `JOURNAL.md`, `README.md` | v82–v86 | Personas Mika (Ajaccio) et Ghjuvana Maria (Bastia), page d'erreur, tests, décisions |
 | `RENDU-U-CINEMA.pdf`, `CHECKLIST-TEST-3-PERSONNES.pdf`, `CINELUX-autonome.html` | v82–v86 | Régénérés à chaque version |
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
+
+## Rangement du dossier (après la v86)
+Le dossier du projet s'appelle désormais **U CINEMA**. Textes dans `documents/`, PDF à remettre dans `A-RENDRE/`, anciens essais dans `archives/`, version autonome renommée `U-CINEMA-autonome.html`, lanceurs « Ouvrir U CINEMA ». Le site (à la racine) n'a pas bougé.
 
 ## Version 86 — 18 novembre 2026
 
