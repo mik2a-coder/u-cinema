@@ -1590,6 +1590,14 @@ body:has(#s-home.active) #dtop.sc::before{opacity:1}
 .v-nb{background:linear-gradient(#7a1d24,#52101a 45%,#2e070c)!important;box-shadow:inset 0 .25em 0 rgba(255,140,128,.25)!important}
 .v-scene::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 75% 70% at 50% 42%,transparent 45%,rgba(8,2,3,.6) 100%);pointer-events:none;z-index:4}
 .v-screen{z-index:5}
+/* immersion : salle plus sombre, lumière de l'écran qui retombe sur les premières rangées, sièges voisins */
+.vn{filter:brightness(.7)}.vnr{z-index:3}
+.sv-room{background:linear-gradient(to bottom,#1d0709 0,#130507 45%,#0b0305 100%)!important}
+.v-wall{background:linear-gradient(to bottom,#240a0e,#150508)!important;opacity:.9}
+.v-glow{background:radial-gradient(70% 46% at 50% var(--sy),rgba(255,190,155,.30),rgba(255,150,120,.08) 55%,transparent 78%)}
+.vs{background:linear-gradient(#7a1c23 0,#5a1017 22%,#3b090e 64%,#220508 100%)!important;box-shadow:inset 0 .05em 0 rgba(255,150,130,.34),inset 0 -.12em .22em rgba(0,0,0,.5),0 .2em .4em rgba(0,0,0,.4)!important}
+.v-scene::after{background:radial-gradient(ellipse 62% 60% at 50% 38%,transparent 35%,rgba(4,1,2,.82) 100%)!important}
+.v-hd{opacity:.3}
 </style>
 </head>
 <body>
@@ -2316,17 +2324,17 @@ function svBuild(){}
 function svScene(id,enter){
  const f=film(),tk=ST.tk||new Set(),g=svGeom(id),ri=g.ri,ci=g.ci;
  const room=$('#svRoom'),W=$('#sv').clientWidth||390,H=$('#sv').clientHeight||800,mob=H>W;
- const cx=W/2,hy=H*(mob?.40:.47),u=mob?W*.36:H*.30,h0=H*(mob?.74:.72),K=d=>1/(.7+.85*d);
+ const cx=W/2,hy=H*(mob?.43:.56),u=mob?W*.34:H*.27,h0=H*(mob?.62:.55),K=d=>1/(.7+.85*d);
  const pitch=1,aisle=.55,wx=c=>(c-ci)*pitch+(c>=4?aisle:0)-(ci>=4?aisle:0);
  const rnd=rng('sv'+f.id+id);let out='';
  // écran : plus petit quand on est loin
- const sk=1.32-ri*.05;let sw=Math.min(W*.94,(mob?W*.94:W*.62))*sk;sw=Math.min(sw,W*.96,(hy-H*.05)*16/9);const sh=sw*9/16,sy=hy-sh-H*.02;
+ const sk=1.4-ri*.04;let sw=Math.min(W*.96,(mob?W*.97:W*.80))*sk;sw=Math.min(sw,W*.98,(hy-H*.04)*16/9);const sh=sw*9/16,sy=hy-sh-H*.02;
  out+=`<div class="v-wall" style="height:${(hy+H*.02).toFixed(0)}px"></div><div class="v-glow" style="--sy:${(sy+sh/2).toFixed(0)}px"></div>`;
  out+=`<div class="v-screen" style="left:${(cx-sw/2).toFixed(0)}px;top:${sy.toFixed(0)}px;width:${sw.toFixed(0)}px;height:${sh.toFixed(0)}px"><img src="${SCENEDATA[f.id]||'img/scene/'+f.id+'.jpg'}" alt="" onerror="this.remove()"></div>`;
  out+=`<div class="v-stage" style="top:${(hy-H*.012).toFixed(0)}px"></div>`;
  // rangées devant soi, de la plus lointaine à la plus proche
  for(let r=0;r<ri;r++){
-  const d=ri-r,k=K(d),y=hy+h0*k*.62,sW=.84*u*k,sH=.98*u*k,blur=Math.min(2.6,Math.max(0,(d-1.3)*.28)),dim=Math.max(.5,1-d*.07);
+  const d=ri-r,k=K(d),y=hy+h0*k*.62,sW=.84*u*k,sH=.98*u*k,blur=Math.min(2.6,Math.max(0,(d-1.3)*.28)),dim=Math.min(.92,.56+d*.05);
   let row='';
   for(let c=0;c<8;c++){
    const x=cx+wx(c)*u*k;if(x<-sW||x>W+sW)continue;
@@ -2335,7 +2343,13 @@ function svScene(id,enter){
    row+=`<i class="vs" style="left:${(x-sW/2).toFixed(1)}px;top:${(y-sH).toFixed(1)}px;width:${sW.toFixed(1)}px;height:${sH.toFixed(1)}px;font-size:${sW.toFixed(1)}px"></i>`}
   out+=`<div class="vr" style="--k:${k.toFixed(3)};filter:blur(${blur.toFixed(2)}px) brightness(${dim.toFixed(2)})">${row}</div>`}
  // fauteuils voisins au premier plan (bords)
- out+=`<div class="v-nb l"></div><div class="v-nb r"></div><div class="v-floor"></div>`;
+ // sièges voisins, dans notre rangée (vus de côté, en bas de l'image)
+ {const kn=mob?1.35:1,sW=.84*u*kn,sH=.98*u*kn,yb=H*(mob?.9:1.04);let row='';
+  for(const c of [ci-3,ci-2,ci-1,ci+1,ci+2,ci+3]){if(c<0||c>7)continue;const x=cx+wx(c)*u*kn,sid=ROWS[ri]+(c+1);
+   if(tk.has(sid)){const hs=.46*u*kn;row+=`<b class="v-hd" style="left:${(x-hs/2).toFixed(1)}px;top:${(yb-sH-hs*.5).toFixed(1)}px;width:${hs.toFixed(1)}px;height:${(hs*1.12).toFixed(1)}px"></b>`}
+   row+=`<i class="vs vn" style="left:${(x-sW/2).toFixed(1)}px;top:${(yb-sH).toFixed(1)}px;width:${sW.toFixed(1)}px;height:${sH.toFixed(1)}px;font-size:${sW.toFixed(1)}px"></i>`}
+  out+=`<div class="vr vnr" style="--k:1.2">${row}</div>`}
+ out+=`<div class="v-floor"></div>`;
  room.innerHTML=`<div class="v-scene${enter?' in':''}">${out}</div>`;
  const t=room.querySelector('.v-scene');if(!enter&&!A11Y.rm){t.classList.add('sw')}
 }
