@@ -43,6 +43,7 @@ puis l'**avis général** : content · mitigé · pas content.
 | Bouton de commande | Sur la page Commande, le bouton garde sa taille (≈ 52 px de haut, en bas de page) avec et sans CGV cochées ; achat jusqu'au billet | vérifié (v90) après un conflit de classe repéré sur une vidéo d'écran |
 | Bandes-annonces | Pour les 22 films : lien YouTube vérifié (réponse « oEmbed » valide) et extrait de la fiche révélé en environ 2,5 s (Chrome) | voir v92 |
 | Règles d'achat | Annulation refusée à moins de 2 h ; avoir créé avec une date à 12 mois, affiché dans Compte et à la commande ; avoir périmé ignoré ; doublon et chevauchement refusés (45 min) | vérifié (v93) |
+| Annulation depuis le billet | Après un achat à 2 jours : bouton présent, confirmation en 2 temps, avoir de 38,40 € à 12 mois, retour au Compte ; billet à moins de 2 h : « Annulation impossible » | vérifié (v95) |
 | Contraste | Mesure des paires texte/fond sur 5 palettes | ≥ 4,5 : 1 (voir `DESIGN.md`) |
 
 ## Revues déjà intégrées — la version améliorée (1 relecteur : l'auteur)

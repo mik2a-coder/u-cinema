@@ -1684,6 +1684,8 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
 .onb-actions{flex-direction:column;gap:10px}.onb-actions .onb-skip{min-height:48px;font-weight:700}
 .ytlink{color:var(--accent-text);text-decoration:underline;text-underline-offset:3px;font-weight:600}
 @media (max-width:480px){.tabs{gap:2px!important;padding-left:12px!important;padding-right:12px!important;justify-content:space-between}.tabs button{padding:0 2px;font-size:calc(var(--fs-xs)*var(--ts,1))}}
+:root:not(.light) #dtop::before{background:linear-gradient(to bottom,color-mix(in srgb,var(--bg) 46%,transparent) 0,color-mix(in srgb,var(--bg) 40%,transparent) 62%,color-mix(in srgb,var(--bg) 14%,transparent) 88%,transparent 100%)}
+#tkCancel{width:100%}#tkCancel .btn{margin-top:6px}
 </style>
 </head>
 <body>
@@ -1846,6 +1848,7 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
       <div id="ticketHost"></div>
       <div class="t-act"><button class="btn wallet" id="wallet"><span data-ic="wallet"></span><span id="wLbl">Ajouter à Wallet</span></button>
         <button class="btn" id="seeTickets"><span>Voir mes billets</span></button>
+        <div id="tkCancel"></div>
         <p class="endnote">Bonne séance ! Votre billet reste disponible dans « Mes billets », même sans réseau.</p><button class="link" data-go="home">Retour à l’accueil</button></div>
       <footer class="foot"><button type="button" class="textlink" data-legal>Règles, confidentialité et mentions légales</button></footer>
     </div>
@@ -2384,6 +2387,7 @@ function recordBooking(){
 }
 const cxLeft=b=>new Date(b.date+'T'+b.time+':00').getTime()-Date.now();
 function cancelBlock(b){return cxLeft(b)>=POL.cx*3600e3?`<p class="vtxt small" style="margin-top:14px;text-align:center">Annulation possible jusqu’à ${POL.cx} h avant la séance. Le montant est rendu sous forme d’avoir de ${eur(b.total)}, valable ${POL.creditMonths} mois (pas de remboursement). <button type="button" class="lnk" data-legal="annulation">Voir les règles</button></p><button class="btn alt" id="bkCancel" style="margin-top:8px"><span>Annuler la réservation</span></button>`:`<p class="vtxt small" role="note" style="margin-top:14px;text-align:center"><b>Annulation impossible</b> : elle n’est possible que jusqu’à 2 h avant la séance.</p>`}
+function cancelBooking(b){const i=ACC.bookings.indexOf(b);if(i<0)return false;ACC.bookings.splice(i,1);ACC.points=Math.max(0,ACC.points-Math.round(b.total));ACC.credit=+(creditNow()+b.total).toFixed(2);{const e=new Date();e.setMonth(e.getMonth()+POL.creditMonths);ACC.creditExp=dIso(e)}saveACC();logAct('cancel',b.id);return true}
 const fdateStr=iso=>cap(new Date(iso+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'}).replace('.',''));
 const stars=(id,n)=>`<div class="r5" role="radiogroup" aria-label="Votre note">${[1,2,3,4,5].map(k=>`<button type="button" role="radio" aria-checked="${n===k}" aria-label="${k} sur 5" data-rate="${k}" data-f="${id}" class="${k<=n?'on':''}">${IC.star}</button>`).join('')}</div>`;
 function renderAccount(){
@@ -2453,7 +2457,7 @@ ${creditNow()>0?`<div class="acc-credit"><span data-ic="wallet"></span><div><str
    openSheet('Mon billet',`<div class="bk"><div class="bk-top"><span class="mini-th">${poster(f.kind)}</span><div><strong>${esc(f.title)}</strong><small>${fdateStr(b.date)} · ${b.time}</small></div></div>
     <div class="bk-g"><div><small>CINÉMA</small><b>${esc(CINEMAS[b.cin].n)}</b></div><div><small>PLACES</small><b>${b.seats.join(' · ')}</b></div><div><small>BILLETS</small><b>${b.count}</b></div><div><small>TOTAL TTC</small><b>${eur(b.total)}</b></div></div>
     <div class="bk-qr">${qrSVG('bk-'+b.id+b.date+b.time)}</div><p class="vtxt small" style="text-align:center">À présenter à l’entrée de la salle.</p>${cancelBlock(b)}</div>`,bb=>{bb.onclick=ev=>{const c=ev.target.closest('#bkCancel');if(!c)return;if(cxLeft(b)<POL.cx*3600e3){toast('Annulation impossible moins de 2 h avant la séance');closeSheet();return}if(!c.dataset.sure){c.dataset.sure='1';c.querySelector('span').textContent='Confirmer · avoir de '+eur(b.total);return}
-     const i=ACC.bookings.indexOf(b);if(i>=0){ACC.bookings.splice(i,1);ACC.points=Math.max(0,ACC.points-Math.round(b.total));ACC.credit=+(creditNow()+b.total).toFixed(2);{const e=new Date();e.setMonth(e.getMonth()+POL.creditMonths);ACC.creditExp=dIso(e)}saveACC();logAct('cancel',b.id)}closeSheet();renderAccount();toast('Réservation annulée · avoir de '+eur(b.total)+' ajouté à votre compte')}});return}
+     cancelBooking(b);closeSheet();renderAccount();toast('Réservation annulée · avoir de '+eur(b.total)+' ajouté à votre compte')}});return}
   if(e.target.closest('#accAv,#accAvLink'))openAvatars();
   if(e.target.closest('#accA11y'))openA11y();
   if(e.target.closest('#accLegal'))openLegal();
@@ -3294,7 +3298,9 @@ function renderTicket(){
  <div class="grid"><div>CINÉMA<b>${ci.s}</b></div><div>HEURE<b>${tm}</b></div><div>SALLE<b>02</b></div><div>PLACES<b>${seats.join(' · ')}</b></div></div></div>
  ${ex}<div class="perf"></div><div class="qr">${qrSVG(id+seats.join())}<small>${id}</small></div></article>`;
  $('#wallet').classList.remove('done');$('#wLbl').textContent='Ajouter à Wallet';
+ {const bo=bk||ACC.bookings.find(x=>x.id===f.id&&x.date===dIso(d)&&x.time===tm);ST.tkB=bo||null;$('#tkCancel').innerHTML=bo?cancelBlock(bo):''}
 }
+document.addEventListener('click',e=>{const c=e.target.closest('#tkCancel #bkCancel');if(!c)return;const b=ST.tkB;if(!b)return;if(cxLeft(b)<POL.cx*3600e3){toast('Annulation impossible moins de '+POL.cx+' h avant la séance');return}if(!c.dataset.sure){c.dataset.sure='1';c.querySelector('span').textContent='Confirmer · avoir de '+eur(b.total);haptic('tick');return}if(cancelBooking(b)){ST.tkBk=null;ST.tkB=null;ST.booked=upBookings().length>0;haptic('success');toast('Réservation annulée · avoir de '+eur(b.total)+' ajouté à votre compte');go('account')}});
 $('#wallet').onclick=()=>{$('#wallet').classList.add('done');$('#wLbl').textContent='Ajouté à Wallet ✓';toast('Billet ajouté à Wallet')};
 
 /* =============== INIT & ÉCHELLE =============== */

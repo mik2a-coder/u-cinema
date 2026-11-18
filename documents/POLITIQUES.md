@@ -6,7 +6,7 @@
 | Règle | Valeur | Où elle est appliquée dans l'app |
 |---|---|---|
 | Réservation en ligne | jusqu'à **10 minutes avant** la séance | Les séances commencées ou sur le point de l'être sont grisées « Terminée » |
-| Annulation par le client | jusqu'à **2 heures avant** la séance | Compte › Mes réservations › Mon billet : bouton d'annulation, ou message « Annulation impossible » |
+| Annulation par le client | jusqu'à **2 heures avant** la séance | Bouton « Annuler la réservation » sur la page du billet et dans Compte › Mes réservations › Mon billet, ou message « Annulation impossible » |
 | Contrepartie de l'annulation | **avoir** du montant payé (frais de service compris), **jamais un remboursement en argent** | Avoir visible dans Compte et activable à la commande |
 | Validité de l'avoir | **12 mois** à partir de l'annulation | Date affichée dans Compte et à la commande ; un avoir périmé n'est plus proposé |
 | Séance annulée par le cinéma | **remboursement intégral** (ou autre séance) | Créneau « Annulée · voir 23:15 » ; règle écrite dans les conditions |
