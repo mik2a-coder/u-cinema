@@ -22,6 +22,13 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
 
+## Version 90 — 18 novembre 2026
+
+| Demande | Ce qui a été fait | Où le voir |
+|---|---|---|
+| Problème de paiement apparu récemment (vidéo Safari) | Cause trouvée : depuis la v83, la page « Plus de réseau » utilisait le nom de classe `off`, déjà employé par le bouton de commande grisé (CGV non cochées). Le bouton héritait de « plein écran » et recouvrait toute la page d'un voile gris, avec seul son texte visible au milieu. La page réseau a été renommée (`netoff`) : le bouton retrouve sa place en bas | Commande |
+| Transitions de l'introduction à améliorer | Les trois affiches de l'étape suivante sont préchargées et décodées avant l'échange : plus de cartes noires pendant le changement | Introduction |
+
 ## Version 89 — 18 novembre 2026
 
 | Demande | Ce qui a été fait | Où le voir |
@@ -181,3 +188,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v87 | 18/11/2026 | Fond flouté en ovale sur l'introduction ; en-tête de l'accueil transparent au défilement |
 | v88 | 18/11/2026 | Détourage du chat refait pour le mode sombre |
 | v89 | 18/11/2026 | Achat : refus d'une séance déjà réservée enfin visible, créneau par défaut sans doublon |
+| v90 | 18/11/2026 | Correctif paiement (conflit de classe avec la page réseau) ; affiches de l'introduction préchargées |

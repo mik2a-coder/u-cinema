@@ -1656,18 +1656,18 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
 .promo b{display:flex;align-items:center}
 
 /* v83 · page « pas de réseau » avec mini-jeu */
-.off{position:absolute;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:calc(var(--top) + 8px) 20px calc(var(--bot) + 8px);background:radial-gradient(ellipse 80% 60% at 50% 30%,color-mix(in srgb,var(--accent) 16%,var(--bg)),var(--bg));overflow-y:auto}
-.off[hidden]{display:none}
+.netoff{position:absolute;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:calc(var(--top) + 8px) 20px calc(var(--bot) + 8px);background:radial-gradient(ellipse 80% 60% at 50% 30%,color-mix(in srgb,var(--accent) 16%,var(--bg)),var(--bg));overflow-y:auto}
+.netoff[hidden]{display:none}
 .off-in{width:100%;max-width:560px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
-.off-cat{width:104px;height:auto}.off h1{font-size:calc(var(--fs-7xl)*var(--ts,1));line-height:1}
-.off p{color:var(--muted);font-size:calc(var(--fs-md)*var(--ts,1));line-height:1.5;max-width:46ch}
+.off-cat{width:104px;height:auto}.netoff h1{font-size:calc(var(--fs-7xl)*var(--ts,1));line-height:1}
+.netoff p{color:var(--muted);font-size:calc(var(--fs-md)*var(--ts,1));line-height:1.5;max-width:46ch}
 .off-game{position:relative;width:100%;border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--line);overflow:hidden;touch-action:manipulation;cursor:pointer}
 .off-game canvas{display:block;width:100%;height:220px}
 .off-sc{position:absolute;top:10px;right:14px;font-weight:700;font-size:calc(var(--fs-sm)*var(--ts,1));color:var(--muted)}.off-sc span{color:var(--accent-text)}
-.off .off-hint{font-size:calc(var(--fs-xs)*var(--ts,1))}
+.netoff .off-hint{font-size:calc(var(--fs-xs)*var(--ts,1))}
 .off-act{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;width:100%}.off-act .btn{width:auto;min-width:180px;flex:1 1 180px;max-width:260px}
-.off.shake .off-in{animation:offShake .4s}@keyframes offShake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-.viewport.rm .off.shake .off-in{animation:none}
+.netoff.shake .off-in{animation:offShake .4s}@keyframes offShake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.viewport.rm .netoff.shake .off-in{animation:none}
 </style>
 </head>
 <body>
@@ -1833,7 +1833,7 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
     </div>
   </section>
 
-  <div class="off" id="off" role="dialog" aria-modal="true" aria-labelledby="offT" hidden>
+  <div class="netoff" id="off" role="dialog" aria-modal="true" aria-labelledby="offT" hidden>
     <div class="off-in"><img class="off-cat" src="img/chat/triste.png" alt="" width="96" height="88">
       <h1 class="display" id="offT">Plus de réseau</h1><p id="offMsg">La connexion est coupée. Vos billets restent disponibles sur cet appareil. En attendant, aidez U Ghjattu-Volpe à rejoindre l’arrivée en sautant par-dessus les objets de cinéma.</p>
       <div class="off-game"><canvas id="offCv" aria-label="Mini-jeu : le chat court vers l’arrivée en sautant par-dessus des objets de cinéma. Touchez l’écran ou appuyez sur Espace pour sauter." role="img"></canvas><div class="off-sc" aria-live="off"><span id="offScore">0</span> · record <span id="offBest">0</span></div></div>
@@ -2173,20 +2173,24 @@ function initPalette(){
 /* =============== 1. ONBOARDING =============== */
 const ONB=[['Cinéma sélectionné','L’histoire commence ici','Découvrez des films qui vous restent en tête.'],['Séances en direct','Votre séance en deux gestes','Choisissez un film, une heure, vos places.'],['Zéro file d’attente','Votre billet dans la poche','Un QR code, et la salle est à vous.']];
 const ONBP=[['hailmary','odyssey','michael'],['toystory5','spiderman','hungergames'],['mandalorian','supergirl','mariogalaxy']];
+const ONBREADY={};
+function onbLoad(k){return ONBREADY[k]||(ONBREADY[k]=new Promise(r=>{const u=IMGS[k];if(!u){r();return}const i=new Image();i.onload=i.onerror=()=>r();i.src=u;if(i.decode)i.decode().then(r,r);setTimeout(r,1500)}))}
+ONBP.flat().forEach(onbLoad);
 function renderOnb(anim){
  const k=ST.onb,o=ONB[k],f=$('#onbFan');
  if(!f.children.length)f.innerHTML=`<div class="card3 l">${poster(ONBP[0][0])}</div><div class="card3 c">${poster(ONBP[0][1])}</div><div class="card3 r">${poster(ONBP[0][2])}</div>`;
  const txt=()=>{$('#onbEye').textContent=o[0];$('#onbTitle').textContent=o[1];$('#onbSub').textContent=o[2]};
  [...$('#onbDots').children].forEach((d,i)=>d.classList.toggle('on',i===k));
  $('#onbNext').innerHTML=`<span>${k<2?'Continuer':'Commencer'}</span>${IC.arrow}`;
-{const ab=$('#ambOnb');if(ab){const set=()=>{ab.innerHTML=poster(ONBP[k][1])};if(!anim||!ab.animate)set();else{const o=ab.animate([{opacity:1},{opacity:0}],{duration:240,fill:'forwards'});o.onfinish=()=>{set();const i=ab.animate([{opacity:0},{opacity:1}],{duration:520,fill:'both'});i.onfinish=()=>{i.cancel();o.cancel()}}}}}
+{const ab=$('#ambOnb');if(ab){const set=()=>{ab.innerHTML=poster(ONBP[k][1])};if(!anim||!ab.animate)set();else{const o=ab.animate([{opacity:1},{opacity:0}],{duration:240,fill:'forwards'});o.onfinish=()=>{Promise.all(ONBP[k].map(onbLoad)).then(()=>{set();const i=ab.animate([{opacity:0},{opacity:1}],{duration:520,fill:'both'});i.onfinish=()=>{i.cancel();o.cancel()}})}}}}
  const cards=[...f.querySelectorAll('.card3')],reduce=A11Y.rm||matchMedia('(prefers-reduced-motion:reduce)').matches;
  if(!anim||reduce||!cards[0].animate){cards.forEach((c,i)=>{c.innerHTML=poster(ONBP[k][i])});txt();return}
  /* images : chaque affiche glisse légèrement, change, puis revient (décalées) ; le texte se fond en même temps */
+ const ready=Promise.all(ONBP[k].map(onbLoad));
  const t=[$('#onbEye'),$('#onbTitle'),$('#onbSub')];
  t.forEach(e=>e.animate([{opacity:1,transform:'none'},{opacity:0,transform:'translateY(8px)'}],{duration:200,easing:'ease-in',fill:'forwards'}));
  cards.forEach((c,i)=>{const base=getComputedStyle(c).transform,dx=(i-1)*16,out=c.animate([{opacity:1,transform:base},{opacity:0,transform:`${base} translate(${-dx}px,16px) scale(.96)`}],{duration:240,delay:i*60,easing:'ease-in',fill:'forwards'});
-  out.onfinish=()=>{c.innerHTML=poster(ONBP[k][i]);const inn=c.animate([{opacity:0,transform:`${base} translate(${dx}px,-14px) scale(1.04)`},{opacity:1,transform:base}],{duration:520,easing:'cubic-bezier(.2,.8,.2,1)',fill:'both'});inn.onfinish=()=>{inn.cancel();out.cancel()}}});
+  out.onfinish=()=>{ready.then(()=>{c.innerHTML=poster(ONBP[k][i]);const inn=c.animate([{opacity:0,transform:`${base} translate(${dx}px,-14px) scale(1.04)`},{opacity:1,transform:base}],{duration:520,easing:'cubic-bezier(.2,.8,.2,1)',fill:'both'});inn.onfinish=()=>{inn.cancel();out.cancel()}})}});
  setTimeout(()=>{txt();t.forEach((e,j)=>{const a=e.animate([{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'none'}],{duration:420,delay:j*70,easing:'cubic-bezier(.2,.8,.2,1)',fill:'both'});a.onfinish=()=>a.cancel()});t.forEach(e=>e.getAnimations().filter(x=>x.playState==='finished'&&x.effect.getKeyframes()[1].opacity==='0').forEach(x=>x.cancel()))},240);
 }
 $('#onbNext').onclick=()=>{if(ST.onb<2){ST.onb++;renderOnb(true)}else go('home')};

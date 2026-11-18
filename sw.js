@@ -1,5 +1,5 @@
 /* U CINEMÀ – service worker : l'appli reste utilisable hors ligne */
-const CACHE = 'cinelux2-v89';
+const CACHE = 'cinelux2-v90';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './fonts/fonts.css',
   './fonts/BebasNeue-400.woff2', './fonts/Inter-400.woff2',
   './fonts/AtkinsonHyperlegible-400.woff2', './fonts/AtkinsonHyperlegible-700.woff2',
