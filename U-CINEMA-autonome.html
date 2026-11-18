@@ -1996,7 +1996,7 @@ function isCx(di,ti){return (TIMES[ti].cx||[]).includes(di)}
 function okSlot(di,ti){return !TIMES[ti].full&&!isPast(di,ti)&&!isCx(di,ti)&&!(typeof ACC!=='undefined'&&typeof bkConflict==='function'&&bkConflict(di,ti))}
 function nextOk(di,ti){const j=TIMES.findIndex((t,i)=>i>ti&&okSlot(di,i));return j>=0?TIMES[j].t:null}
 function dayLabel(i){return i===0?'Aujourd’hui':i===1?'Demain':fdate(DATES[i],{weekday:'short',day:'numeric',month:'short'}).replace(/\./g,'')}
-function defaultSlot(){for(const di of [0,1]){for(const ti of [2,3,4,5,0]){if(okSlot(di,ti))return{date:di,time:ti}}}return{date:1,time:2}}
+function defaultSlot(){for(const di of [0,1,2,3,4]){for(const ti of [2,3,4,5,0]){if(okSlot(di,ti))return{date:di,time:ti}}}return{date:1,time:2}}
 /* une personne ne peut pas être à deux séances qui se chevauchent (même film, même heure compris) */
 const durMin=f=>{const m=/(\d+)\s*h\s*(\d+)?/.exec((f&&f.dur)||'');return m?(+m[1])*60+(+(m[2]||0)):120};
 const tMin=t=>{const [h,m]=String(t).split(':').map(Number);return h*60+(m||0)};
@@ -3095,7 +3095,8 @@ $('#sgrid').addEventListener('click',e=>{const b=e.target.closest('.seat');if(!b
  b.setAttribute('aria-pressed',i<0);b.firstChild.innerHTML=seatInner(id,i<0);paintSeatsBar();say(`Place ${id} ${i<0?'sélectionnée':'retirée'}. ${ST.seats.length} sur ${ST.count}.`)});
 function askPmr(){const han=ST.tq.han>0;openSheet('Emplacement fauteuil roulant',`<p class="muted" style="font-size:calc(var(--fs-sm)*var(--ts,1));line-height:1.5">${han?'Pour réserver un emplacement fauteuil roulant, indiquez-le d’abord sur l’écran <b style="color:var(--text)">Séances</b> : « Avez-vous besoin d’un emplacement fauteuil roulant ? ». Cela permet de savoir combien il en reste pour les autres personnes.':'Ces emplacements sont réservés aux personnes en situation de handicap. Ajoutez d’abord un billet <b style="color:var(--text)">« Personne en situation de handicap »</b> (carte mobilité inclusion ou d’invalidité), puis indiquez que vous avez besoin d’un emplacement.'}</p><button class="btn" id="pmrYes">Modifier ma réservation</button><button class="link" id="pmrNo">Fermer</button>`,b=>{
  $('#pmrYes').onclick=()=>{closeSheet();go('book')};$('#pmrNo').onclick=closeSheet})}
-$('#buy').onclick=()=>go('order');
+const dupMsg=c=>c.same?'Vous avez déjà réservé cette séance (Mon compte › Mes réservations).':'Vous avez déjà une séance : '+(c.f?c.f.title:'autre film')+' à '+c.b.time+'. Il faut au moins 45 minutes entre deux films : choisissez un autre horaire.';
+$('#buy').onclick=()=>{const c=bkConflict(ST.date,ST.time);if(c){haptic('error');toast(dupMsg(c),{ms:5000});go('book');return}go('order')};
 
 /* =============== 6. COMMANDE =============== */
 const RW=[{k:'snack',n:'Friandise offerte',d:'Un cookie, des bonbons ou du chocolat au comptoir',pts:300,val:3.2},{k:'off5',n:'−5 % sur une place',d:'Remise sur le prix d’une place, pour une commande',pts:500}];
@@ -3175,7 +3176,7 @@ $('#pays').addEventListener('click',e=>{if(!e.target.closest('#payBtn'))return;
   b.onclick=e=>{const o=e.target.closest('.opt');if(!o)return;if(o.dataset.add){toast('Bientôt disponible');return}ST.pay=+o.dataset.i;$('#payErr').hidden=true;renderOrder();closeSheet()}})});
 $('#confirm').onclick=()=>{const b=$('#confirm');if(navigator.onLine===false){offShow('pay');return}if(!$('#cgv').checked){const cg=$('#cgv'),bx=cg.closest('.cgv');if(bx){bx.scrollIntoView({behavior:A11Y.rm?'auto':'smooth',block:'center'});bx.classList.remove('need');void bx.offsetWidth;bx.classList.add('need')}cg.focus({preventScroll:true});haptic('error');toast('Veuillez accepter les conditions générales de vente pour continuer');return}b.disabled=true;b.dataset.busy=1;b.innerHTML='<span class="spin"></span><span>Paiement en cours…</span>';setTimeout(()=>{
   if(PAYS[ST.pay][3]){delete b.dataset.busy;updateConfirm();haptic('error');showPayErr();return}
-  {const c=bkConflict(ST.date,ST.time);if(c){delete b.dataset.busy;updateConfirm();haptic('error');const e=$('#payErr');e.textContent=c.same?'Vous avez déjà réservé cette séance (Mon compte › Mes réservations).':'Vous avez déjà une séance : '+(c.f?c.f.title:'autre film')+' à '+c.b.time+'. Il faut au moins 45 minutes entre deux films : choisissez un autre horaire.';e.hidden=false;return}}
+  {const c=bkConflict(ST.date,ST.time);if(c){delete b.dataset.busy;updateConfirm();haptic('error');const e=$('#payErr');e.textContent=dupMsg(c);e.hidden=false;e.scrollIntoView({block:'center',behavior:A11Y.rm?'auto':'smooth'});toast(dupMsg(c),{ms:5000});return}}
   $('#payErr').hidden=true;ST.booked=true;ST.tkBk=null;recordBooking();go('ticket');haptic('success');b.disabled=false;delete b.dataset.busy;updateConfirm()},900)};
 
 /* =============== 7. BILLET =============== */

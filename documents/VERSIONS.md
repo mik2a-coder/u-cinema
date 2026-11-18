@@ -22,6 +22,12 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
 
+## Version 89 — 18 novembre 2026
+
+| Demande | Ce qui a été fait | Où le voir |
+|---|---|---|
+| Bug à l'achat sur la page Commande, sur tous les supports | Cause trouvée : quand la séance choisie était déjà réservée, le message de refus apparaissait sous l'écran et le bouton semblait ne rien faire. Corrections : le message est amené à l'écran et doublé d'un bandeau ; « Acheter » sur le plan de salle refuse dès l'étape précédente et renvoie aux séances ; la séance proposée par défaut évite désormais les séances déjà prises (sur 5 jours) | Plan de salle, Commande |
+
 ## Version 88 — 18 novembre 2026
 
 | Demande | Ce qui a été fait | Où le voir |
@@ -174,3 +180,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v86 | 18/11/2026 | Mini-jeu : poses remises dans l'ordre, départ, arrivée en glissade, chute, objets de cinéma, plus facile |
 | v87 | 18/11/2026 | Fond flouté en ovale sur l'introduction ; en-tête de l'accueil transparent au défilement |
 | v88 | 18/11/2026 | Détourage du chat refait pour le mode sombre |
+| v89 | 18/11/2026 | Achat : refus d'une séance déjà réservée enfin visible, créneau par défaut sans doublon |
