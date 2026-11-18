@@ -22,6 +22,12 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
 
+## Version 88 — 18 novembre 2026
+
+| Demande | Ce qui a été fait | Où le voir |
+|---|---|---|
+| Images du chat abîmées sur fond sombre (halo blanc, taches sombres sur le museau) | Nouveau détourage des poses : seul le fond relié au bord est retiré (le pelage blanc est conservé), les trous entre les pattes sont nettoyés et le liseré blanc est rogné ; poses et tête triste régénérées | Page « Plus de réseau », mode sombre |
+
 ## Version 87 — 18 novembre 2026
 
 | Demande | Ce qui a été fait | Où le voir |
@@ -167,3 +173,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v85 | 18/11/2026 | Mini-jeu : cycle de course en 6 images et obstacles de la planche de sprites |
 | v86 | 18/11/2026 | Mini-jeu : poses remises dans l'ordre, départ, arrivée en glissade, chute, objets de cinéma, plus facile |
 | v87 | 18/11/2026 | Fond flouté en ovale sur l'introduction ; en-tête de l'accueil transparent au défilement |
+| v88 | 18/11/2026 | Détourage du chat refait pour le mode sombre |

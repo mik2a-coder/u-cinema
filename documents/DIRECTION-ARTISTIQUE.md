@@ -1,6 +1,6 @@
 # Direction artistique et palette
 
-*Dossier de livraison : passation design et développement. Version du prototype : **v87** (18 novembre 2026).*
+*Dossier de livraison : passation design et développement. Version du prototype : **v88** (18 novembre 2026).*
 
 ## 1. Synthèse de la direction artistique
 
