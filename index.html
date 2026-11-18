@@ -1118,7 +1118,7 @@ html.vt-back::view-transition-new(root){animation:vtInB .46s cubic-bezier(.16,1,
 
 /* ---------- compte ---------- */
 .acc-id{display:flex;align-items:center;gap:14px;padding:8px 20px}
-.acc-av{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--grad);color:var(--on-accent);font-family:var(--display);font-size:calc(var(--fs-3xl)*var(--ts,1))}
+.acc-av{position:relative;overflow:visible;display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--grad);color:var(--on-accent);font-family:var(--display);font-size:calc(var(--fs-3xl)*var(--ts,1))}
 .acc-id strong{display:block;font-size:calc(var(--fs-xl)*var(--ts,1))}.acc-id small{color:var(--muted);font-size:calc(var(--fs-xs)*var(--ts,1))}
 .lc-wrap{padding:12px 20px 0;perspective:1000px}
 .lcard{display:block;width:100%;aspect-ratio:1.586;max-width:420px;margin:0 auto;border-radius:22px;--tx:0deg;--ty:0deg;--sx:50%;transform:rotateX(var(--ty)) rotateY(var(--tx));transition:transform .25s ease-out;position:relative;text-align:left;color:#1B1203}
@@ -1486,7 +1486,7 @@ html.vt-back::view-transition-new(root){animation:vtInB .46s cubic-bezier(.16,1,
 .d-video.vert iframe{left:0;top:0;width:100%;height:100%;transform:scale(1.19)}
 .d-video.vert::after{display:none}
 
-@media (max-width:599px){#s-seats .vfs{top:44px!important;right:10px!important}}
+@media (max-width:599px){#s-seats .vfs{top:66px!important;right:10px!important}}
 /* logo : aucun filtre (certains navigateurs dessinent un cadre autour d'une image filtrée) */
 .lg-mark,:root.light .lg-mark,:root:not(.light) .lg-mark{filter:none!important;-webkit-filter:none!important;background:transparent!important;box-shadow:none!important}
 /* barre haute : verre progressif, le flou et la teinte s'estompent vers le contenu (aucune ligne) */
@@ -1541,7 +1541,7 @@ body:has(#s-detail.active) .toast{bottom:118px}
 .avatar.brand-m{width:48px;height:48px;border:0;border-radius:0;overflow:visible;background:none}.avatar.brand-m .lg-mark{width:48px!important;height:48px!important;margin:0}
 #avatar{display:none!important}
 /* vue depuis la place : écran 16:9 (la vidéo remplit exactement le plan, rien ne dépasse, y compris sous Safari) */
-.sv-screen,.sv-vid{-webkit-mask-image:-webkit-radial-gradient(white,black);isolation:isolate}
+.sv-screen,.sv-vid{isolation:isolate}
 .acc-row.static .link.rm,.acc-row .link.rm{margin-left:auto;flex:none;white-space:nowrap}
 /* accueil : le fond coloré de l'affiche prend la forme d'un ovale doux (les boutons et textes ne sont jamais floutés) */
 #s-home .amb{top:0;bottom:0;height:100%!important;opacity:.9;-webkit-mask-image:radial-gradient(ellipse 92% 54% at 50% 50%,#000 58%,rgba(0,0,0,.62) 76%,rgba(0,0,0,.24) 90%,rgba(0,0,0,0) 100%);mask-image:radial-gradient(ellipse 92% 54% at 50% 50%,#000 58%,rgba(0,0,0,.62) 76%,rgba(0,0,0,.24) 90%,rgba(0,0,0,0) 100%)}
@@ -1667,6 +1667,15 @@ body:has(#s-home.active) #dtop::before,body:has(#s-onb.active) #dtop::before{opa
 .off-act{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;width:100%}.off-act .btn{width:auto;min-width:180px;flex:1 1 180px;max-width:260px}
 .netoff.shake .off-in{animation:offShake .4s}@keyframes offShake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 .viewport.rm .netoff.shake .off-in{animation:none}
+#zToggle,.zbtn{display:none!important}
+.dnames .nm{display:inline;min-height:32px;padding:4px 0;font:inherit;text-align:left;text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--accent) 60%,transparent);text-underline-offset:4px}
+.sv-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;display:flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;border-radius:99px;background:rgba(14,12,10,.7);color:#F8F3E8;border:1px solid rgba(255,255,255,.3);font-weight:600;font-size:calc(var(--fs-sm)*var(--ts,1));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}.sv-play i{font-style:normal;color:#F0C05A}.sv-play:active{transform:translate(-50%,-50%) scale(.97)}
+
+.acc-av{flex:none;aspect-ratio:1}.acc-av svg{border-radius:50%;display:block}.acc-ed{position:absolute;right:-2px;bottom:-2px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:12px;background:var(--surface);color:var(--text);border:1px solid var(--line);box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.avgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px}
+.avp{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;border-radius:var(--r-md);background:var(--surface2);border:2px solid transparent;text-align:center}
+.avp[aria-checked=true]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,var(--surface2))}
+.avp .avi{width:64px;height:64px;border-radius:50%;overflow:hidden;display:block}.avp b{font-size:calc(var(--fs-sm)*var(--ts,1));line-height:1.2}.avp small{color:var(--muted);font-size:calc(var(--fs-micro)*var(--ts,1));line-height:1.25}
 </style>
 </head>
 <body>
@@ -1946,6 +1955,26 @@ Object.keys(PIMG).forEach(k=>{if(k.indexOf("'")>-1)PIMG[k.replace(/'/g,'’')]=P
 const dirNames=f=>{const m=f.dir.match(/^(\S+) et (\S+) (\S+)$/);return m?[m[1]+' '+m[3],m[2]+' '+m[3]]:f.dir.split(/ et /)};
 function dirPhoto(f){return `<span class="dph-row">${dirNames(f).map((n,i)=>{const k=PIMG[n];return k?`<img class="dph" src="${k}" alt="Portrait de ${n}" data-ini="${initials(n)}" data-id="${f.id}${i}" decoding="async">`:avatarSVG(initials(n),f.id+'d'+i)}).join('')}</span>`}
 document.addEventListener('error',e=>{const t=e.target;if(t&&t.classList&&t.classList.contains('dph'))t.outerHTML=avatarSVG(t.dataset.ini,t.dataset.id)},true);
+
+/* ---- personnage du compte : 10 avatars dessinés, inspirés des films de la programmation ---- */
+const SK='#F2C9A0',EY='<circle cx="27" cy="31" r="1.6" fill="#2a1a10"/><circle cx="37" cy="31" r="1.6" fill="#2a1a10"/>';
+const AVATARS=[
+ {k:'volpe',n:'Ghjattu-Volpe',f:'Notre mascotte',bg:'#F6E7C8',d:'<image href="img/mascot-head.png" x="3" y="9" width="58" height="52" preserveAspectRatio="xMidYMid meet"/>'},
+ {k:'astro',n:'L’astronaute',f:'Project Hail Mary',bg:'#1b2a4a',d:`<path d="M6 64c0-14 11-19 26-19s26 5 26 19z" fill="#F26B1D"/><circle cx="32" cy="28" r="19" fill="#f4f6fa" stroke="#cfd6e3" stroke-width="1.5"/><ellipse cx="32" cy="29" rx="13.5" ry="11.5" fill="#14233f"/><circle cx="32" cy="30" r="7" fill="${SK}" opacity=".9"/><circle cx="29.5" cy="29.5" r="1" fill="#2a1a10"/><circle cx="34.5" cy="29.5" r="1" fill="#2a1a10"/><path d="M24 24q4-4 9-3" stroke="#fff" stroke-width="1.6" fill="none" opacity=".7" stroke-linecap="round"/><rect x="44" y="48" width="8" height="5" rx="1" fill="#fff"/>`},
+ {k:'gladiateur',n:'Le guerrier',f:'The Odyssey',bg:'#5b2a1a',d:`<path d="M8 64c0-14 10-20 24-20s24 6 24 20z" fill="#8a5a2b"/><circle cx="32" cy="32" r="13" fill="${SK}"/><path d="M26 15q6-9 12 0v8H26z" fill="#B3202A"/><path d="M18 30a14 14 0 0 1 28 0v1H18z" fill="#C98A3A"/><path d="M18 30h5v11l-5-3zM46 30h-5v11l5-3z" fill="#C98A3A"/>${EY}<path d="M28 38q4 2 8 0" stroke="#7a4a30" stroke-width="1.4" fill="none" stroke-linecap="round"/>`},
+ {k:'masque',n:'Le héros masqué',f:'Spider-Man: Brand New Day',bg:'#1c2c5a',d:`<path d="M8 64c0-14 10-20 24-20s24 6 24 20z" fill="#2447a8"/><circle cx="32" cy="30" r="16" fill="#C8202E"/><path d="M32 14v32M19 22q13 5 26 0M17 32q15 6 30 0" stroke="#7a0f1a" stroke-width="1" fill="none"/><path d="M19 28l10 3-2 7-9-3z M45 28l-10 3 2 7 9-3z" fill="#fff" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/>`},
+ {k:'heroine',n:'L’héroïne à cape',f:'Supergirl',bg:'#3a56b0',d:`<path d="M8 64l9-28h30l9 28z" fill="#C62832"/><path d="M14 64c0-12 8-18 18-18s18 6 18 18z" fill="#2447a8"/><ellipse cx="32" cy="28" rx="16" ry="17" fill="#F2C75B"/><circle cx="32" cy="31" r="12" fill="${SK}"/><path d="M20 27q12-12 24 0q-12-4-24 0z" fill="#F2C75B"/>${EY}<path d="M29 37q3 2 6 0" stroke="#c0505a" stroke-width="1.4" fill="none" stroke-linecap="round"/><path d="M32 49l7 3v6l-7 4-7-4v-6z" fill="#F4C430" stroke="#C62832" stroke-width="1.5"/>`},
+ {k:'chasseur',n:'Le chasseur casqué',f:'The Mandalorian & Grogu',bg:'#8a4a1f',d:`<path d="M6 64c0-14 11-19 26-19s26 5 26 19z" fill="#6b6f75"/><path d="M16 34a16 18 0 0 1 32 0v9a16 12 0 0 1-32 0z" fill="#aeb4ba" stroke="#8a9096" stroke-width="1.5"/><path d="M22 27h20v6H35v15h-6V33h-7z" fill="#0f1114"/><path d="M20 22q12-8 24 0" stroke="#d6dade" stroke-width="2" fill="none" stroke-linecap="round"/>`},
+ {k:'plombier',n:'Le plombier moustachu',f:'Super Mario Galaxy, le film',bg:'#5aa7ea',d:`<path d="M8 64c0-14 10-20 24-20s24 6 24 20z" fill="#D7252B"/><path d="M22 52h20v12H22z" fill="#2455c8"/><circle cx="32" cy="32" r="13" fill="${SK}"/><path d="M17 27a15 14 0 0 1 30 0z" fill="#D7252B"/><path d="M30 27h20v3H30z" fill="#B01E24"/><circle cx="32" cy="21" r="4.8" fill="#fff"/><text x="32" y="24" text-anchor="middle" font-size="7.5" font-weight="700" font-family="Arial,sans-serif" fill="#D7252B">M</text><circle cx="32" cy="35" r="3.8" fill="#E8A97F"/>${EY}<path d="M22 38q5-4 10 0q5-4 10 0q-5 5-10 2q-5 3-10-2z" fill="#4a2a14"/>`},
+ {k:'explorateur',n:'L’aventurier',f:'Jumanji : Open World',bg:'#2f6b3a',d:`<circle cx="10" cy="14" r="9" fill="#3f8a4c"/><circle cx="56" cy="10" r="11" fill="#3f8a4c"/><path d="M8 64c0-14 10-20 24-20s24 6 24 20z" fill="#B79B5A"/><circle cx="32" cy="32" r="13" fill="${SK}"/><ellipse cx="32" cy="24" rx="23" ry="5" fill="#C4A862"/><path d="M20 24a12 12 0 0 1 24 0z" fill="#B8964A"/><rect x="20" y="21" width="24" height="3.5" fill="#6b4a1f"/>${EY}<path d="M28 38q4 2 8 0" stroke="#7a4a30" stroke-width="1.4" fill="none" stroke-linecap="round"/>`},
+ {k:'cowboy',n:'Le shérif',f:'Toy Story 5',bg:'#7bb5e8',d:`<ellipse cx="14" cy="14" rx="10" ry="5" fill="#fff" opacity=".85"/><ellipse cx="50" cy="20" rx="9" ry="4" fill="#fff" opacity=".8"/><path d="M8 64c0-14 10-20 24-20s24 6 24 20z" fill="#F2C230"/><path d="M20 50l12 14 12-14v14H20z" fill="#7a4a22"/><path d="M26 45l6 5 6-5z" fill="#D7252B"/><circle cx="32" cy="32" r="13" fill="${SK}"/><ellipse cx="32" cy="23" rx="25" ry="5" fill="#6b3f1b"/><path d="M20 23c0-11 6-14 12-14s12 3 12 14z" fill="#7b4a22"/>${EY}<path d="M28 38q4 2 8 0" stroke="#7a4a30" stroke-width="1.4" fill="none" stroke-linecap="round"/><path d="M32 53l2 4 4 .5-3 3 1 4-4-2-4 2 1-4-3-3 4-.5z" fill="#F4C430" stroke="#a87a10" stroke-width=".8"/>`},
+ {k:'navigatrice',n:'La navigatrice',f:'Vaiana',bg:'#1f8fb0',d:`<path d="M0 52q8-6 16 0t16 0 16 0 16 0v12H0z" fill="#16739a"/><path d="M14 30a18 20 0 0 1 36 0v26H14z" fill="#2a1a14"/><path d="M8 64c0-13 10-18 24-18s24 5 24 18z" fill="#D9582B"/><circle cx="32" cy="31" r="12.5" fill="#D9A06F"/><path d="M19 28q13-14 26 0q-13-5-26 0z" fill="#2a1a14"/><circle cx="26.5" cy="31" r="1.6" fill="#2a1a10"/><circle cx="37.5" cy="31" r="1.6" fill="#2a1a10"/><path d="M29 37q3 2 6 0" stroke="#7a3a2a" stroke-width="1.4" fill="none" stroke-linecap="round"/><g transform="translate(46 22)"><circle r="2" fill="#F6D365"/><circle cx="0" cy="-4" r="2.6" fill="#E8416B"/><circle cx="3.8" cy="-1.2" r="2.6" fill="#E8416B"/><circle cx="2.4" cy="3.2" r="2.6" fill="#E8416B"/><circle cx="-2.4" cy="3.2" r="2.6" fill="#E8416B"/><circle cx="-3.8" cy="-1.2" r="2.6" fill="#E8416B"/><circle r="1.8" fill="#F6D365"/></g>`}
+];
+const avSvg=k=>{const a=AVATARS.find(x=>x.k===k);return a?`<svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><rect width="64" height="64" fill="${a.bg}"/>${a.d}</svg>`:''};
+function openAvatars(){const cur=ACC.avatar||'';
+ openSheet('Mon personnage',`<p class="muted" style="margin:0 0 12px;font-size:calc(var(--fs-sm)*var(--ts,1))">Choisissez le personnage qui vous représente dans U CINEMÀ.</p><div class="avgrid" role="radiogroup" aria-label="Personnages">${AVATARS.map(a=>`<button type="button" class="avp" role="radio" aria-checked="${a.k===cur}" data-av="${a.k}"><span class="avi">${avSvg(a.k)}</span><b>${esc(a.n)}</b><small>${esc(a.f)}</small></button>`).join('')}</div><button type="button" class="btn alt" id="avNone" style="margin-top:12px"><span>Revenir à mon initiale</span></button>`,
+ bb=>{bb.onclick=e=>{const p=e.target.closest('[data-av]'),n=e.target.closest('#avNone');if(!p&&!n)return;ACC.avatar=p?p.dataset.av:'';saveACC();haptic('soft');closeSheet();if(cur_screen_is_account())renderAccount();toast(p?'Personnage choisi : '+AVATARS.find(a=>a.k===ACC.avatar).n:'Initiale rétablie')}})}
+const cur_screen_is_account=()=>cur==='account';
 function avatarSVG(ini,seed){return `<svg viewBox="0 0 56 56" width="100%" height="100%" aria-hidden="true"><defs><linearGradient id="av${seed}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--accent)"/><stop offset="1" style="stop-color:var(--accent2)"/></linearGradient></defs><rect width="56" height="56" fill="url(#av${seed})"/><text x="28" y="35" text-anchor="middle" font-family="Bebas Neue,Impact,sans-serif" font-size="24" fill="var(--on-accent)">${ini}</text></svg>`}
 
 /* =============== DONNÉES =============== */
@@ -2348,7 +2377,7 @@ function renderAccount(){
  const rated=Object.keys(ACC.ratings).length,rem=Object.keys(ACC.remind).map(F).filter(Boolean);
  $('#accScroll').innerHTML=`
  <div class="acc-grid"><div class="acc-left">
- <div class="acc-id"><span class="acc-av">M</span><div><strong>Mika</strong><small>Membre depuis ${ACC.since} · profil de démonstration</small></div></div>
+ <div class="acc-id"><button type="button" class="acc-av" id="accAv" aria-label="Changer mon personnage">${ACC.avatar?avSvg(ACC.avatar):'M'}<i class="acc-ed" aria-hidden="true">✎</i></button><div><strong>Mika</strong><small>Membre depuis ${ACC.since} · profil de démonstration</small><button type="button" class="link" id="accAvLink" style="padding:4px 0;font-size:calc(var(--fs-xs)*var(--ts,1))">Changer mon personnage</button></div></div>
  <div class="lc-wrap"><button type="button" class="lcard" id="lcard" aria-pressed="false" aria-label="Carte de fidélité ${LVL[li][0]}. Appuyer pour afficher le code à présenter en caisse">
   <span class="lc-in">
    <span class="lc-face lc-front"><span class="lc-top"><b class="lc-brand">U CINEMÀ</b><em class="lc-lvl">${LVL[li][0]}</em></span>
@@ -2408,6 +2437,7 @@ ${ACC.credit>0?`<div class="acc-credit"><span data-ic="wallet"></span><div><stro
     <div class="bk-g"><div><small>CINÉMA</small><b>${esc(CINEMAS[b.cin].n)}</b></div><div><small>PLACES</small><b>${b.seats.join(' · ')}</b></div><div><small>BILLETS</small><b>${b.count}</b></div><div><small>TOTAL TTC</small><b>${eur(b.total)}</b></div></div>
     <div class="bk-qr">${qrSVG('bk-'+b.id+b.date+b.time)}</div><p class="vtxt small" style="text-align:center">À présenter à l’entrée de la salle.</p>${cancelBlock(b)}</div>`,bb=>{bb.onclick=ev=>{const c=ev.target.closest('#bkCancel');if(!c)return;if(cxLeft(b)<2*3600e3){toast('Annulation impossible moins de 2 h avant la séance');closeSheet();return}if(!c.dataset.sure){c.dataset.sure='1';c.querySelector('span').textContent='Confirmer · avoir de '+eur(b.total);return}
      const i=ACC.bookings.indexOf(b);if(i>=0){ACC.bookings.splice(i,1);ACC.points=Math.max(0,ACC.points-Math.round(b.total));ACC.credit=+((ACC.credit||0)+b.total).toFixed(2);saveACC();logAct('cancel',b.id)}closeSheet();renderAccount();toast('Réservation annulée · avoir de '+eur(b.total)+' ajouté à votre compte')}});return}
+  if(e.target.closest('#accAv,#accAvLink'))openAvatars();
   if(e.target.closest('#accA11y'))openA11y();
   if(e.target.closest('#accLegal'))openLegal();
  });
@@ -2462,7 +2492,7 @@ function svScene(id,enter){
 }
 function svAim(id,enter){
  const g=svGeom(id);
- svScene(id,enter);
+ svScene(id,enter);if(!enter&&SV.open)svTrailer();
  $('#svTitle').textContent='Place '+id;
  $('#svSub').textContent=`Rang ${g.row} · ${(g.z).toFixed(0)} m de l’écran${PMR.includes(id)?' · emplacement fauteuil roulant':''}`;
  $('#svNav').style.display=SV.ids.length>1?'flex':'none';
@@ -2483,11 +2513,17 @@ function openSeatView(){
 /* la bande-annonce passe sur l'écran de la salle (muette, après l'arrivée à la place) */
 function svTrailer(){
  const f=film();if(!f||!f.yt)return;
- const go=()=>{if(!SV.open)return;const sc=document.querySelector('#svRoom .v-screen');if(!sc||sc.querySelector('.sv-vid'))return;
+ const scr=()=>document.querySelector('#svRoom .v-screen');
+ const btn=()=>{const sc=scr();if(!sc||sc.querySelector('.sv-play')||sc.querySelector('.sv-vid.on'))return;
+  const b=document.createElement('button');b.type='button';b.className='sv-play';b.innerHTML='<i aria-hidden="true">▶</i><span>Lancer la bande-annonce</span>';
+  b.onclick=()=>{if(!A11Y.vidAsked||!A11Y.vidOn){askVideoConsent(play);return}if(navigator.onLine===false){toast('Pas de réseau : la bande-annonce ne peut pas se lancer');return}b.remove();play()};sc.appendChild(b)};
+ const play=()=>{if(!SV.open)return;const sc=scr();if(!sc)return;sc.querySelectorAll('.sv-vid').forEach(e=>e.remove());
   const w=document.createElement('div');w.className='sv-vid';const st=f.ts||30;
   w.innerHTML=`<iframe src="${ytSrc(f,{loop:1,playlist:f.yt,start:st,end:st+60})}" title="" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1" aria-hidden="true"></iframe>`;
-  ytWhenPlaying(w.firstChild,()=>w.classList.add('on'),st);sc.appendChild(w)};
- ytWarm();setTimeout(()=>{if(!SV.open)return;if(!A11Y.vidAsked){askVideoConsent(go);return}if(vidOK())go()},A11Y.rm?0:600)}
+  ytWhenPlaying(w.firstChild,()=>{w.classList.add('on');const p=sc.querySelector('.sv-play');if(p)p.remove()},st,7000);sc.appendChild(w);
+  /* si la vidéo n'apparaît pas au bout de 7 s (autoplay refusé, réseau lent), un bouton permet de la lancer d'un toucher */
+  clearTimeout(SV.pt);SV.pt=setTimeout(()=>{const s2=scr();if(SV.open&&s2&&!s2.querySelector('.sv-vid.on'))btn()},7500)};
+ ytWarm();setTimeout(()=>{if(!SV.open)return;if(!A11Y.vidAsked){askVideoConsent(play);btn();return}if(A11Y.vidOn&&!A11Y.rm&&navigator.onLine!==false&&!(navigator.connection&&navigator.connection.saveData))play();else btn()},A11Y.rm?0:600)}
 function closeSeatView(){
  if(!SV.open)return;SV.open=false;const sv=$('#sv'),sc=$('#s-seats');
  sv.classList.add('closing');sv.classList.remove('show');sc.classList.remove('diving');
@@ -2694,15 +2730,16 @@ const EX={t:null};
 const vidOK=()=>A11Y.vidOn&&!A11Y.rm&&navigator.onLine!==false&&!(navigator.connection&&navigator.connection.saveData);
 function ytSrc(f,o2){const q=new URLSearchParams(Object.assign({autoplay:1,mute:1,controls:0,disablekb:1,fs:0,iv_load_policy:3,modestbranding:1,playsinline:1,rel:0,enablejsapi:1},o2||{}));if(/^https?:$/.test(location.protocol))q.set('origin',location.origin);return 'https://www.youtube-nocookie.com/embed/'+f.yt+'?'+q}
 /* on n'affiche la vidéo que lorsqu'elle joue vraiment : plus de première image figée ni de boutons YouTube */
-function ytWhenPlaying(fr,cb,minT){let done=false,got=false;const need=Math.max(.4,(minT||0)+.4);const fin=()=>{if(done)return;done=true;removeEventListener('message',on);cb()};
- /* on ne révèle que le contenu : la lecture doit avoir dépassé le point de départ de l'extrait (une publicité avant la vidéo reste cachée, derrière l'affiche) */
+function ytWhenPlaying(fr,cb,minT,toMs){let done=false,got=false,playing=false;const need=Math.max(.4,(minT||0)+.4);const fin=()=>{if(done)return;done=true;removeEventListener('message',on);cb()};
+ /* on ne révèle que le contenu : la lecture doit avoir dépassé le point de départ de l'extrait (une publicité avant la vidéo reste cachée derrière l'affiche) */
  const on=e=>{if(e.source!==fr.contentWindow)return;let d=e.data;try{if(typeof d==='string')d=JSON.parse(d)}catch(x){return}
-  if(d&&d.info&&d.info.currentTime!=null)got=true;
-  if(d&&((d.event==='onStateChange'&&d.info===1&&need<=.4)||(d.event==='infoDelivery'&&d.info&&d.info.playerState===1&&d.info.currentTime>=need)))setTimeout(fin,ytWhenPlaying.gap||350)};
+  if(!d||!d.info)return;const i=d.info;
+  if((d.event==='onStateChange'&&i===1)||(typeof i==='object'&&i.playerState===1)){if(!playing){playing=true;if(need>.4)setTimeout(()=>{if(!got)fin()},2500);else setTimeout(fin,ytWhenPlaying.gap||350)}}
+  if(typeof i==='object'&&i.currentTime!=null){got=true;if(playing&&i.currentTime>=need)setTimeout(fin,ytWhenPlaying.gap||350)}};
  addEventListener('message',on);
  const ping=()=>{try{fr.contentWindow.postMessage(JSON.stringify({event:'listening',id:1,channel:'widget'}),'*');fr.contentWindow.postMessage(JSON.stringify({event:'command',func:'addEventListener',args:['onStateChange']}),'*')}catch(x){}};
  fr.addEventListener('load',()=>{ping();setTimeout(ping,600);setTimeout(ping,1500)});
- setTimeout(()=>{if(!got)fin()},14000)}
+ setTimeout(()=>{if(!got)fin()},toMs||14000)}
 function ytWarm(){if(ytWarm.d||!A11Y.vidOn||A11Y.rm)return;ytWarm.d=1;['https://www.youtube-nocookie.com','https://i.ytimg.com','https://www.gstatic.com'].forEach(h=>{const l=document.createElement('link');l.rel='preconnect';l.href=h;document.head.appendChild(l)})}
 function stopExtract(){clearTimeout(EX.t);EX.t=null;document.querySelectorAll('#dVisual .d-video,#exSound').forEach(e=>e.remove())}
 function startExtract(){stopExtract();ytWarm();const f=film();if(!f||!f.yt)return;
@@ -2743,7 +2780,7 @@ function renderDetail(){
  ${f.rate==null?`<div class="soonb">Dans les salles <b>le ${relLabel(f)}</b></div>`:`<div class="rating">${IC.star}<b>${rt(f)}</b><span class="muted">/10 · note du public</span></div>`}
  <div class="meta">${f.dur}<i></i>${f.genres}<i></i>${f.year}</div>
  ${isSoon(f)?'':quickSlots()}
- <div class="dir"><div class="avs">${dirPhoto(f)}</div><div class="grow"><small>${TM(f).role.toUpperCase()}</small><strong>${f.dir}</strong></div><button class="follow" id="follow" aria-pressed="${dirNames(f).every(n=>ACC.fp[n])}">${dirNames(f).every(n=>ACC.fp[n])?'Suivi':'Suivre'}</button></div>
+ <div class="dir"><div class="avs">${dirPhoto(f)}</div><div class="grow"><small>${TM(f).role.toUpperCase()}</small><strong class="dnames">${dirNames(f).map(n=>`<button type="button" class="nm dn" data-actor="${esc(n)}">${esc(n)}</button>`).join(' et ')}</strong></div><button class="follow" id="follow" aria-pressed="${dirNames(f).every(n=>ACC.fp[n])}">${dirLbl(f)}</button></div>
  <div class="synh"><h3>Synopsis</h3></div><p class="syn clamp" id="syn">${f.syn}</p><button class="synmore" id="synMore" aria-expanded="false" aria-controls="syn">Lire la suite</button>${castHtml(f)}<footer class="foot"><button type="button" class="textlink" data-legal>Confidentialité et mentions légales</button></footer>`;
  paintFollow(f);
  $('#dScroll').scrollTop=0;
@@ -2752,8 +2789,16 @@ function renderDetail(){
 }
 function paintFav(){const f=film(),on=!!ST.fav[f.id],b=$('#favBtn');b.querySelector('svg').style.fill=on?'var(--accent)':'none';b.querySelector('svg').style.color=on?'var(--accent)':'currentColor';b.setAttribute('aria-pressed',on)}
 $('#favBtn').onclick=()=>{const f=film();const flip=()=>{ST.fav[f.id]=!ST.fav[f.id];paintFav();logAct(ST.fav[f.id]?'fav':'unfav',f.id)};flip();haptic('soft');toast(ST.fav[f.id]?'Ajouté aux favoris':'Retiré des favoris',{undo:flip})};
+const dirLbl=f=>{const nm=dirNames(f),k=nm.filter(n=>ACC.fp[n]).length;return k===nm.length?'Suivi':k?'Suivi '+k+'/'+nm.length:'Suivre'};
+function paintDirFollow(f){const b=$('#follow');if(b){const nm=dirNames(f);b.setAttribute('aria-pressed',nm.every(n=>ACC.fp[n]));b.textContent=dirLbl(f)}}
+function followChoice(f){const nm=dirNames(f);
+ const body=()=>nm.map(n=>`<button type="button" class="opt" role="switch" aria-checked="${!!ACC.fp[n]}" data-fpn="${esc(n)}"><span class="grow"><strong>${esc(n)}</strong><small>${ACC.fp[n]?'Vous le suivez':'Touchez pour suivre'}</small></span><span class="sw2" aria-hidden="true"><i></i></span></button>`).join('')+`<button type="button" class="btn alt" id="fpAll" style="margin-top:10px"><span>${nm.every(n=>ACC.fp[n])?'Ne plus suivre les deux':'Suivre les deux'}</span></button>`;
+ openSheet('Qui voulez-vous suivre ?',body(),bb=>{bb.onclick=e=>{const o=e.target.closest('[data-fpn]'),all=e.target.closest('#fpAll');if(!o&&!all)return;
+  if(o){const n=o.dataset.fpn,on=!ACC.fp[n];if(on)ACC.fp[n]=Date.now();else delete ACC.fp[n];saveACC();logAct(on?'followp':'unfollowp',f.id,{name:n});haptic(on?'soft':'tick')}
+  else{togglePeople(nm,f.id)}
+  bb.innerHTML=body();paintDirFollow(f)}})}
 function togglePeople(names,fid){const on=!names.every(n=>ACC.fp[n]);names.forEach(n=>{if(on)ACC.fp[n]=Date.now();else delete ACC.fp[n]});saveACC();logAct(on?'followp':'unfollowp',fid,{name:names.join(' et ')});haptic(on?'soft':'tick');return on}
-$('#dBody').addEventListener('click',e=>{const b=e.target.closest('#follow');if(!b)return;const f=film(),nm=dirNames(f),on=togglePeople(nm,f.id);b.setAttribute('aria-pressed',on);b.textContent=on?'Suivi':'Suivre';toast(on?'Vous suivez '+nm.join(' et '):'Vous ne suivez plus '+nm.join(' et '),{undo:()=>{togglePeople(nm,f.id);b.setAttribute('aria-pressed',!on);b.textContent=on?'Suivre':'Suivi'}})});
+$('#dBody').addEventListener('click',e=>{const b=e.target.closest('#follow');if(!b)return;const f=film(),nm=dirNames(f);if(nm.length>1){followChoice(f);return}const on=togglePeople(nm,f.id);b.setAttribute('aria-pressed',on);b.textContent=on?'Suivi':'Suivre';toast(on?'Vous suivez '+nm.join(' et '):'Vous ne suivez plus '+nm.join(' et '),{undo:()=>{togglePeople(nm,f.id);b.setAttribute('aria-pressed',!on);b.textContent=on?'Suivre':'Suivi'}})});
 
 /* =============== 4. RÉSERVATION =============== */
 function cnt(){return TARIFS.reduce((a,t)=>a+ST.tq[t.k],0)}
@@ -3031,20 +3076,9 @@ function autoSeatsZone(tk,z){const n=ST.count,blk=new Set([...tk,...PMR]);let be
  for(const i of ZONES[z].rows){const R=ROWS[i];for(let st=1;st+n-1<=8;st++){const ids=[];let ok=true;for(let k=0;k<n;k++){const id=R+(st+k);if(blk.has(id)){ok=false;break}ids.push(id)}
   if(ok){const c=Math.abs(st+(n-1)/2-4.5)+Math.abs(i-ZONES[z].rows[Math.floor(ZONES[z].rows.length/2)])*.2;if(!best||c<best.c)best={c,ids}}}}
  return best?best.ids:null}
-function applyZone(){
- const g=$('#sgrid');if(!g)return;const rows=[...g.querySelectorAll('.srow')];
- rows.forEach((r,i)=>{r.classList.toggle('in',ZONES[ST.zone]&&ZONES[ST.zone].rows.includes(i))});
- g.querySelectorAll('.zbtn').forEach(x=>x.remove());
- ZONES.forEach((z,zi)=>{const rs=z.rows.map(i=>rows[i]);if(!rs[0])return;const top=rs[0].offsetTop,bot=rs[rs.length-1].offsetTop+rs[rs.length-1].offsetHeight;
-  const free=z.rows.reduce((a,i)=>a+[...rows[i].querySelectorAll('.seat')].filter(x=>!x.disabled).length,0);
-  const b=document.createElement('button');b.type='button';b.className='zbtn';b.dataset.z=zi;b.style.cssText=`top:${top-4}px;height:${bot-top+8}px`;
-  b.setAttribute('aria-label',`Zone ${z.n}, ${free} places libres`);b.innerHTML=`<b>${z.n}</b><small>${free} libres</small>`;g.appendChild(b)});
- g.classList.toggle('ov',!!ST.zOv);g.classList.toggle('zf',!ST.zOv);
- const t=$('#zToggle');if(t){t.textContent=ST.zOv?'Revenir à ma zone':'Voir toute la salle';t.setAttribute('aria-pressed',!!ST.zOv)}}
-function zoneIntro(){const g=$('#sgrid');
- if(A11Y.rm){ST.zOv=false;applyZone();return}
- ST.zOv=true;g.classList.add('notr');applyZone();void g.offsetWidth;g.classList.remove('notr');
- clearTimeout(ST.zt);ST.zt=setTimeout(()=>{if(cur==='seats'){ST.zOv=false;applyZone()}},700)}
+/* v91 : le plan montre toute la salle d'un coup (plus de zoom par zone) ; les zones ne servent qu'à l'assistant */
+function applyZone(){const g=$('#sgrid');if(!g)return;ST.zOv=false;g.classList.remove('ov','zf','notr');g.querySelectorAll('.zbtn').forEach(x=>x.remove());const rows=[...g.querySelectorAll('.srow')];rows.forEach(r=>r.classList.remove('in'));const t=$('#zToggle');if(t)t.hidden=true}
+function zoneIntro(){applyZone()}
 function renderSeats(){
  const f=film(),tk=taken();ST.tk=tk;if(ST.seats.length!==ST.count){const zs=ST.zPick&&!ST.pmrN&&ST.zone!=null?autoSeatsZone(tk,ST.zone):null;ST.seats=zs||autoSeats(tk);if(!ST.zPick)ST.zone=ST.seats.length?Math.max(0,zoneOf(ST.seats[0])):1}
  $('#sFilm').textContent=f.title;

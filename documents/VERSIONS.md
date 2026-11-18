@@ -22,6 +22,16 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
 
+## Version 91 — 18 novembre 2026
+
+| N° | Demande | Ce qui a été fait | Où le voir |
+|---|---|---|---|
+| 1 | Personnaliser la photo du compte avec des personnages de films (≈ 10) | 10 personnages dessinés, inspirés des films de la programmation ; choix dans Compte (touche la photo ou « Changer mon personnage ») ; retour à l'initiale possible | Compte |
+| 2 | Choix des places sur toute la salle, pas par rang | Le plan montre toute la salle d'un coup ; plus de zoom par zone ; bouton « Voir depuis ma place » décalé pour ne plus recouvrir l'adresse sur téléphone | Places |
+| 3 | Deux réalisateurs : fiche de chacun et choix du suivi | Chaque nom ouvre sa fiche ; « Suivre » propose de choisir l'un, l'autre ou les deux | Fiche film |
+| 4 | Bande-annonce de la salle qui ne se lance pas | Cause trouvée : depuis la v82, la vidéo n'était révélée que si l'application YouTube envoyait l'état de lecture avec l'heure exacte ; l'état seul ne suffisait pas. Corrigé (valable aussi pour l'extrait de la fiche film, révélé ~2,5 s après l'affiche). Ajout d'un bouton de secours « Lancer la bande-annonce » | Vue depuis la place, fiche film |
+| 5 | Documents à jour et test utilisateur simplifié | Test réduit à 3 tâches et 2 questions (une page) ; documents mis à jour | `documents/` |
+
 ## Version 90 — 18 novembre 2026
 
 | Demande | Ce qui a été fait | Où le voir |
@@ -189,3 +199,4 @@ Contrôles réalisés avant livraison : 0 défaut de débordement sur 6 largeurs
 | v88 | 18/11/2026 | Détourage du chat refait pour le mode sombre |
 | v89 | 18/11/2026 | Achat : refus d'une séance déjà réservée enfin visible, créneau par défaut sans doublon |
 | v90 | 18/11/2026 | Correctif paiement (conflit de classe avec la page réseau) ; affiches de l'introduction préchargées |
+| v91 | 18/11/2026 | Personnages du compte, plan de salle complet, deux réalisateurs, bande-annonce de la salle, test simplifié |
