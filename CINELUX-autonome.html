@@ -2316,11 +2316,11 @@ function svBuild(){}
 function svScene(id,enter){
  const f=film(),tk=ST.tk||new Set(),g=svGeom(id),ri=g.ri,ci=g.ci;
  const room=$('#svRoom'),W=$('#sv').clientWidth||390,H=$('#sv').clientHeight||800,mob=H>W;
- const cx=W/2,hy=H*(mob?.42:.37),u=mob?W*.36:H*.31,h0=H*(mob?.72:.82),K=d=>1/(.7+.85*d);
+ const cx=W/2,hy=H*(mob?.40:.47),u=mob?W*.36:H*.30,h0=H*(mob?.74:.72),K=d=>1/(.7+.85*d);
  const pitch=1,aisle=.55,wx=c=>(c-ci)*pitch+(c>=4?aisle:0)-(ci>=4?aisle:0);
  const rnd=rng('sv'+f.id+id);let out='';
  // écran : plus petit quand on est loin
- const sk=1.18-ri*.075;let sw=Math.min(W*.86,(mob?W*.78:H*.78))*sk;sw=Math.min(sw,(hy-H*.1)*16/9);const sh=sw*9/16,sy=hy-sh-H*.02;
+ const sk=1.32-ri*.05;let sw=Math.min(W*.94,(mob?W*.94:W*.62))*sk;sw=Math.min(sw,W*.96,(hy-H*.05)*16/9);const sh=sw*9/16,sy=hy-sh-H*.02;
  out+=`<div class="v-wall" style="height:${(hy+H*.02).toFixed(0)}px"></div><div class="v-glow" style="--sy:${(sy+sh/2).toFixed(0)}px"></div>`;
  out+=`<div class="v-screen" style="left:${(cx-sw/2).toFixed(0)}px;top:${sy.toFixed(0)}px;width:${sw.toFixed(0)}px;height:${sh.toFixed(0)}px"><img src="${SCENEDATA[f.id]||'img/scene/'+f.id+'.jpg'}" alt="" onerror="this.remove()"></div>`;
  out+=`<div class="v-stage" style="top:${(hy-H*.012).toFixed(0)}px"></div>`;
