@@ -115,6 +115,14 @@ Détail point par point dans `VERSIONS.md`. Décisions de conception :
 | Poses issues des planches de U Ghjattu-Volpe | Cohérence avec la mascotte, aucun dessin ajouté par l'assistant |
 | Jeu rendu plus facile (vitesse douce, saut mémorisé, collisions indulgentes) | Retour de l'auteur : « trop difficile » |
 
+## 24 novembre 2026 — version 113 : mascotte en 3D
+| Décision | Pourquoi |
+|---|---|
+| Modèle 3D le plus récent (rigué) plutôt que les essais précédents | Choix de l'auteur |
+| Seule l'animation assise « Idle / Attente » ; pas de suivi de la souris | Les autres animations (marche, saut, toilette…) jugées pas assez pro |
+| Survol sobre (2 px) et bulle d'accueil conservée | Retour de l'auteur : mouvement trop prononcé, bulle à ne pas toucher |
+| Repli sur les portraits 2D sans WebGL | Accessibilité et appareils anciens |
+
 ## Limites et à valider
 - Test à 3 personnes **non réalisé** (voir `TESTS.md`).
 - Bandes-annonces verticales officielles trouvées pour 3 films sur 22 ; les autres s'affichent en 16:9 dans le cadre.

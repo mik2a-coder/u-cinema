@@ -22,6 +22,18 @@ Chaque version correspond au numéro de cache du service worker (`cinelux2-vNN` 
 
 **Page d'erreur réseau, à ouvrir :** https://mik2a-coder.github.io/u-cinema/#x:0:off
 
+## Version 113 — 24 novembre 2026
+
+| Demande | Ce qui a été fait | Où le voir |
+|---|---|---|
+| Mettre U Ghjattu-Volpe en 3D, assis et en attente, à la place de l'image 2D fixe | Modèle 3D animé (three.js, `3d/models/ghjattu.glb`, textures réduites à 1024 px, 8 Mo) : seule l'animation assise « Idle / Attente » est utilisée, posture fixe, sans suivi de la souris. Le même renard sert au bouton flottant (plein corps) et à l'en-tête du panneau (gros plan sur la tête, cadrage calé sur l'os de la tête) | Accueil, bouton de l'assistant ; en-tête du panneau |
+| Effet de survol plus sobre | Léger soulèvement de 2 px et halo discret (l'ancien zoom + rotation est retiré). La bulle d'accueil d'origine est inchangée | Survol ou focus clavier du bouton |
+| Sécurité | Si WebGL ou le modèle est indisponible, les portraits 2D d'origine restent affichés. Rendu mis en pause hors de l'accueil, onglet masqué ou animations réduites (dont batterie faible) | — |
+
+Fichiers : `3d/` (nouveau : `muv3d.js`, `mascot3d.js`, `models/ghjattu.glb`, `vendor/` three.js r170 et licence), `index.html` (table d'import, style, script), `sw.js` (cache `cinelux2-v113`, fichiers 3D mis en cache).
+
+**Limites connues :** modèle de 8 Mo chargé au démarrage de l'accueil. La version autonome `U-CINEMA-autonome.html` (un seul fichier) garde les portraits 2D : le modèle 3D demande le dossier `3d/` à côté de la page. PDF de rendu et version autonome régénérés pour cette version.
+
 ## Version 106 — 18 novembre 2026
 
 | Demande | Ce qui a été fait | Où le voir |
